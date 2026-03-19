@@ -174,7 +174,7 @@ function Nav() {
   );
 }
 
-/* ── HERO (DARK — navy #052134 background) ── */
+/* ── HERO (Full-bleed photo, centered layout) ── */
 function Hero() {
   const ref = useScrollReveal();
   return (
@@ -184,241 +184,150 @@ function Hero() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(180deg, #052134 0%, #0D0D0D 100%)",
         position: "relative",
         overflow: "hidden",
         padding: "120px clamp(20px, 5vw, 80px) 80px",
       }}
     >
-      {/* Grid dot pattern overlay */}
+      {/* Full-bleed background photo */}
+      <Image
+        src="/images/staci-larry-hero.avif"
+        alt="Staci and Larry Wallace"
+        fill
+        style={{ objectFit: "cover" }}
+        priority
+      />
+      {/* Dark overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage:
-            "radial-gradient(rgba(184,148,63,0.08) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-          pointerEvents: "none",
-        }}
-      />
-      {/* Large gold radial glow behind photo */}
-      <div
-        style={{
-          position: "absolute",
-          top: "30%",
-          right: "15%",
-          width: "600px",
-          height: "600px",
-          borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(184,148,63,0.15) 0%, transparent 70%)",
-          pointerEvents: "none",
+            "linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(5,33,52,0.8) 100%)",
+          zIndex: 1,
         }}
       />
-      {/* Center glow */}
-      <div
-        style={{
-          position: "absolute",
-          top: "40%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "900px",
-          height: "900px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(184,148,63,0.12) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
+      {/* Content */}
       <div
         ref={ref}
         className="section-reveal"
         style={{
-          maxWidth: "1200px",
+          position: "relative",
+          zIndex: 2,
+          maxWidth: "900px",
           width: "100%",
           margin: "0 auto",
+          textAlign: "center",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          gap: "60px",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 1,
         }}
       >
-        {/* Left: text */}
-        <div style={{ flex: "1 1 500px", minWidth: "300px" }}>
-          {/* Floating badge */}
-          <div
-            style={{
-              display: "inline-block",
-              padding: "8px 20px",
-              borderRadius: "50px",
-              background: "rgba(184,148,63,0.12)",
-              border: "1px solid rgba(184,148,63,0.3)",
-              marginBottom: "24px",
-              animation: "gentleBounce 3s ease-in-out infinite",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "13px",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                color: "#D4AD4A",
-              }}
-            >
-              FREE — LIMITED SEATS
-            </span>
-          </div>
-          <p
-            style={{
-              fontSize: "12px",
-              fontWeight: 600,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "#B8943F",
-              marginBottom: "20px",
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            <span
-              style={{
-                display: "inline-block",
-                width: "24px",
-                height: "2px",
-                background: "#B8943F",
-              }}
-            />
-            Free Live Event &mdash; April 14&ndash;16, 2026
-          </p>
-          <h1
-            style={{
-              fontSize: "clamp(40px, 5.5vw, 72px)",
-              fontWeight: 700,
-              lineHeight: 1.1,
-              marginBottom: "20px",
-              letterSpacing: "-0.02em",
-              background:
-                "linear-gradient(135deg, #FFFFFF, #B8943F, #FFFFFF)",
-              backgroundSize: "200% 200%",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "shimmer 4s linear infinite",
-            }}
-          >
-            Kingdom Intelligence Master Class
-          </h1>
-          <p
-            style={{
-              fontSize: "22px",
-              color: "#C8C8C8",
-              lineHeight: 1.5,
-              marginBottom: "40px",
-              maxWidth: "520px",
-            }}
-          >
-            Where Faith-Driven Leaders Learn to Scale in the AI Era
-          </p>
-          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-            <a
-              href={REGISTER_URL}
-              className="hero-cta"
-              style={{
-                display: "inline-block",
-                background: "linear-gradient(135deg, #B8943F, #D4AD4A)",
-                color: "#0d0d0d",
-                fontWeight: 600,
-                padding: "18px 48px",
-                borderRadius: "50px",
-                border: "none",
-                fontSize: "17px",
-                textDecoration: "none",
-                cursor: "pointer",
-              }}
-            >
-              Save Your Seat Free
-            </a>
-            <a
-              href="#learn-more"
-              style={{
-                display: "inline-block",
-                padding: "18px 48px",
-                borderRadius: "50px",
-                border: "1px solid rgba(255,255,255,0.15)",
-                background: "rgba(255,255,255,0.06)",
-                color: "#FFFFFF",
-                fontWeight: 600,
-                fontSize: "17px",
-                textDecoration: "none",
-                cursor: "pointer",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-              }}
-            >
-              Learn More
-            </a>
-          </div>
-          <p
+        {/* Badge */}
+        <div
+          style={{
+            display: "inline-block",
+            padding: "8px 24px",
+            borderRadius: "50px",
+            background: "rgba(184,148,63,0.15)",
+            border: "1px solid rgba(184,148,63,0.35)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            marginBottom: "28px",
+          }}
+        >
+          <span
             style={{
               fontSize: "13px",
-              color: "#C8C8C8",
-              marginTop: "24px",
-              letterSpacing: "0.03em",
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              color: "#D4AD4A",
             }}
           >
-            3 Days Live Online &mdash; No Cost &mdash; April 14&ndash;16, 2026
-          </p>
+            FREE &mdash; APRIL 14&ndash;16, 2026
+          </span>
         </div>
-
-        {/* Right: photo — clean white-bordered frame */}
-        <div style={{ flex: "0 1 380px", position: "relative" }}>
-          {/* Gold glow behind photo */}
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "450px",
-              height: "450px",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle, rgba(184,148,63,0.25) 0%, transparent 70%)",
-              pointerEvents: "none",
-            }}
-          />
-          <div
-            style={{
-              background: "#FFFFFF",
-              padding: "8px",
-              borderRadius: "20px",
-              overflow: "hidden",
-              transform: "translateY(-10px)",
-              boxShadow:
-                "0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(184,148,63,0.1)",
-              position: "relative",
-            }}
-          >
-            <Image
-              src="/images/staci-headshot-best.jpg"
-              alt="Staci Wallace"
-              width={380}
-              height={475}
-              style={{
-                width: "100%",
-                height: "auto",
-                display: "block",
-                borderRadius: "14px",
-                objectFit: "cover",
-              }}
-              priority
-            />
-          </div>
-        </div>
+        {/* Tagline */}
+        <p
+          style={{
+            fontSize: "15px",
+            fontWeight: 700,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#D4AD4A",
+            marginBottom: "20px",
+          }}
+        >
+          Big Business. Bold Faith. No Compromise.
+        </p>
+        {/* Main headline */}
+        <h1
+          style={{
+            fontSize: "clamp(42px, 6vw, 80px)",
+            fontWeight: 700,
+            lineHeight: 1.05,
+            marginBottom: "20px",
+            letterSpacing: "-0.02em",
+            color: "#FFFFFF",
+          }}
+        >
+          Kingdom Intelligence Master Class
+        </h1>
+        {/* Subheadline */}
+        <p
+          style={{
+            fontSize: "22px",
+            color: "rgba(255,255,255,0.8)",
+            lineHeight: 1.5,
+            marginBottom: "28px",
+            maxWidth: "600px",
+          }}
+        >
+          Where Faith-Driven Leaders Learn to Scale in the AI Era
+        </p>
+        {/* Event details */}
+        <p
+          style={{
+            fontSize: "15px",
+            fontWeight: 600,
+            letterSpacing: "0.08em",
+            color: "#D4AD4A",
+            marginBottom: "36px",
+          }}
+        >
+          April 14&ndash;16, 2026 &nbsp;|&nbsp; Free Live Online Event &nbsp;|&nbsp; 3 Days
+        </p>
+        {/* CTA */}
+        <a
+          href={REGISTER_URL}
+          className="hero-cta"
+          style={{
+            display: "inline-block",
+            background: "linear-gradient(135deg, #B8943F, #D4AD4A)",
+            color: "#0d0d0d",
+            fontWeight: 600,
+            padding: "20px 56px",
+            borderRadius: "50px",
+            border: "none",
+            fontSize: "18px",
+            textDecoration: "none",
+            cursor: "pointer",
+            boxShadow: "0 0 40px rgba(184,148,63,0.3)",
+          }}
+        >
+          Save Your Seat &mdash; Free
+        </a>
+        {/* Sub-CTA */}
+        <p
+          style={{
+            fontSize: "13px",
+            color: "rgba(255,255,255,0.55)",
+            marginTop: "20px",
+            letterSpacing: "0.03em",
+          }}
+        >
+          No credit card required. Limited seats available.
+        </p>
       </div>
     </section>
   );
