@@ -1,14 +1,106 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useCallback } from "react";
 
 const REGISTER_URL = "https://fbfchallenge.com";
 
 const glassCard = {
-  background: "rgba(255,255,255,0.04)",
+  background: "rgba(255,255,255,0.06)",
   backdropFilter: "blur(20px) saturate(180%)",
   WebkitBackdropFilter: "blur(20px) saturate(180%)",
-  border: "1px solid rgba(255,255,255,0.08)",
+  border: "1px solid rgba(255,255,255,0.12)",
   borderRadius: "20px",
 } as const;
+
+/* ── SECTION LABEL (consistent across all sections) ── */
+function SectionLabel({ children, center }: { children: React.ReactNode; center?: boolean }) {
+  return (
+    <p
+      style={{
+        fontSize: "12px",
+        fontWeight: 600,
+        letterSpacing: "0.2em",
+        textTransform: "uppercase",
+        color: "#C9A55A",
+        marginBottom: "16px",
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        justifyContent: center ? "center" : "flex-start",
+      }}
+    >
+      <span
+        style={{
+          display: "inline-block",
+          width: "24px",
+          height: "2px",
+          background: "#C9A55A",
+          flexShrink: 0,
+        }}
+      />
+      {children}
+    </p>
+  );
+}
+
+/* ── INTERSECTION OBSERVER HOOK ── */
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("visible");
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return ref;
+}
+
+/* ── ANIMATED COUNTER ── */
+function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          let start = 0;
+          const duration = 1500;
+          const startTime = performance.now();
+          const animate = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            start = Math.round(eased * value);
+            el.textContent = start + suffix;
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [value, suffix]);
+
+  return <span ref={ref}>0{suffix}</span>;
+}
 
 /* ── NAV ── */
 function Nav() {
@@ -24,46 +116,46 @@ function Nav() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "18px clamp(20px, 5vw, 80px)",
-        ...glassCard,
-        borderRadius: 0,
-        borderTop: "none",
-        borderLeft: "none",
-        borderRight: "none",
+        background: "rgba(13,13,13,0.85)",
+        backdropFilter: "blur(30px)",
+        WebkitBackdropFilter: "blur(30px)",
+        borderBottom: "1px solid rgba(201,165,90,0.2)",
       }}
     >
-      <span
-        style={{
-          fontWeight: 700,
-          fontSize: "20px",
-          letterSpacing: "3px",
-          color: "#BB945A",
-        }}
-      >
-        FBF
-      </span>
-      <a
-        href={REGISTER_URL}
-        style={{
-          display: "inline-block",
-          padding: "10px 28px",
-          fontSize: "14px",
-          fontWeight: 600,
-          color: "#F0F0F0",
-          textDecoration: "none",
-          borderRadius: "50px",
-          border: "1px solid #BB945A",
-          background: "rgba(187,148,90,0.08)",
-          letterSpacing: "0.5px",
-        }}
-      >
-        Register Free
-      </a>
+      <span className="fbf-logo">FBF</span>
+      <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+        <a href="#learn-more" className="nav-link">
+          About
+        </a>
+        <a href="#testimonials" className="nav-link">
+          Results
+        </a>
+        <a
+          href={REGISTER_URL}
+          style={{
+            display: "inline-block",
+            padding: "10px 28px",
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "#FFFFFF",
+            textDecoration: "none",
+            borderRadius: "50px",
+            border: "1px solid #C9A55A",
+            background: "rgba(201,165,90,0.12)",
+            letterSpacing: "0.5px",
+            transition: "all 0.3s ease",
+          }}
+        >
+          Register Free
+        </a>
+      </div>
     </nav>
   );
 }
 
 /* ── HERO ── */
 function Hero() {
+  const ref = useScrollReveal();
   return (
     <section
       style={{
@@ -71,14 +163,38 @@ function Hero() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background:
-          "linear-gradient(180deg, #0a0a0a 0%, #050505 100%)",
+        background: "linear-gradient(180deg, #111111 0%, #0d0d0d 100%)",
         position: "relative",
         overflow: "hidden",
         padding: "120px clamp(20px, 5vw, 80px) 80px",
       }}
     >
-      {/* subtle gold radial glow */}
+      {/* Grid dot pattern overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "radial-gradient(rgba(201,165,90,0.08) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Large gold radial glow behind photo */}
+      <div
+        style={{
+          position: "absolute",
+          top: "30%",
+          right: "15%",
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(201,165,90,0.15) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Center glow */}
       <div
         style={{
           position: "absolute",
@@ -88,11 +204,14 @@ function Hero() {
           width: "900px",
           height: "900px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(187,148,90,0.08) 0%, transparent 70%)",
+          background:
+            "radial-gradient(circle, rgba(201,165,90,0.12) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
       <div
+        ref={ref}
+        className="section-reveal"
         style={{
           maxWidth: "1200px",
           width: "100%",
@@ -108,26 +227,65 @@ function Hero() {
       >
         {/* Left: text */}
         <div style={{ flex: "1 1 500px", minWidth: "300px" }}>
+          {/* Floating badge */}
+          <div
+            style={{
+              display: "inline-block",
+              padding: "8px 20px",
+              borderRadius: "50px",
+              background: "rgba(201,165,90,0.12)",
+              border: "1px solid rgba(201,165,90,0.3)",
+              marginBottom: "24px",
+              animation: "gentleBounce 3s ease-in-out infinite",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "13px",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                color: "#E8C070",
+              }}
+            >
+              FREE — LIMITED SEATS
+            </span>
+          </div>
           <p
             style={{
               fontSize: "12px",
               fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase" as const,
-              color: "#BB945A",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#C9A55A",
               marginBottom: "20px",
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
             }}
           >
+            <span
+              style={{
+                display: "inline-block",
+                width: "24px",
+                height: "2px",
+                background: "#C9A55A",
+              }}
+            />
             Free Live Event &mdash; April 14&ndash;16, 2026
           </p>
           <h1
             style={{
               fontSize: "clamp(40px, 5.5vw, 72px)",
               fontWeight: 700,
-              lineHeight: 1.05,
-              color: "#F0F0F0",
+              lineHeight: 1.1,
               marginBottom: "20px",
               letterSpacing: "-0.02em",
+              background: "linear-gradient(135deg, #FFFFFF, #C9A55A, #FFFFFF)",
+              backgroundSize: "200% 200%",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "shimmer 4s linear infinite",
             }}
           >
             Kingdom Intelligence Master Class
@@ -135,7 +293,7 @@ function Hero() {
           <p
             style={{
               fontSize: "22px",
-              color: "#A8A8A8",
+              color: "#C8C8C8",
               lineHeight: 1.5,
               marginBottom: "40px",
               maxWidth: "520px",
@@ -146,10 +304,11 @@ function Hero() {
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <a
               href={REGISTER_URL}
+              className="hero-cta"
               style={{
                 display: "inline-block",
-                background: "linear-gradient(135deg, #BB945A, #d4a96a)",
-                color: "#050505",
+                background: "linear-gradient(135deg, #C9A55A, #E8C070)",
+                color: "#0d0d0d",
                 fontWeight: 600,
                 padding: "18px 48px",
                 borderRadius: "50px",
@@ -168,8 +327,8 @@ function Hero() {
                 padding: "18px 48px",
                 borderRadius: "50px",
                 border: "1px solid rgba(255,255,255,0.15)",
-                background: "rgba(255,255,255,0.04)",
-                color: "#F0F0F0",
+                background: "rgba(255,255,255,0.06)",
+                color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: "17px",
                 textDecoration: "none",
@@ -184,7 +343,7 @@ function Hero() {
           <p
             style={{
               fontSize: "13px",
-              color: "#A8A8A8",
+              color: "#C8C8C8",
               marginTop: "24px",
               letterSpacing: "0.03em",
             }}
@@ -194,19 +353,31 @@ function Hero() {
         </div>
 
         {/* Right: photo */}
-        <div
-          style={{
-            flex: "0 1 380px",
-            position: "relative",
-          }}
-        >
+        <div style={{ flex: "0 1 380px", position: "relative" }}>
+          {/* Gold glow behind photo */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "450px",
+              height: "450px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(201,165,90,0.25) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
           <div
             style={{
               ...glassCard,
               padding: "8px",
               overflow: "hidden",
               transform: "translateY(-10px)",
-              boxShadow: "0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(187,148,90,0.05)",
+              boxShadow:
+                "0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(201,165,90,0.1)",
+              position: "relative",
             }}
           >
             <Image
@@ -232,25 +403,25 @@ function Hero() {
 
 /* ── SOCIAL PROOF BAR ── */
 const stats = [
-  { number: "35+", label: "Years Business Experience" },
-  { number: "5", label: "U.S. Presidents Shared Stages With" },
-  { number: "Thousands", label: "Of Leaders Coached" },
+  { number: 35, suffix: "+", label: "Years Business Experience" },
+  { number: 5, suffix: "", label: "U.S. Presidents Shared Stages With" },
+  { number: 1000, suffix: "s+", label: "Of Leaders Coached" },
 ];
 
 function SocialProof() {
   return (
     <section
       style={{
-        background: "linear-gradient(180deg, #050505 0%, #0a0a0a 100%)",
-        padding: "0 clamp(20px, 5vw, 80px)",
+        background: "rgba(201,165,90,0.08)",
+        borderTop: "1px solid rgba(201,165,90,0.2)",
+        borderBottom: "1px solid rgba(201,165,90,0.2)",
+        padding: "48px clamp(20px, 5vw, 80px)",
       }}
     >
       <div
         style={{
           maxWidth: "1000px",
           margin: "0 auto",
-          ...glassCard,
-          padding: "40px 48px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -267,25 +438,27 @@ function SocialProof() {
               padding: "16px 32px",
               borderRight:
                 i < stats.length - 1
-                  ? "1px solid rgba(255,255,255,0.08)"
+                  ? "1px solid rgba(201,165,90,0.2)"
                   : "none",
             }}
           >
             <p
               style={{
-                fontSize: "clamp(28px, 3vw, 36px)",
+                fontSize: "48px",
                 fontWeight: 700,
-                color: "#BB945A",
+                color: "#FFFFFF",
                 marginBottom: "8px",
+                lineHeight: 1,
               }}
             >
-              {s.number}
+              <AnimatedNumber value={s.number} suffix={s.suffix} />
             </p>
             <p
               style={{
                 fontSize: "14px",
-                color: "#A8A8A8",
-                letterSpacing: "0.03em",
+                color: "#C9A55A",
+                letterSpacing: "0.05em",
+                fontWeight: 500,
               }}
             >
               {s.label}
@@ -317,33 +490,37 @@ const painPoints = [
 ];
 
 function Problem() {
+  const ref = useScrollReveal();
   return (
     <section
       id="learn-more"
       style={{
-        background: "linear-gradient(180deg, rgba(5,33,52,0.9) 0%, rgba(5,33,52,0.7) 100%)",
-        padding: "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px)",
+        background: "linear-gradient(180deg, #111111 0%, #0d0d0d 100%)",
+        padding: "120px clamp(20px, 5vw, 80px)",
+        position: "relative",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <p
-          style={{
-            fontSize: "12px",
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase" as const,
-            color: "#BB945A",
-            marginBottom: "16px",
-          }}
-        >
-          Who This Is For
-        </p>
+      {/* Glowing gold line separator */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "200px",
+          height: "2px",
+          background:
+            "linear-gradient(90deg, transparent, #C9A55A, transparent)",
+        }}
+      />
+      <div ref={ref} className="section-reveal" style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <SectionLabel>Who This Is For</SectionLabel>
         <h2
           style={{
             fontSize: "clamp(32px, 4vw, 48px)",
             fontWeight: 700,
-            lineHeight: 1.15,
-            color: "#F0F0F0",
+            lineHeight: 1.1,
+            color: "#FFFFFF",
             marginBottom: "56px",
             maxWidth: "700px",
           }}
@@ -357,32 +534,47 @@ function Problem() {
             gap: "24px",
           }}
         >
-          {painPoints.map((p) => (
+          {painPoints.map((p, i) => (
             <div
               key={p.num}
+              className="glass-card-hover"
               style={{
                 ...glassCard,
-                borderTop: "2px solid #BB945A",
+                borderTop: "2px solid #C9A55A",
                 padding: "36px 32px",
+                animationDelay: `${i * 0.15}s`,
               }}
             >
-              <span
+              {/* Gold circle number */}
+              <div
                 style={{
-                  fontSize: "14px",
-                  fontWeight: 700,
-                  color: "#BB945A",
-                  letterSpacing: "0.1em",
-                  display: "block",
-                  marginBottom: "16px",
+                  width: "48px",
+                  height: "48px",
+                  borderRadius: "50%",
+                  background: "rgba(201,165,90,0.15)",
+                  border: "1px solid rgba(201,165,90,0.3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "20px",
                 }}
               >
-                {p.num}
-              </span>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: 700,
+                    color: "#E8C070",
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  {p.num}
+                </span>
+              </div>
               <h3
                 style={{
                   fontSize: "20px",
                   fontWeight: 700,
-                  color: "#F0F0F0",
+                  color: "#FFFFFF",
                   marginBottom: "12px",
                   lineHeight: 1.3,
                 }}
@@ -392,7 +584,7 @@ function Problem() {
               <p
                 style={{
                   fontSize: "16px",
-                  color: "#A8A8A8",
+                  color: "#C8C8C8",
                   lineHeight: 1.7,
                 }}
               >
@@ -426,32 +618,60 @@ const features = [
 ];
 
 function Solution() {
+  const ref = useScrollReveal();
   return (
     <section
       style={{
-        background: "linear-gradient(180deg, #0a0a0a 0%, #050505 100%)",
-        padding: "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px)",
+        background: "#0d0d0d",
+        padding: "120px clamp(20px, 5vw, 80px)",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto", textAlign: "center" }}>
-        <p
-          style={{
-            fontSize: "12px",
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase" as const,
-            color: "#BB945A",
-            marginBottom: "16px",
-          }}
-        >
-          The Framework
-        </p>
+      {/* Navy blue radial glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "800px",
+          height: "800px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(5,52,82,0.4) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Dot pattern background */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        ref={ref}
+        className="section-reveal"
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+          textAlign: "center",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        <SectionLabel center>The Framework</SectionLabel>
         <h2
           style={{
             fontSize: "clamp(32px, 4vw, 48px)",
             fontWeight: 700,
-            lineHeight: 1.15,
-            color: "#F0F0F0",
+            lineHeight: 1.1,
+            color: "#FFFFFF",
             marginBottom: "40px",
             maxWidth: "800px",
             margin: "0 auto 40px",
@@ -460,19 +680,22 @@ function Solution() {
           AI increases speed. Kingdom Intelligence determines dominion.
         </h2>
 
-        {/* Quote block */}
+        {/* Quote block — more prominent */}
         <div
           style={{
             ...glassCard,
+            background: "rgba(255,255,255,0.08)",
             padding: "48px 40px",
             maxWidth: "800px",
             margin: "0 auto 64px",
+            borderLeft: "4px solid #C9A55A",
+            textAlign: "left",
           }}
         >
           <p
             style={{
-              fontSize: "17px",
-              color: "#A8A8A8",
+              fontSize: "18px",
+              color: "#FFFFFF",
               lineHeight: 1.7,
             }}
           >
@@ -495,12 +718,12 @@ function Solution() {
           }}
         >
           {features.map((f) => (
-            <div key={f.num}>
+            <div key={f.num} className="feature-col" style={{ paddingBottom: "8px" }}>
               <span
                 style={{
                   fontSize: "48px",
                   fontWeight: 700,
-                  color: "#BB945A",
+                  color: "#C9A55A",
                   lineHeight: 1,
                   display: "block",
                   marginBottom: "16px",
@@ -513,7 +736,7 @@ function Solution() {
                 style={{
                   fontSize: "20px",
                   fontWeight: 700,
-                  color: "#F0F0F0",
+                  color: "#FFFFFF",
                   marginBottom: "12px",
                   lineHeight: 1.3,
                 }}
@@ -523,7 +746,7 @@ function Solution() {
               <p
                 style={{
                   fontSize: "16px",
-                  color: "#A8A8A8",
+                  color: "#C8C8C8",
                   lineHeight: 1.7,
                 }}
               >
@@ -546,33 +769,56 @@ const checklist = [
   "Scale without becoming the bottleneck",
 ];
 
+function CheckmarkSVG({ delay }: { delay: number }) {
+  return (
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+      fill="none"
+      style={{ flexShrink: 0 }}
+    >
+      <circle
+        cx="14"
+        cy="14"
+        r="12"
+        stroke="#C9A55A"
+        strokeWidth="1.5"
+        fill="rgba(201,165,90,0.1)"
+      />
+      <path
+        d="M9 14.5L12.5 18L19 11"
+        stroke="#E8C070"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="50"
+        strokeDashoffset="50"
+        style={{
+          animation: `strokeDraw 0.6s ease-out ${delay}s forwards`,
+        }}
+      />
+    </svg>
+  );
+}
+
 function Learn() {
+  const ref = useScrollReveal();
   return (
     <section
       style={{
-        background: "linear-gradient(180deg, #060a10 0%, #080c14 100%)",
-        padding: "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px)",
+        background: "linear-gradient(180deg, #0d0d0d 0%, #111827 100%)",
+        padding: "120px clamp(20px, 5vw, 80px)",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <p
-          style={{
-            fontSize: "12px",
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase" as const,
-            color: "#BB945A",
-            marginBottom: "16px",
-          }}
-        >
-          Inside the Master Class
-        </p>
+      <div ref={ref} className="section-reveal" style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <SectionLabel>Inside the Master Class</SectionLabel>
         <h2
           style={{
             fontSize: "clamp(32px, 4vw, 48px)",
             fontWeight: 700,
-            lineHeight: 1.15,
-            color: "#F0F0F0",
+            lineHeight: 1.1,
+            color: "#FFFFFF",
             marginBottom: "56px",
             maxWidth: "600px",
           }}
@@ -595,22 +841,15 @@ function Learn() {
                 alignItems: "flex-start",
                 gap: "16px",
                 padding: "12px 0",
+                opacity: 0,
+                animation: `fadeInUp 0.5s ease-out ${0.3 + i * 0.15}s forwards`,
               }}
             >
-              <span
-                style={{
-                  color: "#BB945A",
-                  fontSize: "22px",
-                  lineHeight: "28px",
-                  flexShrink: 0,
-                }}
-              >
-                &#10003;
-              </span>
+              <CheckmarkSVG delay={0.5 + i * 0.15} />
               <span
                 style={{
                   fontSize: "17px",
-                  color: "#F0F0F0",
+                  color: "#FFFFFF",
                   lineHeight: 1.7,
                 }}
               >
@@ -621,10 +860,11 @@ function Learn() {
         </div>
         <a
           href={REGISTER_URL}
+          className="hero-cta"
           style={{
             display: "inline-block",
-            background: "linear-gradient(135deg, #BB945A, #d4a96a)",
-            color: "#050505",
+            background: "linear-gradient(135deg, #C9A55A, #E8C070)",
+            color: "#0d0d0d",
             fontWeight: 600,
             padding: "18px 48px",
             borderRadius: "50px",
@@ -643,14 +883,17 @@ function Learn() {
 
 /* ── ABOUT STACI ── */
 function About() {
+  const ref = useScrollReveal();
   return (
     <section
       style={{
-        background: "linear-gradient(180deg, #050505 0%, #0a0a0a 100%)",
-        padding: "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px)",
+        background: "linear-gradient(180deg, #111111 0%, #0d0d0d 100%)",
+        padding: "120px clamp(20px, 5vw, 80px)",
       }}
     >
       <div
+        ref={ref}
+        className="section-reveal"
         style={{
           maxWidth: "1100px",
           margin: "0 auto",
@@ -660,45 +903,52 @@ function About() {
           flexWrap: "wrap",
         }}
       >
-        {/* Text */}
+        {/* Text — animate from left */}
         <div style={{ flex: "1 1 400px", minWidth: "280px", order: 1 }}>
-          <p
-            style={{
-              fontSize: "12px",
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase" as const,
-              color: "#BB945A",
-              marginBottom: "16px",
-            }}
-          >
-            Your Host
-          </p>
+          <SectionLabel>Your Host</SectionLabel>
           <h2
             style={{
               fontSize: "clamp(32px, 4vw, 48px)",
               fontWeight: 700,
-              color: "#F0F0F0",
+              color: "#FFFFFF",
               marginBottom: "8px",
+              lineHeight: 1.1,
             }}
           >
             Staci Wallace
           </h2>
-          <p
+          {/* Gold accent line next to title */}
+          <div
             style={{
-              fontSize: "15px",
-              color: "#BB945A",
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
               marginBottom: "28px",
-              lineHeight: 1.5,
             }}
           >
-            CEO, Fueled By Fire &mdash; 8x Best-Selling Author &mdash;
-            International Speaker
-          </p>
+            <span
+              style={{
+                display: "inline-block",
+                width: "40px",
+                height: "2px",
+                background: "linear-gradient(90deg, #C9A55A, #E8C070)",
+              }}
+            />
+            <p
+              style={{
+                fontSize: "15px",
+                color: "#C9A55A",
+                lineHeight: 1.5,
+              }}
+            >
+              CEO, Fueled By Fire &mdash; 8x Best-Selling Author &mdash;
+              International Speaker
+            </p>
+          </div>
           <p
             style={{
               fontSize: "17px",
-              color: "#A8A8A8",
+              color: "#C8C8C8",
               lineHeight: 1.7,
               marginBottom: "32px",
             }}
@@ -714,7 +964,7 @@ function About() {
           <p
             style={{
               fontSize: "20px",
-              color: "#BB945A",
+              color: "#E8C070",
               fontStyle: "italic",
               fontWeight: 500,
             }}
@@ -723,20 +973,32 @@ function About() {
           </p>
         </div>
 
-        {/* Photo */}
-        <div
-          style={{
-            flex: "0 1 400px",
-            order: 2,
-          }}
-        >
+        {/* Photo — floating animation */}
+        <div style={{ flex: "0 1 400px", order: 2, position: "relative" }}>
+          {/* Gold glow behind photo */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "400px",
+              height: "400px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(201,165,90,0.2) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
           <div
             style={{
               ...glassCard,
               padding: "8px",
               overflow: "hidden",
-              transform: "rotate(-2deg)",
-              boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
+              animation: "float 6s ease-in-out infinite",
+              boxShadow:
+                "0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(201,165,90,0.1)",
+              position: "relative",
             }}
           >
             <Image
@@ -782,33 +1044,23 @@ const testimonials = [
 ];
 
 function Testimonials() {
+  const ref = useScrollReveal();
   return (
     <section
+      id="testimonials"
       style={{
-        background: "linear-gradient(180deg, #0a0a0a 0%, #050505 100%)",
-        padding: "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px)",
+        background: "#0d0d0d",
+        padding: "120px clamp(20px, 5vw, 80px)",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <p
-          style={{
-            fontSize: "12px",
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase" as const,
-            color: "#BB945A",
-            marginBottom: "16px",
-            textAlign: "center",
-          }}
-        >
-          Results That Speak
-        </p>
+      <div ref={ref} className="section-reveal" style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <SectionLabel center>Results That Speak</SectionLabel>
         <h2
           style={{
             fontSize: "clamp(32px, 4vw, 48px)",
             fontWeight: 700,
-            lineHeight: 1.15,
-            color: "#F0F0F0",
+            lineHeight: 1.1,
+            color: "#FFFFFF",
             marginBottom: "56px",
             textAlign: "center",
           }}
@@ -825,38 +1077,60 @@ function Testimonials() {
           {testimonials.map((t, i) => (
             <div
               key={i}
+              className="testimonial-card"
               style={{
                 ...glassCard,
                 padding: "40px 32px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                position: "relative",
+                overflow: "hidden",
+                animationDelay: `${i * 0.15}s`,
               }}
             >
+              {/* Decorative quote mark */}
+              <span
+                style={{
+                  position: "absolute",
+                  top: "16px",
+                  right: "24px",
+                  fontSize: "120px",
+                  fontFamily: "Georgia, serif",
+                  color: "rgba(201,165,90,0.08)",
+                  lineHeight: 1,
+                  pointerEvents: "none",
+                  userSelect: "none",
+                }}
+              >
+                &ldquo;
+              </span>
               <p
                 style={{
                   fontSize: "17px",
-                  color: "#F0F0F0",
+                  color: "#FFFFFF",
                   lineHeight: 1.7,
                   marginBottom: "32px",
                   fontStyle: "italic",
+                  position: "relative",
+                  zIndex: 1,
                 }}
               >
                 &ldquo;{t.quote}&rdquo;
               </p>
-              <div>
+              <div style={{ position: "relative", zIndex: 1 }}>
                 <p
                   style={{
                     fontSize: "16px",
                     fontWeight: 700,
-                    color: "#BB945A",
+                    color: "#C9A55A",
                     marginBottom: "4px",
                   }}
                 >
                   {t.name}
                 </p>
                 {t.company && (
-                  <p style={{ fontSize: "14px", color: "#A8A8A8" }}>
+                  <p style={{ fontSize: "14px", color: "#C8C8C8" }}>
                     {t.company}
                   </p>
                 )}
@@ -871,22 +1145,54 @@ function Testimonials() {
 
 /* ── FINAL CTA ── */
 function FinalCTA() {
+  const ref = useScrollReveal();
   return (
     <section
       style={{
-        background: "linear-gradient(135deg, #BB945A 0%, #a07840 100%)",
-        padding: "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px)",
+        background: "linear-gradient(135deg, #C9A55A 0%, #E8C070 50%, #C9A55A 100%)",
+        backgroundSize: "200% 200%",
+        animation: "gradientShift 6s ease infinite",
+        padding: "120px clamp(20px, 5vw, 80px)",
         textAlign: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+      {/* Confetti-like decorative dots */}
+      {[
+        { top: "10%", left: "8%", size: 6 },
+        { top: "20%", right: "12%", size: 4 },
+        { top: "70%", left: "15%", size: 5 },
+        { top: "80%", right: "10%", size: 7 },
+        { top: "40%", left: "5%", size: 3 },
+        { top: "30%", right: "6%", size: 5 },
+        { top: "60%", right: "20%", size: 4 },
+        { top: "15%", left: "25%", size: 3 },
+      ].map((dot, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            top: dot.top,
+            left: "left" in dot ? dot.left : undefined,
+            right: "right" in dot ? dot.right : undefined,
+            width: dot.size + "px",
+            height: dot.size + "px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.3)",
+            pointerEvents: "none",
+          }}
+        />
+      ))}
+      <div ref={ref} className="section-reveal" style={{ maxWidth: "700px", margin: "0 auto", position: "relative", zIndex: 1 }}>
         <h2
           style={{
             fontSize: "clamp(36px, 5vw, 56px)",
             fontWeight: 700,
-            color: "#050505",
+            color: "#FFFFFF",
             marginBottom: "20px",
             lineHeight: 1.1,
+            textShadow: "0 2px 20px rgba(0,0,0,0.2)",
           }}
         >
           Your seat is waiting.
@@ -894,10 +1200,10 @@ function FinalCTA() {
         <p
           style={{
             fontSize: "19px",
-            color: "#050505",
+            color: "#FFFFFF",
             lineHeight: 1.6,
             marginBottom: "40px",
-            opacity: 0.8,
+            opacity: 0.9,
           }}
         >
           Three free days. April 14&ndash;16, 2026. Built for faith-driven
@@ -905,12 +1211,13 @@ function FinalCTA() {
         </p>
         <a
           href={REGISTER_URL}
+          className="final-cta-btn"
           style={{
             display: "inline-block",
-            background: "#050505",
-            color: "#F0F0F0",
+            background: "#0d0d0d",
+            color: "#FFFFFF",
             fontWeight: 600,
-            padding: "18px 56px",
+            padding: "18px 48px",
             borderRadius: "50px",
             border: "none",
             fontSize: "17px",
@@ -923,9 +1230,9 @@ function FinalCTA() {
         <p
           style={{
             fontSize: "14px",
-            color: "#050505",
+            color: "#FFFFFF",
             marginTop: "20px",
-            opacity: 0.55,
+            opacity: 0.6,
           }}
         >
           Free registration. No credit card. Live online event.
@@ -940,8 +1247,8 @@ function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: "#050505",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        backgroundColor: "#0d0d0d",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
         padding: "40px clamp(20px, 5vw, 80px)",
       }}
     >
@@ -957,19 +1264,12 @@ function Footer() {
         }}
       >
         <div>
-          <span
-            style={{
-              fontWeight: 700,
-              fontSize: "16px",
-              letterSpacing: "2px",
-              color: "#BB945A",
-            }}
-          >
+          <span className="fbf-logo" style={{ fontSize: "16px", letterSpacing: "2px" }}>
             FBF
           </span>
           <span
             style={{
-              color: "#A8A8A8",
+              color: "#C8C8C8",
               fontSize: "14px",
               marginLeft: "16px",
             }}
@@ -978,24 +1278,10 @@ function Footer() {
           </span>
         </div>
         <div style={{ display: "flex", gap: "24px" }}>
-          <a
-            href="#"
-            style={{
-              color: "#A8A8A8",
-              fontSize: "14px",
-              textDecoration: "none",
-            }}
-          >
+          <a href="#" className="nav-link">
             Privacy Policy
           </a>
-          <a
-            href="#"
-            style={{
-              color: "#A8A8A8",
-              fontSize: "14px",
-              textDecoration: "none",
-            }}
-          >
+          <a href="#" className="nav-link">
             Terms
           </a>
         </div>
