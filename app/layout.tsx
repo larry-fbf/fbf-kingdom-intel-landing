@@ -38,8 +38,8 @@ export default function RootLayout({
   50% { box-shadow: 0 0 40px rgba(201,165,90,0.6); }
 }
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(-2deg); }
-  50% { transform: translateY(-10px) rotate(-2deg); }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
