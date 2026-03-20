@@ -61,7 +61,6 @@ function CTAButton({ text = "COUNT ME IN!!" }: { text?: string }) {
 
 /* ── SECTION 1: HERO ── */
 function Hero() {
-  const ref = useScrollReveal();
   return (
     <section
       className="hero-split"
@@ -85,9 +84,9 @@ function Hero() {
         padding: "24px 8vw",
       }}>
         <img
-          src="/images/fbf-logo-black.png"
+          src="/images/fbf-logo-white.png"
           alt="Fueled By Fire"
-          style={{ height: "48px", width: "auto", display: "block", filter: "invert(1)" }}
+          style={{ height: "48px", width: "auto", display: "block" }}
         />
       </div>
 
@@ -121,8 +120,7 @@ function Hero() {
         />
 
         <div
-          ref={ref}
-          className="section-reveal"
+          className="hero-reveal"
           style={{ position: "relative", maxWidth: "560px" }}
         >
           {/* Badge */}
@@ -152,25 +150,28 @@ function Hero() {
           {/* Headline */}
           <h1
             style={{
-              fontSize: "clamp(36px, 5vw, 64px)",
-              fontWeight: 800,
-              lineHeight: 1.05,
+              fontSize: "clamp(40px, 6vw, 72px)",
+              fontWeight: 900,
+              lineHeight: 1.0,
               color: "#FFFFFF",
               marginBottom: "20px",
               textTransform: "uppercase" as const,
+              letterSpacing: "-0.01em",
             }}
           >
             KINGDOM INTELLIGENCE{" "}
-            <span style={{ color: "#CC0000" }}>MASTER CLASS</span>
+            <span style={{ color: "#CC0000" }}>MASTERCLASS</span>
           </h1>
 
           {/* Subhead */}
           <p
             style={{
               fontSize: "19px",
-              color: "#D4A017",
+              color: "rgba(255,255,255,0.85)",
               lineHeight: 1.6,
               marginBottom: "20px",
+              fontFamily: "'Work Sans', sans-serif",
+              fontWeight: 400,
             }}
           >
             Where High-Performing Leaders Scale Profitable Companies Without
@@ -309,25 +310,97 @@ function EventDetails() {
   );
 }
 
+/* ── SECTION 2b: VSL ── */
+function VSLSection() {
+  const ref = useScrollReveal();
+  return (
+    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+      <div
+        ref={ref}
+        className="section-reveal"
+        style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}
+      >
+        <p
+          style={{
+            fontSize: "13px",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase" as const,
+            color: "#C9A55A",
+            marginBottom: "16px",
+            fontFamily: "'Work Sans', sans-serif",
+          }}
+        >
+          WATCH THIS FIRST
+        </p>
+        <h2
+          style={{
+            fontSize: "clamp(26px, 3.5vw, 38px)",
+            fontWeight: 900,
+            color: "#FFFFFF",
+            marginBottom: "40px",
+            lineHeight: 1.2,
+          }}
+        >
+          See Why Thousands of Kingdom CEOs Are Going ALL IN
+        </h2>
+
+        {/* Video embed placeholder — swap src with real YouTube/Vimeo URL */}
+        <div
+          style={{
+            position: "relative",
+            paddingBottom: "56.25%",
+            height: 0,
+            overflow: "hidden",
+            borderRadius: "12px",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
+            border: "1px solid rgba(201,165,90,0.2)",
+            background: "#111",
+          }}
+        >
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
+            title="Kingdom Intelligence Masterclass"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+            }}
+          />
+        </div>
+
+        <div style={{ marginTop: "40px" }}>
+          <CTAButton text="RESERVE MY FREE SEAT" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── SECTION 3: TESTIMONIALS (3 cards) ── */
 const testimonials3 = [
   {
     name: "Kyler Kropf",
-    title: "Business Owner",
+    title: "Founder, SaddleBrookeLife",
     quote:
-      "I was an 8th-grade dropout... company grew to $1 million in 9 months and over $10 million in 3 years!",
+      "I was an 8th-grade dropout with zero business experience. Larry & Staci helped our company grow to $13 million in 9 months and over $60 million in 3 years!",
   },
   {
     name: "Dallas Marley",
     title: "Entrepreneur",
     quote:
-      "In less than 12 months, we paid off over $1 million in debt, moved to Ecuador...",
+      "In less than 12 months, we paid off over $2 million in debt, moved to Ecuador, and stepped into the life of our dreams.",
   },
   {
     name: "Vangel Roberts",
-    title: "Wade Roberts Plumbing",
+    title: "CMO, Wade Roberts Plumbing",
     quote:
-      "Over the last 8 months, we've experienced transformation in every area of our lives...",
+      "Over the last 8 months, we've experienced transformation in every area of our lives. Our company is thriving, but the greatest transformation has been in our marriage and with our kids.",
   },
 ];
 
@@ -800,9 +873,9 @@ function NoteSection() {
 const testimonials4 = [
   {
     name: "Kolton Kropf",
-    title: "Business Owner",
+    title: "CEO, SaddlebrookeLife",
     quote:
-      "Our business was headed toward bankruptcy... turned into an 8-figure success story. The Kingdom Intelligence Framework changed everything for our family and our company.",
+      "Our business was headed toward bankruptcy and after only 9 months, we turned it into an 8-figure success story on target to surpass $100 million in revenue.",
   },
   {
     name: "Delbert Friesen",
@@ -965,6 +1038,7 @@ export default function Home() {
     <main>
       <Hero />
       <EventDetails />
+      <VSLSection />
       <Testimonials3 />
       <Invitation />
       <AboutStaci />

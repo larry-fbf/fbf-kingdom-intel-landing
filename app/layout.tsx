@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kingdom Intelligence Master Class | Fueled By Fire",
+  title: "Kingdom Intelligence Masterclass | Fueled By Fire",
   description:
     "Free 3-day live online event for faith-driven business owners. April 14-16, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
   icons: {
@@ -19,6 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -26,12 +32,15 @@ export default function RootLayout({
 html { scroll-behavior: smooth; }
 body {
   margin: 0; padding: 0;
-  font-family: system-ui, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Work Sans', system-ui, 'Helvetica Neue', Arial, sans-serif;
   background-color: #FFFFFF;
   color: #111111;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+h1, h2, h3, h4 {
+  font-family: 'Frank Ruhl Libre', Georgia, serif;
 }
 a { color: inherit; text-decoration: none; }
 
@@ -46,14 +55,19 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(0);
 }
 
+/* Hero — no reveal delay, animate on load */
+.hero-reveal {
+  animation: fadeInUp 0.9s ease both;
+}
+
 /* CTA Button */
 .cta-btn {
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .cta-btn:hover {
-  opacity: 0.9;
+  filter: brightness(1.1);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(204,0,0,0.3);
+  box-shadow: 0 10px 36px rgba(185,148,90,0.5);
 }
 
 /* Testimonial Cards */
@@ -71,28 +85,19 @@ a { color: inherit; text-decoration: none; }
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(204,0,0,0); }
-  50% { box-shadow: 0 0 30px 8px rgba(204,0,0,0.25); }
-}
-@keyframes gentleFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-/* CTA gold hover */
-.cta-btn:hover {
-  filter: brightness(1.08);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Hero split responsive */
 @media (max-width: 768px) {
   .hero-split { flex-direction: column !important; }
-  .hero-left { flex: none !important; width: 100% !important; padding: 40px 24px !important; }
+  .hero-left { flex: none !important; width: 100% !important; padding: 100px 24px 40px !important; }
   .hero-right { flex: none !important; width: 100% !important; height: 360px !important; min-height: 360px !important; }
 }
 
