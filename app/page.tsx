@@ -36,10 +36,10 @@ function CTAButton({ text = "REGISTER FOR FREE" }: { text?: string }) {
         background: "#CC0000",
         color: "#FFFFFF",
         fontWeight: 700,
-        padding: "18px 56px",
+        padding: "13px 36px",
         borderRadius: "4px",
         border: "none",
-        fontSize: "18px",
+        fontSize: "15px",
         textDecoration: "none",
         cursor: "pointer",
         textTransform: "uppercase" as const,
@@ -218,10 +218,9 @@ function Hero() {
             Free 3-Day Live Event &mdash; April 14-16, 2026 @ 12:00 PM CST
           </p>
 
-          {/* CTAs */}
-          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+          {/* CTA */}
+          <div>
             <CTAButton />
-            <CTAButton text="SAVE MY SEAT" />
           </div>
 
           {/* Fine print */}
