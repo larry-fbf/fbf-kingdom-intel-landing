@@ -98,19 +98,23 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 768px) {
 
   /* Hero */
-  .hero-split { flex-direction: column !important; min-height: auto !important; }
+  .hero-split { flex-direction: column !important; min-height: auto !important; height: auto !important; }
   .hero-left {
     flex: none !important; width: 100% !important;
-    padding: 100px 20px 40px !important;
+    padding: 32px 24px 48px !important;
     min-height: auto !important;
   }
   .hero-right {
     flex: none !important; width: 100% !important;
-    height: 300px !important; min-height: 300px !important;
+    height: 420px !important; min-height: 420px !important;
     order: -1;
   }
   /* Hero content row stacks */
   .hero-content-row { flex-direction: column !important; min-height: auto !important; }
+
+  /* Logo bar becomes relative on mobile so it sits above photo */
+  .hero-logo-bar { position: relative !important; padding: 20px 20px 0 !important; }
+  .hero-photo { object-position: center 20% !important; }
 
   /* About section */
   .about-flex { flex-direction: column !important; align-items: center !important; }
