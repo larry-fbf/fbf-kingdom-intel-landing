@@ -4,6 +4,11 @@ export const metadata: Metadata = {
   title: "Kingdom Intelligence Master Class | Fueled By Fire",
   description:
     "Free 3-day live online event for faith-driven business owners. April 14-16, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

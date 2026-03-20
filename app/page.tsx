@@ -78,7 +78,11 @@ function Navbar() {
           textTransform: "uppercase" as const,
         }}
       >
-        FBF
+        <img
+          src="/images/fbf-logo-black.png"
+          alt="FBF"
+          style={{ height: "36px", width: "auto", display: "block" }}
+        />
       </span>
       <a
         href={REGISTER_URL}
