@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 
 const REGISTER_URL = "https://fbfchallenge.com";
 
-/* ── SCROLL REVEAL HOOK ── */
+/* â”€â”€ SCROLL REVEAL HOOK â”€â”€ */
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -25,7 +25,7 @@ function useScrollReveal() {
   return ref;
 }
 
-/* ── CTA BUTTON (Gold style) ── */
+/* â”€â”€ CTA BUTTON (Gold style) â”€â”€ */
 function CTAButton({ text = "REGISTER FOR FREE", dark = false }: { text?: string; dark?: boolean }) {
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
@@ -58,9 +58,9 @@ function CTAButton({ text = "REGISTER FOR FREE", dark = false }: { text?: string
   );
 }
 
-/* ── NAVBAR removed — logo now lives in hero ── */
+/* â”€â”€ NAVBAR removed â€” logo now lives in hero â”€â”€ */
 
-/* ── SECTION 1: HERO ── */
+/* â”€â”€ SECTION 1: HERO â”€â”€ */
 function Hero() {
   return (
     <section
@@ -75,7 +75,7 @@ function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* TOP BAR — logo */}
+      {/* TOP BAR â€” logo */}
       <div style={{
         position: "absolute",
         top: 0,
@@ -93,7 +93,7 @@ function Hero() {
 
       {/* MAIN CONTENT ROW */}
       <div style={{ display: "flex", flex: 1, minHeight: "100vh" }}>
-      {/* LEFT SIDE — text content */}
+      {/* LEFT SIDE â€” text content */}
       <div
         className="hero-left"
         style={{
@@ -208,7 +208,7 @@ function Hero() {
         </div>
       </div>
 
-      {/* RIGHT SIDE — photo */}
+      {/* RIGHT SIDE â€” photo */}
       <div
         className="hero-right"
         style={{
@@ -246,7 +246,7 @@ function Hero() {
   );
 }
 
-/* ── SECTION 2: EVENT DETAILS ── */
+/* â”€â”€ SECTION 2: EVENT DETAILS â”€â”€ */
 function EventDetails() {
   const ref = useScrollReveal();
   return (
@@ -311,7 +311,7 @@ function EventDetails() {
   );
 }
 
-/* ── SECTION 2b: VSL ── */
+/* â”€â”€ SECTION 2b: VSL â”€â”€ */
 function VSLSection() {
   const ref = useScrollReveal();
   return (
@@ -346,7 +346,7 @@ function VSLSection() {
           See Why Thousands of Kingdom CEOs Are Going ALL IN
         </h2>
 
-        {/* Video embed placeholder — swap src with real YouTube/Vimeo URL */}
+        {/* Video embed placeholder â€” swap src with real YouTube/Vimeo URL */}
         <div
           style={{
             position: "relative",
@@ -383,7 +383,7 @@ function VSLSection() {
   );
 }
 
-/* ── SECTION 3: TESTIMONIALS (3 cards) ── */
+/* â”€â”€ SECTION 3: TESTIMONIALS (3 cards) â”€â”€ */
 const testimonials3 = [
   {
     name: "Kyler Kropf",
@@ -480,140 +480,154 @@ function Testimonials3() {
 }
 
 /* ── SECTION 4: THE INVITATION ── */
+const inviteCards = [
+  {
+    icon: "🔥",
+    text: "You feel called to something bigger — a God-given mission to build a business that creates real impact, generational wealth, and a lasting legacy.",
+  },
+  {
+    icon: "🙏",
+    text: "You're passionate about scaling your company but refuse to compromise your faith, your family, or your freedom in the process.",
+  },
+  {
+    icon: "⚡",
+    text: "You've lived in BEAST mode so long your health and relationships have paid the price. You're exhausted — and know there's a better way.",
+  },
+];
+
 function Invitation() {
   const ref = useScrollReveal();
+  const ref2 = useScrollReveal();
   return (
-    <section style={{ background: "#F5F5F5", padding: "80px 20px" }}>
+    <section style={{ background: "#0d0d0d", padding: "100px 20px 0", overflow: "hidden" }}>
+
+      {/* TOP: eyebrow + headline + cards */}
       <div
         ref={ref}
         className="section-reveal"
-        style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}
+        style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center", paddingBottom: "64px" }}
       >
-        <p
-          style={{
-            fontSize: "13px",
-            fontWeight: 700,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase" as const,
-            color: "#CC0000",
-            marginBottom: "16px",
-          }}
-        >
-          THE INVITATION
+        <p style={{
+          fontSize: "13px", fontWeight: 700, letterSpacing: "0.22em",
+          textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px",
+          fontFamily: "'Work Sans', sans-serif",
+        }}>
+          THIS IS FOR YOU IF...
         </p>
-        <h2
-          style={{
-            fontSize: "clamp(32px, 5vw, 52px)",
-            fontWeight: 700,
-            color: "#111111",
-            marginBottom: "48px",
-            textTransform: "uppercase" as const,
-          }}
-        >
-          NOW IS THE TIME TO GO ALL IN!!
+        <h2 style={{
+          fontSize: "clamp(34px, 5vw, 58px)", fontWeight: 900,
+          color: "#FFFFFF", lineHeight: 1.05, marginBottom: "56px",
+          textTransform: "uppercase" as const,
+        }}>
+          NOW IS THE TIME<br />TO GO <span style={{ color: "#CC0000" }}>ALL IN</span>
         </h2>
 
-        <div
-          style={{
-            textAlign: "left",
-            maxWidth: "750px",
-            margin: "0 auto 48px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "28px",
-          }}
-        >
-          <p style={{ fontSize: "18px", color: "#444444", lineHeight: 1.8 }}>
-            <strong style={{ color: "#CC0000" }}>DO</strong> you feel called to
-            something bigger &mdash; a God-given mission to build a business
-            that creates real impact, generational wealth, and a lasting legacy
-            for your family?
+        {/* 3 icon cards */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gap: "20px",
+          marginBottom: "64px",
+          textAlign: "left",
+        }}>
+          {inviteCards.map((card, i) => (
+            <div key={i} style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(201,165,90,0.2)",
+              borderRadius: "14px",
+              padding: "28px 24px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+              transition: "border-color 0.3s",
+            }}>
+              <span style={{ fontSize: "36px", lineHeight: 1 }}>{card.icon}</span>
+              <p style={{
+                fontSize: "16px", color: "rgba(255,255,255,0.8)",
+                lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif",
+              }}>{card.text}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* BIG QUESTION divider block */}
+        <div style={{
+          borderTop: "1px solid rgba(255,255,255,0.1)",
+          borderBottom: "1px solid rgba(255,255,255,0.1)",
+          padding: "52px 24px",
+          marginBottom: "48px",
+        }}>
+          <h3 style={{
+            fontSize: "clamp(22px, 3.5vw, 38px)", fontWeight: 900,
+            color: "#FFFFFF", lineHeight: 1.2, marginBottom: "20px",
+            textTransform: "uppercase" as const,
+          }}>
+            Is it possible to have it all<br />without forsaking Faith, Family, or Freedom?
+          </h3>
+          <p style={{
+            fontSize: "clamp(20px, 2.5vw, 26px)", fontWeight: 700,
+            color: "#C9A55A", marginBottom: "20px",
+          }}>
+            The answer is YES — and we are living proof.
           </p>
-          <p style={{ fontSize: "18px", color: "#444444", lineHeight: 1.8 }}>
-            <strong style={{ color: "#CC0000" }}>ARE</strong> you passionate
-            about growing your company but refuse to compromise your faith, your
-            family, or your freedom in the process?
-          </p>
-          <p style={{ fontSize: "18px", color: "#444444", lineHeight: 1.8 }}>
-            Perhaps you&rsquo;ve lived in{" "}
-            <strong style={{ color: "#CC0000" }}>BEAST mode</strong> for so long
-            that your health, relationships, and spiritual life have paid the
-            price. You&rsquo;re exhausted, overwhelmed, and wondering if
-            there&rsquo;s a better way...
+          <p style={{
+            fontSize: "17px", color: "rgba(255,255,255,0.55)",
+            lineHeight: 1.7, maxWidth: "620px", margin: "0 auto",
+            fontFamily: "'Work Sans', sans-serif",
+          }}>
+            Get the exact blueprint we&rsquo;ve used to build multiple 7–9 figure
+            companies and a family legacy &mdash; God&rsquo;s way.
           </p>
         </div>
 
-        <h3
-          style={{
-            fontSize: "clamp(22px, 3vw, 32px)",
-            fontWeight: 700,
-            color: "#111111",
-            marginBottom: "24px",
-            lineHeight: 1.3,
-          }}
-        >
-          IS IT POSSIBLE TO HAVE IT ALL WITHOUT FORSAKING YOUR FAMILY, FAITH,
-          OR FREEDOM?
-        </h3>
-        <p
-          style={{
-            fontSize: "24px",
-            color: "#CC0000",
-            fontWeight: 700,
-            marginBottom: "16px",
-          }}
-        >
-          The answer is &lsquo;YES&rsquo; and we are living proof!
-        </p>
-        <p
-          style={{
-            fontSize: "18px",
-            color: "#444444",
-            marginBottom: "40px",
-            lineHeight: 1.7,
-          }}
-        >
-          That is why we&rsquo;ve created the Kingdom Intelligence Master Class
-          for leaders like YOU!
-        </p>
-        <p
-          style={{
-            fontSize: "clamp(20px, 3vw, 28px)",
-            fontWeight: 700,
-            color: "#111111",
-            marginBottom: "48px",
-            lineHeight: 1.4,
-          }}
-        >
-          Get the Exact Blueprint We&rsquo;ve Used to Build Multiple 7-9 Figure
-          Companies And A Family Legacy &mdash; God&rsquo;s Way!
-        </p>
-        {/* Warriors callout block */}
-        <div style={{
+        <CTAButton />
+      </div>
+
+      {/* WARRIORS FULL-WIDTH CINEMATIC BANNER */}
+      <div
+        ref={ref2}
+        className="section-reveal"
+        style={{
           background: "#CC0000",
-          borderRadius: "8px",
-          padding: "36px 40px",
-          maxWidth: "700px",
-          margin: "0 auto",
+          padding: "80px 20px",
+          textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{
+          position: "absolute", top: "-30px", left: "50%", transform: "translateX(-50%)",
+          fontSize: "260px", color: "rgba(255,255,255,0.05)",
+          fontFamily: "'Frank Ruhl Libre', Georgia, serif",
+          lineHeight: 1, pointerEvents: "none", userSelect: "none" as const,
         }}>
-          <p style={{
-            fontSize: "clamp(22px, 3.5vw, 34px)",
-            fontWeight: 900,
-            color: "#FFFFFF",
-            fontStyle: "italic",
-            lineHeight: 1.2,
-            letterSpacing: "-0.01em",
-          }}>
-            &ldquo;WARRIORS DON&rsquo;T RETREAT,<br />THEY RELOAD!&rdquo;
-          </p>
-          <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.8)", marginTop: "12px", fontWeight: 600 }}>— Staci Wallace</p>
+          &ldquo;
         </div>
+        <p style={{
+          fontSize: "clamp(28px, 5vw, 60px)", fontWeight: 900,
+          color: "#FFFFFF", fontStyle: "italic", lineHeight: 1.1,
+          letterSpacing: "-0.01em", position: "relative", zIndex: 1,
+          textTransform: "uppercase" as const,
+        }}>
+          Warriors don&rsquo;t retreat.<br />They reload.
+        </p>
+        <div style={{
+          width: "60px", height: "3px", background: "rgba(255,255,255,0.4)",
+          margin: "24px auto 16px", borderRadius: "2px",
+        }} />
+        <p style={{
+          fontSize: "15px", color: "rgba(255,255,255,0.8)",
+          fontWeight: 700, letterSpacing: "0.15em",
+          textTransform: "uppercase" as const, position: "relative", zIndex: 1,
+          fontFamily: "'Work Sans', sans-serif",
+        }}>
+          — Staci Wallace
+        </p>
       </div>
     </section>
   );
 }
-
-/* ── SECTION 5: ABOUT STACI ── */
+/* â”€â”€ SECTION 5: ABOUT STACI â”€â”€ */
 function AboutStaci() {
   const ref = useScrollReveal();
   return (
@@ -739,7 +753,7 @@ function AboutStaci() {
   );
 }
 
-/* ── SECTION 6: WHAT YOU WILL LEARN ── */
+/* â”€â”€ SECTION 6: WHAT YOU WILL LEARN â”€â”€ */
 const learnItems = [
   "Identify your #1 Profit-Making Activity (PMA) and create a plan to hire the team to scale it",
   "Increase profitability and build a thriving business without losing peace",
@@ -838,7 +852,7 @@ function WhatYouLearn() {
   );
 }
 
-/* ── SECTION 7: NOT FOR / FOR (NOTE) ── */
+/* â”€â”€ SECTION 7: NOT FOR / FOR (NOTE) â”€â”€ */
 function NoteSection() {
   const ref = useScrollReveal();
   return (
@@ -886,7 +900,7 @@ function NoteSection() {
   );
 }
 
-/* ── SECTION 8: MORE TESTIMONIALS (2x2) ── */
+/* â”€â”€ SECTION 8: MORE TESTIMONIALS (2x2) â”€â”€ */
 const testimonials4 = [
   {
     name: "Kolton Kropf",
@@ -904,7 +918,7 @@ const testimonials4 = [
     name: "Eric Moland",
     title: "CEO, Black Dog Insurance",
     quote:
-      "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years — more than double from the previous year. Our entire business profit is up over 50% this year alone.",
+      "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years â€” more than double from the previous year. Our entire business profit is up over 50% this year alone.",
   },
   {
     name: "Alex & Irina Chifor",
@@ -964,7 +978,7 @@ function MoreTestimonials() {
   );
 }
 
-/* ── SECTION 9: FINAL CTA ── */
+/* â”€â”€ SECTION 9: FINAL CTA â”€â”€ */
 function FinalCTA() {
   const ref = useScrollReveal();
   return (
@@ -1011,7 +1025,7 @@ function FinalCTA() {
   );
 }
 
-/* ── FOOTER ── */
+/* â”€â”€ FOOTER â”€â”€ */
 function Footer() {
   return (
     <footer
@@ -1039,7 +1053,7 @@ function Footer() {
   );
 }
 
-/* ── PAGE ── */
+/* â”€â”€ PAGE â”€â”€ */
 export default function Home() {
   return (
     <main>
