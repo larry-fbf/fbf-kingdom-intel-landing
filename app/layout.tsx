@@ -131,6 +131,9 @@ a { color: inherit; text-decoration: none; }
   /* Event detail flex row → column */
   .event-details-row { flex-direction: column !important; gap: 20px !important; align-items: center !important; }
 
+  /* Prep grid → single column */
+  .prep-grid { grid-template-columns: 1fr !important; }
+
   /* Invitation split → stacks on mobile */
   .invitation-split { flex-direction: column !important; min-height: auto !important; }
   .invitation-photo { flex: none !important; width: 100% !important; min-height: 380px !important; }

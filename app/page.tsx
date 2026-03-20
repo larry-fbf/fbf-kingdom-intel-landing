@@ -564,34 +564,79 @@ function ECHOBlueprint() {
   );
 }
 
-/* ── SECTION 7: NOTE / QUALIFIER ── */
+/* ── SECTION 7: PREPARE + QUALIFIER ── */
+const prepSteps = [
+  {
+    number: "01",
+    title: "Block Your Calendar",
+    body: "All three days. April 14–16, 12:00 PM CST. Treat it like the most important business meeting of the year — because it is.",
+  },
+  {
+    number: "02",
+    title: "Bring Your Biggest Challenge",
+    body: "Come with the one thing that's been holding your business back. We built this Masterclass to solve real problems in real time.",
+  },
+  {
+    number: "03",
+    title: "Come Ready to Implement",
+    body: "This is not a lecture. It's a blueprint. Bring a notebook, your team if possible, and a willingness to make decisions and move.",
+  },
+];
+
 function NoteSection() {
   const ref = useScrollReveal();
+  const ref2 = useScrollReveal();
   return (
-    <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
-      <div ref={ref} className="section-reveal" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
-        <div className="note-inner" style={{ background: "#0a0a0a", borderRadius: "12px", padding: "48px 40px", marginBottom: "48px", border: "1px solid rgba(201,165,90,0.2)" }}>
-          <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 20px 0" }}>
+
+      {/* HOW TO PREPARE */}
+      <div ref={ref} className="section-reveal" style={{ maxWidth: "960px", margin: "0 auto", paddingBottom: "80px" }}>
+        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "16px", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
+          Before You Arrive
+        </p>
+        <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, color: "#111111", marginBottom: "12px", textAlign: "center", lineHeight: 1.15 }}>
+          How to Prepare for the 3 Days
+        </h2>
+        <p style={{ fontSize: "17px", color: "#888", textAlign: "center", marginBottom: "52px", fontFamily: "'Work Sans', sans-serif", maxWidth: "560px", margin: "0 auto 52px" }}>
+          Leaders who come prepared get the most out of every session. Here&rsquo;s how to make sure you&rsquo;re ready.
+        </p>
+
+        <div className="prep-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", marginBottom: "56px" }}>
+          {prepSteps.map((step, i) => (
+            <div key={i} style={{ borderTop: "3px solid #CC0000", paddingTop: "24px" }}>
+              <p style={{ fontSize: "32px", fontWeight: 900, color: "rgba(0,0,0,0.08)", fontFamily: "'Frank Ruhl Libre', Georgia, serif", lineHeight: 1, marginBottom: "8px" }}>
+                {step.number}
+              </p>
+              <h3 style={{ fontSize: "18px", fontWeight: 900, color: "#111111", marginBottom: "10px", lineHeight: 1.2 }}>
+                {step.title}
+              </h3>
+              <p style={{ fontSize: "15px", color: "#666", lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif" }}>
+                {step.body}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <CTAButton dark={true} />
+        </div>
+      </div>
+
+      {/* QUALIFIER — dark full-width strip */}
+      <div ref={ref2} className="section-reveal" style={{ background: "#0a0a0a", padding: "64px 20px" }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center" }}>
+          <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
             A Word of Honesty
           </p>
-          <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.8)", lineHeight: 1.8, fontFamily: "'Work Sans', sans-serif" }}>
+          <p style={{ fontSize: "19px", color: "rgba(255,255,255,0.8)", lineHeight: 1.8, fontFamily: "'Work Sans', sans-serif", marginBottom: "16px" }}>
             This Masterclass is <strong style={{ color: "#FFFFFF" }}>NOT</strong> for money-chasers, passive dreamers, or leaders
             unwilling to build the infrastructure real scale demands.
           </p>
-          <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.8)", lineHeight: 1.8, marginTop: "16px", fontFamily: "'Work Sans', sans-serif" }}>
-            But it <strong style={{ color: "#CC0000" }}>IS</strong> for the entrepreneur who knows
-            they carry a God-given business the world desperately needs — and is ready to build it
-            the right way.
+          <p style={{ fontSize: "19px", color: "rgba(255,255,255,0.8)", lineHeight: 1.8, fontFamily: "'Work Sans', sans-serif" }}>
+            But it <strong style={{ color: "#CC0000" }}>IS</strong> for the entrepreneur who knows they carry a God-given business
+            the world desperately needs — and is ready to build it the right way.
           </p>
         </div>
-        <h2 style={{ fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 900, color: "#111111", marginBottom: "12px" }}>
-          This Is Your Moment.
-        </h2>
-        <p style={{ fontSize: "18px", color: "#666", marginBottom: "36px", fontFamily: "'Work Sans', sans-serif" }}>
-          Knowledge alone doesn&rsquo;t build companies. Implementation does — and implementation
-          requires the right room.
-        </p>
-        <CTAButton dark={true} />
       </div>
     </section>
   );
