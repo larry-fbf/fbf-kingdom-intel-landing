@@ -302,39 +302,52 @@ function Invitation() {
   const ref = useScrollReveal();
   const ref2 = useScrollReveal();
   return (
-    <section style={{ background: "#0d0d0d", padding: "100px 20px 0", overflow: "hidden" }}>
-      <div ref={ref} className="section-reveal" style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center", paddingBottom: "72px" }}>
+    <section style={{ background: "#0d0d0d", overflow: "hidden" }}>
 
-        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-          This Is For You If...
-        </p>
-        <h2 style={{ fontSize: "clamp(34px, 5vw, 58px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.05, marginBottom: "52px", textTransform: "uppercase" as const }}>
-          NOW IS THE TIME<br />TO GO <span style={{ color: "#CC0000" }}>ALL IN</span>
-        </h2>
+      {/* SPLIT: photo left, content right */}
+      <div ref={ref} className="section-reveal invitation-split" style={{ display: "flex", minHeight: "80vh" }}>
 
-        {/* Minimal statement list */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "0", marginBottom: "60px", textAlign: "left", maxWidth: "600px", margin: "0 auto 60px" }}>
-          {[
-            "You feel called to build something bigger — a legacy, not just a business.",
-            "You refuse to sacrifice faith, family, or freedom to get there.",
-            "You're scaling fast but know your infrastructure hasn't kept up.",
-          ].map((line, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "16px", padding: "20px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
-              <span style={{ color: "#CC0000", fontWeight: 900, fontSize: "20px", lineHeight: 1.4, flexShrink: 0 }}>{i + 1}.</span>
-              <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.85)", lineHeight: 1.6, fontFamily: "'Work Sans', sans-serif", margin: 0 }}>{line}</p>
-            </div>
-          ))}
+        {/* LEFT — photo */}
+        <div className="invitation-photo" style={{ flex: "0 0 45%", position: "relative", overflow: "hidden", minHeight: "600px" }}>
+          <img
+            src="/images/staci-larry-split.webp"
+            alt="Larry and Staci Wallace"
+            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+          />
+          {/* Right edge fade */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 60%, #0d0d0d 100%)" }} />
         </div>
 
-        {/* Big question + answer */}
-        <h3 style={{ fontSize: "clamp(24px, 3.5vw, 40px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.15, marginBottom: "16px", textTransform: "uppercase" as const }}>
-          Can you build a 7–9 figure company<br />without forsaking Faith, Family, or Freedom?
-        </h3>
-        <p style={{ fontSize: "clamp(20px, 2.5vw, 26px)", fontWeight: 700, color: "#C9A55A", marginBottom: "40px" }}>
-          The answer is YES — and we are living proof.
-        </p>
+        {/* RIGHT — content */}
+        <div className="invitation-content" style={{ flex: "0 0 55%", display: "flex", alignItems: "center", padding: "80px 8vw 80px 48px" }}>
+          <div style={{ maxWidth: "520px" }}>
+            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
+              This Is For You If...
+            </p>
+            <h2 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.05, marginBottom: "40px", textTransform: "uppercase" as const }}>
+              NOW IS THE TIME<br />TO GO <span style={{ color: "#CC0000" }}>ALL IN</span>
+            </h2>
 
-        <CTAButton />
+            <div style={{ display: "flex", flexDirection: "column", marginBottom: "44px" }}>
+              {[
+                "You feel called to build something bigger — a legacy, not just a business.",
+                "You refuse to sacrifice faith, family, or freedom to get there.",
+                "You're scaling fast but know your infrastructure hasn't kept up.",
+              ].map((line, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "16px", padding: "18px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
+                  <span style={{ color: "#CC0000", fontWeight: 900, fontSize: "18px", lineHeight: 1.5, flexShrink: 0 }}>{i + 1}.</span>
+                  <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.8)", lineHeight: 1.65, fontFamily: "'Work Sans', sans-serif", margin: 0 }}>{line}</p>
+                </div>
+              ))}
+            </div>
+
+            <p style={{ fontSize: "clamp(18px, 2vw, 22px)", fontWeight: 700, color: "#C9A55A", marginBottom: "32px", lineHeight: 1.3 }}>
+              The answer is YES — and we are living proof.
+            </p>
+
+            <CTAButton />
+          </div>
+        </div>
       </div>
 
       {/* WARRIORS BANNER */}

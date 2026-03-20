@@ -130,8 +130,11 @@ a { color: inherit; text-decoration: none; }
   /* Event detail flex row → column */
   .event-details-row { flex-direction: column !important; gap: 20px !important; align-items: center !important; }
 
-  /* Invite cards grid already auto-fit but make sure */
-  .invite-grid { grid-template-columns: 1fr !important; }
+  /* Invitation split → stacks on mobile */
+  .invitation-split { flex-direction: column !important; min-height: auto !important; }
+  .invitation-photo { flex: none !important; width: 100% !important; min-height: 380px !important; }
+  .invitation-content { flex: none !important; width: 100% !important; padding: 40px 24px 56px !important; }
+  .invitation-content > div { max-width: 100% !important; }
 
   /* Warriors banner text */
   .warriors-quote { font-size: 28px !important; }
