@@ -298,76 +298,41 @@ function Testimonials3() {
   );
 }
 
-/* ── SECTION 4: THE INVITATION ── */
-const inviteCards = [
-  {
-    icon: (
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <circle cx="18" cy="18" r="17" stroke="#C9A55A" strokeWidth="1.5" />
-        <path d="M18 8v4M18 24v4M8 18h4M24 18h4" stroke="#C9A55A" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="18" cy="18" r="5" stroke="#C9A55A" strokeWidth="1.5"/>
-        <circle cx="18" cy="18" r="2" fill="#C9A55A"/>
-      </svg>
-    ),
-    text: "You feel called to something bigger — a God-given mission to build a business that creates real impact, generational wealth, and a lasting legacy.",
-  },
-  {
-    icon: (
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <path d="M18 6L8 11v8c0 5.5 4.3 10.7 10 12 5.7-1.3 10-6.5 10-12v-8L18 6z" stroke="#C9A55A" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M14 18l3 3 5-5" stroke="#C9A55A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-    text: "You're passionate about scaling your company but refuse to compromise your faith, your family, or your freedom in the process.",
-  },
-  {
-    icon: (
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <path d="M20 6L10 20h9l-3 10 16-14h-9l3-10z" stroke="#C9A55A" strokeWidth="1.5" strokeLinejoin="round"/>
-      </svg>
-    ),
-    text: "You've been running hard — but something feels off. Your growth has outpaced your infrastructure, and you know it.",
-  },
-];
-
 function Invitation() {
   const ref = useScrollReveal();
   const ref2 = useScrollReveal();
   return (
     <section style={{ background: "#0d0d0d", padding: "100px 20px 0", overflow: "hidden" }}>
-      <div ref={ref} className="section-reveal" style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center", paddingBottom: "64px" }}>
+      <div ref={ref} className="section-reveal" style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center", paddingBottom: "72px" }}>
+
         <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
           This Is For You If...
         </p>
-        <h2 style={{ fontSize: "clamp(34px, 5vw, 58px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.05, marginBottom: "56px", textTransform: "uppercase" as const }}>
+        <h2 style={{ fontSize: "clamp(34px, 5vw, 58px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.05, marginBottom: "52px", textTransform: "uppercase" as const }}>
           NOW IS THE TIME<br />TO GO <span style={{ color: "#CC0000" }}>ALL IN</span>
         </h2>
 
-        <div className="invite-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px", marginBottom: "64px", textAlign: "left" }}>
-          {inviteCards.map((card, i) => (
-            <div key={i} style={{
-              background: "rgba(255,255,255,0.04)", border: "1px solid rgba(201,165,90,0.2)",
-              borderRadius: "14px", padding: "28px 24px", display: "flex", flexDirection: "column", gap: "14px",
-            }}>
-              <div style={{ lineHeight: 1 }}>{card.icon}</div>
-              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.8)", lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif" }}>{card.text}</p>
+        {/* Minimal statement list */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0", marginBottom: "60px", textAlign: "left", maxWidth: "600px", margin: "0 auto 60px" }}>
+          {[
+            "You feel called to build something bigger — a legacy, not just a business.",
+            "You refuse to sacrifice faith, family, or freedom to get there.",
+            "You're scaling fast but know your infrastructure hasn't kept up.",
+          ].map((line, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "16px", padding: "20px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
+              <span style={{ color: "#CC0000", fontWeight: 900, fontSize: "20px", lineHeight: 1.4, flexShrink: 0 }}>{i + 1}.</span>
+              <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.85)", lineHeight: 1.6, fontFamily: "'Work Sans', sans-serif", margin: 0 }}>{line}</p>
             </div>
           ))}
         </div>
 
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", borderBottom: "1px solid rgba(255,255,255,0.1)", padding: "52px 24px", marginBottom: "48px" }}>
-          <h3 style={{ fontSize: "clamp(22px, 3.5vw, 38px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.2, marginBottom: "20px", textTransform: "uppercase" as const }}>
-            Is it possible to build a 7–9 figure company<br />without forsaking Faith, Family, or Freedom?
-          </h3>
-          <p style={{ fontSize: "clamp(20px, 2.5vw, 26px)", fontWeight: 700, color: "#C9A55A", marginBottom: "20px" }}>
-            The answer is YES — and we are living proof.
-          </p>
-          <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.55)", lineHeight: 1.75, maxWidth: "620px", margin: "0 auto", fontFamily: "'Work Sans', sans-serif" }}>
-            Larry &amp; Staci Wallace have spent nearly four decades building companies from the ground up —
-            multiple 7, 8, and 9-figure businesses, all while keeping faith and family at the center.
-            In this Masterclass, they hand you the exact blueprint.
-          </p>
-        </div>
+        {/* Big question + answer */}
+        <h3 style={{ fontSize: "clamp(24px, 3.5vw, 40px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.15, marginBottom: "16px", textTransform: "uppercase" as const }}>
+          Can you build a 7–9 figure company<br />without forsaking Faith, Family, or Freedom?
+        </h3>
+        <p style={{ fontSize: "clamp(20px, 2.5vw, 26px)", fontWeight: 700, color: "#C9A55A", marginBottom: "40px" }}>
+          The answer is YES — and we are living proof.
+        </p>
 
         <CTAButton />
       </div>
