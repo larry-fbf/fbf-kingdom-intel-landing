@@ -26,32 +26,33 @@ function useScrollReveal() {
 }
 
 /* ── CTA BUTTON (Gold style) ── */
-function CTAButton({ text = "COUNT ME IN!!" }: { text?: string }) {
+function CTAButton({ text = "REGISTER FOR FREE", dark = false }: { text?: string; dark?: boolean }) {
   return (
-    <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: "8px" }}>
+    <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
       <a
         href={REGISTER_URL}
         className="cta-btn"
         style={{
           display: "inline-block",
-          background: "linear-gradient(135deg, #C9A55A 0%, #E8C97A 40%, #BB945A 100%)",
-          color: "#1a1000",
+          background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
+          color: "#120800",
           fontWeight: 800,
-          padding: "16px 40px",
-          borderRadius: "6px",
+          padding: "18px 48px",
+          borderRadius: "5px",
           border: "none",
-          fontSize: "17px",
+          fontSize: "18px",
           textDecoration: "none",
           cursor: "pointer",
           textTransform: "uppercase" as const,
-          letterSpacing: "0.06em",
-          boxShadow: "0 4px 20px rgba(185,148,90,0.4)",
+          letterSpacing: "0.08em",
+          boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
+          fontFamily: "'Work Sans', sans-serif",
         }}
       >
-        » {text} «
+        {text}
       </a>
-      <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", paddingLeft: "4px", fontStyle: "italic" }}>
-        Register For FREE
+      <span style={{ fontSize: "13px", color: dark ? "#888" : "rgba(255,255,255,0.55)", fontStyle: "italic" }}>
+        No cost. Limited seats. Live online event.
       </span>
     </div>
   );
@@ -276,7 +277,7 @@ function EventDetails() {
             marginBottom: "32px",
           }}
         >
-          FREE 3-Day Kingdom Intelligence Master Class &mdash; April 14-16 @
+          FREE 3-Day Kingdom Intelligence Masterclass &mdash; April 14-16 @
           12:00 PM CST
         </h2>
         <p
@@ -303,7 +304,7 @@ function EventDetails() {
             fontWeight: 600,
           }}
         >
-          FREE For A LIMITED TIME ONLY (A $1,500 VALUE)
+          FREE For A LIMITED TIME ONLY (A $7,500 VALUE)
         </p>
       </div>
     </section>
@@ -456,6 +457,12 @@ function Testimonials3() {
         className="section-reveal"
         style={{ maxWidth: "1100px", margin: "0 auto" }}
       >
+        <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "#C9A55A", textAlign: "center", marginBottom: "12px" }}>
+          WHAT OUR CLIENTS ARE SAYING
+        </p>
+        <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 900, color: "#FFFFFF", textAlign: "center", marginBottom: "48px", lineHeight: 1.2 }}>
+          Real People. Real Results.
+        </h2>
         <div
           style={{
             display: "grid",
@@ -581,16 +588,26 @@ function Invitation() {
           Get the Exact Blueprint We&rsquo;ve Used to Build Multiple 7-9 Figure
           Companies And A Family Legacy &mdash; God&rsquo;s Way!
         </p>
-        <p
-          style={{
-            fontSize: "clamp(24px, 4vw, 36px)",
-            fontWeight: 700,
-            color: "#CC0000",
+        {/* Warriors callout block */}
+        <div style={{
+          background: "#CC0000",
+          borderRadius: "8px",
+          padding: "36px 40px",
+          maxWidth: "700px",
+          margin: "0 auto",
+        }}>
+          <p style={{
+            fontSize: "clamp(22px, 3.5vw, 34px)",
+            fontWeight: 900,
+            color: "#FFFFFF",
             fontStyle: "italic",
-          }}
-        >
-          &ldquo;WARRIORS DON&rsquo;T RETREAT, THEY RELOAD!&rdquo;
-        </p>
+            lineHeight: 1.2,
+            letterSpacing: "-0.01em",
+          }}>
+            &ldquo;WARRIORS DON&rsquo;T RETREAT,<br />THEY RELOAD!&rdquo;
+          </p>
+          <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.8)", marginTop: "12px", fontWeight: 600 }}>— Staci Wallace</p>
+        </div>
       </div>
     </section>
   );
@@ -704,7 +721,7 @@ function AboutStaci() {
             }}
           >
             If you&rsquo;re a leader who refuses to choose between success and
-            significance &mdash; this Master Class was built for you.
+            significance &mdash; this Masterclass was built for you.
           </p>
           <p
             style={{
@@ -814,7 +831,7 @@ function WhatYouLearn() {
           ))}
         </div>
         <div style={{ textAlign: "center", marginTop: "48px" }}>
-          <CTAButton />
+          <CTAButton dark={true} />
         </div>
       </div>
     </section>
@@ -856,14 +873,14 @@ function NoteSection() {
         <h2
           style={{
             fontSize: "clamp(32px, 5vw, 48px)",
-            fontWeight: 700,
+            fontWeight: 900,
             color: "#111111",
             marginBottom: "32px",
           }}
         >
-          Are You Ready to Go ALL IN?
+          This Is Your Moment. Don&rsquo;t Miss It.
         </h2>
-        <CTAButton />
+        <CTAButton dark={true} />
       </div>
     </section>
   );
@@ -879,15 +896,15 @@ const testimonials4 = [
   },
   {
     name: "Delbert Friesen",
-    title: "Entrepreneur",
+    title: "President, Earthmax",
     quote:
-      "I've never heard anyone bridge the gap between elite business training with Kingdom principles the way Staci and Larry do. This is world-class.",
+      "I've never heard anyone bridge the gap between elite business training with Kingdom principles like Staci. She has helped us scale profits while building Kingdom generosity and legacy impact.",
   },
   {
     name: "Eric Moland",
-    title: "Sales Professional",
+    title: "CEO, Black Dog Insurance",
     quote:
-      "In one month, my income jumped 35%. Next month, largest commission sales in 40 years of my career. The frameworks are that powerful.",
+      "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years — more than double from the previous year. Our entire business profit is up over 50% this year alone.",
   },
   {
     name: "Alex & Irina Chifor",
@@ -962,15 +979,19 @@ function FinalCTA() {
         className="section-reveal"
         style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}
       >
+        <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "16px" }}>
+          APRIL 14-16, 2026
+        </p>
         <h2
           style={{
-            fontSize: "clamp(36px, 5vw, 56px)",
-            fontWeight: 700,
+            fontSize: "clamp(36px, 5vw, 60px)",
+            fontWeight: 900,
             color: "#FFFFFF",
             marginBottom: "16px",
+            lineHeight: 1.05,
           }}
         >
-          Are You Ready to Go ALL IN?
+          ARE YOU READY TO<br />GO ALL IN?
         </h2>
         <p
           style={{
@@ -978,21 +999,13 @@ function FinalCTA() {
             color: "rgba(255,255,255,0.7)",
             marginBottom: "40px",
             lineHeight: 1.6,
+            maxWidth: "600px",
+            margin: "0 auto 40px",
           }}
         >
-          Join thousands of faith-driven leaders who are building God-sized
-          businesses &mdash; without sacrificing what matters most.
+          Join thousands of faith-driven leaders building God-sized businesses &mdash; without sacrificing faith, family, or freedom.
         </p>
-        <CTAButton text="CLAIM YOUR FREE SEAT NOW" />
-        <p
-          style={{
-            fontSize: "13px",
-            color: "rgba(255,255,255,0.4)",
-            marginTop: "20px",
-          }}
-        >
-          Free for a limited time. Live online event April 14-16, 2026.
-        </p>
+        <CTAButton text="CLAIM YOUR FREE SEAT" />
       </div>
     </section>
   );
@@ -1009,17 +1022,11 @@ function Footer() {
         textAlign: "center",
       }}
     >
-      <p
-        style={{
-          fontSize: "20px",
-          fontWeight: 800,
-          color: "#FFFFFF",
-          letterSpacing: "0.15em",
-          marginBottom: "12px",
-        }}
-      >
-        FBF
-      </p>
+      <img
+        src="/images/fbf-logo-white.png"
+        alt="Fueled By Fire"
+        style={{ height: "40px", width: "auto", marginBottom: "16px", display: "inline-block" }}
+      />
       <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", marginBottom: "8px" }}>
         &copy; 2026 Fueled By Fire. All Rights Reserved.
       </p>
