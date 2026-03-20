@@ -628,6 +628,7 @@ function NoteSection() {
 
 /* ── SECTION 8: GALLERY TESTIMONIALS ── */
 const testimonials4 = [
+  // Slide 1 — lead with biggest results
   {
     name: "Kolton Kropf",
     title: "CEO, SaddlebrookeLife",
@@ -646,6 +647,7 @@ const testimonials4 = [
     quote: "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years — more than double the previous year. Our entire business profit is up over 50%.",
     photo: "/images/eric-headshot.jpg",
   },
+  // Slide 2
   {
     name: "Alex & Irina Chifor",
     title: "Commercial Investors",
@@ -658,6 +660,13 @@ const testimonials4 = [
     quote: "FBF Platinum has forever changed our lives! Our business is now 100% debt-free and continues to scale. We've paid off all personal debt, and our marriage has been totally restored.",
     photo: "/images/rogelio-brandi.webp",
   },
+  {
+    name: "Drew & Tina Shabo",
+    title: "Dentistry Business Owners",
+    quote: "We've clarified God's plan for our portfolio of dentistry businesses and our family has been restored to full alignment. We are now crystal clear about our GOD-SIZED vision.",
+    photo: "/images/drew-tina.jpg",
+  },
+  // Slide 3
   {
     name: "Jamie Dahl",
     title: "Business Owner",
@@ -676,12 +685,7 @@ const testimonials4 = [
     quote: "I am now debt-free, have lost over 60 pounds, and am walking in total freedom from the past. Fueled by Fire has changed everything for me and my family!",
     photo: "/images/christina-willis.jpeg",
   },
-  {
-    name: "Drew & Tina Shabo",
-    title: "Dentistry Business Owners",
-    quote: "We've clarified God's plan for our portfolio of dentistry businesses and our family has been restored to full alignment. We are now crystal clear about our GOD-SIZED vision.",
-    photo: "/images/drew-tina.jpg",
-  },
+  // Slide 4
   {
     name: "Lynn Vennefron",
     title: "FBF Client",
@@ -700,7 +704,7 @@ function MoreTestimonials() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent(c => (c + 1) % pages);
-    }, 5000);
+    }, 8000);
     return () => clearInterval(timer);
   }, [pages]);
 
