@@ -275,7 +275,7 @@ function TestimonialCard({ t }: { t: { name: string; title: string; quote: strin
       </p>
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
         {t.photo && (
-          <img src={t.photo} alt={t.name} style={{ width: "44px", height: "44px", borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: "2px solid rgba(201,165,90,0.4)" }} />
+          <img src={t.photo} alt={t.name} style={{ width: "64px", height: "64px", borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: "2px solid rgba(201,165,90,0.4)" }} />
         )}
         <p style={{ fontSize: "14px", color: "#ccc", fontFamily: "'Work Sans', sans-serif" }}>
           <strong style={{ color: "#FFFFFF", display: "block" }}>{t.name}</strong>
@@ -291,11 +291,8 @@ function Testimonials3() {
   return (
     <section style={{ background: "#111111", padding: "80px 20px" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", textAlign: "center", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
-          What Our Clients Are Saying
-        </p>
-        <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 900, color: "#FFFFFF", textAlign: "center", marginBottom: "48px", lineHeight: 1.15 }}>
-          Real People. Real Results.
+        <h2 style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 900, color: "#FFFFFF", textAlign: "center", marginBottom: "48px", lineHeight: 1.15, textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>
+          RESULTS MATTER...
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
           {testimonials3.map((t, i) => <TestimonialCard key={i} t={t} />)}
