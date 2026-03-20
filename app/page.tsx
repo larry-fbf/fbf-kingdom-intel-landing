@@ -334,18 +334,20 @@ function Invitation() {
             <div style={{ width: "48px", height: "2px", background: "#CC0000", marginBottom: "28px", borderRadius: "2px" }} />
 
             {/* Letter body */}
-            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-              We are entering one of the most disruptive economic shifts in modern history. Artificial Intelligence is accelerating the speed of business at a pace the world has never seen. Ideas are generated instantly. Automation is reshaping entire industries.
+            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>
+              While AI increases speed, <span style={{ color: "#C9A55A", fontWeight: 700 }}>Kingdom Intelligence determines dominion, authority, and long-term impact in the marketplace.</span> The leaders who will thrive in this next decade are not simply adopting new tools. They are developing the Spirit-led wisdom, operational foresight, and leadership structure required to steward growth well. That is why we created the Kingdom Intelligence Masterclass Series.
             </p>
-            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-              Yet many leaders still don&rsquo;t know how to position their companies for this shift.
+            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>
+              This three-day immersive experience is designed for faith-driven leaders who are ready to build highly profitable, purpose-driven companies without sacrificing their peace, family, or calling.
             </p>
-            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, marginBottom: "28px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
-              <span style={{ color: "#C9A55A" }}>AI increases speed. Kingdom Intelligence determines dominion.</span>{" "}
-              The leaders who will thrive aren&rsquo;t just adopting new tools — they&rsquo;re developing the Spirit-led wisdom to steward growth God&rsquo;s way.
+            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>
+              God is positioning Kingdom-minded entrepreneurs with the operational clarity and leadership infrastructure needed to scale businesses that generate profit, cultivate culture, and multiply generosity across generations.
             </p>
-            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "36px", fontFamily: "'Work Sans', sans-serif" }}>
-              That&rsquo;s why we created this Masterclass. Join us for three days and let us hand you the exact blueprint we&rsquo;ve used to build multiple 7–9 figure companies — without compromising faith, family, or freedom.
+            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>
+              Each day will guide you through our <span style={{ color: "#C9A55A", fontWeight: 700 }}>E.C.H.O. Framework</span> — a step-by-step process that fuses spiritual alignment with practical business strategy. When your life and leadership align with your divine mandate, you stop chasing money and begin igniting movements that impact families, teams, and entire industries.
+            </p>
+            <p style={{ fontSize: "16px", color: "#FFFFFF", lineHeight: 1.7, marginBottom: "28px", fontFamily: "'Frank Ruhl Libre', Georgia, serif", fontWeight: 700, fontStyle: "italic" }}>
+              What will your echo be? Playing small has never built a Kingdom.<br />Now is the moment to go ALL IN.
             </p>
 
             {/* Signature */}
