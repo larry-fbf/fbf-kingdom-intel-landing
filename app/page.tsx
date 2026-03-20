@@ -162,11 +162,6 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         <div className="hero-left" style={{ flex: "0 0 55%", display: "flex", alignItems: "center", padding: "120px 48px 60px 8vw", position: "relative", zIndex: 2 }}>
           <div style={{ position: "absolute", top: "40%", left: "30%", width: "600px", height: "600px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,165,90,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
           <div className="hero-reveal" style={{ position: "relative", maxWidth: "580px" }}>
-            <div style={{ display: "inline-block", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(201,165,90,0.4)", borderRadius: "50px", padding: "10px 24px", marginBottom: "24px" }}>
-              <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", fontFamily: "'Work Sans', sans-serif" }}>
-                Free 3-Day Live Event &middot; April 14&ndash;16, 2026 &middot; 12:00 PM CST
-              </span>
-            </div>
             <h1 style={{ fontSize: "clamp(42px, 6vw, 76px)", fontWeight: 900, lineHeight: 0.95, color: "#FFFFFF", marginBottom: "20px", textTransform: "uppercase" as const, letterSpacing: "-0.02em" }}>
               Kingdom<br />Intelligence<br /><span style={{ color: "#CC0000" }}>Masterclass</span>
             </h1>
@@ -540,6 +535,29 @@ function Footer() {
   );
 }
 
+/* -- STICKY TOP BANNER -- */
+function TopBanner({ onOpen }: { onOpen: () => void }) {
+  return (
+    <button
+      onClick={onOpen}
+      style={{
+        position: "fixed", top: 0, left: 0, width: "100%", zIndex: 9998,
+        background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)",
+        border: "none", cursor: "pointer", padding: "11px 20px",
+        display: "flex", alignItems: "center", justifyContent: "center", gap: "12px",
+        transition: "filter 0.2s",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.filter = "brightness(1.1)")}
+      onMouseLeave={e => (e.currentTarget.style.filter = "brightness(1)")}
+    >
+      <span style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif" }}>
+        Free 3-Day Live Event &nbsp;&middot;&nbsp; April 14&ndash;16, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;
+        <span style={{ color: "#FFE599", textDecoration: "underline" }}>Register Now &rarr;</span>
+      </span>
+    </button>
+  );
+}
+
 /* -- PAGE -- */
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -549,7 +567,8 @@ export default function Home() {
   return (
     <>
       {modalOpen && <RegisterModal onClose={close} />}
-      <main>
+      <TopBanner onOpen={open} />
+      <main style={{ paddingTop: "40px" }}>
         <Hero onOpen={open} />
         <EventDetails />
         <VSLSection onOpen={open} />

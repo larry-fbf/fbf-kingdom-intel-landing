@@ -97,6 +97,9 @@ a { color: inherit; text-decoration: none; }
 /* ── MOBILE: 768px and below ── */
 @media (max-width: 768px) {
 
+  /* ── TOP BANNER ── */
+  .top-banner-text { font-size: 11px !important; letter-spacing: 0.12em !important; }
+
   /* ── HERO ── */
   .hero-split { flex-direction: column !important; min-height: auto !important; height: auto !important; }
   .hero-content-row { flex-direction: column !important; min-height: auto !important; }
