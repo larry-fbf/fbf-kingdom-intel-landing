@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const REGISTER_URL = "https://fbfchallenge.com";
@@ -18,7 +17,7 @@ function useScrollReveal() {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -34,21 +33,76 @@ function CTAButton({ text = "REGISTER FOR FREE" }: { text?: string }) {
       className="cta-btn"
       style={{
         display: "inline-block",
-        background: "#BB945A",
+        background: "linear-gradient(135deg, #BB945A, #D4A017, #BB945A)",
+        backgroundSize: "200%",
+        animation: "shimmerText 4s linear infinite, pulseGlow 3s ease-in-out infinite",
         color: "#000",
         fontWeight: 700,
-        padding: "18px 60px",
+        padding: "20px 64px",
         borderRadius: "4px",
         border: "none",
         fontSize: "18px",
         textDecoration: "none",
         cursor: "pointer",
         textTransform: "uppercase" as const,
-        letterSpacing: "0.05em",
+        letterSpacing: "0.08em",
       }}
     >
       {text}
     </a>
+  );
+}
+
+/* ── NAVBAR ── */
+function Navbar() {
+  return (
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        zIndex: 1000,
+        background: "rgba(10,10,10,0.9)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderBottom: "1px solid rgba(201,165,90,0.2)",
+        padding: "16px 32px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "22px",
+          fontWeight: 800,
+          color: "#D4A017",
+          letterSpacing: "0.15em",
+          textTransform: "uppercase" as const,
+        }}
+      >
+        FBF
+      </span>
+      <a
+        href={REGISTER_URL}
+        className="nav-register"
+        style={{
+          border: "1px solid #D4A017",
+          color: "#D4A017",
+          padding: "10px 28px",
+          borderRadius: "4px",
+          fontSize: "14px",
+          fontWeight: 700,
+          letterSpacing: "0.08em",
+          textTransform: "uppercase" as const,
+          textDecoration: "none",
+          transition: "background 0.2s",
+        }}
+      >
+        Register Free
+      </a>
+    </nav>
   );
 }
 
@@ -59,6 +113,7 @@ function Hero() {
     <section
       style={{
         minHeight: "100vh",
+        paddingTop: "80px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -66,21 +121,45 @@ function Hero() {
         overflow: "hidden",
       }}
     >
-      <Image
+      {/* Background image using regular img */}
+      <img
         src="/images/staci-larry-hero.avif"
-        alt="Staci and Larry Wallace"
-        fill
-        style={{ objectFit: "cover" }}
-        priority
+        alt=""
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+        }}
       />
+      {/* Dark overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(0,0,0,0.6)",
+          background: "rgba(0,0,0,0.65)",
           zIndex: 1,
         }}
       />
+      {/* Gold radial glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "800px",
+          height: "800px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(201,165,90,0.15) 0%, transparent 70%)",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      />
+      {/* Content */}
       <div
         ref={ref}
         className="section-reveal"
@@ -89,37 +168,59 @@ function Hero() {
           zIndex: 2,
           maxWidth: "900px",
           width: "100%",
-          padding: "0 20px",
+          padding: "60px 20px",
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <p
+        {/* Badge pill */}
+        <div
           style={{
-            fontSize: "14px",
-            fontWeight: 700,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase" as const,
-            color: "#D4A017",
-            marginBottom: "24px",
+            display: "inline-block",
+            background: "rgba(255,255,255,0.06)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(201,165,90,0.4)",
+            borderRadius: "50px",
+            padding: "10px 28px",
+            marginBottom: "32px",
           }}
         >
-          BIG BUSINESS. BOLD FAITH. NO COMPROMISE.
-        </p>
+          <span
+            style={{
+              fontSize: "13px",
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase" as const,
+              color: "#D4A017",
+            }}
+          >
+            BIG BUSINESS. BOLD FAITH. NO COMPROMISE.
+          </span>
+        </div>
+
+        {/* Headline with shimmer */}
         <h1
           style={{
-            fontSize: "clamp(42px, 7vw, 80px)",
-            fontWeight: 700,
+            fontSize: "clamp(40px, 7vw, 70px)",
+            fontWeight: 800,
             lineHeight: 1.05,
             color: "#FFFFFF",
             marginBottom: "24px",
             textTransform: "uppercase" as const,
+            background: "linear-gradient(90deg, #FFFFFF 30%, #D4A017 50%, #FFFFFF 70%)",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            animation: "shimmerText 6s linear infinite",
           }}
         >
           KINGDOM INTELLIGENCE MASTER CLASS
         </h1>
+
+        {/* Subhead */}
         <p
           style={{
             fontSize: "22px",
@@ -132,19 +233,34 @@ function Hero() {
           Where High-Performing Leaders Scale Profitable Companies Without
           Compromising Their Faith, Family or Freedom
         </p>
+
+        {/* Event line */}
         <p
           style={{
-            fontSize: "18px",
+            fontSize: "17px",
             color: "#FFFFFF",
             marginBottom: "40px",
           }}
         >
           Free 3-Day Live Event &mdash; April 14-16, 2026 @ 12:00 PM CST
         </p>
-        <CTAButton />
-        <div style={{ marginTop: "16px" }}>
+
+        {/* Two CTA buttons side by side */}
+        <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
           <CTAButton />
+          <CTAButton text="SAVE MY SEAT" />
         </div>
+
+        {/* Muted small text */}
+        <p
+          style={{
+            fontSize: "13px",
+            color: "rgba(255,255,255,0.5)",
+            marginTop: "20px",
+          }}
+        >
+          No cost. Limited seats. Live online event.
+        </p>
       </div>
     </section>
   );
@@ -154,7 +270,7 @@ function Hero() {
 function EventDetails() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#111111", padding: "80px 20px" }}>
+    <section style={{ background: "#0f0f0f", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
@@ -225,70 +341,67 @@ const testimonials3 = [
   },
 ];
 
+function TestimonialCard({ t }: { t: { name: string; title: string; quote: string } }) {
+  return (
+    <div
+      className="testimonial-card"
+      style={{
+        background: "rgba(255,255,255,0.05)",
+        border: "1px solid rgba(201,165,90,0.15)",
+        borderRadius: "16px",
+        padding: "32px",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "64px",
+          fontFamily: "Georgia, serif",
+          color: "#D4A017",
+          lineHeight: 1,
+          display: "block",
+          marginBottom: "-10px",
+        }}
+      >
+        &ldquo;
+      </span>
+      <p
+        style={{
+          fontSize: "16px",
+          color: "#FFFFFF",
+          lineHeight: 1.7,
+          fontStyle: "italic",
+          marginBottom: "24px",
+        }}
+      >
+        {t.quote}
+      </p>
+      <p style={{ fontSize: "15px", color: "#ccc" }}>
+        <span style={{ color: "#D4A017" }}>&mdash;</span>{" "}
+        <strong style={{ color: "#FFFFFF" }}>{t.name}</strong>
+        <span style={{ color: "#888", marginLeft: "6px" }}>{t.title}</span>
+      </p>
+    </div>
+  );
+}
+
 function Testimonials3() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+    <section style={{ background: "#111827", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
-        style={{ maxWidth: "1000px", margin: "0 auto" }}
+        style={{ maxWidth: "1100px", margin: "0 auto" }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
             gap: "24px",
           }}
         >
           {testimonials3.map((t, i) => (
-            <div
-              key={i}
-              className="testimonial-card"
-              style={{
-                background: "#1a1a1a",
-                border: "1px solid #333",
-                borderRadius: "8px",
-                padding: "32px",
-                position: "relative",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "80px",
-                  fontFamily: "Georgia, serif",
-                  color: "#D4A017",
-                  lineHeight: 1,
-                  display: "block",
-                  marginBottom: "-20px",
-                  opacity: 0.6,
-                }}
-              >
-                &ldquo;
-              </span>
-              <p
-                style={{
-                  fontSize: "16px",
-                  color: "#FFFFFF",
-                  lineHeight: 1.7,
-                  fontStyle: "italic",
-                  marginBottom: "24px",
-                }}
-              >
-                {t.quote}
-              </p>
-              <p
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                  marginBottom: "4px",
-                }}
-              >
-                {t.name}
-              </p>
-              <p style={{ fontSize: "14px", color: "#888" }}>{t.title}</p>
-            </div>
+            <TestimonialCard key={i} t={t} />
           ))}
         </div>
       </div>
@@ -296,11 +409,11 @@ function Testimonials3() {
   );
 }
 
-/* ── SECTION 4: THE INVITATION (NOW IS THE TIME) ── */
+/* ── SECTION 4: THE INVITATION ── */
 function Invitation() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#111111", padding: "80px 20px" }}>
+    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
@@ -336,14 +449,14 @@ function Invitation() {
           </p>
           <p style={{ fontSize: "18px", color: "#FFFFFF", lineHeight: 1.8 }}>
             <strong style={{ color: "#D4A017" }}>ARE</strong> you passionate
-            about growing your company but refuse to compromise your faith,
-            your family, or your freedom in the process?
+            about growing your company but refuse to compromise your faith, your
+            family, or your freedom in the process?
           </p>
           <p style={{ fontSize: "18px", color: "#FFFFFF", lineHeight: 1.8 }}>
             Perhaps you&rsquo;ve lived in{" "}
-            <strong style={{ color: "#D4A017" }}>BEAST mode</strong> for so
-            long that your health, relationships, and spiritual life have paid
-            the price. You&rsquo;re exhausted, overwhelmed, and wondering if
+            <strong style={{ color: "#D4A017" }}>BEAST mode</strong> for so long
+            that your health, relationships, and spiritual life have paid the
+            price. You&rsquo;re exhausted, overwhelmed, and wondering if
             there&rsquo;s a better way...
           </p>
         </div>
@@ -412,12 +525,12 @@ function Invitation() {
 function AboutStaci() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+    <section style={{ background: "#111111", padding: "80px 20px" }}>
       <div
         ref={ref}
-        className="section-reveal"
+        className="section-reveal about-flex"
         style={{
-          maxWidth: "900px",
+          maxWidth: "1000px",
           margin: "0 auto",
           display: "flex",
           alignItems: "flex-start",
@@ -425,54 +538,65 @@ function AboutStaci() {
           flexWrap: "wrap",
         }}
       >
-        <div
-          style={{
-            flex: "0 1 320px",
-            minWidth: "250px",
-          }}
-        >
-          <Image
+        {/* Photo LEFT */}
+        <div style={{ flex: "0 0 auto" }}>
+          <img
             src="/images/staci-headshot-best.jpg"
             alt="Staci Wallace"
-            width={320}
-            height={400}
+            className="about-photo"
+            width={400}
             style={{
-              width: "100%",
+              width: "400px",
               height: "auto",
               display: "block",
-              borderRadius: "8px",
-              objectFit: "cover",
+              borderRadius: "12px",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
             }}
           />
         </div>
+
+        {/* Bio RIGHT */}
         <div style={{ flex: "1 1 400px", minWidth: "280px" }}>
-          <h2
+          <p
             style={{
-              fontSize: "clamp(28px, 4vw, 40px)",
+              fontSize: "13px",
               fontWeight: 700,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase" as const,
               color: "#D4A017",
               marginBottom: "8px",
             }}
           >
-            HI, I AM STACI WALLACE
+            YOUR HOST
+          </p>
+          <h2
+            style={{
+              fontSize: "clamp(28px, 4vw, 40px)",
+              fontWeight: 700,
+              color: "#FFFFFF",
+              marginBottom: "8px",
+            }}
+          >
+            STACI WALLACE
           </h2>
           <p
             style={{
-              fontSize: "18px",
-              fontWeight: 700,
-              color: "#FFFFFF",
-              marginBottom: "24px",
+              fontSize: "17px",
+              fontWeight: 600,
+              color: "#D4A017",
+              marginBottom: "28px",
               textTransform: "uppercase" as const,
+              letterSpacing: "0.04em",
             }}
           >
-            CEO, FUELED BY FIRE AND 8X BEST-SELLING AUTHOR
+            CEO, FUELED BY FIRE &bull; 8X BEST-SELLING AUTHOR
           </p>
           <p
             style={{
               fontSize: "17px",
               color: "#ccc",
               lineHeight: 1.8,
-              marginBottom: "24px",
+              marginBottom: "20px",
             }}
           >
             For over four decades, I&rsquo;ve been building companies from the
@@ -486,7 +610,7 @@ function AboutStaci() {
               fontSize: "17px",
               color: "#ccc",
               lineHeight: 1.8,
-              marginBottom: "24px",
+              marginBottom: "20px",
             }}
           >
             I&rsquo;ve had the honor of sharing stages with 5 U.S. Presidents,
@@ -501,11 +625,21 @@ function AboutStaci() {
               fontSize: "17px",
               color: "#ccc",
               lineHeight: 1.8,
-              marginBottom: "24px",
+              marginBottom: "28px",
             }}
           >
             If you&rsquo;re a leader who refuses to choose between success and
             significance &mdash; this Master Class was built for you.
+          </p>
+          <p
+            style={{
+              fontSize: "20px",
+              fontWeight: 700,
+              fontStyle: "italic",
+              color: "#D4A017",
+            }}
+          >
+            &ldquo;Your business should fund your calling, not replace it.&rdquo;
           </p>
         </div>
       </div>
@@ -525,10 +659,19 @@ const learnItems = [
   "Ignite a purpose-driven life your family wants to champion",
 ];
 
+function GoldCheck() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={{ flexShrink: 0, marginTop: "2px" }}>
+      <circle cx="14" cy="14" r="14" fill="rgba(201,165,90,0.15)" />
+      <path d="M8 14.5L12 18.5L20 10.5" stroke="#D4A017" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function WhatYouLearn() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#111111", padding: "80px 20px" }}>
+    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
@@ -538,20 +681,21 @@ function WhatYouLearn() {
           style={{
             fontSize: "clamp(28px, 4vw, 40px)",
             fontWeight: 700,
-            color: "#FFFFFF",
+            color: "#D4A017",
             marginBottom: "48px",
             textAlign: "center",
             lineHeight: 1.3,
           }}
         >
-          During this 3-day transformational event, you&rsquo;ll learn how
-          to...
+          During This 3-Day Transformational Event, You&rsquo;ll Learn How
+          To...
         </h2>
         <div
+          className="learn-grid"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "24px",
           }}
         >
           {learnItems.map((item, i) => (
@@ -560,30 +704,24 @@ function WhatYouLearn() {
               style={{
                 display: "flex",
                 alignItems: "flex-start",
-                gap: "16px",
+                gap: "14px",
               }}
             >
-              <span
-                style={{
-                  fontSize: "24px",
-                  color: "#D4A017",
-                  lineHeight: 1.4,
-                  flexShrink: 0,
-                }}
-              >
-                ✓
-              </span>
+              <GoldCheck />
               <p
                 style={{
-                  fontSize: "18px",
+                  fontSize: "17px",
                   color: "#FFFFFF",
-                  lineHeight: 1.7,
+                  lineHeight: 1.6,
                 }}
               >
                 {item}
               </p>
             </div>
           ))}
+        </div>
+        <div style={{ textAlign: "center", marginTop: "48px" }}>
+          <CTAButton />
         </div>
       </div>
     </section>
@@ -594,7 +732,7 @@ function WhatYouLearn() {
 function NoteSection() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+    <section style={{ background: "#111111", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
@@ -602,10 +740,11 @@ function NoteSection() {
       >
         <div
           style={{
-            border: "2px solid #D4A017",
-            borderRadius: "8px",
+            border: "2px solid rgba(201,165,90,0.5)",
+            borderRadius: "12px",
             padding: "48px 40px",
             marginBottom: "48px",
+            background: "rgba(201,165,90,0.03)",
           }}
         >
           <p
@@ -637,7 +776,7 @@ function NoteSection() {
   );
 }
 
-/* ── SECTION 8: MORE TESTIMONIALS ── */
+/* ── SECTION 8: MORE TESTIMONIALS (2x2) ── */
 const testimonials4 = [
   {
     name: "Kolton Kropf",
@@ -668,11 +807,11 @@ const testimonials4 = [
 function MoreTestimonials() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#111111", padding: "80px 20px" }}>
+    <section style={{ background: "#0d0d0d", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
-        style={{ maxWidth: "1000px", margin: "0 auto" }}
+        style={{ maxWidth: "1100px", margin: "0 auto" }}
       >
         <h2
           style={{
@@ -686,59 +825,15 @@ function MoreTestimonials() {
           RESULTS MATTER...
         </h2>
         <div
+          className="testimonial-grid-4"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(2, 1fr)",
             gap: "24px",
           }}
         >
           {testimonials4.map((t, i) => (
-            <div
-              key={i}
-              className="testimonial-card"
-              style={{
-                background: "#1a1a1a",
-                border: "1px solid #333",
-                borderRadius: "8px",
-                padding: "32px",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "80px",
-                  fontFamily: "Georgia, serif",
-                  color: "#D4A017",
-                  lineHeight: 1,
-                  display: "block",
-                  marginBottom: "-20px",
-                  opacity: 0.6,
-                }}
-              >
-                &ldquo;
-              </span>
-              <p
-                style={{
-                  fontSize: "16px",
-                  color: "#FFFFFF",
-                  lineHeight: 1.7,
-                  fontStyle: "italic",
-                  marginBottom: "24px",
-                }}
-              >
-                {t.quote}
-              </p>
-              <p
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                  marginBottom: "4px",
-                }}
-              >
-                {t.name}
-              </p>
-              <p style={{ fontSize: "14px", color: "#888" }}>{t.title}</p>
-            </div>
+            <TestimonialCard key={i} t={t} />
           ))}
         </div>
       </div>
@@ -750,7 +845,12 @@ function MoreTestimonials() {
 function FinalCTA() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+    <section
+      style={{
+        background: "linear-gradient(135deg, #0d0d0d 0%, #052134 100%)",
+        padding: "100px 20px",
+      }}
+    >
       <div
         ref={ref}
         className="section-reveal"
@@ -761,12 +861,32 @@ function FinalCTA() {
             fontSize: "clamp(36px, 5vw, 56px)",
             fontWeight: 700,
             color: "#FFFFFF",
-            marginBottom: "32px",
+            marginBottom: "16px",
           }}
         >
           Are You Ready to Go ALL IN?
         </h2>
-        <CTAButton />
+        <p
+          style={{
+            fontSize: "20px",
+            color: "#D4A017",
+            marginBottom: "40px",
+            lineHeight: 1.6,
+          }}
+        >
+          Join thousands of faith-driven leaders who are building God-sized
+          businesses &mdash; without sacrificing what matters most.
+        </p>
+        <CTAButton text="CLAIM YOUR FREE SEAT NOW" />
+        <p
+          style={{
+            fontSize: "13px",
+            color: "rgba(255,255,255,0.4)",
+            marginTop: "20px",
+          }}
+        >
+          Free for a limited time. Live online event April 14-16, 2026.
+        </p>
       </div>
     </section>
   );
@@ -777,15 +897,31 @@ function Footer() {
   return (
     <footer
       style={{
-        background: "#0a0a0a",
-        borderTop: "1px solid #222",
-        padding: "32px 20px",
+        background: "#050505",
+        borderTop: "1px solid rgba(201,165,90,0.1)",
+        padding: "40px 20px",
         textAlign: "center",
       }}
     >
-      <p style={{ fontSize: "14px", color: "#666" }}>
+      <p
+        style={{
+          fontSize: "20px",
+          fontWeight: 800,
+          color: "#D4A017",
+          letterSpacing: "0.15em",
+          marginBottom: "12px",
+        }}
+      >
+        FBF
+      </p>
+      <p style={{ fontSize: "14px", color: "#666", marginBottom: "8px" }}>
         &copy; 2026 Fueled By Fire. All Rights Reserved.
       </p>
+      <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginTop: "8px" }}>
+        <a href="#" style={{ fontSize: "13px", color: "#555" }}>Privacy Policy</a>
+        <a href="#" style={{ fontSize: "13px", color: "#555" }}>Terms of Service</a>
+        <a href="#" style={{ fontSize: "13px", color: "#555" }}>Contact</a>
+      </div>
     </footer>
   );
 }
@@ -794,6 +930,7 @@ function Footer() {
 export default function Home() {
   return (
     <main>
+      <Navbar />
       <Hero />
       <EventDetails />
       <Testimonials3 />
