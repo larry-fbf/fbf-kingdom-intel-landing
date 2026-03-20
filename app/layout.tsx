@@ -22,8 +22,8 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0; padding: 0;
   font-family: system-ui, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #0a0a0a;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #111111;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -48,7 +48,7 @@ a { color: inherit; text-decoration: none; }
 .cta-btn:hover {
   opacity: 0.9;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201,165,90,0.4);
+  box-shadow: 0 8px 30px rgba(204,0,0,0.3);
 }
 
 /* Testimonial Cards */
@@ -57,7 +57,7 @@ a { color: inherit; text-decoration: none; }
 }
 .testimonial-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(201,165,90,0.4) !important;
+  border-color: rgba(204,0,0,0.4) !important;
   box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 }
 
@@ -67,8 +67,8 @@ a { color: inherit; text-decoration: none; }
   100% { background-position: 200% center; }
 }
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201,165,90,0); }
-  50% { box-shadow: 0 0 30px 8px rgba(201,165,90,0.25); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(204,0,0,0); }
+  50% { box-shadow: 0 0 30px 8px rgba(204,0,0,0.25); }
 }
 @keyframes gentleFloat {
   0%, 100% { transform: translateY(0); }
@@ -81,7 +81,7 @@ a { color: inherit; text-decoration: none; }
 
 /* Navbar link hover */
 .nav-register:hover {
-  background: rgba(201,165,90,0.15) !important;
+  background: #AA0000 !important;
 }
 
 /* Hero split responsive */

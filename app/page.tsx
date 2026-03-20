@@ -25,7 +25,7 @@ function useScrollReveal() {
   return ref;
 }
 
-/* ── CTA BUTTON ── */
+/* ── CTA BUTTON (Red) ── */
 function CTAButton({ text = "REGISTER FOR FREE" }: { text?: string }) {
   return (
     <a
@@ -33,12 +33,10 @@ function CTAButton({ text = "REGISTER FOR FREE" }: { text?: string }) {
       className="cta-btn"
       style={{
         display: "inline-block",
-        background: "linear-gradient(135deg, #BB945A, #D4A017, #BB945A)",
-        backgroundSize: "200%",
-        animation: "shimmerText 4s linear infinite, pulseGlow 3s ease-in-out infinite",
-        color: "#000",
+        background: "#CC0000",
+        color: "#FFFFFF",
         fontWeight: 700,
-        padding: "20px 64px",
+        padding: "18px 56px",
         borderRadius: "4px",
         border: "none",
         fontSize: "18px",
@@ -63,10 +61,8 @@ function Navbar() {
         left: 0,
         width: "100%",
         zIndex: 1000,
-        background: "rgba(10,10,10,0.9)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(201,165,90,0.2)",
+        background: "rgba(255,255,255,0.95)",
+        borderBottom: "1px solid #E5E5E5",
         padding: "16px 32px",
         display: "flex",
         alignItems: "center",
@@ -77,7 +73,7 @@ function Navbar() {
         style={{
           fontSize: "22px",
           fontWeight: 800,
-          color: "#D4A017",
+          color: "#111111",
           letterSpacing: "0.15em",
           textTransform: "uppercase" as const,
         }}
@@ -88,8 +84,8 @@ function Navbar() {
         href={REGISTER_URL}
         className="nav-register"
         style={{
-          border: "1px solid #D4A017",
-          color: "#D4A017",
+          background: "#CC0000",
+          color: "#FFFFFF",
           padding: "10px 28px",
           borderRadius: "4px",
           fontSize: "14px",
@@ -106,7 +102,7 @@ function Navbar() {
   );
 }
 
-/* ── SECTION 1: HERO ── */
+/* ── SECTION 1: HERO (stays dark/gold, red CTAs) ── */
 function Hero() {
   const ref = useScrollReveal();
   return (
@@ -282,17 +278,29 @@ function Hero() {
 function EventDetails() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0f0f0f", padding: "80px 20px" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
         style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}
       >
+        <p
+          style={{
+            fontSize: "13px",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase" as const,
+            color: "#CC0000",
+            marginBottom: "16px",
+          }}
+        >
+          EVENT DETAILS
+        </p>
         <h2
           style={{
             fontSize: "clamp(28px, 4vw, 42px)",
             fontWeight: 700,
-            color: "#D4A017",
+            color: "#111111",
             lineHeight: 1.2,
             marginBottom: "32px",
           }}
@@ -303,7 +311,7 @@ function EventDetails() {
         <p
           style={{
             fontSize: "18px",
-            color: "#FFFFFF",
+            color: "#444444",
             lineHeight: 1.8,
             marginBottom: "32px",
             maxWidth: "800px",
@@ -319,7 +327,7 @@ function EventDetails() {
         <p
           style={{
             fontSize: "20px",
-            color: "#D4A017",
+            color: "#CC0000",
             fontStyle: "italic",
             fontWeight: 600,
           }}
@@ -359,7 +367,7 @@ function TestimonialCard({ t }: { t: { name: string; title: string; quote: strin
       className="testimonial-card"
       style={{
         background: "rgba(255,255,255,0.05)",
-        border: "1px solid rgba(201,165,90,0.15)",
+        border: "1px solid rgba(204,0,0,0.2)",
         borderRadius: "16px",
         padding: "32px",
       }}
@@ -368,7 +376,7 @@ function TestimonialCard({ t }: { t: { name: string; title: string; quote: strin
         style={{
           fontSize: "64px",
           fontFamily: "Georgia, serif",
-          color: "#D4A017",
+          color: "#CC0000",
           lineHeight: 1,
           display: "block",
           marginBottom: "-10px",
@@ -388,7 +396,7 @@ function TestimonialCard({ t }: { t: { name: string; title: string; quote: strin
         {t.quote}
       </p>
       <p style={{ fontSize: "15px", color: "#ccc" }}>
-        <span style={{ color: "#D4A017" }}>&mdash;</span>{" "}
+        <span style={{ color: "#CC0000" }}>&mdash;</span>{" "}
         <strong style={{ color: "#FFFFFF" }}>{t.name}</strong>
         <span style={{ color: "#888", marginLeft: "6px" }}>{t.title}</span>
       </p>
@@ -399,7 +407,7 @@ function TestimonialCard({ t }: { t: { name: string; title: string; quote: strin
 function Testimonials3() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#111827", padding: "80px 20px" }}>
+    <section style={{ background: "#111111", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
@@ -425,17 +433,29 @@ function Testimonials3() {
 function Invitation() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+    <section style={{ background: "#F5F5F5", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
         style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}
       >
+        <p
+          style={{
+            fontSize: "13px",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase" as const,
+            color: "#CC0000",
+            marginBottom: "16px",
+          }}
+        >
+          THE INVITATION
+        </p>
         <h2
           style={{
             fontSize: "clamp(32px, 5vw, 52px)",
             fontWeight: 700,
-            color: "#D4A017",
+            color: "#111111",
             marginBottom: "48px",
             textTransform: "uppercase" as const,
           }}
@@ -453,20 +473,20 @@ function Invitation() {
             gap: "28px",
           }}
         >
-          <p style={{ fontSize: "18px", color: "#FFFFFF", lineHeight: 1.8 }}>
-            <strong style={{ color: "#D4A017" }}>DO</strong> you feel called to
+          <p style={{ fontSize: "18px", color: "#444444", lineHeight: 1.8 }}>
+            <strong style={{ color: "#CC0000" }}>DO</strong> you feel called to
             something bigger &mdash; a God-given mission to build a business
             that creates real impact, generational wealth, and a lasting legacy
             for your family?
           </p>
-          <p style={{ fontSize: "18px", color: "#FFFFFF", lineHeight: 1.8 }}>
-            <strong style={{ color: "#D4A017" }}>ARE</strong> you passionate
+          <p style={{ fontSize: "18px", color: "#444444", lineHeight: 1.8 }}>
+            <strong style={{ color: "#CC0000" }}>ARE</strong> you passionate
             about growing your company but refuse to compromise your faith, your
             family, or your freedom in the process?
           </p>
-          <p style={{ fontSize: "18px", color: "#FFFFFF", lineHeight: 1.8 }}>
+          <p style={{ fontSize: "18px", color: "#444444", lineHeight: 1.8 }}>
             Perhaps you&rsquo;ve lived in{" "}
-            <strong style={{ color: "#D4A017" }}>BEAST mode</strong> for so long
+            <strong style={{ color: "#CC0000" }}>BEAST mode</strong> for so long
             that your health, relationships, and spiritual life have paid the
             price. You&rsquo;re exhausted, overwhelmed, and wondering if
             there&rsquo;s a better way...
@@ -477,7 +497,7 @@ function Invitation() {
           style={{
             fontSize: "clamp(22px, 3vw, 32px)",
             fontWeight: 700,
-            color: "#FFFFFF",
+            color: "#111111",
             marginBottom: "24px",
             lineHeight: 1.3,
           }}
@@ -488,7 +508,7 @@ function Invitation() {
         <p
           style={{
             fontSize: "24px",
-            color: "#D4A017",
+            color: "#CC0000",
             fontWeight: 700,
             marginBottom: "16px",
           }}
@@ -498,7 +518,7 @@ function Invitation() {
         <p
           style={{
             fontSize: "18px",
-            color: "#FFFFFF",
+            color: "#444444",
             marginBottom: "40px",
             lineHeight: 1.7,
           }}
@@ -510,7 +530,7 @@ function Invitation() {
           style={{
             fontSize: "clamp(20px, 3vw, 28px)",
             fontWeight: 700,
-            color: "#D4A017",
+            color: "#111111",
             marginBottom: "48px",
             lineHeight: 1.4,
           }}
@@ -522,7 +542,7 @@ function Invitation() {
           style={{
             fontSize: "clamp(24px, 4vw, 36px)",
             fontWeight: 700,
-            color: "#D4A017",
+            color: "#CC0000",
             fontStyle: "italic",
           }}
         >
@@ -537,7 +557,7 @@ function Invitation() {
 function AboutStaci() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#111111", padding: "80px 20px" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal about-flex"
@@ -562,7 +582,7 @@ function AboutStaci() {
               height: "auto",
               display: "block",
               borderRadius: "12px",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
             }}
           />
         </div>
@@ -575,7 +595,7 @@ function AboutStaci() {
               fontWeight: 700,
               letterSpacing: "0.2em",
               textTransform: "uppercase" as const,
-              color: "#D4A017",
+              color: "#CC0000",
               marginBottom: "8px",
             }}
           >
@@ -585,7 +605,7 @@ function AboutStaci() {
             style={{
               fontSize: "clamp(28px, 4vw, 40px)",
               fontWeight: 700,
-              color: "#FFFFFF",
+              color: "#111111",
               marginBottom: "8px",
             }}
           >
@@ -595,7 +615,7 @@ function AboutStaci() {
             style={{
               fontSize: "17px",
               fontWeight: 600,
-              color: "#D4A017",
+              color: "#CC0000",
               marginBottom: "28px",
               textTransform: "uppercase" as const,
               letterSpacing: "0.04em",
@@ -606,7 +626,7 @@ function AboutStaci() {
           <p
             style={{
               fontSize: "17px",
-              color: "#ccc",
+              color: "#444444",
               lineHeight: 1.8,
               marginBottom: "20px",
             }}
@@ -620,7 +640,7 @@ function AboutStaci() {
           <p
             style={{
               fontSize: "17px",
-              color: "#ccc",
+              color: "#444444",
               lineHeight: 1.8,
               marginBottom: "20px",
             }}
@@ -635,7 +655,7 @@ function AboutStaci() {
           <p
             style={{
               fontSize: "17px",
-              color: "#ccc",
+              color: "#444444",
               lineHeight: 1.8,
               marginBottom: "28px",
             }}
@@ -648,7 +668,7 @@ function AboutStaci() {
               fontSize: "20px",
               fontWeight: 700,
               fontStyle: "italic",
-              color: "#D4A017",
+              color: "#CC0000",
             }}
           >
             &ldquo;Your business should fund your calling, not replace it.&rdquo;
@@ -671,11 +691,11 @@ const learnItems = [
   "Ignite a purpose-driven life your family wants to champion",
 ];
 
-function GoldCheck() {
+function RedCheck() {
   return (
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={{ flexShrink: 0, marginTop: "2px" }}>
-      <circle cx="14" cy="14" r="14" fill="rgba(201,165,90,0.15)" />
-      <path d="M8 14.5L12 18.5L20 10.5" stroke="#D4A017" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="14" cy="14" r="14" fill="rgba(204,0,0,0.1)" />
+      <path d="M8 14.5L12 18.5L20 10.5" stroke="#CC0000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -683,17 +703,30 @@ function GoldCheck() {
 function WhatYouLearn() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+    <section style={{ background: "#F5F5F5", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
         style={{ maxWidth: "900px", margin: "0 auto" }}
       >
+        <p
+          style={{
+            fontSize: "13px",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase" as const,
+            color: "#CC0000",
+            marginBottom: "16px",
+            textAlign: "center",
+          }}
+        >
+          WHAT YOU WILL LEARN
+        </p>
         <h2
           style={{
             fontSize: "clamp(28px, 4vw, 40px)",
             fontWeight: 700,
-            color: "#D4A017",
+            color: "#111111",
             marginBottom: "48px",
             textAlign: "center",
             lineHeight: 1.3,
@@ -717,13 +750,18 @@ function WhatYouLearn() {
                 display: "flex",
                 alignItems: "flex-start",
                 gap: "14px",
+                background: "#FFFFFF",
+                border: "1px solid #E5E5E5",
+                borderRadius: "12px",
+                padding: "20px",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
               }}
             >
-              <GoldCheck />
+              <RedCheck />
               <p
                 style={{
                   fontSize: "17px",
-                  color: "#FFFFFF",
+                  color: "#444444",
                   lineHeight: 1.6,
                 }}
               >
@@ -744,7 +782,7 @@ function WhatYouLearn() {
 function NoteSection() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#111111", padding: "80px 20px" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
@@ -752,21 +790,21 @@ function NoteSection() {
       >
         <div
           style={{
-            border: "2px solid rgba(201,165,90,0.5)",
+            border: "2px solid #CC0000",
             borderRadius: "12px",
             padding: "48px 40px",
             marginBottom: "48px",
-            background: "rgba(201,165,90,0.03)",
+            background: "#FFFFFF",
           }}
         >
           <p
             style={{
               fontSize: "20px",
-              color: "#FFFFFF",
+              color: "#444444",
               lineHeight: 1.8,
             }}
           >
-            <strong style={{ color: "#D4A017" }}>NOTE:</strong> This course is
+            <strong style={{ color: "#CC0000" }}>NOTE:</strong> This course is
             NOT for money-chasers or passive dreamers. But it IS for the
             entrepreneur who knows they have a God-given business the world
             desperately needs.
@@ -776,7 +814,7 @@ function NoteSection() {
           style={{
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 700,
-            color: "#D4A017",
+            color: "#111111",
             marginBottom: "32px",
           }}
         >
@@ -819,17 +857,30 @@ const testimonials4 = [
 function MoreTestimonials() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0d0d0d", padding: "80px 20px" }}>
+    <section style={{ background: "#111111", padding: "80px 20px" }}>
       <div
         ref={ref}
         className="section-reveal"
         style={{ maxWidth: "1100px", margin: "0 auto" }}
       >
+        <p
+          style={{
+            fontSize: "13px",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase" as const,
+            color: "#CC0000",
+            textAlign: "center",
+            marginBottom: "16px",
+          }}
+        >
+          TESTIMONIALS
+        </p>
         <h2
           style={{
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 700,
-            color: "#D4A017",
+            color: "#FFFFFF",
             textAlign: "center",
             marginBottom: "48px",
           }}
@@ -859,7 +910,7 @@ function FinalCTA() {
   return (
     <section
       style={{
-        background: "linear-gradient(135deg, #0d0d0d 0%, #052134 100%)",
+        background: "#111111",
         padding: "100px 20px",
       }}
     >
@@ -881,7 +932,7 @@ function FinalCTA() {
         <p
           style={{
             fontSize: "20px",
-            color: "#D4A017",
+            color: "rgba(255,255,255,0.7)",
             marginBottom: "40px",
             lineHeight: 1.6,
           }}
@@ -909,8 +960,8 @@ function Footer() {
   return (
     <footer
       style={{
-        background: "#050505",
-        borderTop: "1px solid rgba(201,165,90,0.1)",
+        background: "#111111",
+        borderTop: "1px solid rgba(255,255,255,0.1)",
         padding: "40px 20px",
         textAlign: "center",
       }}
@@ -919,20 +970,20 @@ function Footer() {
         style={{
           fontSize: "20px",
           fontWeight: 800,
-          color: "#D4A017",
+          color: "#FFFFFF",
           letterSpacing: "0.15em",
           marginBottom: "12px",
         }}
       >
         FBF
       </p>
-      <p style={{ fontSize: "14px", color: "#666", marginBottom: "8px" }}>
+      <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", marginBottom: "8px" }}>
         &copy; 2026 Fueled By Fire. All Rights Reserved.
       </p>
       <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginTop: "8px" }}>
-        <a href="#" style={{ fontSize: "13px", color: "#555" }}>Privacy Policy</a>
-        <a href="#" style={{ fontSize: "13px", color: "#555" }}>Terms of Service</a>
-        <a href="#" style={{ fontSize: "13px", color: "#555" }}>Contact</a>
+        <a href="#" style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>Privacy Policy</a>
+        <a href="#" style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>Terms of Service</a>
+        <a href="#" style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>Contact</a>
       </div>
     </footer>
   );
