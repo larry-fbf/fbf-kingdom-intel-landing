@@ -84,9 +84,9 @@ a { color: inherit; text-decoration: none; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Navbar link hover */
-.nav-register:hover {
-  background: #AA0000 !important;
+/* CTA gold hover */
+.cta-btn:hover {
+  filter: brightness(1.08);
 }
 
 /* Hero split responsive */

@@ -25,88 +25,41 @@ function useScrollReveal() {
   return ref;
 }
 
-/* ── CTA BUTTON (Red) ── */
-function CTAButton({ text = "REGISTER FOR FREE" }: { text?: string }) {
+/* ── CTA BUTTON (Gold style) ── */
+function CTAButton({ text = "COUNT ME IN!!" }: { text?: string }) {
   return (
-    <a
-      href={REGISTER_URL}
-      className="cta-btn"
-      style={{
-        display: "inline-block",
-        background: "#CC0000",
-        color: "#FFFFFF",
-        fontWeight: 700,
-        padding: "13px 36px",
-        borderRadius: "4px",
-        border: "none",
-        fontSize: "15px",
-        textDecoration: "none",
-        cursor: "pointer",
-        textTransform: "uppercase" as const,
-        letterSpacing: "0.08em",
-      }}
-    >
-      {text}
-    </a>
-  );
-}
-
-/* ── NAVBAR ── */
-function Navbar() {
-  return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        zIndex: 1000,
-        background: "rgba(255,255,255,0.95)",
-        borderBottom: "1px solid #E5E5E5",
-        padding: "16px 32px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
-    >
-      <span
-        style={{
-          fontSize: "22px",
-          fontWeight: 800,
-          color: "#111111",
-          letterSpacing: "0.15em",
-          textTransform: "uppercase" as const,
-        }}
-      >
-        <img
-          src="/images/fbf-logo-black.png"
-          alt="FBF"
-          style={{ height: "36px", width: "auto", display: "block" }}
-        />
-      </span>
+    <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: "8px" }}>
       <a
         href={REGISTER_URL}
-        className="nav-register"
+        className="cta-btn"
         style={{
-          background: "#CC0000",
-          color: "#FFFFFF",
-          padding: "10px 28px",
-          borderRadius: "4px",
-          fontSize: "14px",
-          fontWeight: 700,
-          letterSpacing: "0.08em",
-          textTransform: "uppercase" as const,
+          display: "inline-block",
+          background: "linear-gradient(135deg, #C9A55A 0%, #E8C97A 40%, #BB945A 100%)",
+          color: "#1a1000",
+          fontWeight: 800,
+          padding: "16px 40px",
+          borderRadius: "6px",
+          border: "none",
+          fontSize: "17px",
           textDecoration: "none",
-          transition: "background 0.2s",
+          cursor: "pointer",
+          textTransform: "uppercase" as const,
+          letterSpacing: "0.06em",
+          boxShadow: "0 4px 20px rgba(185,148,90,0.4)",
         }}
       >
-        Register Free
+        » {text} «
       </a>
-    </nav>
+      <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", paddingLeft: "4px", fontStyle: "italic" }}>
+        Register For FREE
+      </span>
+    </div>
   );
 }
 
-/* ── SECTION 1: HERO (stays dark/gold, red CTAs) ── */
+/* ── NAVBAR removed — logo now lives in hero ── */
+
+/* ── SECTION 1: HERO ── */
 function Hero() {
   const ref = useScrollReveal();
   return (
@@ -114,13 +67,32 @@ function Hero() {
       className="hero-split"
       style={{
         minHeight: "100vh",
-        paddingTop: "80px",
+        paddingTop: "0",
         display: "flex",
+        flexDirection: "column",
         background: "#0a0a0a",
         position: "relative",
         overflow: "hidden",
       }}
     >
+      {/* TOP BAR — logo */}
+      <div style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        zIndex: 10,
+        padding: "24px 8vw",
+      }}>
+        <img
+          src="/images/fbf-logo-black.png"
+          alt="Fueled By Fire"
+          style={{ height: "48px", width: "auto", display: "block", filter: "invert(1)" }}
+        />
+      </div>
+
+      {/* MAIN CONTENT ROW */}
+      <div style={{ display: "flex", flex: 1, minHeight: "100vh" }}>
       {/* LEFT SIDE — text content */}
       <div
         className="hero-left"
@@ -128,7 +100,7 @@ function Hero() {
           flex: "0 0 55%",
           display: "flex",
           alignItems: "center",
-          padding: "60px 48px 60px 8vw",
+          padding: "120px 48px 60px 8vw",
           position: "relative",
           zIndex: 2,
         }}
@@ -186,16 +158,10 @@ function Hero() {
               color: "#FFFFFF",
               marginBottom: "20px",
               textTransform: "uppercase" as const,
-              background:
-                "linear-gradient(90deg, #FFFFFF 30%, #D4A017 50%, #FFFFFF 70%)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "shimmerText 6s linear infinite",
             }}
           >
-            KINGDOM INTELLIGENCE MASTER CLASS
+            KINGDOM INTELLIGENCE{" "}
+            <span style={{ color: "#CC0000" }}>MASTER CLASS</span>
           </h1>
 
           {/* Subhead */}
@@ -273,6 +239,7 @@ function Hero() {
           }}
         />
       </div>
+      </div>{/* end MAIN CONTENT ROW */}
     </section>
   );
 }
@@ -996,7 +963,6 @@ function Footer() {
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
       <EventDetails />
       <Testimonials3 />
