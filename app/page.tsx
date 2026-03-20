@@ -352,7 +352,7 @@ function Invitation() {
 
             {/* Signature */}
             <p style={{ fontSize: "17px", fontStyle: "italic", color: "rgba(255,255,255,0.5)", marginBottom: "32px", fontFamily: "'Frank Ruhl Libre', Georgia, serif" }}>
-              With faith and fire,<br />
+              Blessings,<br />
               <strong style={{ color: "#FFFFFF", fontStyle: "normal" }}>Larry &amp; Staci Wallace</strong>
             </p>
 
