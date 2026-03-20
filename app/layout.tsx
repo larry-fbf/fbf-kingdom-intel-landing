@@ -123,6 +123,7 @@ a { color: inherit; text-decoration: none; }
   /* Grids → single column */
   .learn-grid { grid-template-columns: 1fr !important; }
   .testimonial-grid-4 { grid-template-columns: 1fr !important; }
+  .echo-grid { grid-template-columns: repeat(2, 1fr) !important; }
 
   /* CTA button full-width feel */
   .cta-btn { width: 100% !important; text-align: center !important; padding: 18px 24px !important; font-size: 16px !important; }

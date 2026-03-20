@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const REGISTER_URL = "https://fbfchallenge.com";
 
@@ -435,62 +435,129 @@ function AboutStaci() {
   );
 }
 
-/* ── SECTION 6: WHAT YOU WILL LEARN (E.C.H.O. aligned) ── */
-const learnItems = [
-  { tag: "E — Economic Stewardship", text: "Install the Four Pillars of Economic Infrastructure: Vision & Strategy, Operational Systems, Leadership Infrastructure, and Financial Intelligence." },
-  { tag: "C — Culture Architecture", text: "Build a team culture that attracts, develops, and multiplies leaders who carry your vision — without you becoming the bottleneck." },
-  { tag: "H — Human Infrastructure", text: "Transition from founder-dependent to team-managed — so your company can scale beyond you, not because of you." },
-  { tag: "O — Operational Excellence", text: "Install systems, AI, and automation that remove friction, increase speed, and allow your company to scale with precision." },
-  { tag: "Kingdom Intelligence", text: "Discover the Intelligence Hierarchy — how AI, Human Intelligence, and Spirit-led Kingdom Intelligence work together for dominion in the marketplace." },
-  { tag: "G.R.O.W.T.H. Method", text: "Walk through the full G.R.O.W.T.H. framework: God-Sized Vision · Revenue Architecture · Operational Excellence · Wise Counsel · Team Multiplication · Habit Discipline." },
-  { tag: "S.W.E.E.T. Spot Audit", text: "Clarify your #1 Profit-Making Activity (PMA) and identify exactly where your time, energy, and team need to be focused for maximum scale." },
-  { tag: "The Thresher Principle", text: "Learn why pressure doesn't create cracks — it exposes them. Find and fix the small structural blind spots that could sink your ship before they become catastrophic." },
+/* ── SECTION 6: E.C.H.O. INTERACTIVE ── */
+const echoItems = [
+  {
+    letter: "E",
+    label: "Economic Stewardship",
+    tagline: "Build the infrastructure your vision demands.",
+    description: "Design profitable systems that fund the mission — Vision & Strategy, Operational Systems, Leadership Infrastructure, and Financial Intelligence.",
+    color: "#C9A55A",
+  },
+  {
+    letter: "C",
+    label: "Culture Architecture",
+    tagline: "Stop being the ceiling of your company.",
+    description: "Create an environment that attracts, develops, and multiplies leaders who carry the vision — without you becoming the bottleneck.",
+    color: "#C9A55A",
+  },
+  {
+    letter: "H",
+    label: "Human Infrastructure",
+    tagline: "Build a company that runs beyond the founder.",
+    description: "Transition from founder-dependent to team-managed. Your company should scale beyond you, not because of you.",
+    color: "#C9A55A",
+  },
+  {
+    letter: "O",
+    label: "Operational Excellence",
+    tagline: "Install systems that scale with precision.",
+    description: "Deploy AI, automation, and operational architecture that removes friction, increases speed, and allows your company to grow without chaos.",
+    color: "#C9A55A",
+  },
 ];
 
-function GoldCheck() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0, marginTop: "3px" }}>
-      <circle cx="11" cy="11" r="10.5" stroke="#C9A55A" strokeWidth="1.2"/>
-      <path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="#C9A55A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
-function WhatYouLearn() {
+function ECHOBlueprint() {
   const ref = useScrollReveal();
+  const [active, setActive] = useState(0);
+
   return (
     <section style={{ background: "#111111", padding: "80px 20px" }}>
-      <div ref={ref} className="section-reveal" style={{ maxWidth: "960px", margin: "0 auto" }}>
+      <div ref={ref} className="section-reveal" style={{ maxWidth: "1000px", margin: "0 auto" }}>
+
+        {/* Header */}
         <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "16px", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
           What You Will Learn
         </p>
-        <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "12px", textAlign: "center", lineHeight: 1.2 }}>
-          The Complete E.C.H.O. Blueprint
+        <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "12px", textAlign: "center", lineHeight: 1.1 }}>
+          The E.C.H.O. Blueprint
         </h2>
-        <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.55)", textAlign: "center", marginBottom: "48px", fontFamily: "'Work Sans', sans-serif", maxWidth: "680px", margin: "0 auto 48px" }}>
-          During this 3-day transformational event, you&rsquo;ll install the exact architecture required
-          to build a company that ECHOS beyond your lifetime.
+        <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.45)", textAlign: "center", marginBottom: "56px", fontFamily: "'Work Sans', sans-serif", maxWidth: "560px", margin: "0 auto 56px" }}>
+          When these layers align, leadership creates an ECHO that outlives the founder.
         </p>
-        <div className="learn-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-          {learnItems.map((item, i) => (
-            <div key={i} style={{
-              display: "flex", alignItems: "flex-start", gap: "14px",
-              background: "rgba(255,255,255,0.04)", border: "1px solid rgba(201,165,90,0.15)",
-              borderRadius: "12px", padding: "20px 22px",
-            }}>
-              <GoldCheck />
-              <div>
-                <p style={{ fontSize: "11px", fontWeight: 700, color: "#C9A55A", letterSpacing: "0.12em", textTransform: "uppercase" as const, marginBottom: "5px", fontFamily: "'Work Sans', sans-serif" }}>
-                  {item.tag}
-                </p>
-                <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.65, fontFamily: "'Work Sans', sans-serif" }}>
-                  {item.text}
-                </p>
+
+        {/* Interactive tiles */}
+        <div className="echo-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px", marginBottom: "40px" }}>
+          {echoItems.map((item, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              style={{
+                background: active === i ? "rgba(201,165,90,0.12)" : "rgba(255,255,255,0.03)",
+                border: active === i ? "1px solid rgba(201,165,90,0.6)" : "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "12px",
+                padding: "32px 20px",
+                cursor: "pointer",
+                textAlign: "center",
+                transition: "all 0.25s ease",
+                outline: "none",
+              }}
+            >
+              <div style={{
+                fontSize: "clamp(52px, 6vw, 72px)",
+                fontWeight: 900,
+                lineHeight: 1,
+                color: active === i ? "#C9A55A" : "rgba(255,255,255,0.15)",
+                fontFamily: "'Frank Ruhl Libre', Georgia, serif",
+                transition: "color 0.25s ease",
+                marginBottom: "12px",
+              }}>
+                {item.letter}
               </div>
-            </div>
+              <p style={{
+                fontSize: "11px",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase" as const,
+                color: active === i ? "#C9A55A" : "rgba(255,255,255,0.35)",
+                fontFamily: "'Work Sans', sans-serif",
+                transition: "color 0.25s ease",
+                lineHeight: 1.4,
+              }}>
+                {item.label}
+              </p>
+            </button>
           ))}
         </div>
-        <div style={{ textAlign: "center", marginTop: "48px" }}>
+
+        {/* Detail panel */}
+        <div style={{
+          background: "rgba(201,165,90,0.06)",
+          border: "1px solid rgba(201,165,90,0.2)",
+          borderRadius: "16px",
+          padding: "40px 48px",
+          minHeight: "140px",
+          transition: "all 0.3s ease",
+        }}>
+          <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
+            {echoItems[active].letter} — {echoItems[active].label}
+          </p>
+          <h3 style={{ fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "14px", lineHeight: 1.2 }}>
+            {echoItems[active].tagline}
+          </h3>
+          <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.65)", lineHeight: 1.75, fontFamily: "'Work Sans', sans-serif", maxWidth: "700px" }}>
+            {echoItems[active].description}
+          </p>
+        </div>
+
+        {/* Apex line */}
+        <div style={{ textAlign: "center", marginTop: "32px", marginBottom: "48px" }}>
+          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.35)", fontFamily: "'Work Sans', sans-serif", letterSpacing: "0.05em" }}>
+            Apex: <span style={{ color: "#CC0000", fontWeight: 700 }}>GOD-SIZED VISION</span> — The Assignment You Steward
+          </p>
+        </div>
+
+        <div style={{ textAlign: "center" }}>
           <CTAButton />
         </div>
       </div>
@@ -638,7 +705,7 @@ export default function Home() {
       <Testimonials3 />
       <Invitation />
       <AboutStaci />
-      <WhatYouLearn />
+      <ECHOBlueprint />
       <NoteSection />
       <MoreTestimonials />
       <FinalCTA />
