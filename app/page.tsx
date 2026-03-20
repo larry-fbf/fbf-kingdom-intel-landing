@@ -653,13 +653,13 @@ const testimonials4 = [
   {
     name: "Delbert Friesen",
     title: "President, Earthmax",
-    quote: "I've never heard anyone bridge the gap between elite business training and Kingdom principles like Staci. She has helped us scale profits while building Kingdom generosity and legacy impact. Staci and Larry are the best in the world at Kingdom Business Mastery.",
+    quote: "I've never heard anyone bridge the gap between elite business training and Kingdom principles like Staci. She has helped us scale profits while building Kingdom generosity and legacy impact.",
     photo: "/images/delbert-headshot.png",
   },
   {
     name: "Eric Moland",
     title: "CEO, Black Dog Insurance",
-    quote: "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years — more than double the previous year. Our entire business profit is up over 50% this year alone.",
+    quote: "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years — more than double the previous year. Our entire business profit is up over 50%.",
     photo: "/images/eric-headshot.jpg",
   },
   {
@@ -667,6 +667,42 @@ const testimonials4 = [
     title: "Commercial Investors",
     quote: "FBF has had a monumental impact on our lives. We've built an 8-figure commercial investment business while keeping faith and family first.",
     photo: "/images/irina-alex.webp",
+  },
+  {
+    name: "Rogelio & Brandi Del Rio",
+    title: "CEO, Del Rio Landscape",
+    quote: "FBF Platinum has forever changed our lives! Our business is now 100% debt-free and continues to scale. We've paid off all personal debt, and our marriage has been totally restored.",
+    photo: "/images/rogelio-brandi.webp",
+  },
+  {
+    name: "Jamie Dahl",
+    title: "Business Owner",
+    quote: "Since aligning with Staci's coaching, God has enabled me to write and publish my first book, achieve the top sales position in my company, and launch a brand and business making a difference in the lives of many.",
+    photo: "/images/jamie-dahl.jpeg",
+  },
+  {
+    name: "Kristina Hess",
+    title: "KR Hess Law, P.C.",
+    quote: "Since joining Fueled by Fire, my husband got baptized, we are expanding our law firm nationally, and God has been downloading BIG audacious goals for our future.",
+    photo: "/images/kristina-hess.png",
+  },
+  {
+    name: "Christina Willis",
+    title: "FBF Client",
+    quote: "I am now debt-free, have lost over 60 pounds, and am walking in total freedom from the past. Fueled by Fire has changed everything for me and my family!",
+    photo: "/images/christina-willis.jpeg",
+  },
+  {
+    name: "Drew & Tina Shabo",
+    title: "Dentistry Business Owners",
+    quote: "We've clarified God's plan for our portfolio of dentistry businesses and our family has been restored to full alignment. We are now crystal clear about our GOD-SIZED vision.",
+    photo: "/images/drew-tina.jpg",
+  },
+  {
+    name: "Lynn Vennefron",
+    title: "FBF Client",
+    quote: "Since graduating from the Smart Money Makeover course, we have paid off all of our debt other than our mortgage. For the first time in our married life, we are debt free and able to give from a place of inner-peace, profits, & Kingdom generosity!",
+    photo: "/images/lynn-headshot.jpg",
   },
 ];
 
@@ -714,7 +750,7 @@ function MoreTestimonials() {
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 900, color: "#FFFFFF", textAlign: "center", marginBottom: "48px", lineHeight: 1.15 }}>
           Lives Changed. Businesses Built.
         </h2>
-        <div className="testimonial-grid-4" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+        <div className="testimonial-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
           {testimonials4.map((t, i) => <GalleryCard key={i} t={t} />)}
         </div>
       </div>

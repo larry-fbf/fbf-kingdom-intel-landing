@@ -123,6 +123,8 @@ a { color: inherit; text-decoration: none; }
   /* Grids → single column */
   .learn-grid { grid-template-columns: 1fr !important; }
   .testimonial-grid-4 { grid-template-columns: 1fr !important; }
+  .testimonial-grid-4 > div { flex-direction: column !important; }
+  .testimonial-grid-4 > div > div:first-child { width: 100% !important; height: 160px !important; position: relative !important; }
   .echo-grid { grid-template-columns: repeat(2, 1fr) !important; }
 
   /* CTA button full-width feel */
