@@ -111,156 +111,168 @@ function Hero() {
   const ref = useScrollReveal();
   return (
     <section
+      className="hero-split"
       style={{
         minHeight: "100vh",
         paddingTop: "80px",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        background: "#0a0a0a",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Background image using regular img */}
-      <img
-        src="/images/staci-larry-hero.avif"
-        alt=""
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: 0,
-        }}
-      />
-      {/* Dark overlay */}
+      {/* LEFT SIDE — text content */}
       <div
+        className="hero-left"
         style={{
-          position: "absolute",
-          inset: 0,
-          background: "rgba(0,0,0,0.65)",
-          zIndex: 1,
-        }}
-      />
-      {/* Gold radial glow */}
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "800px",
-          height: "800px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(201,165,90,0.15) 0%, transparent 70%)",
-          zIndex: 1,
-          pointerEvents: "none",
-        }}
-      />
-      {/* Content */}
-      <div
-        ref={ref}
-        className="section-reveal"
-        style={{
+          flex: "0 0 55%",
+          display: "flex",
+          alignItems: "center",
+          padding: "60px 48px 60px 8vw",
           position: "relative",
           zIndex: 2,
-          maxWidth: "900px",
-          width: "100%",
-          padding: "60px 20px",
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
         }}
       >
-        {/* Badge pill */}
+        {/* Subtle gold radial glow behind left content */}
         <div
           style={{
-            display: "inline-block",
-            background: "rgba(255,255,255,0.06)",
-            backdropFilter: "blur(10px)",
-            border: "1px solid rgba(201,165,90,0.4)",
-            borderRadius: "50px",
-            padding: "10px 28px",
-            marginBottom: "32px",
+            position: "absolute",
+            top: "40%",
+            left: "30%",
+            width: "600px",
+            height: "600px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(201,165,90,0.08) 0%, transparent 70%)",
+            pointerEvents: "none",
           }}
+        />
+
+        <div
+          ref={ref}
+          className="section-reveal"
+          style={{ position: "relative", maxWidth: "560px" }}
         >
-          <span
+          {/* Badge */}
+          <div
             style={{
-              fontSize: "13px",
-              fontWeight: 700,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase" as const,
-              color: "#D4A017",
+              display: "inline-block",
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(201,165,90,0.4)",
+              borderRadius: "50px",
+              padding: "10px 24px",
+              marginBottom: "28px",
             }}
           >
-            BIG BUSINESS. BOLD FAITH. NO COMPROMISE.
-          </span>
+            <span
+              style={{
+                fontSize: "12px",
+                fontWeight: 700,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase" as const,
+                color: "#D4A017",
+              }}
+            >
+              BIG BUSINESS. BOLD FAITH. NO COMPROMISE.
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1
+            style={{
+              fontSize: "clamp(36px, 5vw, 64px)",
+              fontWeight: 800,
+              lineHeight: 1.05,
+              color: "#FFFFFF",
+              marginBottom: "20px",
+              textTransform: "uppercase" as const,
+              background:
+                "linear-gradient(90deg, #FFFFFF 30%, #D4A017 50%, #FFFFFF 70%)",
+              backgroundSize: "200% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "shimmerText 6s linear infinite",
+            }}
+          >
+            KINGDOM INTELLIGENCE MASTER CLASS
+          </h1>
+
+          {/* Subhead */}
+          <p
+            style={{
+              fontSize: "19px",
+              color: "#D4A017",
+              lineHeight: 1.6,
+              marginBottom: "20px",
+            }}
+          >
+            Where High-Performing Leaders Scale Profitable Companies Without
+            Compromising Their Faith, Family or Freedom
+          </p>
+
+          {/* Event line */}
+          <p
+            style={{
+              fontSize: "16px",
+              color: "#C8C8C8",
+              marginBottom: "36px",
+            }}
+          >
+            Free 3-Day Live Event &mdash; April 14-16, 2026 @ 12:00 PM CST
+          </p>
+
+          {/* CTAs */}
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <CTAButton />
+            <CTAButton text="SAVE MY SEAT" />
+          </div>
+
+          {/* Fine print */}
+          <p
+            style={{
+              fontSize: "13px",
+              color: "#666",
+              marginTop: "16px",
+            }}
+          >
+            No cost. Limited seats. Live online event.
+          </p>
         </div>
+      </div>
 
-        {/* Headline with shimmer */}
-        <h1
+      {/* RIGHT SIDE — photo */}
+      <div
+        className="hero-right"
+        style={{
+          flex: "0 0 45%",
+          position: "relative",
+          overflow: "hidden",
+          minHeight: "100vh",
+        }}
+      >
+        <img
+          src="/images/staci-larry-hero.avif"
+          alt="Staci and Larry Wallace"
           style={{
-            fontSize: "clamp(40px, 7vw, 70px)",
-            fontWeight: 800,
-            lineHeight: 1.05,
-            color: "#FFFFFF",
-            marginBottom: "24px",
-            textTransform: "uppercase" as const,
-            background: "linear-gradient(90deg, #FFFFFF 30%, #D4A017 50%, #FFFFFF 70%)",
-            backgroundSize: "200% auto",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            animation: "shimmerText 6s linear infinite",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center top",
           }}
-        >
-          KINGDOM INTELLIGENCE MASTER CLASS
-        </h1>
-
-        {/* Subhead */}
-        <p
+        />
+        {/* Subtle left edge fade to blend with dark background */}
+        <div
           style={{
-            fontSize: "22px",
-            color: "#D4A017",
-            lineHeight: 1.5,
-            marginBottom: "24px",
-            maxWidth: "700px",
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to right, rgba(10,10,10,0.4) 0%, transparent 30%)",
           }}
-        >
-          Where High-Performing Leaders Scale Profitable Companies Without
-          Compromising Their Faith, Family or Freedom
-        </p>
-
-        {/* Event line */}
-        <p
-          style={{
-            fontSize: "17px",
-            color: "#FFFFFF",
-            marginBottom: "40px",
-          }}
-        >
-          Free 3-Day Live Event &mdash; April 14-16, 2026 @ 12:00 PM CST
-        </p>
-
-        {/* Two CTA buttons side by side */}
-        <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
-          <CTAButton />
-          <CTAButton text="SAVE MY SEAT" />
-        </div>
-
-        {/* Muted small text */}
-        <p
-          style={{
-            fontSize: "13px",
-            color: "rgba(255,255,255,0.5)",
-            marginTop: "20px",
-          }}
-        >
-          No cost. Limited seats. Live online event.
-        </p>
+        />
       </div>
     </section>
   );

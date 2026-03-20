@@ -84,6 +84,13 @@ a { color: inherit; text-decoration: none; }
   background: rgba(201,165,90,0.15) !important;
 }
 
+/* Hero split responsive */
+@media (max-width: 768px) {
+  .hero-split { flex-direction: column !important; }
+  .hero-left { flex: none !important; width: 100% !important; padding: 40px 24px !important; }
+  .hero-right { flex: none !important; width: 100% !important; height: 360px !important; min-height: 360px !important; }
+}
+
 /* Checklist grid responsive */
 @media (max-width: 700px) {
   .learn-grid { grid-template-columns: 1fr !important; }
