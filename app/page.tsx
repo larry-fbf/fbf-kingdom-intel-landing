@@ -550,14 +550,7 @@ function ECHOBlueprint() {
           </p>
         </div>
 
-        {/* Apex line */}
-        <div style={{ textAlign: "center", marginTop: "32px", marginBottom: "48px" }}>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.35)", fontFamily: "'Work Sans', sans-serif", letterSpacing: "0.05em" }}>
-            Apex: <span style={{ color: "#CC0000", fontWeight: 700 }}>GOD-SIZED VISION</span> — The Assignment You Steward
-          </p>
-        </div>
-
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginTop: "40px" }}>
           <CTAButton />
         </div>
       </div>
