@@ -40,11 +40,11 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
       alignItems: "center", justifyContent: "center", padding: "20px",
       backdropFilter: "blur(4px)",
     }}>
-      <div onClick={e => e.stopPropagation()} style={{
+      <div onClick={e => e.stopPropagation()} className="modal-inner" style={{
         background: "#FFFFFF", borderRadius: "16px", padding: "48px 40px",
         maxWidth: "540px", width: "100%", position: "relative",
         maxHeight: "92vh", overflowY: "auto",
-        boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
+        boxShadow: "0 24px 80px rgba(0,0,0,0.5)"
       }}>
         <button onClick={onClose} style={{ position: "absolute", top: "16px", right: "20px", background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#aaa", lineHeight: 1, fontWeight: 700 }}>X</button>
 
@@ -76,7 +76,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
                 <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Email *</label>
                 <input required type="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <div className="modal-name-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                 <div>
                   <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>First Name *</label>
                   <input required type="text" style={inputStyle} value={form.firstName} onChange={e => setForm(f => ({...f, firstName: e.target.value}))} />
@@ -145,7 +145,7 @@ function useScrollReveal() {
 /* -- CTA BUTTON -- */
 function CTAButton({ text = "REGISTER FOR FREE", dark = false, onOpen }: { text?: string; dark?: boolean; onOpen?: () => void }) {
   return (
-    <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+    <div className="cta-wrapper" style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
       <button onClick={onOpen} className="cta-btn" style={{
         background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
         color: "#120800", fontWeight: 800, padding: "18px 48px", borderRadius: "5px",
@@ -400,7 +400,7 @@ function ECHOBlueprint({ onOpen }: { onOpen: () => void }) {
             </button>
           ))}
         </div>
-        <div style={{ background: "rgba(201,165,90,0.06)", border: "1px solid rgba(201,165,90,0.2)", borderRadius: "16px", padding: "40px 48px", minHeight: "140px" }}>
+        <div className="echo-detail" style={{ background: "rgba(201,165,90,0.06)", border: "1px solid rgba(201,165,90,0.2)", borderRadius: "16px", padding: "40px 48px", minHeight: "140px" }}>
           <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>{echoItems[active].letter} &mdash; {echoItems[active].label}</p>
           <h3 style={{ fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "14px", lineHeight: 1.2 }}>{echoItems[active].tagline}</h3>
           <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.65)", lineHeight: 1.75, fontFamily: "'Work Sans', sans-serif", maxWidth: "700px" }}>{echoItems[active].description}</p>
@@ -482,7 +482,7 @@ function MoreTestimonials() {
           {visible.map((t, i) => (
             <div key={`${current}-${i}`} className="testimonial-card" style={{ background: "#0a0a0a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "14px", overflow: "hidden", animation: "fadeInUp 0.4s ease both" }}>
               {t.photo && (
-                <div style={{ width: "100%", height: "200px", overflow: "hidden", position: "relative" }}>
+                <div className="slider-photo" style={{ width: "100%", height: "200px", overflow: "hidden", position: "relative" }}>
                   <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 25%", display: "block" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 40%, #0a0a0a 100%)" }} />
                 </div>

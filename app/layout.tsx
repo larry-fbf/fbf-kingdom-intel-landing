@@ -97,61 +97,58 @@ a { color: inherit; text-decoration: none; }
 /* ── MOBILE: 768px and below ── */
 @media (max-width: 768px) {
 
-  /* Hero */
+  /* ── HERO ── */
   .hero-split { flex-direction: column !important; min-height: auto !important; height: auto !important; }
-  .hero-left {
-    flex: none !important; width: 100% !important;
-    padding: 32px 24px 48px !important;
-    min-height: auto !important;
-  }
-  .hero-right {
-    flex: none !important; width: 100% !important;
-    height: 420px !important; min-height: 420px !important;
-    order: -1;
-  }
-  /* Hero content row stacks */
   .hero-content-row { flex-direction: column !important; min-height: auto !important; }
-
-  /* Logo bar becomes relative on mobile so it sits above photo */
-  .hero-logo-bar { position: relative !important; padding: 20px 20px 0 !important; }
+  .hero-right { flex: none !important; width: 100% !important; height: 380px !important; min-height: 380px !important; order: -1; }
   .hero-photo { object-position: center 20% !important; }
+  .hero-left { flex: none !important; width: 100% !important; padding: 28px 20px 48px !important; min-height: auto !important; }
+  /* Logo bar sits above photo on mobile */
+  .hero-logo-bar { position: relative !important; padding: 20px 20px 0 !important; background: #0a0a0a; }
+  .hero-logo { height: 40px !important; }
+  /* Hero H1 needs a floor */
+  .hero-reveal h1 { font-size: 40px !important; line-height: 1.0 !important; }
 
-  /* About section */
-  .about-flex { flex-direction: column !important; align-items: center !important; }
-  .about-photo { width: 100% !important; max-width: 340px !important; }
+  /* ── CTA BUTTON — full width on mobile ── */
+  .cta-wrapper { display: flex !important; flex-direction: column !important; align-items: stretch !important; width: 100% !important; }
+  .cta-btn { width: 100% !important; text-align: center !important; padding: 16px 20px !important; font-size: 16px !important; box-sizing: border-box !important; }
 
-  /* Grids → single column */
+  /* ── SECTION PADDING ── */
+  section { padding-top: 56px !important; padding-bottom: 56px !important; padding-left: 0 !important; padding-right: 0 !important; }
+  section > div { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* ── EVENT DETAILS ── */
+  .event-details-row { flex-direction: column !important; gap: 20px !important; align-items: center !important; }
+
+  /* ── ECHO GRID — 2x2 ── */
+  .echo-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .echo-detail { padding: 24px 20px !important; }
+
+  /* ── INVITATION SPLIT ── */
+  .invitation-split { flex-direction: column !important; min-height: auto !important; }
+  .invitation-photo { flex: none !important; width: 100% !important; min-height: 320px !important; max-height: 360px !important; position: relative !important; }
+  .invitation-content { flex: none !important; width: 100% !important; padding: 36px 20px 48px !important; }
+  .invitation-content > div { max-width: 100% !important; }
+
+  /* ── WARRIORS BANNER ── */
+  .warriors-quote { font-size: 26px !important; }
+
+  /* ── ABOUT STACI ── */
+  .about-flex { flex-direction: column !important; align-items: center !important; gap: 24px !important; }
+  .about-photo { width: 100% !important; max-width: 320px !important; }
+
+  /* ── GRIDS ── */
   .learn-grid { grid-template-columns: 1fr !important; }
   .testimonial-grid-4 { grid-template-columns: 1fr !important; }
   .slider-grid { grid-template-columns: 1fr !important; }
-  .echo-grid { grid-template-columns: repeat(2, 1fr) !important; }
-
-  /* CTA button full-width feel */
-  .cta-btn { width: 100% !important; text-align: center !important; padding: 18px 24px !important; font-size: 16px !important; }
-
-  /* Event detail flex row → column */
-  .event-details-row { flex-direction: column !important; gap: 20px !important; align-items: center !important; }
-
-  /* Prep grid → single column */
   .prep-grid { grid-template-columns: 1fr !important; }
 
-  /* Invitation split → stacks on mobile */
-  .invitation-split { flex-direction: column !important; min-height: auto !important; }
-  .invitation-photo { flex: none !important; width: 100% !important; min-height: 380px !important; }
-  .invitation-content { flex: none !important; width: 100% !important; padding: 40px 24px 56px !important; }
-  .invitation-content > div { max-width: 100% !important; }
+  /* ── SLIDER PHOTO HEIGHT ── */
+  .slider-photo { height: 180px !important; }
 
-  /* Warriors banner text */
-  .warriors-quote { font-size: 28px !important; }
-
-  /* Section padding reduction */
-  section { padding-left: 16px !important; padding-right: 16px !important; }
-
-  /* Note section inner padding */
-  .note-inner { padding: 32px 20px !important; }
-
-  /* Logo size */
-  .hero-logo { height: 38px !important; }
+  /* ── MODAL ── */
+  .modal-name-grid { grid-template-columns: 1fr !important; }
+  .modal-inner { padding: 32px 20px !important; }
 }
 
 /* ── TABLET: 769px – 1024px ── */
@@ -159,6 +156,7 @@ a { color: inherit; text-decoration: none; }
   .hero-left { padding: 100px 32px 60px 5vw !important; }
   .learn-grid { grid-template-columns: 1fr 1fr !important; }
   .about-photo { width: 300px !important; }
+  .echo-grid { grid-template-columns: repeat(4, 1fr) !important; }
 }
 `,
           }}
