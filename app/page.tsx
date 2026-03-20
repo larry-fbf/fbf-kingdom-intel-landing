@@ -597,7 +597,7 @@ function NoteSection() {
   );
 }
 
-/* ── SECTION 8: MORE TESTIMONIALS ── */
+/* ── SECTION 8: GALLERY TESTIMONIALS ── */
 const testimonials4 = [
   {
     name: "Kolton Kropf",
@@ -625,19 +625,50 @@ const testimonials4 = [
   },
 ];
 
+function GalleryCard({ t }: { t: { name: string; title: string; quote: string; photo?: string } }) {
+  return (
+    <div className="testimonial-card" style={{
+      background: "#0a0a0a",
+      border: "1px solid rgba(255,255,255,0.08)",
+      borderRadius: "16px",
+      overflow: "hidden",
+    }}>
+      {/* Full photo */}
+      {t.photo && (
+        <div style={{ width: "100%", height: "220px", overflow: "hidden", position: "relative" }}>
+          <img
+            src={t.photo}
+            alt={t.name}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, #0a0a0a 100%)" }} />
+        </div>
+      )}
+      {/* Content */}
+      <div style={{ padding: "24px 28px 28px" }}>
+        <p style={{ fontSize: "15px", fontWeight: 700, color: "#FFFFFF", marginBottom: "2px" }}>{t.name}</p>
+        <p style={{ fontSize: "12px", color: "#C9A55A", marginBottom: "16px", fontFamily: "'Work Sans', sans-serif", letterSpacing: "0.04em" }}>{t.title}</p>
+        <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.75, fontStyle: "italic", fontFamily: "'Work Sans', sans-serif" }}>
+          &ldquo;{t.quote}&rdquo;
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function MoreTestimonials() {
   const ref = useScrollReveal();
   return (
     <section style={{ background: "#111111", padding: "80px 20px" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", textAlign: "center", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
-          Testimonials
+          Kingdom Leaders
         </p>
         <h2 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 900, color: "#FFFFFF", textAlign: "center", marginBottom: "48px", lineHeight: 1.15 }}>
-          RESULTS MATTER...
+          Lives Changed. Businesses Built.
         </h2>
         <div className="testimonial-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
-          {testimonials4.map((t, i) => <TestimonialCard key={i} t={t} />)}
+          {testimonials4.map((t, i) => <GalleryCard key={i} t={t} />)}
         </div>
       </div>
     </section>
