@@ -318,34 +318,43 @@ function Invitation() {
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 60%, #0d0d0d 100%)" }} />
         </div>
 
-        {/* RIGHT — content */}
+        {/* RIGHT — letter content */}
         <div className="invitation-content" style={{ flex: "0 0 55%", display: "flex", alignItems: "center", padding: "80px 8vw 80px 48px" }}>
           <div style={{ maxWidth: "520px" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-              This Is For You If...
+
+            {/* Letter heading */}
+            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
+              A Personal Word From Larry &amp; Staci
             </p>
-            <h2 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.05, marginBottom: "40px", textTransform: "uppercase" as const }}>
-              NOW IS THE TIME<br />TO GO <span style={{ color: "#CC0000" }}>ALL IN</span>
+            <h2 style={{ fontSize: "clamp(22px, 2.8vw, 32px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.2, marginBottom: "28px" }}>
+              A Kingdom Blueprint for Scaling Business Without Sacrificing Family, Peace, or Purpose.
             </h2>
 
-            <div style={{ display: "flex", flexDirection: "column", marginBottom: "44px" }}>
-              {[
-                "You feel called to build something bigger — a legacy, not just a business.",
-                "You refuse to sacrifice faith, family, or freedom to get there.",
-                "You're scaling fast but know your infrastructure hasn't kept up.",
-              ].map((line, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "16px", padding: "18px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
-                  <span style={{ color: "#CC0000", fontWeight: 900, fontSize: "18px", lineHeight: 1.5, flexShrink: 0 }}>{i + 1}.</span>
-                  <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.8)", lineHeight: 1.65, fontFamily: "'Work Sans', sans-serif", margin: 0 }}>{line}</p>
-                </div>
-              ))}
-            </div>
+            {/* Divider */}
+            <div style={{ width: "48px", height: "2px", background: "#CC0000", marginBottom: "28px", borderRadius: "2px" }} />
 
-            <p style={{ fontSize: "clamp(18px, 2vw, 22px)", fontWeight: 700, color: "#C9A55A", marginBottom: "32px", lineHeight: 1.3 }}>
-              The answer is YES — and we are living proof.
+            {/* Letter body */}
+            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
+              We are entering one of the most disruptive economic shifts in modern history. Artificial Intelligence is accelerating the speed of business at a pace the world has never seen. Ideas are generated instantly. Automation is reshaping entire industries.
+            </p>
+            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
+              Yet many leaders still don&rsquo;t know how to position their companies for this shift.
+            </p>
+            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, marginBottom: "28px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
+              <span style={{ color: "#C9A55A" }}>AI increases speed. Kingdom Intelligence determines dominion.</span>{" "}
+              The leaders who will thrive aren&rsquo;t just adopting new tools — they&rsquo;re developing the Spirit-led wisdom to steward growth God&rsquo;s way.
+            </p>
+            <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "36px", fontFamily: "'Work Sans', sans-serif" }}>
+              That&rsquo;s why we created this Masterclass. Join us for three days and let us hand you the exact blueprint we&rsquo;ve used to build multiple 7–9 figure companies — without compromising faith, family, or freedom.
             </p>
 
-            <CTAButton />
+            {/* Signature */}
+            <p style={{ fontSize: "17px", fontStyle: "italic", color: "rgba(255,255,255,0.5)", marginBottom: "32px", fontFamily: "'Frank Ruhl Libre', Georgia, serif" }}>
+              With faith and fire,<br />
+              <strong style={{ color: "#FFFFFF", fontStyle: "normal" }}>Larry &amp; Staci Wallace</strong>
+            </p>
+
+            <CTAButton text="BUILD YOUR KINGDOM BUSINESS" />
           </div>
         </div>
       </div>
