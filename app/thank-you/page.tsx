@@ -41,6 +41,13 @@ export default function ThankYou() {
       </head>
       <body>
 
+        {/* ── REGISTERED BANNER ── */}
+        <div style={{ background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", padding: "14px 20px", textAlign: "center" }}>
+          <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#FFFFFF" }}>
+            &#10003; &nbsp;You Are Registered &mdash; April 14&ndash;16, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
+          </p>
+        </div>
+
         {/* ── LOGO BAR ── */}
         <header style={{ background: "#080808", padding: "20px 40px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "44px", display: "block" }} />
@@ -48,13 +55,6 @@ export default function ThankYou() {
             Kingdom Intelligence Masterclass
           </p>
         </header>
-
-        {/* ── REGISTERED BANNER ── */}
-        <div style={{ background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", padding: "14px 20px", textAlign: "center" }}>
-          <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#FFFFFF" }}>
-            &#10003; &nbsp;You Are Registered &mdash; April 14&ndash;16, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
-          </p>
-        </div>
 
         {/* ── SECTION 1: HERO ── */}
         <section style={{ background: "#080808", position: "relative", overflow: "hidden" }}>
