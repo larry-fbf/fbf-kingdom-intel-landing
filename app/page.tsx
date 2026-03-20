@@ -1,10 +1,133 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 
-const REGISTER_URL = "https://fbfchallenge.com";
+const REGISTER_URL = "#register";
 
-/* ── SCROLL REVEAL HOOK ── */
+/* â”€â”€ REGISTRATION MODAL â”€â”€ */
+function RegisterModal({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState({ email: "", firstName: "", lastName: "", phone: "", agreed: false });
+  const [status, setStatus] = useState<"idle"|"loading"|"success"|"error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.agreed) return alert("Please agree to receive communications to continue.");
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) setStatus("success");
+      else setStatus("error");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%", padding: "12px 14px", borderRadius: "6px",
+    border: "1px solid #E0E0E0", fontSize: "15px",
+    fontFamily: "'Work Sans', sans-serif", color: "#111",
+    outline: "none", boxSizing: "border-box",
+  };
+
+  return (
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, zIndex: 9999,
+      background: "rgba(0,0,0,0.75)", display: "flex",
+      alignItems: "center", justifyContent: "center", padding: "20px",
+      backdropFilter: "blur(4px)",
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        background: "#FFFFFF", borderRadius: "16px", padding: "48px 40px",
+        maxWidth: "560px", width: "100%", position: "relative",
+        maxHeight: "90vh", overflowY: "auto",
+        boxShadow: "0 24px 80px rgba(0,0,0,0.4)",
+      }}>
+        {/* Close */}
+        <button onClick={onClose} style={{ position: "absolute", top: "16px", right: "20px", background: "none", border: "none", fontSize: "24px", cursor: "pointer", color: "#999", lineHeight: 1 }}>Ã—</button>
+
+        {status === "success" ? (
+          <div style={{ textAlign: "center", padding: "20px 0" }}>
+            <p style={{ fontSize: "48px", marginBottom: "16px" }}>ðŸ”¥</p>
+            <h2 style={{ fontSize: "28px", fontWeight: 900, color: "#111", marginBottom: "12px" }}>You&rsquo;re In!</h2>
+            <p style={{ fontSize: "17px", color: "#555", lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif" }}>
+              Check your email for confirmation. We&rsquo;ll see you April 14â€“16 at 12:00 PM CST.
+            </p>
+            <p style={{ fontSize: "16px", color: "#C9A55A", fontWeight: 700, marginTop: "16px", fontFamily: "'Work Sans', sans-serif" }}>
+              Now is the moment to go ALL IN.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div style={{ textAlign: "center", marginBottom: "28px" }}>
+              <img src="/images/fbf-logo-black.png" alt="FBF" style={{ height: "36px", marginBottom: "20px", display: "inline-block" }} />
+              <h2 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 900, color: "#111", lineHeight: 1.2, marginBottom: "8px" }}>
+                Join the FREE Kingdom Intelligence<br />Masterclass â€” April 14â€“16, 2026
+              </h2>
+              <p style={{ fontSize: "14px", color: "#CC0000", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
+                Your decision to join has the potential to be the biggest choice you make in 2026.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <div>
+                <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Email*</label>
+                <input required type="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                <div>
+                  <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>First Name*</label>
+                  <input required type="text" style={inputStyle} value={form.firstName} onChange={e => setForm(f => ({...f, firstName: e.target.value}))} />
+                </div>
+                <div>
+                  <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Last Name*</label>
+                  <input required type="text" style={inputStyle} value={form.lastName} onChange={e => setForm(f => ({...f, lastName: e.target.value}))} />
+                </div>
+              </div>
+              <div>
+                <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Mobile Number</label>
+                <input type="tel" placeholder="+1 (555) 000-0000" style={inputStyle} value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
+              </div>
+
+              <div style={{ borderTop: "1px solid #F0F0F0", paddingTop: "16px" }}>
+                <p style={{ fontSize: "12px", color: "#666", lineHeight: 1.6, marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
+                  Fueled By Fire, LLC values your privacy. We&rsquo;ll use your info to manage your account and deliver the services you&rsquo;ve asked for.
+                </p>
+                <label style={{ display: "flex", alignItems: "flex-start", gap: "10px", cursor: "pointer" }}>
+                  <input type="checkbox" checked={form.agreed} onChange={e => setForm(f => ({...f, agreed: e.target.checked}))} style={{ marginTop: "3px", flexShrink: 0, width: "16px", height: "16px", accentColor: "#CC0000" }} />
+                  <span style={{ fontSize: "13px", color: "#444", fontFamily: "'Work Sans', sans-serif", lineHeight: 1.5 }}>
+                    I agree to receive emails and, optionally, SMS from Fueled By Fire, LLC.*
+                  </span>
+                </label>
+              </div>
+
+              <button type="submit" disabled={status === "loading"} style={{
+                background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
+                color: "#120800", fontWeight: 800, padding: "16px", borderRadius: "6px",
+                border: "none", fontSize: "16px", cursor: "pointer", letterSpacing: "0.08em",
+                textTransform: "uppercase", fontFamily: "'Work Sans', sans-serif",
+                opacity: status === "loading" ? 0.7 : 1,
+              }}>
+                {status === "loading" ? "Registering..." : "RSVP NOW â†’"}
+              </button>
+
+              {status === "error" && (
+                <p style={{ fontSize: "13px", color: "#CC0000", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
+                  Something went wrong. Please try again or email us directly.
+                </p>
+              )}
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* â”€â”€ SCROLL REVEAL HOOK â”€â”€ */
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -25,12 +148,12 @@ function useScrollReveal() {
   return ref;
 }
 
-/* ── CTA BUTTON ── */
-function CTAButton({ text = "REGISTER FOR FREE", dark = false }: { text?: string; dark?: boolean }) {
+/* â”€â”€ CTA BUTTON â”€â”€ */
+function CTAButton({ text = "REGISTER FOR FREE", dark = false, onOpen }: { text?: string; dark?: boolean; onOpen?: () => void }) {
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-      <a
-        href={REGISTER_URL}
+      <button
+        onClick={onOpen}
         className="cta-btn"
         style={{
           display: "inline-block",
@@ -46,10 +169,11 @@ function CTAButton({ text = "REGISTER FOR FREE", dark = false }: { text?: string
           letterSpacing: "0.08em",
           boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
           fontFamily: "'Work Sans', sans-serif",
+          border: "none",
         }}
       >
         {text}
-      </a>
+      </button>
       <span style={{ fontSize: "13px", color: dark ? "#888" : "rgba(255,255,255,0.55)", fontStyle: "italic" }}>
         No cost. Limited seats. Live online event.
       </span>
@@ -57,8 +181,8 @@ function CTAButton({ text = "REGISTER FOR FREE", dark = false }: { text?: string
   );
 }
 
-/* ── SECTION 1: HERO ── */
-function Hero() {
+/* â”€â”€ SECTION 1: HERO â”€â”€ */
+function Hero({ onOpen }: { onOpen: () => void }) {
   return (
     <section
       className="hero-split"
@@ -99,7 +223,7 @@ function Hero() {
               marginBottom: "24px",
             }}>
               <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", fontFamily: "'Work Sans', sans-serif" }}>
-                Free 3-Day Live Event · April 14–16, 2026 · 12:00 PM CST
+                Free 3-Day Live Event Â· April 14â€“16, 2026 Â· 12:00 PM CST
               </span>
             </div>
 
@@ -139,16 +263,16 @@ function Hero() {
               fontFamily: "'Work Sans', sans-serif",
               fontWeight: 400,
             }}>
-              The leaders who will thrive in this next decade aren&rsquo;t just adopting new tools —
+              The leaders who will thrive in this next decade aren&rsquo;t just adopting new tools â€”
               they&rsquo;re developing the Spirit-led wisdom and leadership structure
               required to steward growth well.
             </p>
 
-            <CTAButton />
+            <CTAButton onOpen={onOpen} />
           </div>
         </div>
 
-        {/* RIGHT — photo */}
+        {/* RIGHT â€” photo */}
         <div className="hero-right" style={{ flex: "0 0 45%", position: "relative", overflow: "hidden", minHeight: "100vh" }}>
           <img
             src="/images/staci-larry-hero.avif"
@@ -163,7 +287,7 @@ function Hero() {
   );
 }
 
-/* ── SECTION 2: EVENT DETAILS ── */
+/* â”€â”€ SECTION 2: EVENT DETAILS â”€â”€ */
 function EventDetails() {
   const ref = useScrollReveal();
   return (
@@ -181,14 +305,14 @@ function EventDetails() {
           their companies for what&rsquo;s coming.
         </p>
         <p style={{ fontSize: "18px", color: "#111111", lineHeight: 1.85, marginBottom: "32px", maxWidth: "780px", margin: "0 auto 32px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
-          That&rsquo;s why Larry &amp; Staci Wallace created the Kingdom Intelligence Masterclass —
+          That&rsquo;s why Larry &amp; Staci Wallace created the Kingdom Intelligence Masterclass â€”
           a FREE 3-day live event built to give faith-driven leaders the E.C.H.O. Framework, the
           G.R.O.W.T.H. Method, and the spiritual intelligence to scale without sacrificing
           what matters most.
         </p>
         <div className="event-details-row" style={{ display: "flex", justifyContent: "center", gap: "40px", flexWrap: "wrap", marginBottom: "32px" }}>
           {[
-            { label: "Date", value: "April 14–16, 2026" },
+            { label: "Date", value: "April 14â€“16, 2026" },
             { label: "Time", value: "12:00 PM CST Daily" },
             { label: "Format", value: "Free Live Online Event" },
           ].map((item, i) => (
@@ -206,8 +330,8 @@ function EventDetails() {
   );
 }
 
-/* ── SECTION 2b: VSL ── */
-function VSLSection() {
+/* â”€â”€ SECTION 2b: VSL â”€â”€ */
+function VSLSection({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   return (
     <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
@@ -232,14 +356,14 @@ function VSLSection() {
           />
         </div>
         <div style={{ marginTop: "40px" }}>
-          <CTAButton text="RESERVE MY FREE SEAT" />
+          <CTAButton text="RESERVE MY FREE SEAT" onOpen={onOpen} />
         </div>
       </div>
     </section>
   );
 }
 
-/* ── SECTION 3: TESTIMONIALS (3 cards) ── */
+/* â”€â”€ SECTION 3: TESTIMONIALS (3 cards) â”€â”€ */
 const testimonials3 = [
   {
     name: "Kyler Kropf",
@@ -304,7 +428,7 @@ function Testimonials3() {
   );
 }
 
-function Invitation() {
+function Invitation({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   const ref2 = useScrollReveal();
   return (
@@ -313,7 +437,7 @@ function Invitation() {
       {/* SPLIT: photo left, content right */}
       <div ref={ref} className="section-reveal invitation-split" style={{ display: "flex", minHeight: "80vh" }}>
 
-        {/* LEFT — photo */}
+        {/* LEFT â€” photo */}
         <div className="invitation-photo" style={{ flex: "0 0 45%", position: "relative", overflow: "hidden", minHeight: "600px" }}>
           <img
             src="/images/staci-larry-split.webp"
@@ -324,7 +448,7 @@ function Invitation() {
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 60%, #0d0d0d 100%)" }} />
         </div>
 
-        {/* RIGHT — letter content */}
+        {/* RIGHT â€” letter content */}
         <div className="invitation-content" style={{ flex: "0 0 55%", display: "flex", alignItems: "center", padding: "80px 8vw 80px 48px" }}>
           <div style={{ maxWidth: "520px" }}>
 
@@ -350,7 +474,7 @@ function Invitation() {
               God is positioning Kingdom-minded entrepreneurs with the operational clarity and leadership infrastructure needed to scale businesses that generate profit, cultivate culture, and multiply generosity across generations.
             </p>
             <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>
-              Each day will guide you through our <span style={{ color: "#C9A55A", fontWeight: 700 }}>E.C.H.O. Framework</span> — a step-by-step process that fuses spiritual alignment with practical business strategy. When your life and leadership align with your divine mandate, you stop chasing money and begin igniting movements that impact families, teams, and entire industries.
+              Each day will guide you through our <span style={{ color: "#C9A55A", fontWeight: 700 }}>E.C.H.O. Framework</span> â€” a step-by-step process that fuses spiritual alignment with practical business strategy. When your life and leadership align with your divine mandate, you stop chasing money and begin igniting movements that impact families, teams, and entire industries.
             </p>
             <p style={{ fontSize: "16px", color: "#FFFFFF", lineHeight: 1.7, marginBottom: "28px", fontFamily: "'Frank Ruhl Libre', Georgia, serif", fontWeight: 700, fontStyle: "italic" }}>
               What will your echo be? Playing small has never built a Kingdom.<br />Now is the moment to go ALL IN.
@@ -362,7 +486,7 @@ function Invitation() {
               <strong style={{ color: "#FFFFFF", fontStyle: "normal" }}>Larry &amp; Staci Wallace</strong>
             </p>
 
-            <CTAButton text="BUILD YOUR KINGDOM BUSINESS" />
+            <CTAButton text="BUILD YOUR KINGDOM BUSINESS" onOpen={onOpen} />
           </div>
         </div>
       </div>
@@ -386,14 +510,14 @@ function Invitation() {
         </p>
         <div style={{ width: "60px", height: "3px", background: "rgba(255,255,255,0.4)", margin: "24px auto 16px", borderRadius: "2px" }} />
         <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" as const, position: "relative", zIndex: 1, fontFamily: "'Work Sans', sans-serif" }}>
-          — Staci Wallace
+          â€” Staci Wallace
         </p>
       </div>
     </section>
   );
 }
 
-/* ── SECTION 5: ABOUT STACI ── */
+/* â”€â”€ SECTION 5: ABOUT STACI â”€â”€ */
 function AboutStaci() {
   const ref = useScrollReveal();
   return (
@@ -419,7 +543,7 @@ function AboutStaci() {
           </p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
             After 28 years of marriage and nearly four decades of growing companies from scratch,
-            Staci and Larry Wallace have built multiple 7, 8, and 9-figure businesses — all while
+            Staci and Larry Wallace have built multiple 7, 8, and 9-figure businesses â€” all while
             raising their family and keeping faith at the center of everything they do.
           </p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
@@ -441,20 +565,20 @@ function AboutStaci() {
   );
 }
 
-/* ── SECTION 6: E.C.H.O. INTERACTIVE ── */
+/* â”€â”€ SECTION 6: E.C.H.O. INTERACTIVE â”€â”€ */
 const echoItems = [
   {
     letter: "E",
     label: "Economic Stewardship",
     tagline: "Build the infrastructure your vision demands.",
-    description: "Design profitable systems that fund the mission — Vision & Strategy, Operational Systems, Leadership Infrastructure, and Financial Intelligence.",
+    description: "Design profitable systems that fund the mission â€” Vision & Strategy, Operational Systems, Leadership Infrastructure, and Financial Intelligence.",
     color: "#C9A55A",
   },
   {
     letter: "C",
     label: "Culture Architecture",
     tagline: "Stop being the ceiling of your company.",
-    description: "Create an environment that attracts, develops, and multiplies leaders who carry the vision — without you becoming the bottleneck.",
+    description: "Create an environment that attracts, develops, and multiplies leaders who carry the vision â€” without you becoming the bottleneck.",
     color: "#C9A55A",
   },
   {
@@ -473,7 +597,7 @@ const echoItems = [
   },
 ];
 
-function ECHOBlueprint() {
+function ECHOBlueprint({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   const [active, setActive] = useState(0);
 
@@ -546,7 +670,7 @@ function ECHOBlueprint() {
           transition: "all 0.3s ease",
         }}>
           <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
-            {echoItems[active].letter} — {echoItems[active].label}
+            {echoItems[active].letter} â€” {echoItems[active].label}
           </p>
           <h3 style={{ fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "14px", lineHeight: 1.2 }}>
             {echoItems[active].tagline}
@@ -557,19 +681,19 @@ function ECHOBlueprint() {
         </div>
 
         <div style={{ textAlign: "center", marginTop: "40px" }}>
-          <CTAButton />
+          <CTAButton onOpen={onOpen} />
         </div>
       </div>
     </section>
   );
 }
 
-/* ── SECTION 7: PREPARE + QUALIFIER ── */
+/* â”€â”€ SECTION 7: PREPARE + QUALIFIER â”€â”€ */
 const prepSteps = [
   {
     number: "01",
     title: "Block Your Calendar",
-    body: "All three days. April 14–16, 12:00 PM CST. Treat it like the most important business meeting of the year — because it is.",
+    body: "All three days. April 14â€“16, 12:00 PM CST. Treat it like the most important business meeting of the year â€” because it is.",
   },
   {
     number: "02",
@@ -583,7 +707,7 @@ const prepSteps = [
   },
 ];
 
-function NoteSection() {
+function NoteSection({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   return (
     <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
@@ -617,7 +741,7 @@ function NoteSection() {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <CTAButton dark={true} />
+          <CTAButton dark={true} onOpen={onOpen} />
         </div>
       </div>
 
@@ -626,9 +750,9 @@ function NoteSection() {
   );
 }
 
-/* ── SECTION 8: GALLERY TESTIMONIALS ── */
+/* â”€â”€ SECTION 8: GALLERY TESTIMONIALS â”€â”€ */
 const testimonials4 = [
-  // Slide 1 — lead with biggest results
+  // Slide 1 â€” lead with biggest results
   {
     name: "Kolton Kropf",
     title: "CEO, SaddlebrookeLife",
@@ -644,7 +768,7 @@ const testimonials4 = [
   {
     name: "Eric Moland",
     title: "CEO, Black Dog Insurance",
-    quote: "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years — more than double the previous year. Our entire business profit is up over 50%.",
+    quote: "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years â€” more than double the previous year. Our entire business profit is up over 50%.",
     photo: "/images/eric-headshot.jpg",
   },
   // Slide 2
@@ -753,7 +877,7 @@ function MoreTestimonials() {
             onClick={() => setCurrent(c => (c - 1 + pages) % pages)}
             style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "50%", width: "40px", height: "40px", cursor: "pointer", color: "#FFFFFF", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }}
           >
-            ‹
+            â€¹
           </button>
 
           {/* Dots */}
@@ -771,7 +895,7 @@ function MoreTestimonials() {
             onClick={() => setCurrent(c => (c + 1) % pages)}
             style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "50%", width: "40px", height: "40px", cursor: "pointer", color: "#FFFFFF", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.2s" }}
           >
-            ›
+            â€º
           </button>
         </div>
       </div>
@@ -779,8 +903,8 @@ function MoreTestimonials() {
   );
 }
 
-/* ── SECTION 9: FINAL CTA ── */
-function FinalCTA() {
+/* â”€â”€ SECTION 9: FINAL CTA â”€â”€ */
+function FinalCTA({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   return (
     <section style={{ background: "#0a0a0a", padding: "100px 20px", position: "relative", overflow: "hidden" }}>
@@ -791,29 +915,29 @@ function FinalCTA() {
       }} />
       <div ref={ref} className="section-reveal" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
         <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-          April 14–16, 2026 · Free Live Event
+          April 14â€“16, 2026 Â· Free Live Event
         </p>
         <h2 style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "20px", lineHeight: 1.1 }}>
           Playing Small Has Never<br />Changed The World.
         </h2>
         <p style={{ fontSize: "19px", color: "rgba(255,255,255,0.65)", marginBottom: "12px", lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif", maxWidth: "640px", margin: "0 auto 12px" }}>
-          You were not built for business as usual. You were built for an ECHO —
+          You were not built for business as usual. You were built for an ECHO â€”
           leadership that outlives the founder, vision that multiplies through culture,
           impact that reverberates through generations.
         </p>
         <p style={{ fontSize: "17px", color: "#C9A55A", marginBottom: "40px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
-          Join thousands of Kingdom CEOs who are building God-sized businesses —<br />without sacrificing what matters most.
+          Join thousands of Kingdom CEOs who are building God-sized businesses â€”<br />without sacrificing what matters most.
         </p>
-        <CTAButton text="CLAIM YOUR FREE SEAT" />
+        <CTAButton text="CLAIM YOUR FREE SEAT" onOpen={onOpen} />
         <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "24px", fontFamily: "'Work Sans', sans-serif" }}>
-          Free for a limited time. Live online event April 14–16, 2026.
+          Free for a limited time. Live online event April 14â€“16, 2026.
         </p>
       </div>
     </section>
   );
 }
 
-/* ── FOOTER ── */
+/* â”€â”€ FOOTER â”€â”€ */
 function Footer() {
   return (
     <footer style={{ background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.08)", padding: "48px 20px", textAlign: "center" }}>
@@ -833,21 +957,29 @@ function Footer() {
   );
 }
 
-/* ── PAGE ── */
+/* â”€â”€ PAGE â”€â”€ */
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const open = () => setModalOpen(true);
+  const close = () => setModalOpen(false);
+
   return (
-    <main>
-      <Hero />
-      <EventDetails />
-      <VSLSection />
-      <Testimonials3 />
-      <Invitation />
-      <AboutStaci />
-      <ECHOBlueprint />
-      <NoteSection />
-      <MoreTestimonials />
-      <FinalCTA />
-      <Footer />
-    </main>
+    <>
+      {modalOpen && <RegisterModal onClose={close} />}
+      <main>
+        <Hero onOpen={open} />
+        <EventDetails />
+        <VSLSection onOpen={open} />
+        <Testimonials3 />
+        <Invitation onOpen={open} />
+        <AboutStaci />
+        <ECHOBlueprint onOpen={open} />
+        <NoteSection onOpen={open} />
+        <MoreTestimonials />
+        <FinalCTA onOpen={open} />
+        <Footer />
+      </main>
+    </>
   );
 }
+
