@@ -244,36 +244,36 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           {/* Main headline */}
           <div style={{ marginBottom: "28px" }}>
             <div style={{
-              fontSize: "clamp(64px, 9vw, 130px)",
-              fontWeight: 900,
+              fontSize: "clamp(72px, 10.5vw, 148px)",
+              fontWeight: 400,
               color: "#FFFFFF",
               lineHeight: 0.88,
               textTransform: "uppercase" as const,
-              letterSpacing: "-0.01em",
-              fontFamily: "'Work Sans', sans-serif",
+              letterSpacing: "0.01em",
+              fontFamily: "'Anton', sans-serif",
             }}>
               KINGDOM
             </div>
             <div style={{
-              fontSize: "clamp(52px, 7.2vw, 108px)",
-              fontWeight: 900,
+              fontSize: "clamp(48px, 6.8vw, 100px)",
+              fontWeight: 400,
               color: "#BB945A",
-              lineHeight: 0.9,
+              lineHeight: 0.92,
               textTransform: "uppercase" as const,
-              letterSpacing: "0.04em",
-              fontFamily: "'Work Sans', sans-serif",
+              letterSpacing: "0.08em",
+              fontFamily: "'Bebas Neue', sans-serif",
             }}>
               INTELLIGENCE
             </div>
             <div style={{
-              fontSize: "clamp(18px, 2.4vw, 34px)",
+              fontSize: "clamp(16px, 2vw, 28px)",
               fontWeight: 400,
-              color: "#FFFFFF",
+              color: "rgba(255,255,255,0.75)",
               lineHeight: 1.2,
               textTransform: "uppercase" as const,
-              letterSpacing: "0.35em",
-              fontFamily: "'Work Sans', sans-serif",
-              marginTop: "8px",
+              letterSpacing: "0.4em",
+              fontFamily: "'Bebas Neue', sans-serif",
+              marginTop: "10px",
             }}>
               MASTERCLASS
             </div>
