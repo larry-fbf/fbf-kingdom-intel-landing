@@ -203,7 +203,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
 
         {/* LEFT — Staci & Larry photo */}
         <div style={{
-          flex: "0 0 42%",
+          flex: "0 0 48%",
           position: "relative",
           display: "flex",
           alignItems: "flex-end",
@@ -234,13 +234,13 @@ function Hero({ onOpen }: { onOpen: () => void }) {
 
         {/* RIGHT — Text content */}
         <div style={{
-          flex: "0 0 58%",
+          flex: "0 0 52%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          padding: "120px 6vw 80px 2vw",
+          padding: "120px 5vw 80px 0vw",
         }}>
 
           {/* Main headline */}
