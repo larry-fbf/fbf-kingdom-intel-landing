@@ -291,7 +291,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             fontFamily: "'Work Sans', sans-serif",
             maxWidth: "480px",
           }}>
-            AI may increase speed, but discernment determines direction.{" "}<span style={{ color: "#BB945A", fontWeight: 700 }}>Learn how to scale your business with Spirit-led strategy, structure, and systems.</span>{" "}For faith-driven business owners ready to scale without compromise.
+            AI increases speed. Kingdom Intelligence increases discernment over AI.{" "}<span style={{ color: "#BB945A", fontWeight: 700 }}>Learn how to scale your business with Spirit-led strategy, structure, and systems</span>{" "}that multiply your efforts and help you scale without compromise.
           </p>
 
           {/* CTA */}
