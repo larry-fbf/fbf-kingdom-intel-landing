@@ -162,8 +162,10 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         <div className="hero-left" style={{ flex: "0 0 55%", display: "flex", alignItems: "center", padding: "120px 48px 60px 8vw", position: "relative", zIndex: 2 }}>
           <div style={{ position: "absolute", top: "40%", left: "30%", width: "600px", height: "600px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,165,90,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
           <div className="hero-reveal" style={{ position: "relative", maxWidth: "580px" }}>
-            <h1 style={{ fontSize: "clamp(42px, 6vw, 76px)", fontWeight: 900, lineHeight: 0.95, color: "#FFFFFF", marginBottom: "20px", textTransform: "uppercase" as const, letterSpacing: "-0.02em" }}>
-              Kingdom<br />Intelligence<br /><span style={{ color: "#CC0000" }}>Masterclass</span>
+            <h1 style={{ fontWeight: 900, lineHeight: 0.95, color: "#FFFFFF", marginBottom: "20px", textTransform: "uppercase" as const, letterSpacing: "-0.02em" }}>
+              <span style={{ fontSize: "clamp(52px, 7.5vw, 96px)", display: "block" }}>Kingdom</span>
+              <span style={{ fontSize: "clamp(52px, 7.5vw, 96px)", display: "block" }}>Intelligence</span>
+              <span style={{ fontSize: "clamp(28px, 3.5vw, 48px)", display: "block", color: "#CC0000" }}>Masterclass</span>
             </h1>
             <p style={{ fontSize: "17px", color: "#C9A55A", lineHeight: 1.5, marginBottom: "16px", fontFamily: "'Work Sans', sans-serif", fontWeight: 700 }}>
               AI Increases Speed. Kingdom Intelligence Determines Dominion.
