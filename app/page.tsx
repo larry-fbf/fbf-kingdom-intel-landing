@@ -238,7 +238,9 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "120px 8vw 80px 4vw",
+          alignItems: "center",
+          textAlign: "center",
+          padding: "120px 6vw 80px 2vw",
         }}>
 
           {/* Main headline */}
@@ -280,7 +282,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           </div>
 
           {/* Divider */}
-          <div style={{ width: "60px", height: "2px", background: "#BB945A", marginBottom: "28px" }} />
+          <div style={{ width: "60px", height: "2px", background: "#BB945A", marginBottom: "28px", margin: "0 auto 28px" }} />
 
           {/* Subline */}
           <p style={{
