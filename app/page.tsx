@@ -238,7 +238,8 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "120px 8vw 80px 4vw",
+          padding: "120px 8vw 80px 0vw",
+          marginLeft: "-4vw",
         }}>
 
           {/* Main headline */}
@@ -291,7 +292,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             fontFamily: "'Work Sans', sans-serif",
             maxWidth: "480px",
           }}>
-            AI Increases Speed. <span style={{ color: "#BB945A", fontWeight: 700 }}>Kingdom Intelligence Determines Dominion.</span> Join Larry &amp; Staci Wallace for a FREE 3-day live event built to give faith-driven leaders the tools to scale without compromise.
+            AI Increases Speed.{" "}<span style={{ color: "#BB945A", fontWeight: 700 }}>Kingdom Intelligence Determines Dominion.</span>{" "}Join Larry &amp; Staci Wallace for a FREE 3-day live event built to give faith-driven leaders the tools to scale without compromise.
           </p>
 
           {/* CTA */}
