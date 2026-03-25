@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: "Welcome to the Kingdom Intelligence community. Join us and start your journey today.",
 };
 
-const COMMUNITY_URL = "https://app.circle.so/join/KINGDOM_INTEL_NETWORK"; // TODO: replace with real invite link
+const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const LANDING_URL = "/";
 
 export default function ThankYou() {
@@ -73,20 +73,20 @@ export default function ThankYou() {
             <div className="hero-text" style={{ flex: "1 1 56%", display: "flex", alignItems: "center", padding: "72px 64px 72px 40px" }}>
               <div className="animate" style={{ maxWidth: "540px" }}>
                 <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "20px" }}>
-                  Welcome to the Kingdom Intel Network
+                  Welcome to the Fueled By Fire Community
                 </p>
                 <h1 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.1, marginBottom: "8px" }}>
                   One More Step Before You Go.
                 </h1>
                 <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 700, color: "#CC0000", lineHeight: 1.2, marginBottom: "32px" }}>
-                  Join Our Community &amp; Maximize Your Experience.
+                  Join Our Free Facebook Community.
                 </h2>
                 <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "16px" }}>
                   Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for a welcome message from Staci with everything you need. (Check spam/promotions if you don&rsquo;t see it.)
                 </p>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "40px" }}>
-                  Join the <strong style={{ color: "#C9A55A" }}>Kingdom Intel Network</strong> &mdash; your private community of faith-driven leaders building God-sized businesses. Start your journey today and get access to bonus training, daily encouragement, and a network of Kingdom CEOs walking this road with you.
+                  Join the <strong style={{ color: "#C9A55A" }}>Fueled By Fire Community</strong> on Facebook — 30,000 faith-driven leaders building God-sized businesses. Connect, grow, and stay updated with everything happening in the Masterclass.
                 </p>
                 <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
                   display: "inline-block",
@@ -96,7 +96,7 @@ export default function ThankYou() {
                   textTransform: "uppercase", letterSpacing: "0.08em",
                   boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
                 }}>
-                  Join the Kingdom Intel Network
+                  Join the Facebook Community
                 </a>
                 <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", marginTop: "12px", fontStyle: "italic" }}>Free access included with your registration.</p>
               </div>
