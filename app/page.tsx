@@ -154,7 +154,7 @@ function CTAButton({ text = "SAVE MY SEAT", dark = false, onOpen }: { text?: str
 /* -- HERO -- */
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <section className="hero-section" style={{ background: "#0d0d0d", position: "relative", overflow: "hidden", backgroundImage: "url(/images/hero-ai-bg.png)", backgroundSize: "cover", backgroundPosition: "center center" }}>
+    <section className="hero-section" style={{ background: "#0d0d0d", position: "relative", overflow: "hidden", backgroundImage: "url(/images/hero-ai-bg.png)", backgroundSize: "cover", backgroundPosition: "center center", marginBottom: 0, borderBottom: "none" }}>
       {/* Dark overlay */}
       <div style={{
         position: "absolute", inset: 0,
@@ -178,12 +178,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             alt="Staci and Larry Wallace"
             className="hero-photo"
           />
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(to right, transparent 60%, #0d0d0d 100%)",
-            pointerEvents: "none",
-          }} />
-        </div>
+          </div>
 
         {/* Text col */}
         <div className="hero-text-col">
@@ -241,7 +236,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
 function EventDetails() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 20px", borderTop: "none" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
         <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, color: "#111111", lineHeight: 1.15, marginBottom: "28px" }}>
           We Are Entering the Most Disruptive Economic Shift in Modern History.
@@ -383,7 +378,7 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
 function AboutStaci() {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 20px", borderTop: "none" }}>
       <div ref={ref} className="section-reveal about-flex" style={{ maxWidth: "1020px", margin: "0 auto", display: "flex", alignItems: "flex-start", gap: "56px", flexWrap: "wrap" }}>
         <div style={{ flex: "0 0 auto" }}>
           <img src="/images/staci-headshot-best.jpg" alt="Staci Wallace" className="about-photo" style={{ width: "100%", maxWidth: "380px", height: "auto", display: "block", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }} />
@@ -459,7 +454,7 @@ const prepSteps = [
 function NoteSection({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#FFFFFF", padding: "80px 20px" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 20px", borderTop: "none" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "960px", margin: "0 auto" }}>
         <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "16px", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>Before You Arrive</p>
         <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, color: "#111111", marginBottom: "12px", textAlign: "center", lineHeight: 1.15 }}>How to Prepare for the 3 Days</h2>
