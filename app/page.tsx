@@ -368,11 +368,12 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
 
       <div ref={ref2} className="section-reveal" style={{ background: "#CC0000", padding: "80px 20px", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "-30px", left: "50%", transform: "translateX(-50%)", fontSize: "260px", color: "rgba(255,255,255,0.05)", fontFamily: "'Frank Ruhl Libre', Georgia, serif", lineHeight: 1, pointerEvents: "none", userSelect: "none" as const }}>&ldquo;</div>
-        <p className="warriors-quote" style={{ fontSize: "clamp(28px, 5vw, 60px)", fontWeight: 900, color: "#FFFFFF", fontStyle: "italic", lineHeight: 1.1, letterSpacing: "-0.01em", position: "relative", zIndex: 1, textTransform: "uppercase" as const }}>
+        <p className="warriors-quote" style={{ fontSize: "clamp(22px, 3.5vw, 44px)", fontWeight: 900, color: "#FFFFFF", fontStyle: "italic", lineHeight: 1.1, letterSpacing: "-0.01em", position: "relative", zIndex: 1, textTransform: "uppercase" as const }}>
           Warriors don&rsquo;t retreat.<br />They reload.
         </p>
         <div style={{ width: "60px", height: "3px", background: "rgba(255,255,255,0.4)", margin: "24px auto 16px", borderRadius: "2px" }} />
         <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" as const, position: "relative", zIndex: 1, fontFamily: "'Work Sans', sans-serif" }}>&ndash; Staci Wallace</p>
+          <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.82)", lineHeight: 1.75, maxWidth: "640px", margin: "24px auto 0", fontFamily: "'Work Sans', sans-serif", position: "relative", zIndex: 1 }}>The answer is not to shy away from AI. It is to develop the discernment to wield it with wisdom, deploy it with intention, and govern it with Kingdom Intelligence so your business grows without losing its soul.</p>
       </div>
     </section>
   );
