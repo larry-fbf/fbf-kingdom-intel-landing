@@ -54,7 +54,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
             <div style={{ textAlign: "center", marginBottom: "28px" }}>
               <img src="/images/fbf-logo-black.png" alt="FBF" style={{ height: "36px", marginBottom: "20px", display: "inline-block" }} />
               <h2 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 900, color: "#111", lineHeight: 1.2, marginBottom: "8px" }}>
-                Join the FREE Kingdom Intelligence<br />Masterclass &mdash; April 14&ndash;16, 2026
+                Join the FREE Kingdom Intelligence<br />Masterclass · April 14&ndash;16, 2026
               </h2>
               <p style={{ fontSize: "14px", color: "#CC0000", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
                 Your decision to join has the potential to be the biggest choice you make in 2026.
@@ -256,7 +256,7 @@ function EventDetails() {
           AI is accelerating business at a pace the world has never seen. Yet most leaders still don&rsquo;t know how to position their companies for what&rsquo;s coming.
         </p>
         <p style={{ fontSize: "18px", color: "#111111", lineHeight: 1.85, marginBottom: "32px", maxWidth: "780px", margin: "0 auto 32px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
-          That&rsquo;s why Larry &amp; Staci Wallace created the Kingdom Intelligence Masterclass &mdash;
+          That&rsquo;s why Larry &amp; Staci Wallace created the Kingdom Intelligence Masterclass,
           a FREE 3-day live event built to give faith-driven leaders the E.C.H.O. Framework, the G.R.O.W.T.H. Method,
           and the spiritual intelligence to scale without sacrificing what matters most.
         </p>
@@ -361,7 +361,7 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
               This three-day immersive experience is designed for faith-driven leaders who are ready to build highly profitable, purpose-driven companies without sacrificing their peace, family, or calling.
             </p>
             <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>
-              Each day will guide you through our <span style={{ color: "#C9A55A", fontWeight: 700 }}>E.C.H.O. Framework</span> &mdash; a step-by-step process that fuses spiritual alignment with practical business strategy. When your life and leadership align with your divine mandate, you stop chasing money and begin igniting movements.
+              Each day will guide you through our <span style={{ color: "#C9A55A", fontWeight: 700 }}>E.C.H.O. Framework</span>: a step-by-step process that fuses spiritual alignment with practical business strategy. When your life and leadership align with your divine mandate, you stop chasing money and begin igniting movements.
             </p>
             <p style={{ fontSize: "16px", color: "#FFFFFF", lineHeight: 1.7, marginBottom: "28px", fontFamily: "'Frank Ruhl Libre', Georgia, serif", fontWeight: 700, fontStyle: "italic" }}>
               What will your echo be? Playing small has never built a Kingdom.<br />Now is the moment to go ALL IN.
@@ -380,7 +380,7 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
           Warriors don&rsquo;t retreat.<br />They reload.
         </p>
         <div style={{ width: "60px", height: "3px", background: "rgba(255,255,255,0.4)", margin: "24px auto 16px", borderRadius: "2px" }} />
-        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" as const, position: "relative", zIndex: 1, fontFamily: "'Work Sans', sans-serif" }}>&mdash; Staci Wallace</p>
+        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" as const, position: "relative", zIndex: 1, fontFamily: "'Work Sans', sans-serif" }}>&ndash; Staci Wallace</p>
       </div>
     </section>
   );
@@ -400,13 +400,13 @@ function AboutStaci() {
           <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, color: "#111111", marginBottom: "6px" }}>STACI WALLACE</h2>
           <p style={{ fontSize: "15px", fontWeight: 700, color: "#CC0000", marginBottom: "28px", textTransform: "uppercase" as const, letterSpacing: "0.05em", fontFamily: "'Work Sans', sans-serif" }}>CEO, Fueled By Fire &bull; 8x Best-Selling Author</p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-            After 28 years of marriage and nearly four decades of growing companies from scratch, Staci and Larry Wallace have built multiple 7, 8, and 9-figure businesses &mdash; all while raising their family and keeping faith at the center of everything they do.
+            After 28 years of marriage and nearly four decades of growing companies from scratch, Staci and Larry Wallace have built multiple 7, 8, and 9-figure businesses, all while raising their family and keeping faith at the center of everything they do.
           </p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
             Staci has shared stages with 5 U.S. Presidents, coached tens of thousands of business owners, and built one of the nation&rsquo;s top faith-based business coaching companies.
           </p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "28px", fontFamily: "'Work Sans', sans-serif" }}>
-            <strong style={{ color: "#111" }}>Multiplying what God has given you stewardship over is not just a good idea &mdash; it&rsquo;s a divine mandate.</strong>
+            <strong style={{ color: "#111" }}>Multiplying what God has given you stewardship over is not just a good idea. It&rsquo;s a divine mandate.</strong>
           </p>
           <p style={{ fontSize: "19px", fontWeight: 700, fontStyle: "italic", color: "#CC0000" }}>&ldquo;A dream without a plan of action is nothing but wishful thinking.&rdquo;</p>
         </div>
@@ -443,7 +443,7 @@ function ECHOBlueprint({ onOpen }: { onOpen: () => void }) {
           ))}
         </div>
         <div className="echo-detail" style={{ background: "rgba(201,165,90,0.06)", border: "1px solid rgba(201,165,90,0.2)", borderRadius: "16px", padding: "40px 48px", minHeight: "140px" }}>
-          <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>{echoItems[active].letter} &mdash; {echoItems[active].label}</p>
+          <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>{echoItems[active].letter}: {echoItems[active].label}</p>
           <h3 style={{ fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "14px", lineHeight: 1.2 }}>{echoItems[active].tagline}</h3>
           <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.65)", lineHeight: 1.75, fontFamily: "'Work Sans', sans-serif", maxWidth: "700px" }}>{echoItems[active].description}</p>
         </div>
@@ -563,12 +563,12 @@ function FinalCTA({ onOpen }: { onOpen: () => void }) {
           Playing Small Has Never<br />Changed The World.
         </h2>
         <p style={{ fontSize: "19px", color: "rgba(255,255,255,0.65)", lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif", maxWidth: "640px", margin: "0 auto 16px" }}>
-          You were not built for business as usual. You were built for an ECHO &mdash;
+          You were not built for business as usual. You were built for an ECHO:
           leadership that outlives the founder, vision that multiplies through culture,
           impact that reverberates through generations.
         </p>
         <p style={{ fontSize: "17px", color: "#C9A55A", marginBottom: "40px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
-          Join thousands of Kingdom CEOs building God-sized businesses &mdash; without sacrificing what matters most.
+          Join thousands of Kingdom CEOs building God-sized businesses, without sacrificing what matters most.
         </p>
         <CTAButton text="CLAIM YOUR FREE SEAT" onOpen={onOpen} />
         <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "24px", fontFamily: "'Work Sans', sans-serif" }}>$7,500 Value. Limited seats. Live online event April 14&ndash;16, 2026.</p>
