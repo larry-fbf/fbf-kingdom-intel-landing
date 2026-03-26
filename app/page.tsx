@@ -331,7 +331,7 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
     <section style={{ background: "#0d0d0d", overflow: "hidden" }}>
       <div ref={ref} className="section-reveal invitation-split" style={{ display: "flex", minHeight: "80vh" }}>
         <div className="invitation-photo" style={{ flex: "0 0 45%", position: "relative", overflow: "hidden", minHeight: "600px" }}>
-          <img src="/images/staci-larry-split.webp" alt="Larry and Staci Wallace" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+          <img src="/images/larry-staci-couch.jpg" alt="Larry and Staci Wallace" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 60%, #0d0d0d 100%)" }} />
         </div>
         <div className="invitation-content" style={{ flex: "0 0 55%", display: "flex", alignItems: "center", padding: "80px 8vw 80px 48px" }}>
