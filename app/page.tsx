@@ -154,19 +154,14 @@ function CTAButton({ text = "SAVE MY SEAT", dark = false, onOpen }: { text?: str
 /* -- HERO -- */
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <section className="hero-section" style={{ background: "#0d0d0d", position: "relative", overflow: "hidden" }}>
+    <section className="hero-section" style={{ background: "#0d0d0d", position: "relative", overflow: "hidden", backgroundImage: "url(/images/hero-ai-bg.png)", backgroundSize: "cover", backgroundPosition: "center center" }}>
       {/* Dark overlay */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(105deg, #0d0d0d 38%, rgba(13,13,13,0.7) 55%, rgba(13,13,13,0.3) 100%)",
+        background: "linear-gradient(105deg, rgba(13,13,13,0.92) 38%, rgba(13,13,13,0.75) 55%, rgba(13,13,13,0.55) 100%)",
         zIndex: 2, pointerEvents: "none",
       }} />
-      {/* Grid texture */}
-      <div style={{
-        position: "absolute", right: 0, top: 0, width: "62%", height: "100%",
-        backgroundImage: `repeating-linear-gradient(90deg,transparent,transparent 38px,rgba(255,255,255,0.018) 38px,rgba(255,255,255,0.018) 40px),repeating-linear-gradient(180deg,transparent,transparent 58px,rgba(255,255,255,0.018) 58px,rgba(255,255,255,0.018) 60px)`,
-        zIndex: 1,
-      }} />
+
 
       {/* FBF Logo */}
       <div className="hero-logo-bar">
