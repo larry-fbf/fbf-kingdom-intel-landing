@@ -159,11 +159,11 @@ a { color: inherit; text-decoration: none; }
 
   /* ── HERO — stack vertically, photo on top ── */
   .hero-section { min-height: auto; }
-  .hero-logo-bar { position: relative; top: auto; left: auto; width: 100%; padding: 20px 20px 0; background: #0d0d0d; }
+  .hero-logo-bar { position: relative; top: auto; left: auto; width: 100%; padding: 20px 20px 0; background: transparent; }
   .hero-logo { height: 36px; }
   .hero-content-row { flex-direction: column; min-height: auto; }
-  .hero-photo-col { flex: none; width: 100%; height: 420px; min-height: 420px; position: relative; }
-  .hero-photo { object-fit: cover; object-position: center top; position: absolute; width: 100%; height: 100%; }
+  .hero-photo-col { flex: none; width: 100%; height: 280px; min-height: 280px; position: relative; overflow: hidden; }
+  .hero-photo { object-fit: cover; object-position: center 10%; position: absolute; width: 100%; height: 100%; }
   /* On mobile: change right-fade overlay to bottom-fade so photo is visible */
   .hero-photo-col > div { background: linear-gradient(to bottom, transparent 55%, #0d0d0d 100%) !important; }
   /* On mobile: lighten the big diagonal overlay so photo isn't buried */
