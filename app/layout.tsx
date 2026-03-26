@@ -215,6 +215,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── TABLET: 769px – 1024px ── */
+@media (min-width: 769px) {
+  .event-vsl-wrapper { display: flex; flex-direction: column; }
+  .vsl-order { order: 2; }
+  .event-order { order: 1; }
+}
+
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero-left { padding: 100px 32px 60px 5vw !important; }
   .learn-grid { grid-template-columns: 1fr 1fr !important; }
