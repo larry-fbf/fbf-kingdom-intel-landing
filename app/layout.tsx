@@ -103,9 +103,9 @@ a { color: inherit; text-decoration: none; }
   /* ── HERO ── */
   .hero-split { flex-direction: column !important; min-height: auto !important; height: auto !important; }
   .hero-content-row { flex-direction: column !important; min-height: auto !important; }
-  .hero-right { flex: none !important; width: 100% !important; height: 380px !important; min-height: 380px !important; order: -1; }
-  .hero-photo { object-position: center 20% !important; }
-  .hero-left { flex: none !important; width: 100% !important; padding: 28px 20px 48px !important; min-height: auto !important; }
+  .hero-right { flex: none !important; width: 100% !important; height: 260px !important; min-height: 260px !important; order: -1; }
+  .hero-img { object-fit: cover !important; object-position: center 15% !important; height: 260px !important; }
+  .hero-left { flex: none !important; width: 100% !important; padding: 24px 20px 48px !important; min-height: auto !important; }
   /* Logo bar sits above photo on mobile */
   .hero-logo-bar { position: relative !important; padding: 20px 20px 0 !important; background: #0a0a0a; }
   .hero-logo { height: 40px !important; }
