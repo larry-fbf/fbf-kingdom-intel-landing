@@ -106,7 +106,7 @@ export default function ThankYou() {
           <div style={{ maxWidth: "1060px", margin: "0 auto" }}>
             <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#CC0000", textAlign: "center", marginBottom: "16px" }}>Inside the Community</p>
             <h2 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 900, color: "#111111", textAlign: "center", marginBottom: "52px", lineHeight: 1.15 }}>
-              What Awaits You in the Kingdom Intel Network
+              What Awaits You in the Fueled By Fire Community
             </h2>
             <div className="features-grid animate-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
               {[
