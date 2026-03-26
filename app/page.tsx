@@ -617,8 +617,10 @@ export default function Home() {
       <TopBanner onOpen={open} />
       <main style={{ paddingTop: "43px" }}>
         <Hero onOpen={open} />
-        <EventDetails />
-        <VSLSection onOpen={open} />
+        <div className="event-vsl-wrapper">
+          <div className="event-order"><EventDetails /></div>
+          <div className="vsl-order"><VSLSection onOpen={open} /></div>
+        </div>
         <Testimonials3 />
         <Invitation onOpen={open} />
         <AboutStaci />
