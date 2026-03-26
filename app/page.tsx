@@ -397,15 +397,15 @@ function AboutStaci() {
           <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, color: "#111111", marginBottom: "6px" }}>STACI WALLACE</h2>
           <p style={{ fontSize: "15px", fontWeight: 700, color: "#CC0000", marginBottom: "28px", textTransform: "uppercase" as const, letterSpacing: "0.05em", fontFamily: "'Work Sans', sans-serif" }}>CEO, Fueled By Fire &bull; 8x Best-Selling Author</p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-            After 28 years of marriage and nearly four decades of growing companies from scratch, Staci and Larry Wallace have built multiple 7, 8, and 9-figure businesses, all while raising their family and keeping faith at the center of everything they do.
+            After 29 years of marriage and nearly four decades of building businesses together, Staci and Larry Wallace have built multiple companies from startup to 7, 8, and 9 figures while raising their family and keeping faith at the center of everything they do. For over a decade, they have used automation, systems, and artificial intelligence to scale companies, streamline operations, and build lean, highly profitable businesses. Today, they teach leaders how to combine Kingdom Intelligence with modern technology to scale their businesses without sacrificing their faith, family, or purpose.
           </p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-            Staci has shared stages with 5 U.S. Presidents, coached tens of thousands of business owners, and built one of the nation&rsquo;s top faith-based business coaching companies.
+            
           </p>
           <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "28px", fontFamily: "'Work Sans', sans-serif" }}>
-            <strong style={{ color: "#111" }}>Multiplying what God has given you stewardship over is not just a good idea. It&rsquo;s a divine mandate.</strong>
+            <strong style={{ color: "#111" }}>Multiplying what God has entrusted to your stewardship is not just a good idea. It is a divine mandate.</strong>
           </p>
-          <p style={{ fontSize: "19px", fontWeight: 700, fontStyle: "italic", color: "#CC0000" }}>&ldquo;A dream without a plan of action is nothing but wishful thinking.&rdquo;</p>
+          <p style={{ fontSize: "19px", fontWeight: 700, fontStyle: "italic", color: "#CC0000" }}>&ldquo;A dream without a plan of action is nothing but wishful thinking.&rdquo; &ndash; Staci Wallace</p>
         </div>
       </div>
     </section>
