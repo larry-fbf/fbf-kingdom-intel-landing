@@ -46,7 +46,7 @@ export default function ThankYou() {
         {/* ── REGISTERED BANNER ── */}
         <div style={{ background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", padding: "14px 20px", textAlign: "center" }}>
           <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#FFFFFF" }}>
-            &#10003; &nbsp;You Are Registered &mdash; April 14&ndash;16, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
+            &#10003; &nbsp;You Are Registered · April 14&ndash;16, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export default function ThankYou() {
                   Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for a welcome message from Staci with everything you need. (Check spam/promotions if you don&rsquo;t see it.)
                 </p>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "40px" }}>
-                  Join the <strong style={{ color: "#C9A55A" }}>Kingdom Intel Network</strong> &mdash; your private community of faith-driven leaders building God-sized businesses. Start your journey today and get access to bonus training, daily encouragement, and a network of Kingdom CEOs walking this road with you.
+                  Join the <strong style={{ color: "#C9A55A" }}>Kingdom Intel Network</strong>, your private community of faith-driven leaders building God-sized businesses. Start your journey today and get access to bonus training, daily encouragement, and a network of Kingdom CEOs walking this road with you.
                 </p>
                 <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
                   display: "inline-block",
@@ -115,7 +115,7 @@ export default function ThankYou() {
             </h2>
             <div className="features-grid animate-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
               {[
-                { icon: "▶", title: "Bonus Training Videos", body: "3 exclusive bonus sessions on Mindset, Economy, and Time Expansion &mdash; only available to registered members." },
+                { icon: "▶", title: "Bonus Training Videos", body: "3 exclusive bonus sessions on Mindset, Economy, and Time Expansion, only available to registered members." },
                 { icon: "🤝", title: "Kingdom CEO Community", body: "Connect with hundreds of faith-driven leaders scaling businesses without sacrificing what matters most." },
                 { icon: "📖", title: "Daily Encouragement", body: "Spirit-led content, frameworks, and insights delivered directly to your feed to keep you moving forward." },
                 { icon: "⚡", title: "Live Event Access", body: "Get all Masterclass links, reminders, and updates through the community so you never miss a session." },
@@ -138,7 +138,7 @@ export default function ThankYou() {
                 textTransform: "uppercase", letterSpacing: "0.08em",
                 boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
               }}>
-                Join Now &mdash; It&rsquo;s Free
+                Join Now &ndash; It&rsquo;s Free
               </a>
             </div>
           </div>
@@ -156,9 +156,9 @@ export default function ThankYou() {
                 &ldquo;If you&rsquo;re anything like me, you are deeply passionate about helping others live a purpose-driven life and build a lasting legacy for their families. Give your friends, family, and colleagues a powerful gift worth $7,500 by inviting them to sign up today.
               </p>
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontStyle: "italic", marginTop: "16px" }}>
-                You will think of many people during the three days that need to hear these messages &mdash; so why not start now? Make a list and send them to the link below.&rdquo;
+                You will think of many people during the three days that need to hear these messages, so why not start now? Make a list and send them to the link below.&rdquo;
               </p>
-              <p style={{ fontSize: "15px", fontWeight: 700, color: "#C9A55A", marginTop: "20px", fontStyle: "normal" }}>&mdash; Staci Wallace</p>
+              <p style={{ fontSize: "15px", fontWeight: 700, color: "#C9A55A", marginTop: "20px", fontStyle: "normal" }}>&ndash; Staci Wallace</p>
             </div>
             <p style={{ fontSize: "18px", fontWeight: 700, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "32px" }}>
               This one decision today could change their life and business forever.
@@ -183,7 +183,7 @@ export default function ThankYou() {
             Warriors don&rsquo;t retreat.<br />They reload.
           </p>
           <div style={{ width: "48px", height: "3px", background: "rgba(255,255,255,0.4)", margin: "20px auto 14px", borderRadius: "2px" }} />
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", position: "relative", zIndex: 1 }}>&mdash; Staci Wallace</p>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", position: "relative", zIndex: 1 }}>&ndash; Staci Wallace</p>
         </div>
 
         {/* ── FOOTER ── */}
