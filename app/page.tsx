@@ -455,9 +455,9 @@ function ECHOBlueprint({ onOpen }: { onOpen: () => void }) {
 
 /* -- PREPARE -- */
 const prepSteps = [
-  { number: "01", title: "Block Your Calendar", body: "All three days. April 14\u201316, 12:00 PM CST. Treat it like the most important business meeting of the year \u2014 because it is." },
+  { number: "01", title: "Block Your Calendar", body: "All sessions are LIVE April 14\u201316, 12:00 PM CST. Set your notifications and treat these three days like a board meeting, not a webinar." },
   { number: "02", title: "Bring Your Biggest Challenge", body: "Come with the one thing that's been holding your business back. We built this Masterclass to solve real problems in real time." },
-  { number: "03", title: "Come Ready to Implement", body: "This is not a lecture. It's a blueprint. Bring a notebook, your team if possible, and a willingness to make decisions and move." },
+  { number: "03", title: "Invite Collaborators", body: "Bring your team or key leaders so implementation happens immediately after the event." },
 ];
 
 function NoteSection({ onOpen }: { onOpen: () => void }) {
@@ -480,7 +480,8 @@ function NoteSection({ onOpen }: { onOpen: () => void }) {
           ))}
         </div>
         <div style={{ textAlign: "center" }}>
-          <CTAButton dark={true} onOpen={onOpen} />
+          <button onClick={onOpen} className="cta-btn" style={{ background: "linear-gradient(135deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", color: "#FFFFFF", fontWeight: 800, padding: "18px 48px", borderRadius: "5px", fontSize: "18px", cursor: "pointer", textTransform: "uppercase", letterSpacing: "0.08em", boxShadow: "0 6px 24px rgba(204,0,0,0.45)", fontFamily: "'Work Sans', sans-serif", border: "none" }}>SAVE MY SEAT</button>
+          <div style={{ fontSize: "13px", color: "#888", fontStyle: "italic", marginTop: "10px" }}>$7,500 Value. Limited seats. Live online event.</div>
         </div>
       </div>
     </section>
