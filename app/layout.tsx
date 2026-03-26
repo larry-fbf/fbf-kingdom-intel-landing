@@ -159,7 +159,7 @@ a { color: inherit; text-decoration: none; }
 
   /* ── HERO — stack vertically, photo on top ── */
   .hero-section { min-height: auto; }
-  .hero-logo-bar { position: relative; top: auto; left: auto; width: 100%; padding: 20px 20px 0; background: transparent; }
+  .hero-logo-bar { display: none !important; }
   .hero-logo { height: 36px; }
   .hero-content-row { flex-direction: column; min-height: auto; }
   .hero-photo-col { display: none !important; }
