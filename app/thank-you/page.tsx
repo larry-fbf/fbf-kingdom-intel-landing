@@ -75,7 +75,7 @@ export default function ThankYou() {
                 <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "20px" }}>
                   Welcome to the Fueled By Fire Community
                 </p>
-                <h1 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 400, color: "#FFFFFF", lineHeight: 1.1, marginBottom: "8px", fontFamily: "'Anton', sans-serif", textTransform: "uppercase", letterSpacing: "0.01em" }}>
+                <h1 style={{ fontSize: "clamp(38px, 6vw, 72px)", fontWeight: 400, color: "#FFFFFF", lineHeight: 1.0, marginBottom: "12px", fontFamily: "'Anton', sans-serif", textTransform: "uppercase", letterSpacing: "0.01em" }}>
                   One More Step Before You Go.
                 </h1>
                 <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 700, color: "#CC0000", lineHeight: 1.2, marginBottom: "32px" }}>
