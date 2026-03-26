@@ -269,7 +269,7 @@ function EventDetails() {
 function VSLSection({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "80px 20px" }}>
+    <section className="vsl-mobile-override" style={{ background: "#0a0a0a", padding: "80px 20px" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
         <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "16px", fontFamily: "'Work Sans', sans-serif" }}>Watch This First</p>
         <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "40px", lineHeight: 1.15 }}>
