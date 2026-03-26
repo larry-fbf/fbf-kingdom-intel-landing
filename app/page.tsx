@@ -145,7 +145,7 @@ function CTAButton({ text = "REGISTER FOR FREE", dark = false, onOpen }: { text?
         {text}
       </button>
       <span style={{ fontSize: "13px", color: dark ? "#888" : "rgba(255,255,255,0.55)", fontStyle: "italic" }}>
-        No cost. Limited seats. Live online event.
+        $7,500 Value. Limited seats. Live online event.
       </span>
     </div>
   );
@@ -571,7 +571,7 @@ function FinalCTA({ onOpen }: { onOpen: () => void }) {
           Join thousands of Kingdom CEOs building God-sized businesses &mdash; without sacrificing what matters most.
         </p>
         <CTAButton text="CLAIM YOUR FREE SEAT" onOpen={onOpen} />
-        <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "24px", fontFamily: "'Work Sans', sans-serif" }}>Free for a limited time. Live online event April 14&ndash;16, 2026.</p>
+        <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "24px", fontFamily: "'Work Sans', sans-serif" }}>$7,500 Value. Limited seats. Live online event April 14&ndash;16, 2026.</p>
       </div>
     </section>
   );
