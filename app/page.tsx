@@ -132,7 +132,7 @@ function useScrollReveal() {
 }
 
 /* -- CTA BUTTON -- */
-function CTAButton({ text = "REGISTER FOR FREE", dark = false, onOpen }: { text?: string; dark?: boolean; onOpen?: () => void }) {
+function CTAButton({ text = "SAVE MY SEAT", dark = false, onOpen }: { text?: string; dark?: boolean; onOpen?: () => void }) {
   return (
     <div className="cta-wrapper" style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
       <button onClick={onOpen} className="cta-btn" style={{
@@ -289,7 +289,7 @@ function VSLSection({ onOpen }: { onOpen: () => void }) {
           <iframe src="https://player.vimeo.com/video/1177090365?badge=0&autopause=0&player_id=0&app_id=58479" title="Kingdom Intelligence Masterclass" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowFullScreen style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} />
         </div>
         <div style={{ marginTop: "40px" }}>
-          <CTAButton text="RESERVE MY FREE SEAT" onOpen={onOpen} />
+          <CTAButton text="SAVE MY SEAT" onOpen={onOpen} />
         </div>
       </div>
     </section>
@@ -366,7 +366,7 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
             <p style={{ fontSize: "17px", fontStyle: "italic", color: "rgba(255,255,255,0.5)", marginBottom: "32px", fontFamily: "'Frank Ruhl Libre', Georgia, serif" }}>
               Blessings,<br /><strong style={{ color: "#FFFFFF", fontStyle: "normal" }}>Larry &amp; Staci Wallace</strong>
             </p>
-            <CTAButton text="BUILD YOUR KINGDOM BUSINESS" onOpen={onOpen} />
+            <CTAButton text="SAVE MY SEAT" onOpen={onOpen} />
           </div>
         </div>
       </div>
@@ -445,7 +445,7 @@ function ECHOBlueprint({ onOpen }: { onOpen: () => void }) {
           <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.72)", lineHeight: 1.8, fontFamily: "'Work Sans', sans-serif", maxWidth: "700px" }}>{echoItems[active].description}</p>
         </div>
         <div style={{ textAlign: "center", marginTop: "40px" }}>
-          <button onClick={onOpen} className="cta-btn" style={{ background: "linear-gradient(135deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", color: "#FFFFFF", fontWeight: 800, padding: "18px 48px", borderRadius: "5px", fontSize: "18px", cursor: "pointer", textTransform: "uppercase", letterSpacing: "0.08em", boxShadow: "0 6px 24px rgba(204,0,0,0.45)", fontFamily: "'Work Sans', sans-serif", border: "none" }}>REGISTER FOR FREE</button>
+          <button onClick={onOpen} className="cta-btn" style={{ background: "linear-gradient(135deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", color: "#FFFFFF", fontWeight: 800, padding: "18px 48px", borderRadius: "5px", fontSize: "18px", cursor: "pointer", textTransform: "uppercase", letterSpacing: "0.08em", boxShadow: "0 6px 24px rgba(204,0,0,0.45)", fontFamily: "'Work Sans', sans-serif", border: "none" }}>SAVE MY SEAT</button>
           <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", fontStyle: "italic", marginTop: "10px" }}>$7,500 Value. Limited seats. Live online event.</div>
         </div>
       </div>
@@ -568,7 +568,7 @@ function FinalCTA({ onOpen }: { onOpen: () => void }) {
         <p style={{ fontSize: "17px", color: "#C9A55A", marginBottom: "40px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
           Join thousands of Kingdom CEOs building God-sized businesses, without sacrificing what matters most.
         </p>
-        <CTAButton text="CLAIM YOUR FREE SEAT" onOpen={onOpen} />
+        <CTAButton text="SAVE MY SEAT" onOpen={onOpen} />
         <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "24px", fontFamily: "'Work Sans', sans-serif" }}>$7,500 Value. Limited seats. Live online event April 14&ndash;16, 2026.</p>
       </div>
     </section>
