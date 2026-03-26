@@ -158,7 +158,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
       {/* Dark overlay */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(105deg, rgba(13,13,13,0.65) 38%, rgba(13,13,13,0.55) 55%, rgba(13,13,13,0.35) 100%)",
+        background: "rgba(13,13,13,0.35)",
         zIndex: 2, pointerEvents: "none",
       }} />
 
