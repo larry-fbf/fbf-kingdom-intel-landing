@@ -579,7 +579,7 @@ function FinalCTA({ onOpen }: { onOpen: () => void }) {
 function Footer() {
   return (
     <footer style={{ background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.08)", padding: "48px 20px", textAlign: "center" }}>
-      <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", width: "auto", display: "inline-block", marginBottom: "20px" }} />
+      <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "72px", width: "auto", display: "inline-block", marginBottom: "24px" }} />
       <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.3)", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>&copy; 2026 Fueled By Fire. All Rights Reserved.</p>
       <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.2)", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>10% of every program fee supports Epiphany Global (Uganda) &amp; EMwomen.</p>
       <div style={{ display: "flex", justifyContent: "center", gap: "28px" }}>
