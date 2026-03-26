@@ -127,11 +127,11 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-photo {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: bottom center;
+  height: 115%;
+  object-fit: cover;
+  object-position: center 8%;
   position: absolute;
-  bottom: 0; left: 0;
+  top: 0; left: 0;
 }
 .hero-text-col {
   flex: 0 0 52%;
