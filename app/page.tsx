@@ -554,23 +554,22 @@ function MoreTestimonials() {
 function FinalCTA({ onOpen }: { onOpen: () => void }) {
   const ref = useScrollReveal();
   return (
-    <section style={{ background: "#0a0a0a", padding: "100px 20px", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(201,165,90,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
+    <section style={{ background: "#FFFFFF", padding: "100px 20px", position: "relative", overflow: "hidden" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#C9A55A", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>April 14&ndash;16, 2026 &middot; Free Live Event</p>
-        <h2 style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "20px", lineHeight: 1.1 }}>
+        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>April 14&ndash;16, 2026 &middot; Free Live Event</p>
+        <h2 style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 900, color: "#111111", marginBottom: "20px", lineHeight: 1.1 }}>
           Playing Small Has Never<br />Changed The World.
         </h2>
-        <p style={{ fontSize: "19px", color: "rgba(255,255,255,0.65)", lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif", maxWidth: "640px", margin: "0 auto 16px" }}>
+        <p style={{ fontSize: "19px", color: "#444444", lineHeight: 1.7, fontFamily: "'Work Sans', sans-serif", maxWidth: "640px", margin: "0 auto 16px" }}>
           You were not built for business as usual. You were built for an ECHO:
           leadership that outlives the founder, vision that multiplies through culture,
           impact that reverberates through generations.
         </p>
         <p style={{ fontSize: "17px", color: "#C9A55A", marginBottom: "40px", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
-          Join thousands of Kingdom CEOs building God-sized businesses, without sacrificing what matters most.
+          Join thousands of Kingdom CEOs building with Kingdom Intelligence, without sacrificing what matters most.
         </p>
-        <CTAButton text="SAVE MY SEAT" onOpen={onOpen} />
-        <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "24px", fontFamily: "'Work Sans', sans-serif" }}>$7,500 Value. Limited seats. Live online event April 14&ndash;16, 2026.</p>
+        <button onClick={onOpen} className="cta-btn" style={{ background: "linear-gradient(135deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", color: "#FFFFFF", fontWeight: 800, padding: "18px 48px", borderRadius: "5px", fontSize: "18px", cursor: "pointer", textTransform: "uppercase", letterSpacing: "0.08em", boxShadow: "0 6px 24px rgba(204,0,0,0.45)", fontFamily: "'Work Sans', sans-serif", border: "none" }}>SAVE MY SEAT</button>
+          <div style={{ fontSize: "13px", color: "#888", fontStyle: "italic", marginTop: "10px" }}>$7,500 Value. Limited seats. Live online event.</div>
       </div>
     </section>
   );
