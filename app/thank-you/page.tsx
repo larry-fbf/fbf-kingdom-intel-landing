@@ -51,12 +51,7 @@ export default function ThankYou() {
         </div>
 
         {/* ── LOGO BAR ── */}
-        <header style={{ background: "#080808", padding: "20px 40px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "44px", display: "block" }} />
-          <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>
-            Kingdom Intelligence Masterclass
-          </p>
-        </header>
+        
 
         {/* ── SECTION 1: HERO ── */}
         <section style={{ background: "#080808", position: "relative", overflow: "hidden" }}>
