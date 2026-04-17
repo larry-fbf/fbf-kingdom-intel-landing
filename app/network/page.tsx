@@ -308,6 +308,45 @@ export default function NetworkPage() {
         </div>
       </section>
 
+      <section className={styles.eventsSection}>
+        <div className={styles.container}>
+          <div className={styles.eventsLayout}>
+            <div className={styles.eventsCopy}>
+              <p className={styles.eyebrow}>Yearly Events &amp; Invites</p>
+              <h2 className={styles.heading}>
+                Get invited into Perspective leadership development events and stay close to what is
+                happening all year.
+              </h2>
+              <p className={styles.sectionCopy}>
+                As a Kingdom Intel Network member, you get invited into Perspective gatherings and other
+                leadership development experiences that have happened in places like the beach, the Grand
+                Canyon, and the Smoky Mountains.
+              </p>
+              <p className={styles.sectionCopy}>
+                You also get access to the live events calendar inside the member community, so you can
+                see upcoming online events, trainings, and member moments in one place.
+              </p>
+              <div className={styles.eventsTags}>
+                <span>Perspective leadership events</span>
+                <span>Beach, Grand Canyon, Smoky Mountains</span>
+                <span>Member events calendar access</span>
+                <span>Online and in-person invites</span>
+              </div>
+              <p className={styles.eventsNote}>Event invitations are included. Tickets and travel are not included.</p>
+              <a className={`${styles.button} ${styles.buttonRed}`} href={paymentUrl} target="_blank" rel="noreferrer">
+                Join The Network
+              </a>
+            </div>
+            <div className={styles.eventsImageWrap}>
+              <img
+                src="/perspective-group.jpg"
+                alt="Perspective leadership development event group photo"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className={styles.finalCtaSection}>
         <div className={`${styles.container} ${styles.finalCtaLayout}`}>
           <div className={styles.finalCtaImageWrap}>
