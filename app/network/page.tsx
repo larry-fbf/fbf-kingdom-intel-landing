@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "A strategic room for Kingdom-minded CEOs and entrepreneurial leaders with CEO think tank calls, executive Q&A, member community access, and exclusive event invites.",
 };
 
-const paymentUrl = "https://example.com/join-the-vault";
+const paymentUrl = "https://buy.stripe.com/28EbJ27sB0h82mMfAV5kk01";
 
 const featuredTestimonials = [
   {
