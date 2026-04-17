@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Kingdom Intel Network | Fueled By Fire",
   description:
-    "A strategic room for Kingdom-minded CEOs and entrepreneurial leaders with monthly CEO think tanks, executive Q&A, member community access, monthly trainings, future Masterclass VIP rooms, and exclusive event invites.",
+    "A strategic room for Kingdom-minded CEOs with monthly CEO think tanks, executive Q&A, member community access, monthly trainings, future Masterclass VIP rooms, and exclusive event invites.",
 };
 
 const paymentUrl = "https://buy.stripe.com/28EbJ27sB0h82mMfAV5kk01";
@@ -74,9 +74,9 @@ const testimonialCards = [
 ];
 
 const marqueeTestimonials = [
-  "Kristina Hess — KR Hess Law, P.C.",
-  "Jamie Dahl — Business Owner",
-  "Delbert Friesen — President, Earthmax",
+  "Kristina Hess - KR Hess Law, P.C.",
+  "Jamie Dahl - Business Owner",
+  "Delbert Friesen - President, Earthmax",
 ];
 
 function SectionHeading({
@@ -135,10 +135,9 @@ export default function NetworkPage() {
             </div>
             <p className={styles.heroSubtitle}>Helping you build business God's way.</p>
             <p className={styles.heroDescription}>
-              This is not a typical online community. It is a strategic environment where Kingdom-minded CEOs
-              and entrepreneurial leaders gather for executive-level access, sharp peer counsel, monthly
-              trainings, and the kind of real-time support that helps you steward the assignments God has
-              placed in your hands.
+              This isn't another online community. It's a strategic room where Kingdom-minded CEOs and
+              entrepreneurial leaders gather for executive-level access, sharp peer counsel, monthly
+              trainings, and real-time support for the decisions that matter most.
             </p>
             <div className={styles.heroActions}>
               <a className={`${styles.button} ${styles.buttonGold}`} href={paymentUrl} target="_blank" rel="noreferrer">
@@ -155,7 +154,7 @@ export default function NetworkPage() {
             <SectionHeading
               eyebrow="Who This Is For"
               title="This room is built for leaders carrying real assignments."
-              description="For CEOs, founders, and operators who want Spirit-led strategy, stronger execution, and a trusted room of peers who understand the weight of leadership. Inside this room, you will find leaders building companies, strengthening families, expanding influence, and pursuing Kingdom impact in the marketplace with real access to answers, relationships, and momentum."
+              description="For CEOs, founders, and operators who want Spirit-led strategy, stronger execution, and a trusted room of peers who understand the weight of leadership. This is where leaders build companies, strengthen families, expand influence, and pursue Kingdom impact with real access to answers, relationships, and momentum."
             />
             <div className={styles.tagRow}>
               <span>Peer-level strategy</span>
@@ -192,8 +191,8 @@ export default function NetworkPage() {
               <p className={styles.communityLabel}>Inside The Member Community</p>
               <h3>Ask questions, access monthly trainings, follow the event calendar, and use free resources.</h3>
               <p>
-                Members get a real community hub built for collaboration, weekly events, on-demand support,
-                and a place to stay close to everything happening inside the Network.
+                The member app keeps you close to the room with weekly events, ongoing conversation, and
+                on-demand support when you need answers fast.
               </p>
             </div>
             <div className={styles.communityImage}>
@@ -215,15 +214,15 @@ export default function NetworkPage() {
             <p className={`${styles.eyebrow} ${styles.eyebrowLight}`}>Our Shared Mission</p>
             <h2 className={styles.lightHeading}>Raising a generation of Kingdom CEOs.</h2>
             <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
-              Fueled by Fire exists to equip leaders to build highly profitable, purpose-driven businesses that
-              glorify God in the marketplace. If you are ready to build with excellence, integrity, generosity,
-              and generational legacy, this is the room to step into.
+              Fueled by Fire equips leaders to build highly profitable, purpose-driven businesses that glorify
+              God in the marketplace. If you're ready to build with excellence, integrity, generosity, and
+              legacy in mind, this is the room to step into.
             </p>
             <div className={styles.finalCtaActions}>
               <a className={`${styles.button} ${styles.buttonRed}`} href={paymentUrl} target="_blank" rel="noreferrer">
                 Join The Network
               </a>
-              <p>2 CEO Think Tank calls monthly. Quick executive Q&amp;A. Monthly trainings. Future Masterclass VIP room access.</p>
+              <p>2 CEO Think Tank calls monthly. Executive Q&amp;A. Monthly trainings. Future Masterclass VIP room access.</p>
             </div>
           </div>
         </div>
@@ -240,13 +239,12 @@ export default function NetworkPage() {
           <div className={styles.eventsBody}>
             <div className={styles.eventsText}>
               <p className={styles.sectionCopy}>
-                As a Kingdom Intel Network member, you get invited into Perspective gatherings and other
-                leadership development experiences that have happened in places like the beach, the Grand
-                Canyon, and the Smoky Mountains.
+                As a member, you get invited into Perspective gatherings and leadership development
+                experiences hosted in places like the beach, the Grand Canyon, and the Smoky Mountains.
               </p>
               <p className={styles.sectionCopy}>
-                You also get access to the live events calendar inside the member community, so you can
-                see upcoming online events, trainings, and member moments in one place.
+                You also get access to the live member events calendar, so you can track upcoming online
+                events, trainings, and key moments all in one place.
               </p>
               <a className={`${styles.button} ${styles.buttonRed}`} href={paymentUrl} target="_blank" rel="noreferrer">
                 Join The Network
@@ -316,7 +314,7 @@ export default function NetworkPage() {
             <p className={`${styles.eyebrow} ${styles.eyebrowLight}`}>Join Kingdom Intel Network</p>
             <h2 className={styles.lightHeading}>Get in the room for $197 per month.</h2>
             <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
-              2 CEO Think Tank calls, executive Q&amp;A, monthly trainings, member community access, and
+              2 CEO Think Tank calls, executive Q&amp;A, member community access, monthly trainings, and
               future Kingdom Intel Masterclass VIP rooms.
             </p>
           </div>
@@ -339,17 +337,17 @@ export default function NetworkPage() {
               </h2>
               <div className={styles.personalWordRule} />
               <p className={styles.sectionCopy}>
-                Kingdom Intel Network was built for leaders who want more than content. It is a strategic
-                room for CEOs and founders who need wise counsel, fast access, and real momentum in the
-                middle of real decisions.
+                Kingdom Intel Network was built for leaders who need more than content. It's a strategic room
+                for CEOs and founders who need wise counsel, fast access, and real momentum in the middle of
+                real decisions.
               </p>
               <p className={styles.sectionCopy}>
                 Inside this room, you step into monthly CEO Think Tanks, executive Q&amp;A, monthly
-                trainings, a live member community, and future Kingdom Intel Masterclass VIP rooms designed
-                to keep you close to the conversations that matter most.
+                trainings, a live member community, and future Kingdom Intel Masterclass VIP rooms that keep
+                you close to the conversations that matter most.
               </p>
               <p className={styles.sectionCopy}>
-                If you are called to build something profitable, purpose-driven, and generational, this is
+                If you're called to build something profitable, purpose-driven, and generational, this is
                 where clarity, alignment, and high-trust relationships come together.
               </p>
               <p className={styles.personalWordSignature}>
