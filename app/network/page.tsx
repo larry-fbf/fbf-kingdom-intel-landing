@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Kingdom Intel Network | Fueled By Fire",
+  title: "Kingdom Intelligence Network | Fueled By Fire",
   description:
     "A strategic room for Kingdom-minded CEOs with monthly CEO think tanks, executive Q&A, member community access, monthly trainings, future Masterclass VIP rooms, and exclusive event invites.",
 };
@@ -128,9 +128,9 @@ export default function NetworkPage() {
           </div>
           <div className={styles.heroCopy}>
             <p className={styles.heroKicker}>Fueled by Fire Leadership Network</p>
-            <div className={styles.heroWordmark} aria-label="Kingdom Intel Network">
+            <div className={styles.heroWordmark} aria-label="Kingdom Intelligence Network">
               <span>Kingdom</span>
-              <span className={styles.heroWordmarkAccent}>Intel</span>
+              <span className={styles.heroWordmarkAccent}>Intelligence</span>
               <span>Network</span>
             </div>
             <p className={styles.heroSubtitle}>Helping you build business God's way.</p>
@@ -164,7 +164,7 @@ export default function NetworkPage() {
           </div>
           <div className={styles.pricingCard}>
             <p className={styles.cardEyebrow}>Membership</p>
-            <h3 className={styles.membershipTitle}>The Kingdom Intel Network</h3>
+            <h3 className={styles.membershipTitle}>The Kingdom Intelligence Network</h3>
             <div className={styles.priceRow}>
               <strong>$197</strong>
               <span>per month</span>
@@ -174,7 +174,7 @@ export default function NetworkPage() {
               <li>Fast executive Q&amp;A for real business decisions</li>
               <li>Peer-level Kingdom CEO community inside the member app</li>
               <li>Monthly trainings, weekly event calendar, and free resources</li>
-              <li>Access to future Kingdom Intel Masterclass VIP rooms</li>
+              <li>Access to future Kingdom Intelligence Masterclass VIP rooms</li>
               <li>Exclusive invites to in-person and online events</li>
             </ul>
             <a className={`${styles.button} ${styles.buttonRed} ${styles.fullButton}`} href={paymentUrl} target="_blank" rel="noreferrer">
@@ -198,7 +198,7 @@ export default function NetworkPage() {
             <div className={styles.communityImage}>
               <img
                 src="/community-app-screenshot.png"
-                alt="Kingdom Intel Network member community app showing community feed, events, and resources"
+                alt="Kingdom Intelligence Network member community app showing community feed, events, and resources"
               />
             </div>
           </div>
@@ -311,11 +311,11 @@ export default function NetworkPage() {
       <section className={styles.conversionSection}>
         <div className={`${styles.container} ${styles.conversionShell}`}>
           <div>
-            <p className={`${styles.eyebrow} ${styles.eyebrowLight}`}>Join Kingdom Intel Network</p>
+            <p className={`${styles.eyebrow} ${styles.eyebrowLight}`}>Join Kingdom Intelligence Network</p>
             <h2 className={styles.lightHeading}>Get in the room for $197 per month.</h2>
             <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
               2 CEO Think Tank calls, executive Q&amp;A, member community access, monthly trainings, and
-              future Kingdom Intel Masterclass VIP rooms.
+              future Kingdom Intelligence Masterclass VIP rooms.
             </p>
           </div>
           <a className={`${styles.button} ${styles.buttonGold}`} href={paymentUrl} target="_blank" rel="noreferrer">
@@ -337,14 +337,14 @@ export default function NetworkPage() {
               </h2>
               <div className={styles.personalWordRule} />
               <p className={styles.sectionCopy}>
-                Kingdom Intel Network was built for leaders who need more than content. It's a strategic room
+                Kingdom Intelligence Network was built for leaders who need more than content. It's a strategic room
                 for CEOs and founders who need wise counsel, fast access, and real momentum in the middle of
                 real decisions.
               </p>
               <p className={styles.sectionCopy}>
                 Inside this room, you step into monthly CEO Think Tanks, executive Q&amp;A, monthly
-                trainings, a live member community, and future Kingdom Intel Masterclass VIP rooms that keep
-                you close to the conversations that matter most.
+                trainings, a live member community, and future Kingdom Intelligence Masterclass VIP rooms
+                that keep you close to the conversations that matter most.
               </p>
               <p className={styles.sectionCopy}>
                 If you're called to build something profitable, purpose-driven, and generational, this is
