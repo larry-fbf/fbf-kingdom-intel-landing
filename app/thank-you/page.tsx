@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: "Welcome to the Kingdom Intelligence community. Join us and start your journey today.",
 };
 
-const COMMUNITY_URL = "https://app.circle.so/join/KINGDOM_INTEL_NETWORK"; // TODO: replace with real invite link
+const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const LANDING_URL = "/";
 
 export default function ThankYou() {
@@ -15,7 +15,7 @@ export default function ThankYou() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <style>{`
           *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: 'Work Sans', sans-serif; background: #080808; color: #FFFFFF; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
@@ -51,12 +51,7 @@ export default function ThankYou() {
         </div>
 
         {/* ── LOGO BAR ── */}
-        <header style={{ background: "#080808", padding: "20px 40px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "44px", display: "block" }} />
-          <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>
-            Kingdom Intelligence Masterclass
-          </p>
-        </header>
+        
 
         {/* ── SECTION 1: HERO ── */}
         <section style={{ background: "#080808", position: "relative", overflow: "hidden" }}>
@@ -75,20 +70,20 @@ export default function ThankYou() {
             <div className="hero-text" style={{ flex: "1 1 56%", display: "flex", alignItems: "center", padding: "72px 64px 72px 40px" }}>
               <div className="animate" style={{ maxWidth: "540px" }}>
                 <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "20px" }}>
-                  Welcome to the Kingdom Intel Network
+                  Welcome to the Fueled By Fire Community
                 </p>
-                <h1 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.1, marginBottom: "8px" }}>
+                <h1 style={{ fontSize: "clamp(38px, 6vw, 72px)", fontWeight: 400, color: "#FFFFFF", lineHeight: 1.0, marginBottom: "12px", fontFamily: "'Anton', sans-serif", textTransform: "uppercase", letterSpacing: "0.01em" }}>
                   One More Step Before You Go.
                 </h1>
                 <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 700, color: "#CC0000", lineHeight: 1.2, marginBottom: "32px" }}>
-                  Join Our Community &amp; Maximize Your Experience.
+                  Join Our Free Facebook Community.
                 </h2>
                 <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
-                <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "16px" }}>
-                  Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for a welcome message from Staci with everything you need. (Check spam/promotions if you don&rsquo;t see it.)
+                <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "20px" }}>
+                  Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong>{" "}for a welcome message from Staci with everything you need. (Check spam/promotions if you don&rsquo;t see it.)
                 </p>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "40px" }}>
-                  Join the <strong style={{ color: "#C9A55A" }}>Kingdom Intel Network</strong>, your private community of faith-driven leaders building God-sized businesses. Start your journey today and get access to bonus training, daily encouragement, and a network of Kingdom CEOs walking this road with you.
+                  Join the <strong style={{ color: "#C9A55A" }}>Fueled By Fire Facebook Community</strong>, a growing tribe of over 30,000 faith-driven leaders building businesses with God-sized vision. Connect, grow, and stay updated with everything happening in the Masterclass.
                 </p>
                 <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
                   display: "inline-block",
@@ -98,7 +93,7 @@ export default function ThankYou() {
                   textTransform: "uppercase", letterSpacing: "0.08em",
                   boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
                 }}>
-                  Join the Kingdom Intel Network
+                  Join the Facebook Community
                 </a>
                 <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", marginTop: "12px", fontStyle: "italic" }}>Free access included with your registration.</p>
               </div>
@@ -107,11 +102,11 @@ export default function ThankYou() {
         </section>
 
         {/* ── SECTION 2: WHAT YOU GET ── */}
-        <section style={{ background: "#111111", padding: "80px 24px" }}>
+        <section style={{ background: "#FFFFFF", padding: "80px 24px" }}>
           <div style={{ maxWidth: "1060px", margin: "0 auto" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", textAlign: "center", marginBottom: "16px" }}>Inside the Community</p>
-            <h2 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 900, color: "#FFFFFF", textAlign: "center", marginBottom: "52px", lineHeight: 1.15 }}>
-              What Awaits You in the Kingdom Intel Network
+            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#CC0000", textAlign: "center", marginBottom: "16px" }}>Inside the Community</p>
+            <h2 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 900, color: "#111111", textAlign: "center", marginBottom: "52px", lineHeight: 1.15 }}>
+              What Awaits You in the Fueled By Fire Community
             </h2>
             <div className="features-grid animate-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
               {[
@@ -122,10 +117,17 @@ export default function ThankYou() {
                 { icon: "🌍", title: "Kingdom Impact Network", body: "Connect with leaders across industries who are using business as a platform for generosity and global impact." },
                 { icon: "📋", title: "Masterclass Workbook", body: "Download the Kingdom Intelligence workbook inside the community and come prepared for every session." },
               ].map((f, i) => (
-                <div key={i} className="feature-card" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "28px 24px" }}>
-                  <div style={{ fontSize: "28px", marginBottom: "14px", lineHeight: 1 }}>{f.icon}</div>
-                  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#FFFFFF", marginBottom: "8px", fontFamily: "'Work Sans', sans-serif" }}>{f.title}</h3>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>{f.body}</p>
+                <div key={i} className="feature-card" style={{ background: "#F8F8F8", border: "1px solid #E8E8E8", borderRadius: "14px", padding: "28px 24px" }}>
+                  <div style={{ marginBottom: "14px", lineHeight: 1 }}>
+                  {f.icon === "VIDEO" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>}
+                  {f.icon === "COMMUNITY" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+                  {f.icon === "ENCOURAGEMENT" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>}
+                  {f.icon === "EVENT" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>}
+                  {f.icon === "NETWORK" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>}
+                  {f.icon === "WORKBOOK" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>}
+                </div>
+                  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#111111", marginBottom: "8px", fontFamily: "'Work Sans', sans-serif" }}>{f.title}</h3>
+                  <p style={{ fontSize: "14px", color: "#555555", lineHeight: 1.7 }}>{f.body}</p>
                 </div>
               ))}
             </div>
@@ -187,16 +189,16 @@ export default function ThankYou() {
         </div>
 
         {/* ── FOOTER ── */}
-        <footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
-          <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>Fueled By Fire&reg; LLC &nbsp;|&nbsp; Copyright &copy; 2020&ndash;2026 &nbsp;|&nbsp; All Rights Reserved</p>
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.2)", marginBottom: "16px" }}>10% of every program fee supports Epiphany Global (Uganda) &amp; EMwomen.</p>
-          <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-            {["Privacy Policy", "Terms of Service", "Disclaimer"].map((t, i) => (
-              <a key={i} href="#" style={{ fontSize: "12px", color: "rgba(255,255,255,0.25)" }}>{t}</a>
-            ))}
-          </div>
-        </footer>
+<footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
+  <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
+  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>Fueled By Fire&reg; LLC &nbsp;|&nbsp; Copyright &copy; 2020&ndash;2026 &nbsp;|&nbsp; All Rights Reserved</p>
+  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.2)", marginBottom: "16px" }}>10% of every program fee supports Epiphany Global &amp; EMwomen.</p>
+  <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+    <a href="https://www.fbfchallenge.com/privacy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.25)" }}>Privacy Policy</a>
+    <a href="https://www.fbfchallenge.com/terms" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)" }}>Terms of Service</a>
+    <a href="https://www.fbfchallenge.com/disclaimer" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)" }}>Disclaimer</a>
+  </div>
+</footer>
 
       </body>
     </html>
