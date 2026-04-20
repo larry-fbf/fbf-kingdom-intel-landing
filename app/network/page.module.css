@@ -483,7 +483,7 @@
 }
 
 .personalWordSection {
-  background: #ffffff;
+  background: #0d0d0d;
 }
 
 .eventsSection {
@@ -598,9 +598,8 @@
   gap: 0;
   overflow: hidden;
   border-radius: 28px;
-  border: 1px solid rgba(17, 17, 17, 0.08);
-  background: #ffffff;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+  background: #0d0d0d;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
 }
 
 .personalWordImageWrap {
@@ -609,20 +608,29 @@
   overflow: hidden;
 }
 
+.personalWordImageWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 60%, #0d0d0d 100%);
+  pointer-events: none;
+}
+
 .personalWordImageWrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
   display: block;
 }
 
 .personalWordCopy {
   position: relative;
-  padding: 72px 54px;
+  padding: 80px 8vw 80px 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: #0d0d0d;
 }
 
 .personalWordCopy::before {
@@ -632,7 +640,7 @@
   top: 0;
   bottom: 0;
   width: 96px;
-  background: linear-gradient(90deg, rgba(17, 17, 17, 0.12), rgba(255, 255, 255, 0));
+  background: linear-gradient(90deg, rgba(13, 13, 13, 0.92), rgba(13, 13, 13, 0));
   pointer-events: none;
 }
 
@@ -641,25 +649,57 @@
   z-index: 1;
 }
 
+.personalWordHeading {
+  margin: 0;
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
 .personalWordRule {
   width: 48px;
   height: 2px;
   background: #cc0000;
-  margin: 24px 0;
+  margin: 28px 0;
   border-radius: 2px;
 }
 
+.personalWordBody {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Work Sans", system-ui, sans-serif;
+}
+
+.personalWordBody span {
+  color: #c9a55a;
+  font-weight: 700;
+}
+
+.personalWordEmphasis {
+  margin: 8px 0 28px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #ffffff;
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
 .personalWordSignature {
-  margin: 28px 0 32px;
+  margin: 0 0 32px;
   font-size: 17px;
   line-height: 1.6;
-  color: #666666;
+  color: rgba(255, 255, 255, 0.5);
   font-style: italic;
   font-family: "Frank Ruhl Libre", Georgia, serif;
 }
 
 .personalWordSignature strong {
-  color: #111111;
+  color: #ffffff;
   font-style: normal;
 }
 

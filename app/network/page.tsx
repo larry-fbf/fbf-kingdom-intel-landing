@@ -341,30 +341,28 @@ export default function NetworkPage() {
             </div>
             <div className={styles.personalWordCopy}>
               <p className={styles.eyebrow}>A Personal Word From Larry &amp; Staci</p>
-              <h2 className={styles.heading}>
-                A Kingdom blueprint for scaling business without sacrificing family, peace, or purpose.
+              <h2 className={styles.personalWordHeading}>
+                A Kingdom blueprint for building business God's way without sacrificing faith, family, or peace.
               </h2>
               <div className={styles.personalWordRule} />
-              <p className={styles.sectionCopy}>
-                Kingdom Intelligence Network was built for Christian entrepreneurs who want more than
-                inspiration. It was built for people who want wise counsel, real relationships, and
-                practical mentorship while they build.
+              <p className={styles.personalWordBody}>
+                While AI increases speed, <span>Kingdom Intelligence determines discernment, authority, and long-term impact in the marketplace.</span> The leaders who thrive in this season will not simply move faster. They will build with wisdom, conviction, and Spirit-led strategy.
               </p>
-              <p className={styles.sectionCopy}>
-                Inside this room, you get weekly access to leaders, ongoing support inside the community,
-                replays and trainings you can return to, and future Kingdom Intelligence Masterclass VIP
-                rooms that keep you close to the right conversations.
+              <p className={styles.personalWordBody}>
+                Kingdom Intelligence Network was created for Christian entrepreneurs and business owners who want weekly access to mentorship, executive counsel, and a faith-filled community of leaders committed to building His way.
               </p>
-              <p className={styles.sectionCopy}>
-                If you want to build a profitable business without separating your faith from your
-                leadership, we would be honored to build with you here.
+              <p className={styles.personalWordBody}>
+                Inside this room, you get weekly mentorship, executive Q&amp;A, member community access, replays, resources, and future Kingdom Intelligence Masterclass VIP rooms that keep you close to the conversations and relationships that matter most.
+              </p>
+              <p className={styles.personalWordEmphasis}>
+                Build with discernment. Lead with conviction. Grow with people who refuse to separate business from obedience.
               </p>
               <p className={styles.personalWordSignature}>
                 Blessings,
                 <br />
                 <strong>Larry &amp; Staci Wallace</strong>
               </p>
-              <a className={`${styles.button} ${styles.buttonRed}`} href={paymentUrl} target="_blank" rel="noreferrer">
+              <a className={`${styles.button} ${styles.buttonGold}`} href={paymentUrl} target="_blank" rel="noreferrer">
                 Join The Network
               </a>
             </div>
