@@ -19,15 +19,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta property="og:title" content="Kingdom Intelligence Masterclass | Fueled By Fire" />
-        <meta property="og:description" content="Free 3-day live event April 14-16, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era." />
-        <meta property="og:image" content="https://www.kingdomintel.com/images/og-share.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="1200" />
-        <meta property="og:url" content="https://www.kingdomintel.com" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://www.kingdomintel.com/images/og-share.jpg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -103,83 +94,23 @@ a { color: inherit; text-decoration: none; }
   to   { opacity: 1; }
 }
 
-/* ── HERO BASE STYLES ── */
-.hero-section {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-.hero-logo-bar {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  z-index: 10;
-  padding: 28px 5vw;
-}
-.hero-logo {
-  height: 56px;
-  width: auto;
-  display: block;
-}
-.hero-content-row {
-  display: flex;
-  flex: 1;
-  min-height: 100vh;
-}
-.hero-photo-col {
-  flex: 0 0 48%;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  overflow: hidden;
-}
-.hero-photo {
-  width: 100%;
-  height: 115%;
-  object-fit: cover;
-  object-position: center 8%;
-  position: absolute;
-  top: 0; left: 0;
-}
-.hero-text-col {
-  flex: 0 0 52%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 120px 5vw 80px 0;
-}
-.hero-event-bar {
-  display: flex;
-  gap: 40px;
-  margin-top: 48px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  flex-wrap: wrap;
-}
-
 /* ── MOBILE: 768px and below ── */
 @media (max-width: 768px) {
 
   /* ── TOP BANNER ── */
   .top-banner-text { font-size: 11px !important; letter-spacing: 0.12em !important; }
 
-  /* ── HERO — stack vertically, photo on top ── */
-  .hero-section { min-height: auto; }
-  .hero-logo-bar { display: none !important; }
-  .hero-logo { height: 36px; }
-  .hero-content-row { flex-direction: column; min-height: auto; }
-  .hero-photo-col { display: none !important; }
-  .hero-photo { object-fit: cover; object-position: center 10%; position: absolute; width: 100%; height: 100%; }
-  /* On mobile: change right-fade overlay to bottom-fade so photo is visible */
-  .hero-photo-col > div { background: linear-gradient(to bottom, transparent 55%, #0d0d0d 100%) !important; }
-  /* On mobile: lighten the big diagonal overlay so photo isn't buried */
-  .hero-section > div:first-child { background: linear-gradient(180deg, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.15) 50%, rgba(13,13,13,0.6) 100%) !important; }
-  .hero-text-col { flex: none; width: 100%; padding: 20px 24px 48px; align-items: center; text-align: center; }
-  .hero-event-bar { gap: 20px; margin-top: 32px; justify-content: center !important; }
-  .hero-event-bar > div:last-child { display: none !important; }
+  /* ── HERO ── */
+  .hero-split { flex-direction: column !important; min-height: auto !important; height: auto !important; }
+  .hero-content-row { flex-direction: column !important; min-height: auto !important; }
+  .hero-right { flex: none !important; width: 100% !important; height: 260px !important; min-height: 260px !important; order: -1; }
+  .hero-img { object-fit: cover !important; object-position: center 15% !important; height: 260px !important; }
+  .hero-left { flex: none !important; width: 100% !important; padding: 24px 20px 48px !important; min-height: auto !important; }
+  /* Logo bar sits above photo on mobile */
+  .hero-logo-bar { position: relative !important; padding: 20px 20px 0 !important; background: #0a0a0a; }
+  .hero-logo { height: 40px !important; }
+  /* Hero H1 needs a floor */
+  .hero-reveal h1 { font-size: 40px !important; line-height: 1.0 !important; }
 
   /* ── CTA BUTTON — full width on mobile ── */
   .cta-wrapper { display: flex !important; flex-direction: column !important; align-items: stretch !important; width: 100% !important; }
@@ -224,12 +155,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── TABLET: 769px – 1024px ── */
-@media (min-width: 769px) {
-  .event-vsl-wrapper { display: flex; flex-direction: column; }
-  .vsl-order { order: 2; }
-  .event-order { order: 1; }
-}
-
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero-left { padding: 100px 32px 60px 5vw !important; }
   .learn-grid { grid-template-columns: 1fr 1fr !important; }
@@ -239,19 +164,6 @@ a { color: inherit; text-decoration: none; }
 `,
           }}
         />
-        {/* Facebook Pixel */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window,document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '386045455794262');
-          fbq('track', 'PageView');
-        `}} />
-        <noscript><img height="1" width="1" style={{display:"none"}} src="https://www.facebook.com/tr?id=386045455794262&ev=PageView&noscript=1" /></noscript>
       </head>
       <body>{children}</body>
     </html>
