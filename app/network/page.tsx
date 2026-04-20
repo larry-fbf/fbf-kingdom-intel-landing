@@ -163,6 +163,12 @@ export default function NetworkPage() {
               owners who refuse to build by the world&apos;s standards and instead lead with wisdom, conviction,
               and Spirit-led strategy.
             </p>
+            <p className={styles.sectionCopy}>
+              As technology accelerates, discernment matters more. Kingdom Intelligence is what helps you
+              see clearly, lead with authority, and build lasting impact in the marketplace. This room is
+              for leaders who want to grow with that kind of wisdom and stay surrounded by others doing
+              business the Kingdom way.
+            </p>
             <div className={styles.tagRow}>
               <span>Christian entrepreneurs</span>
               <span>Weekly mentorship</span>
