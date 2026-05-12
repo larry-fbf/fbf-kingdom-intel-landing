@@ -7,20 +7,6 @@ const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const ATTIO_MASTERCLASS_LIST_ID = process.env.ATTIO_MASTERCLASS_LIST_ID || "";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
 const BREVO_MASTERCLASS_LIST_ID = Number(process.env.BREVO_MASTERCLASS_LIST_ID || "0");
-const BREVO_MASTERCLASS_EMAIL_AUTOMATION_ENABLED = process.env.BREVO_MASTERCLASS_EMAIL_AUTOMATION_ENABLED === "true";
-const BREVO_MASTERCLASS_TEMPLATE_IDS = (process.env.BREVO_MASTERCLASS_TEMPLATE_IDS || "")
-  .split(",")
-  .map((value) => Number(value.trim()))
-  .filter(Boolean);
-const MASTERCLASS_LINKS = {
-  LIVE_ROOM_URL: process.env.KI_MASTERCLASS_LIVE_ROOM_URL || "",
-  WORKBOOK_URL: process.env.KI_MASTERCLASS_WORKBOOK_URL || "",
-  CALENDAR_URL: process.env.KI_MASTERCLASS_CALENDAR_URL || "",
-  NETWORK_URL: process.env.KI_MASTERCLASS_NETWORK_URL || "",
-  TEDX_URL: process.env.KI_MASTERCLASS_TEDX_URL || "",
-  TESTIMONY_URL: process.env.KI_MASTERCLASS_TESTIMONY_URL || "",
-  REPLAY_URL: process.env.KI_MASTERCLASS_REPLAY_URL || "",
-};
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
 const SIMPLETEXTING_MASTERCLASS_LIST_ID = process.env.SIMPLETEXTING_MASTERCLASS_LIST_ID || "";
 const SIMPLETEXTING_MASTERCLASS_LIST_NAME = process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME || "";
@@ -144,105 +130,6 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
   return { skipped: false };
 }
 
-type MasterclassEmailStep = {
-  templateIndex: number;
-  label: string;
-  sendAt?: Date;
-};
-
-const CT_FIXED_EMAIL_STEPS: MasterclassEmailStep[] = [
-  { templateIndex: 5, label: "June 3 prep email", sendAt: new Date("2026-06-03T12:00:00.000Z") },
-  { templateIndex: 6, label: "June 6 prep email", sendAt: new Date("2026-06-06T12:15:00.000Z") },
-  { templateIndex: 7, label: "June 8 day-before email", sendAt: new Date("2026-06-08T23:00:00.000Z") },
-  { templateIndex: 8, label: "June 9 morning email", sendAt: new Date("2026-06-09T14:00:00.000Z") },
-  { templateIndex: 9, label: "June 9 live email", sendAt: new Date("2026-06-09T16:45:00.000Z") },
-  { templateIndex: 10, label: "June 10 morning email", sendAt: new Date("2026-06-10T14:00:00.000Z") },
-  { templateIndex: 11, label: "June 10 live email", sendAt: new Date("2026-06-10T16:45:00.000Z") },
-  { templateIndex: 12, label: "June 11 morning email", sendAt: new Date("2026-06-11T14:00:00.000Z") },
-  { templateIndex: 13, label: "June 11 final live email", sendAt: new Date("2026-06-11T16:45:00.000Z") },
-  { templateIndex: 14, label: "Kingdom Intel Network invitation", sendAt: new Date("2026-06-11T19:15:00.000Z") },
-  { templateIndex: 15, label: "Replay email", sendAt: new Date("2026-06-12T15:00:00.000Z") },
-];
-
-function addDays(date: Date, days: number) {
-  return new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
-}
-
-function hasRequiredMasterclassLinks() {
-  return Boolean(MASTERCLASS_LINKS.LIVE_ROOM_URL && MASTERCLASS_LINKS.WORKBOOK_URL && MASTERCLASS_LINKS.CALENDAR_URL);
-}
-
-function hasLinkForTemplate(templateIndex: number) {
-  if (templateIndex === 6) return Boolean(MASTERCLASS_LINKS.TEDX_URL && MASTERCLASS_LINKS.WORKBOOK_URL);
-  if (templateIndex === 14) return Boolean(MASTERCLASS_LINKS.NETWORK_URL);
-  if (templateIndex === 15) return Boolean(MASTERCLASS_LINKS.REPLAY_URL);
-  return true;
-}
-
-function getTemplateId(templateIndex: number) {
-  return BREVO_MASTERCLASS_TEMPLATE_IDS[templateIndex - 1];
-}
-
-function buildMasterclassEmailSchedule(now = new Date()): MasterclassEmailStep[] {
-  const firstFixedStep = CT_FIXED_EMAIL_STEPS[0].sendAt!;
-  const relativeSteps: MasterclassEmailStep[] = [
-    { templateIndex: 2, label: "+1 day follow-up", sendAt: addDays(now, 1) },
-    { templateIndex: 3, label: "+3 days advocate intro", sendAt: addDays(now, 3) },
-    { templateIndex: 4, label: "+4 days Christina note", sendAt: addDays(now, 4) },
-  ].filter((step) => step.sendAt! < firstFixedStep);
-
-  return [
-    { templateIndex: 1, label: "registration confirmation" },
-    ...relativeSteps,
-    ...CT_FIXED_EMAIL_STEPS.filter((step) => step.sendAt! > now),
-  ];
-}
-
-async function scheduleBrevoMasterclassEmails(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">>) {
-  if (!BREVO_MASTERCLASS_EMAIL_AUTOMATION_ENABLED) return { skipped: true, reason: "email automation disabled" };
-  if (!BREVO_API_KEY || BREVO_MASTERCLASS_TEMPLATE_IDS.length < 15) return { skipped: true, reason: "missing Brevo API key or template ids" };
-  if (!hasRequiredMasterclassLinks()) return { skipped: true, reason: "missing required masterclass links" };
-
-  const steps = buildMasterclassEmailSchedule();
-  const scheduled: { templateIndex: number; templateId: number; label: string; scheduledAt?: string }[] = [];
-  const skippedEmails: { templateIndex: number; label: string; reason: string }[] = [];
-
-  for (const step of steps) {
-    const templateId = getTemplateId(step.templateIndex);
-    if (!templateId) {
-      skippedEmails.push({ templateIndex: step.templateIndex, label: step.label, reason: "missing template id" });
-      continue;
-    }
-    if (!hasLinkForTemplate(step.templateIndex)) {
-      skippedEmails.push({ templateIndex: step.templateIndex, label: step.label, reason: "missing optional link for template" });
-      continue;
-    }
-
-    await fetchJson(
-      "https://api.brevo.com/v3/smtp/email",
-      {
-        method: "POST",
-        headers: {
-          "api-key": BREVO_API_KEY,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          to: [{ email: contact.email, name: `${contact.firstName} ${contact.lastName}`.trim() }],
-          templateId,
-          params: MASTERCLASS_LINKS,
-          ...(step.sendAt ? { scheduledAt: step.sendAt.toISOString() } : {}),
-        }),
-      },
-      `Brevo masterclass email ${step.templateIndex}`
-    );
-
-    scheduled.push({ templateIndex: step.templateIndex, templateId, label: step.label, scheduledAt: step.sendAt?.toISOString() });
-  }
-
-  return { skipped: false, scheduled, skippedEmails };
-}
-
 async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
   const simpleTextingGroup = SIMPLETEXTING_MASTERCLASS_LIST_NAME || SIMPLETEXTING_MASTERCLASS_LIST_ID;
   if (!SIMPLETEXTING_API_KEY || !simpleTextingGroup || !contact.phone) return { skipped: true };
@@ -347,7 +234,6 @@ export async function POST(req: NextRequest) {
 
     results.attio = await upsertAttioContact(contact);
     results.brevo = await upsertBrevoContact(contact);
-    results.brevoEmailAutomation = await scheduleBrevoMasterclassEmails(contact);
 
     if (payload.agreed && phone) {
       results.simpleTexting = await upsertSimpleTextingContact(contact);
