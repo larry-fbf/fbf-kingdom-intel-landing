@@ -364,14 +364,22 @@ export default function NetworkPage() {
             description="Bring the real problems, decisions, and growth opportunities in your business. We work the room together."
             light
           />
-          <div className={styles.expectGrid}>
-            {expectationCards.map((item) => (
-              <article key={item.title} className={styles.expectCard}>
-                <div className={styles.expectIcon}>{item.icon}</div>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </article>
-            ))}
+          <div className={styles.expectLayout}>
+            <div className={styles.expectImageWrap}>
+              <img
+                src="/images/kingdom-intel-expect-room.jpg"
+                alt="Kingdom Intelligence Network room"
+              />
+            </div>
+            <div className={styles.expectGrid}>
+              {expectationCards.map((item) => (
+                <article key={item.title} className={styles.expectCard}>
+                  <div className={styles.expectIcon}>{item.icon}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
