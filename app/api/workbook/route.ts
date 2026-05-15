@@ -65,6 +65,27 @@ function answer(value?: string) {
   return clean(value || "") || "Not provided";
 }
 
+function normalizeSelect(value?: string, options: string[] = []) {
+  const raw = clean(value || "");
+  if (!raw) return raw;
+  const comparable = raw.toLowerCase().replace(/[–—−]/g, "-").replace(/\s+/g, " ");
+  return options.find((option) => option.toLowerCase().replace(/[–—−]/g, "-").replace(/\s+/g, " ") === comparable) || raw;
+}
+
+function normalizedPayload(payload: WorkbookPayload): WorkbookPayload {
+  return {
+    ...payload,
+    monthlyIncomeRange: normalizeSelect(payload.monthlyIncomeRange, [
+      "Under $10K/month",
+      "$10K–$50K/month",
+      "$50K–$100K/month",
+      "$100K–$500K/month",
+      "$500K-$1 Mill/month",
+      "$1 Mill +/month",
+    ]),
+  };
+}
+
 function formatWorkbookNote(payload: WorkbookPayload, contact: WorkbookContact) {
   return [
     "# Kingdom Intelligence Masterclass qualification form",
@@ -223,7 +244,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Attio is not configured" }, { status: 500 });
     }
 
-    const payload = (await req.json()) as WorkbookPayload;
+    const payload = normalizedPayload((await req.json()) as WorkbookPayload);
     const contact = {
       firstName: clean(payload.firstName),
       lastName: clean(payload.lastName),
