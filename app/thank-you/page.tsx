@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: "Welcome to the Kingdom Intelligence community. Join us and start your journey today.",
 };
 
-const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
+const COMMUNITY_URL = "https://vault.fbfmastery.com/join?invitation_token=b0c8c0451f281ece962ad9e00e5c739000d5e1b9-e61c108d-7479-4d7b-8079-f258420879bb";
 const LANDING_URL = "/";
 
 export default function ThankYou() {
@@ -70,20 +70,20 @@ export default function ThankYou() {
             <div className="hero-text" style={{ flex: "1 1 56%", display: "flex", alignItems: "center", padding: "72px 64px 72px 40px" }}>
               <div className="animate" style={{ maxWidth: "540px" }}>
                 <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "20px" }}>
-                  Welcome to the Fueled By Fire Community
+                  Welcome to the Masterclass Community
                 </p>
                 <h1 style={{ fontSize: "clamp(38px, 6vw, 72px)", fontWeight: 400, color: "#FFFFFF", lineHeight: 1.0, marginBottom: "12px", fontFamily: "'Anton', sans-serif", textTransform: "uppercase", letterSpacing: "0.01em" }}>
                   One More Step Before You Go.
                 </h1>
                 <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 700, color: "#CC0000", lineHeight: 1.2, marginBottom: "32px" }}>
-                  Join Our Free Facebook Community.
+                  Join the Masterclass Community.
                 </h2>
                 <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "20px" }}>
                   Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong>{" "}for a welcome message from Staci with everything you need. (Check spam/promotions if you don&rsquo;t see it.)
                 </p>
                 <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "40px" }}>
-                  Join the <strong style={{ color: "#C9A55A" }}>Fueled By Fire Facebook Community</strong>, a growing tribe of over 30,000 faith-driven leaders building businesses with God-sized vision. Connect, grow, and stay updated with everything happening in the Masterclass.
+                  Join the <strong style={{ color: "#C9A55A" }}>Masterclass Community</strong>, the home base for live session access, updates, chat, replays, and workbook resources during the Kingdom Intelligence Masterclass.
                 </p>
                 <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
                   display: "inline-block",
@@ -93,7 +93,7 @@ export default function ThankYou() {
                   textTransform: "uppercase", letterSpacing: "0.08em",
                   boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
                 }}>
-                  Join the Facebook Community
+                  Join the Masterclass Community
                 </a>
                 <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", marginTop: "12px", fontStyle: "italic" }}>Free access included with your registration.</p>
               </div>
@@ -104,9 +104,9 @@ export default function ThankYou() {
         {/* ── SECTION 2: WHAT YOU GET ── */}
         <section style={{ background: "#FFFFFF", padding: "80px 24px" }}>
           <div style={{ maxWidth: "1060px", margin: "0 auto" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#CC0000", textAlign: "center", marginBottom: "16px" }}>Inside the Community</p>
+            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#CC0000", textAlign: "center", marginBottom: "16px" }}>Inside the Masterclass Community</p>
             <h2 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 900, color: "#111111", textAlign: "center", marginBottom: "52px", lineHeight: 1.15 }}>
-              What Awaits You in the Fueled By Fire Community
+              What Awaits You in the Masterclass Community
             </h2>
             <div className="features-grid animate-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
               {[
