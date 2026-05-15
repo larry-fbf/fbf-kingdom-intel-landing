@@ -111,7 +111,7 @@ function formatWorkbookNote(payload: WorkbookPayload, contact: WorkbookContact) 
 function attioPersonValues(contact: WorkbookContact) {
   const values: Record<string, unknown> = {
     email_addresses: [{ email_address: contact.email }],
-    phone_numbers: [{ phone_number: contact.phone }],
+    phone_numbers: [{ original_phone_number: contact.phone }],
     name: [{
       first_name: contact.firstName,
       last_name: contact.lastName,
