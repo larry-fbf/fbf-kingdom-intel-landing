@@ -68,8 +68,8 @@ function answer(value?: string) {
 function normalizeSelect(value?: string, options: string[] = []) {
   const raw = clean(value || "");
   if (!raw) return raw;
-  const comparable = raw.toLowerCase().replace(/[–—−]/g, "-").replace(/\s+/g, " ");
-  return options.find((option) => option.toLowerCase().replace(/[–—−]/g, "-").replace(/\s+/g, " ") === comparable) || raw;
+  const comparable = raw.toLowerCase().replace(/[–—−?]/g, "-").replace(/\s+/g, " ");
+  return options.find((option) => option.toLowerCase().replace(/[–—−?]/g, "-").replace(/\s+/g, " ") === comparable) || raw;
 }
 
 function normalizedPayload(payload: WorkbookPayload): WorkbookPayload {
