@@ -900,8 +900,8 @@
 }
 
 .workbookHeroCompact {
-  padding-top: 56px;
-  padding-bottom: 56px;
+  padding-top: 44px;
+  padding-bottom: 44px;
 }
 
 .workbookHeroLayout {
@@ -935,7 +935,7 @@
 
 .workbookHeroCompact .workbookTitle {
   max-width: 11ch;
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(2.55rem, 5vw, 4.5rem);
 }
 
 .workbookHeroCopy .heroDescription {
@@ -978,20 +978,27 @@
   overflow: hidden;
   border-radius: 24px;
   border: 1px solid rgba(201, 165, 90, 0.24);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+  padding: 14px;
 }
 
 .workbookHeroImage {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 520px;
-  object-fit: cover;
+  min-height: 0;
+  object-fit: contain;
+  border-radius: 14px;
 }
 
 .workbookHeroCompact .workbookHeroImage {
-  min-height: 360px;
+  min-height: 0;
+}
+
+.workbookHeroCoverLayout {
+  grid-template-columns: minmax(300px, 0.78fr) minmax(420px, 1.22fr);
+  gap: 36px;
 }
 
 .thankYouHero {
@@ -1517,10 +1524,14 @@
   }
 
   .workbookHeroImage {
-    min-height: 320px;
+    min-height: 0;
+  }
+
+  .workbookHeroCard {
+    padding: 8px;
   }
 
   .workbookTitle {
-    font-size: clamp(2.7rem, 15vw, 4.2rem);
+    font-size: clamp(2.45rem, 13vw, 3.8rem);
   }
 }

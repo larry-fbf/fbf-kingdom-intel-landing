@@ -89,7 +89,7 @@ export default function WorkbookPage() {
     <main className={styles.pageShell}>
       <section className={`${styles.heroSection} ${styles.workbookHero} ${styles.workbookHeroCompact}`}>
         <div className={styles.heroOverlay} />
-        <div className={`${styles.container} ${styles.workbookHeroLayout}`}>
+        <div className={`${styles.container} ${styles.workbookHeroLayout} ${styles.workbookHeroCoverLayout}`}>
           <div className={styles.workbookHeroCopy}>
             <Image src="/images/fbf-logo-white.png" alt="Fueled By Fire" width={154} height={72} className={styles.workbookLogo} priority />
             <p className={styles.heroKicker}>Kingdom Intelligence Masterclass</p>
@@ -99,7 +99,7 @@ export default function WorkbookPage() {
             </p>
           </div>
           <div className={styles.workbookHeroCard}>
-            <Image src="/images/kingdom-intel-expect-room.jpg" alt="Kingdom Intelligence Masterclass room" width={900} height={650} className={styles.workbookHeroImage} priority />
+            <Image src="/images/kingdom-intel-workbook-cover.jpg" alt="Kingdom Intelligence Masterclass workbook" width={1280} height={720} className={styles.workbookHeroImage} priority />
           </div>
         </div>
       </section>
