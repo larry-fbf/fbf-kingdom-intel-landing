@@ -2,9 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
-
-const WORKBOOK_URL = process.env.NEXT_PUBLIC_KIM_WORKBOOK_URL || "";
 
 const descriptors = ["CEO (Decision Maker)", "Entrepreneur/Expert", "Startup", "Coach/ Consultant", "Dreamer"];
 const startTimelines = ["ASAP", "1-14 Days", "15-30 Days", "30+ Days", "60+ Days"];
@@ -28,7 +27,7 @@ const initialForm = {
   monthlyIncomeRange: "",
 };
 
-type Status = "idle" | "loading" | "success" | "error";
+type Status = "idle" | "loading" | "error";
 
 function FieldLabel({ children, required = false }: { children: React.ReactNode; required?: boolean }) {
   return (
@@ -53,6 +52,7 @@ function SelectInput(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
 export default function WorkbookPage() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<Status>("idle");
+  const router = useRouter();
 
   const setField = (name: keyof typeof initialForm, value: string | string[]) => {
     setForm((current) => ({ ...current, [name]: value }));
@@ -79,8 +79,7 @@ export default function WorkbookPage() {
       });
 
       if (!response.ok) throw new Error("submit failed");
-      setStatus("success");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      router.push("/workbook-thank-you");
     } catch {
       setStatus("error");
     }
@@ -88,7 +87,7 @@ export default function WorkbookPage() {
 
   return (
     <main className={styles.pageShell}>
-      <section className={`${styles.heroSection} ${styles.workbookHero}`}>
+      <section className={`${styles.heroSection} ${styles.workbookHero} ${styles.workbookHeroCompact}`}>
         <div className={styles.heroOverlay} />
         <div className={`${styles.container} ${styles.workbookHeroLayout}`}>
           <div className={styles.workbookHeroCopy}>
@@ -96,13 +95,8 @@ export default function WorkbookPage() {
             <p className={styles.heroKicker}>Kingdom Intelligence Masterclass</p>
             <h1 className={styles.workbookTitle}>Get Your Masterclass Workbook</h1>
             <p className={styles.heroDescription}>
-              Complete the short intake below so we can understand where you are, what you are building, and how to serve you during the Kingdom Intelligence Masterclass.
+              Complete the short intake below to unlock the workbook and prepare for the live sessions.
             </p>
-            <div className={styles.workbookPromiseGrid}>
-              <div><strong>01</strong><span>Clarify the outcome you want most</span></div>
-              <div><strong>02</strong><span>Identify the area that needs the most support</span></div>
-              <div><strong>03</strong><span>Access the workbook for the live sessions</span></div>
-            </div>
           </div>
           <div className={styles.workbookHeroCard}>
             <Image src="/images/kingdom-intel-expect-room.jpg" alt="Kingdom Intelligence Masterclass room" width={900} height={650} className={styles.workbookHeroImage} priority />
@@ -112,34 +106,15 @@ export default function WorkbookPage() {
 
       <section className={styles.workbookFormSection}>
         <div className={`${styles.container} ${styles.workbookFormLayout}`}>
-          {status === "success" ? (
-            <div className={styles.successCard}>
-              <p className={styles.eyebrow}>Workbook access</p>
-              <h2 className={styles.heading}>You’re in.</h2>
-              <p className={styles.sectionCopy}>
-                Thanks for completing the Kingdom Intelligence Masterclass workbook form. You have been added to the workbook access list.
-              </p>
-              {WORKBOOK_URL ? (
-                <a className={`${styles.button} ${styles.buttonGold}`} href={WORKBOOK_URL} target="_blank" rel="noopener noreferrer">
-                  Open the workbook
-                </a>
-              ) : (
-                <p className={styles.workbookPendingNote}>
-                  Workbook link is being finalized. Keep this page handy and watch your inbox for the workbook access link.
-                </p>
-              )}
-            </div>
-          ) : (
-            <>
-              <aside className={styles.workbookSidebar}>
-                <p className={styles.eyebrow}>Before you download</p>
-                <h2 className={styles.heading}>Tell us what you are believing God for in business.</h2>
-                <p className={styles.sectionCopy}>
-                  These are the same intake questions from the current workbook access form, redesigned for the Kingdom Intel experience.
-                </p>
-              </aside>
+          <aside className={styles.workbookSidebar}>
+            <p className={styles.eyebrow}>Before you download</p>
+            <h2 className={styles.heading}>Help us tailor the masterclass experience.</h2>
+            <p className={styles.sectionCopy}>
+              Your answers help the team understand where you are and how to serve you well.
+            </p>
+          </aside>
 
-              <form className={styles.workbookForm} onSubmit={handleSubmit}>
+          <form className={styles.workbookForm} onSubmit={handleSubmit}>
                 <div className={styles.formIntro}>
                   <h2>Masterclass workbook form</h2>
                   <p>Fields marked with an asterisk are required.</p>
@@ -222,9 +197,7 @@ export default function WorkbookPage() {
                   {status === "loading" ? "Submitting..." : "Get workbook access"}
                 </button>
                 {status === "error" ? <p className={styles.formError}>Something went wrong. Please try again.</p> : null}
-              </form>
-            </>
-          )}
+          </form>
         </div>
       </section>
     </main>

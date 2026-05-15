@@ -899,6 +899,11 @@
     #0d0d0d;
 }
 
+.workbookHeroCompact {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
 .workbookHeroLayout {
   position: relative;
   z-index: 1;
@@ -926,6 +931,11 @@
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.04em;
+}
+
+.workbookHeroCompact .workbookTitle {
+  max-width: 11ch;
+  font-size: clamp(2.8rem, 6vw, 5rem);
 }
 
 .workbookHeroCopy .heroDescription {
@@ -978,6 +988,37 @@
   height: auto;
   min-height: 520px;
   object-fit: cover;
+}
+
+.workbookHeroCompact .workbookHeroImage {
+  min-height: 360px;
+}
+
+.thankYouHero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.thankYouShell {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  text-align: center;
+}
+
+.thankYouShell .heroDescription {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 64ch;
+}
+
+.thankYouActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 34px;
 }
 
 .workbookFormSection {

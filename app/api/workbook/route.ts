@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const BREVO_WORKBOOK_LIST_ID = Number(process.env.BREVO_WORKBOOK_LIST_ID || process.env.BREVO_KIM_WORKBOOK_LIST_ID || "16");
+const BREVO_WORKBOOK_LIST_ID = Number(process.env.BREVO_WORKBOOK_LIST_ID || process.env.BREVO_KIM_WORKBOOK_LIST_ID || "15");
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const SLACK_WORKBOOK_WEBHOOK_URL = process.env.SLACK_WORKBOOK_WEBHOOK_URL || "";
 
