@@ -2,206 +2,714 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "You Are Registered | Kingdom Intelligence Masterclass",
-  description: "Welcome to the Kingdom Intelligence community. Join us and start your journey today.",
+  description:
+    "Confirmation and next steps for the Kingdom Intelligence Masterclass.",
 };
 
-const COMMUNITY_URL = "https://vault.fbfmastery.com/join?invitation_token=b0c8c0451f281ece962ad9e00e5c739000d5e1b9-e61c108d-7479-4d7b-8079-f258420879bb";
+const COMMUNITY_URL =
+  "https://vault.fbfmastery.com/join?invitation_token=b0c8c0451f281ece962ad9e00e5c739000d5e1b9-e61c108d-7479-4d7b-8079-f258420879bb";
 const LANDING_URL = "/";
+
+const eventDetails = [
+  { label: "date", value: "June 9-11, 2026" },
+  { label: "time", value: "12 PM Central" },
+  { label: "format", value: "Free live online event" },
+];
+
+const nextSteps = [
+  "Check your inbox for the welcome email from Staci.",
+  "Join the masterclass community for links, reminders, and updates.",
+  "Download the workbook before day one and come prepared.",
+];
+
+const communityItems = [
+  {
+    title: "live event access",
+    body: "Session links, reminders, and event updates in one place.",
+  },
+  {
+    title: "workbook resources",
+    body: "The Kingdom Intelligence workbook and prep materials for each day.",
+  },
+  {
+    title: "community connection",
+    body: "A room of faith-driven leaders building with wisdom, order, and courage.",
+  },
+];
+
+function CheckIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M20 6 9 17l-5-5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.5"
+      />
+    </svg>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M5 12h14m-6-6 6 6-6 6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.3"
+      />
+    </svg>
+  );
+}
 
 export default function ThankYou() {
   return (
-    <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-        <style>{`
-          *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-          body { font-family: 'Work Sans', sans-serif; background: #080808; color: #FFFFFF; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-          h1, h2, h3 { font-family: 'Frank Ruhl Libre', Georgia, serif; }
-          a { text-decoration: none; color: inherit; }
-          .gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
-          .gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
-          .feature-card { transition: border-color 0.3s; }
-          .feature-card:hover { border-color: rgba(201,165,90,0.5) !important; }
-          @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-          .animate { animation: fadeInUp 0.7s ease both; }
-          .animate-2 { animation: fadeInUp 0.7s 0.15s ease both; }
-          .animate-3 { animation: fadeInUp 0.7s 0.3s ease both; }
-          @media (max-width: 768px) {
-            .hero-split { flex-direction: column !important; }
-            .hero-photo { height: 320px !important; min-height: 320px !important; width: 100% !important; }
-            .hero-text { padding: 40px 20px 56px !important; }
-            .features-grid { grid-template-columns: 1fr !important; }
-            .invite-grid { flex-direction: column !important; }
-            .gold-btn { width: 100% !important; text-align: center !important; display: block !important; }
-          }
-        `}</style>
-        {/* Facebook Pixel - CompleteRegistration */}
-        <script dangerouslySetInnerHTML={{ __html: `fbq('track', 'CompleteRegistration');` }} />
-      </head>
-      <body>
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            "if (typeof fbq === 'function') { fbq('track', 'CompleteRegistration'); }",
+        }}
+      />
 
-        {/* ── REGISTERED BANNER ── */}
-        <div style={{ background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", padding: "14px 20px", textAlign: "center" }}>
-          <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#FFFFFF" }}>
-            &#10003; &nbsp;You Are Registered · June 9&ndash;11, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
-          </p>
-        </div>
+      <main className="thankYouPage">
+        <section className="thankHero">
+          <div className="registeredBar">
+            <span>
+              <CheckIcon />
+              you are registered
+            </span>
+            <span>june 9-11, 2026</span>
+            <span>12 pm central</span>
+          </div>
 
-        {/* ── LOGO BAR ── */}
-        
+          <div className="heroShell">
+            <div className="heroCopy">
+              <img
+                src="/images/fbf-logo-white.png"
+                alt="Fueled By Fire"
+                className="heroLogo"
+              />
+              <p className="eyebrow">kingdom intelligence masterclass</p>
+              <h1>your seat is saved.</h1>
+              <p className="lead">
+                you are registered for the free three-day live event. check your
+                email for the welcome message, then join the masterclass
+                community so you have the links, reminders, workbook, and updates
+                before day one.
+              </p>
 
-        {/* ── SECTION 1: HERO ── */}
-        <section style={{ background: "#080808", position: "relative", overflow: "hidden" }}>
-          {/* Subtle gold glow */}
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "800px", height: "600px", background: "radial-gradient(ellipse, rgba(201,165,90,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
-
-          <div className="hero-split" style={{ display: "flex", maxWidth: "1160px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-            {/* Photo */}
-            <div className="hero-photo" style={{ flex: "0 0 44%", position: "relative", overflow: "hidden", minHeight: "560px" }}>
-              <img src="/images/staci-larry-split.webp" alt="Larry and Staci Wallace" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 55%, #080808 100%)" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 70%, #080808 100%)" }} />
+              <div className="heroActions">
+                <a
+                  href={COMMUNITY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="goldButton"
+                >
+                  join the masterclass community
+                  <ArrowIcon />
+                </a>
+                <a href={LANDING_URL} className="secondaryLink">
+                  share the masterclass
+                </a>
+              </div>
             </div>
 
-            {/* Text */}
-            <div className="hero-text" style={{ flex: "1 1 56%", display: "flex", alignItems: "center", padding: "72px 64px 72px 40px" }}>
-              <div className="animate" style={{ maxWidth: "540px" }}>
-                <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "20px" }}>
-                  Welcome to the Masterclass Community
-                </p>
-                <h1 style={{ fontSize: "clamp(38px, 6vw, 72px)", fontWeight: 400, color: "#FFFFFF", lineHeight: 1.0, marginBottom: "12px", fontFamily: "'Anton', sans-serif", textTransform: "uppercase", letterSpacing: "0.01em" }}>
-                  One More Step Before You Go.
-                </h1>
-                <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 700, color: "#CC0000", lineHeight: 1.2, marginBottom: "32px" }}>
-                  Join the Masterclass Community.
-                </h2>
-                <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
-                <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "20px" }}>
-                  Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong>{" "}for a welcome message from Staci with everything you need. (Check spam/promotions if you don&rsquo;t see it.)
-                </p>
-                <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "40px" }}>
-                  Join the <strong style={{ color: "#C9A55A" }}>Masterclass Community</strong>, the home base for live session access, updates, chat, replays, and workbook resources during the Kingdom Intelligence Masterclass.
-                </p>
-                <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
-                  display: "inline-block",
-                  background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
-                  color: "#120800", fontWeight: 800, padding: "18px 44px",
-                  borderRadius: "6px", fontSize: "16px",
-                  textTransform: "uppercase", letterSpacing: "0.08em",
-                  boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
-                }}>
-                  Join the Masterclass Community
-                </a>
-                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", marginTop: "12px", fontStyle: "italic" }}>Free access included with your registration.</p>
-              </div>
+            <div className="heroMedia" aria-label="Larry and Staci Wallace">
+              <img src="/images/staci-larry-hero-2026.png" alt="Larry and Staci Wallace" />
             </div>
           </div>
         </section>
 
-        {/* ── SECTION 2: WHAT YOU GET ── */}
-        <section style={{ background: "#FFFFFF", padding: "80px 24px" }}>
-          <div style={{ maxWidth: "1060px", margin: "0 auto" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#CC0000", textAlign: "center", marginBottom: "16px" }}>Inside the Masterclass Community</p>
-            <h2 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 900, color: "#111111", textAlign: "center", marginBottom: "52px", lineHeight: 1.15 }}>
-              What Awaits You in the Masterclass Community
-            </h2>
-            <div className="features-grid animate-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-              {[
-                { icon: "▶", title: "Bonus Training Videos", body: "3 exclusive bonus sessions on Mindset, Economy, and Time Expansion, only available to registered members." },
-                { icon: "🤝", title: "Kingdom CEO Community", body: "Connect with hundreds of faith-driven leaders scaling businesses without sacrificing what matters most." },
-                { icon: "📖", title: "Daily Encouragement", body: "Spirit-led content, frameworks, and insights delivered directly to your feed to keep you moving forward." },
-                { icon: "⚡", title: "Live Event Access", body: "Get all Masterclass links, reminders, and updates through the community so you never miss a session." },
-                { icon: "🌍", title: "Kingdom Impact Network", body: "Connect with leaders across industries who are using business as a platform for generosity and global impact." },
-                { icon: "📋", title: "Masterclass Workbook", body: "Download the Kingdom Intelligence workbook inside the community and come prepared for every session." },
-              ].map((f, i) => (
-                <div key={i} className="feature-card" style={{ background: "#F8F8F8", border: "1px solid #E8E8E8", borderRadius: "14px", padding: "28px 24px" }}>
-                  <div style={{ marginBottom: "14px", lineHeight: 1 }}>
-                  {f.icon === "VIDEO" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>}
-                  {f.icon === "COMMUNITY" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
-                  {f.icon === "ENCOURAGEMENT" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>}
-                  {f.icon === "EVENT" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>}
-                  {f.icon === "NETWORK" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>}
-                  {f.icon === "WORKBOOK" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>}
-                </div>
-                  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#111111", marginBottom: "8px", fontFamily: "'Work Sans', sans-serif" }}>{f.title}</h3>
-                  <p style={{ fontSize: "14px", color: "#555555", lineHeight: 1.7 }}>{f.body}</p>
-                </div>
-              ))}
+        <section className="detailsBand">
+          <div className="detailsGrid" aria-label="event details">
+            {eventDetails.map((item) => (
+              <div key={item.label} className="detailItem">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="nextSection">
+          <div className="nextInner">
+            <div className="sectionIntro">
+              <p className="eyebrow red">next steps</p>
+              <h2>do these before the masterclass starts.</h2>
             </div>
-            <div style={{ textAlign: "center", marginTop: "48px" }}>
-              <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
-                display: "inline-block",
-                background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
-                color: "#120800", fontWeight: 800, padding: "18px 48px",
-                borderRadius: "6px", fontSize: "16px",
-                textTransform: "uppercase", letterSpacing: "0.08em",
-                boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
-              }}>
-                Join Now &ndash; It&rsquo;s Free
+
+            <div className="stepsPanel">
+              <ol>
+                {nextSteps.map((step) => (
+                  <li key={step}>
+                    <span>
+                      <CheckIcon />
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+              <a
+                href={COMMUNITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="darkButton"
+              >
+                get connected now
+                <ArrowIcon />
               </a>
             </div>
           </div>
         </section>
 
-        {/* ── SECTION 3: INVITE FRIENDS ── */}
-        <section style={{ background: "#080808", padding: "80px 24px" }}>
-          <div style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "16px" }}>Share the Mission</p>
-            <h2 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "40px", textTransform: "uppercase" }}>
-              Invite Your Friends!
-            </h2>
-            <div style={{ borderLeft: "3px solid #CC0000", paddingLeft: "28px", textAlign: "left", marginBottom: "40px" }}>
-              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontStyle: "italic" }}>
-                &ldquo;If you&rsquo;re anything like me, you are deeply passionate about helping others live a purpose-driven life and build a lasting legacy for their families. Give your friends, family, and colleagues a powerful gift worth $7,500 by inviting them to sign up today.
+        <section className="communityBand">
+          <div className="communityInner">
+            <div>
+              <p className="eyebrow">inside the community</p>
+              <h2>everything stays in one place.</h2>
+              <p>
+                the community is the home base for live access, resources, and
+                updates as the event gets closer.
               </p>
-              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontStyle: "italic", marginTop: "16px" }}>
-                You will think of many people during the three days that need to hear these messages, so why not start now? Make a list and send them to the link below.&rdquo;
-              </p>
-              <p style={{ fontSize: "15px", fontWeight: 700, color: "#C9A55A", marginTop: "20px", fontStyle: "normal" }}>&ndash; Staci Wallace</p>
             </div>
-            <p style={{ fontSize: "18px", fontWeight: 700, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "32px" }}>
-              This one decision today could change their life and business forever.
+
+            <div className="communityList">
+              {communityItems.map((item) => (
+                <article key={item.title} className="communityItem">
+                  <div className="itemIcon">
+                    <CheckIcon />
+                  </div>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="shareBand">
+          <div className="shareInner">
+            <p className="eyebrow red">share the mission</p>
+            <h2>invite someone who needs this room.</h2>
+            <p>
+              if a friend, client, or leader you know is trying to build business
+              God's way, send them the masterclass page so they can register too.
             </p>
-            <a href={LANDING_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
-              display: "inline-block",
-              background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
-              color: "#120800", fontWeight: 800, padding: "18px 48px",
-              borderRadius: "6px", fontSize: "16px",
-              textTransform: "uppercase", letterSpacing: "0.08em",
-              boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
-            }}>
-              Share the Masterclass
+            <a href={LANDING_URL} className="outlineButton">
+              share the masterclass
+              <ArrowIcon />
             </a>
           </div>
         </section>
 
-        {/* ── WARRIORS QUOTE ── */}
-        <div style={{ background: "#CC0000", padding: "64px 20px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", top: "-20px", left: "50%", transform: "translateX(-50%)", fontSize: "220px", color: "rgba(255,255,255,0.05)", fontFamily: "'Frank Ruhl Libre', Georgia, serif", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>&ldquo;</div>
-          <p style={{ fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 900, color: "#FFFFFF", fontStyle: "italic", lineHeight: 1.15, position: "relative", zIndex: 1, textTransform: "uppercase", letterSpacing: "-0.01em" }}>
-            Warriors don&rsquo;t retreat.<br />They reload.
-          </p>
-          <div style={{ width: "48px", height: "3px", background: "rgba(255,255,255,0.4)", margin: "20px auto 14px", borderRadius: "2px" }} />
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", position: "relative", zIndex: 1 }}>&ndash; Staci Wallace</p>
-        </div>
+        <footer className="thankFooter">
+          <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
+          <p>Fueled By Fire LLC | Copyright 2020-2026 | All Rights Reserved</p>
+          <p>10% of every program fee supports Epiphany Global and EMwomen.</p>
+        </footer>
+      </main>
 
-        {/* ── FOOTER ── */}
-<footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
-  <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
-  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>Fueled By Fire&reg; LLC &nbsp;|&nbsp; Copyright &copy; 2020&ndash;2026 &nbsp;|&nbsp; All Rights Reserved</p>
-  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.2)", marginBottom: "16px" }}>10% of every program fee supports Epiphany Global &amp; EMwomen.</p>
-  <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-    <a href="https://www.fbfchallenge.com/privacy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.25)" }}>Privacy Policy</a>
-    <a href="https://www.fbfchallenge.com/terms" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)" }}>Terms of Service</a>
-    <a href="https://www.fbfchallenge.com/disclaimer" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)" }}>Disclaimer</a>
-  </div>
-</footer>
+      <style>{`
+        .thankYouPage {
+          min-height: 100vh;
+          overflow-x: hidden;
+          background: #080808;
+          color: #ffffff;
+          font-family: 'Work Sans', system-ui, sans-serif;
+        }
 
-      </body>
-    </html>
+        .registeredBar {
+          min-height: 43px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 28px;
+          flex-wrap: wrap;
+          padding: 10px 20px;
+          background: linear-gradient(90deg, #980000 0%, #cc0000 50%, #980000 100%);
+          color: #ffffff;
+          font: 800 12px/1.35 'Work Sans', sans-serif;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+
+        .registeredBar span {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .thankHero {
+          position: relative;
+          overflow: hidden;
+          background:
+            linear-gradient(90deg, rgba(8, 8, 8, 0.98) 0%, rgba(8, 8, 8, 0.9) 52%, rgba(8, 8, 8, 0.58) 100%),
+            url('/images/hero-ai-bg.png') center/cover no-repeat;
+        }
+
+        .heroShell {
+          display: grid;
+          grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+          align-items: stretch;
+          max-width: 1240px;
+          min-height: calc(100vh - 43px);
+          margin: 0 auto;
+        }
+
+        .heroCopy {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 84px 36px 84px 24px;
+        }
+
+        .heroLogo {
+          width: 142px;
+          height: auto;
+          margin-bottom: 44px;
+        }
+
+        .eyebrow {
+          margin: 0 0 16px;
+          color: #bb945a;
+          font: 800 12px/1.4 'Work Sans', sans-serif;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+        }
+
+        .eyebrow.red {
+          color: #cc0000;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+          margin: 0;
+        }
+
+        .heroCopy h1 {
+          max-width: 720px;
+          color: #ffffff;
+          font-family: 'Anton', sans-serif;
+          font-size: clamp(58px, 9vw, 124px);
+          font-weight: 400;
+          letter-spacing: 0.01em;
+          line-height: 0.9;
+          text-transform: uppercase;
+        }
+
+        .lead {
+          max-width: 620px;
+          margin-top: 28px;
+          color: rgba(255, 255, 255, 0.72);
+          font-size: 18px;
+          line-height: 1.75;
+        }
+
+        .heroActions {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          flex-wrap: wrap;
+          margin-top: 38px;
+        }
+
+        .goldButton,
+        .darkButton,
+        .outlineButton {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          min-height: 56px;
+          border-radius: 6px;
+          font: 800 15px/1 'Work Sans', sans-serif;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .goldButton,
+        .darkButton {
+          border: 0;
+          background: linear-gradient(135deg, #c9a55a 0%, #e8d080 45%, #bb945a 100%);
+          color: #120800;
+          box-shadow: 0 6px 24px rgba(185, 148, 90, 0.45);
+          padding: 0 34px;
+        }
+
+        .goldButton:hover,
+        .darkButton:hover {
+          filter: brightness(1.08);
+          transform: translateY(-2px);
+          box-shadow: 0 10px 36px rgba(185, 148, 90, 0.5);
+        }
+
+        .secondaryLink {
+          color: rgba(255, 255, 255, 0.72);
+          font: 700 13px/1.4 'Work Sans', sans-serif;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+        }
+
+        .heroMedia {
+          position: relative;
+          min-height: calc(100vh - 43px);
+          overflow: hidden;
+        }
+
+        .heroMedia::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background:
+            linear-gradient(90deg, #080808 0%, rgba(8, 8, 8, 0) 24%),
+            linear-gradient(0deg, #080808 0%, rgba(8, 8, 8, 0) 28%);
+          pointer-events: none;
+        }
+
+        .heroMedia img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center top;
+        }
+
+        .detailsBand {
+          background: #ffffff;
+          color: #111111;
+          padding: 0 24px;
+        }
+
+        .detailsGrid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1px;
+          max-width: 1040px;
+          margin: 0 auto;
+          background: #e7e7e7;
+        }
+
+        .detailItem {
+          min-height: 118px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 8px;
+          background: #ffffff;
+          text-align: center;
+          padding: 24px 18px;
+        }
+
+        .detailItem span {
+          color: #cc0000;
+          font: 800 11px/1.4 'Work Sans', sans-serif;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+
+        .detailItem strong {
+          color: #111111;
+          font: 800 20px/1.25 'Work Sans', sans-serif;
+        }
+
+        .nextSection {
+          background: #ffffff;
+          color: #111111;
+          padding: 88px 24px;
+        }
+
+        .nextInner {
+          display: grid;
+          grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+          gap: 56px;
+          align-items: start;
+          max-width: 1120px;
+          margin: 0 auto;
+        }
+
+        .sectionIntro h2,
+        .communityInner h2,
+        .shareInner h2 {
+          font-family: 'Anton', sans-serif;
+          font-weight: 400;
+          text-transform: uppercase;
+          letter-spacing: 0.01em;
+          line-height: 0.96;
+        }
+
+        .sectionIntro h2 {
+          max-width: 460px;
+          font-size: clamp(38px, 6vw, 72px);
+        }
+
+        .stepsPanel {
+          border-left: 3px solid #cc0000;
+          padding-left: 36px;
+        }
+
+        .stepsPanel ol {
+          display: grid;
+          gap: 18px;
+          margin: 0 0 32px;
+          padding: 0;
+          list-style: none;
+        }
+
+        .stepsPanel li {
+          display: grid;
+          grid-template-columns: 28px 1fr;
+          gap: 14px;
+          align-items: start;
+          color: #2a2a2a;
+          font-size: 17px;
+          line-height: 1.65;
+        }
+
+        .stepsPanel li span,
+        .itemIcon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: #cc0000;
+          color: #ffffff;
+          flex: 0 0 auto;
+        }
+
+        .darkButton {
+          min-height: 54px;
+        }
+
+        .communityBand {
+          background: #080808;
+          padding: 96px 24px;
+        }
+
+        .communityInner {
+          display: grid;
+          grid-template-columns: minmax(0, 0.88fr) minmax(380px, 1.12fr);
+          gap: 64px;
+          align-items: start;
+          max-width: 1120px;
+          margin: 0 auto;
+        }
+
+        .communityInner h2 {
+          max-width: 480px;
+          font-size: clamp(40px, 6vw, 76px);
+          color: #ffffff;
+        }
+
+        .communityInner > div > p:not(.eyebrow) {
+          max-width: 500px;
+          margin-top: 26px;
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 17px;
+          line-height: 1.8;
+        }
+
+        .communityList {
+          display: grid;
+          gap: 22px;
+        }
+
+        .communityItem {
+          display: grid;
+          grid-template-columns: 34px 1fr;
+          gap: 18px;
+          padding-bottom: 22px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .communityItem h3 {
+          color: #ffffff;
+          font: 800 16px/1.35 'Work Sans', sans-serif;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .communityItem p {
+          margin-top: 8px;
+          color: rgba(255, 255, 255, 0.66);
+          font-size: 15px;
+          line-height: 1.7;
+        }
+
+        .shareBand {
+          background: #f6f6f6;
+          color: #111111;
+          padding: 92px 24px;
+          text-align: center;
+        }
+
+        .shareInner {
+          max-width: 760px;
+          margin: 0 auto;
+        }
+
+        .shareInner h2 {
+          font-size: clamp(38px, 6vw, 68px);
+        }
+
+        .shareInner p {
+          max-width: 640px;
+          margin: 24px auto 34px;
+          color: #444444;
+          font-size: 17px;
+          line-height: 1.8;
+        }
+
+        .outlineButton {
+          border: 1px solid #cc0000;
+          color: #cc0000;
+          padding: 0 30px;
+          background: transparent;
+        }
+
+        .outlineButton:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 28px rgba(204, 0, 0, 0.16);
+        }
+
+        .thankFooter {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          background: #080808;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 48px 20px;
+          text-align: center;
+        }
+
+        .thankFooter img {
+          width: 132px;
+          height: auto;
+          margin-bottom: 10px;
+        }
+
+        .thankFooter p {
+          color: rgba(255, 255, 255, 0.36);
+          font-size: 13px;
+          line-height: 1.55;
+        }
+
+        @media (max-width: 900px) {
+          .thankHero {
+            padding: 0 !important;
+          }
+
+          .detailsBand {
+            padding: 0 22px !important;
+          }
+
+          .registeredBar {
+            gap: 14px;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+          }
+
+          .heroShell,
+          .nextInner,
+          .communityInner {
+            grid-template-columns: 1fr;
+          }
+
+          .heroShell {
+            min-height: auto;
+          }
+
+          .heroCopy {
+            padding: 44px 22px 54px;
+          }
+
+          .heroLogo {
+            width: 118px;
+            margin-bottom: 34px;
+          }
+
+          .heroMedia {
+            min-height: 430px;
+            order: -1;
+          }
+
+          .heroMedia::before {
+            background:
+              linear-gradient(0deg, #080808 0%, rgba(8, 8, 8, 0) 36%),
+              linear-gradient(180deg, rgba(8, 8, 8, 0.32) 0%, rgba(8, 8, 8, 0) 42%);
+          }
+
+          .heroActions {
+            align-items: stretch;
+            flex-direction: column;
+          }
+
+          .goldButton,
+          .darkButton,
+          .outlineButton {
+            width: 100%;
+            min-height: 54px;
+            padding: 14px 14px;
+            font-size: 12px;
+            line-height: 1.25;
+            text-align: center;
+            white-space: normal;
+          }
+
+          .secondaryLink {
+            text-align: center;
+          }
+
+          .detailsGrid {
+            grid-template-columns: 1fr;
+          }
+
+          .nextSection,
+          .communityBand,
+          .shareBand {
+            padding: 64px 22px !important;
+          }
+
+          .stepsPanel {
+            border-left: 0;
+            padding-left: 0;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .registeredBar span:nth-child(2),
+          .registeredBar span:nth-child(3) {
+            display: none;
+          }
+
+          .heroMedia {
+            min-height: 360px;
+          }
+
+          .lead,
+          .shareInner p,
+          .communityInner > div > p:not(.eyebrow) {
+            font-size: 16px;
+          }
+
+          .detailItem {
+            min-height: 96px;
+          }
+        }
+      `}</style>
+    </>
   );
 }
-
