@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 
 const COMMUNITY_URL =
   "https://vault.fbfmastery.com/join?invitation_token=b0c8c0451f281ece962ad9e00e5c739000d5e1b9-e61c108d-7479-4d7b-8079-f258420879bb";
-const LANDING_URL = "/";
 
 function CheckIcon() {
   return (
@@ -77,10 +76,6 @@ export default function ThankYou() {
           </div>
 
           <div className="heroShell">
-            <div className="heroMedia" aria-label="Larry and Staci Wallace">
-              <img src="/images/staci-larry-split.webp" alt="Larry and Staci Wallace" />
-            </div>
-
             <div className="heroCopy">
               <img
                 src="/images/fbf-logo-white.png"
@@ -115,9 +110,6 @@ export default function ThankYou() {
                 >
                   join the masterclass community
                   <ArrowIcon />
-                </a>
-                <a href={LANDING_URL} className="secondaryLink">
-                  share the masterclass
                 </a>
               </div>
             </div>
@@ -170,45 +162,21 @@ export default function ThankYou() {
         }
 
         .heroShell {
-          display: grid;
-          grid-template-columns: minmax(340px, 0.92fr) minmax(0, 1.08fr);
-          align-items: stretch;
-          max-width: 1240px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 980px;
           min-height: calc(100vh - 43px);
           margin: 0 auto;
-        }
-
-        .heroMedia {
-          position: relative;
-          min-height: calc(100vh - 43px);
-          overflow: hidden;
-        }
-
-        .heroMedia::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          background:
-            linear-gradient(90deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0) 58%, #080808 100%),
-            linear-gradient(0deg, #080808 0%, rgba(8, 8, 8, 0) 28%);
-          pointer-events: none;
-        }
-
-        .heroMedia img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center top;
+          padding: 72px 24px 76px;
         }
 
         .heroCopy {
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          padding: 58px 24px 64px 54px;
+          align-items: center;
+          width: 100%;
+          text-align: center;
         }
 
         .heroLogo {
@@ -231,10 +199,10 @@ export default function ThankYou() {
         }
 
         .heroCopy h1 {
-          max-width: 690px;
+          max-width: 780px;
           color: #ffffff;
           font-family: 'Anton', sans-serif;
-          font-size: clamp(44px, 6.7vw, 90px);
+          font-size: clamp(46px, 7.4vw, 92px);
           font-weight: 400;
           letter-spacing: 0.01em;
           line-height: 0.92;
@@ -252,9 +220,9 @@ export default function ThankYou() {
 
         .welcomeVideo {
           position: relative;
-          width: min(100%, 600px);
+          width: min(100%, 700px);
           margin-top: 24px;
-          padding-top: min(75%, 450px);
+          padding-top: min(75%, 525px);
           overflow: hidden;
           border: 1px solid rgba(187, 148, 90, 0.34);
           border-radius: 6px;
@@ -273,7 +241,7 @@ export default function ThankYou() {
         .confirmationCopy {
           display: grid;
           gap: 16px;
-          max-width: 600px;
+          max-width: 680px;
           margin-top: 22px;
         }
 
@@ -291,6 +259,7 @@ export default function ThankYou() {
         .heroActions {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 24px;
           flex-wrap: wrap;
           margin-top: 30px;
@@ -320,13 +289,6 @@ export default function ThankYou() {
           box-shadow: 0 10px 36px rgba(185, 148, 90, 0.5);
         }
 
-        .secondaryLink {
-          color: rgba(255, 255, 255, 0.72);
-          font: 700 13px/1.4 'Work Sans', sans-serif;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-        }
-
         .thankFooter {
           display: flex;
           flex-direction: column;
@@ -352,22 +314,12 @@ export default function ThankYou() {
 
         @media (max-width: 980px) {
           .heroShell {
-            grid-template-columns: 1fr;
             min-height: auto;
-          }
-
-          .heroMedia {
-            min-height: 390px;
-          }
-
-          .heroMedia::before {
-            background:
-              linear-gradient(0deg, #080808 0%, rgba(8, 8, 8, 0) 34%),
-              linear-gradient(180deg, rgba(8, 8, 8, 0.28) 0%, rgba(8, 8, 8, 0) 40%);
+            padding: 52px 22px 60px;
           }
 
           .heroCopy {
-            padding: 42px 22px 56px;
+            padding: 0;
           }
 
           .heroLogo {
@@ -376,6 +328,7 @@ export default function ThankYou() {
           }
 
           .heroActions {
+            width: 100%;
             align-items: stretch;
             flex-direction: column;
           }
@@ -388,10 +341,6 @@ export default function ThankYou() {
             line-height: 1.25;
             text-align: center;
             white-space: normal;
-          }
-
-          .secondaryLink {
-            text-align: center;
           }
         }
 
@@ -409,14 +358,6 @@ export default function ThankYou() {
 
           .registeredBar span:nth-child(n + 3) {
             display: none;
-          }
-
-          .heroMedia {
-            min-height: 335px;
-          }
-
-          .heroMedia img {
-            object-position: center top;
           }
 
           .heroCopy h1 {
