@@ -53,6 +53,7 @@ function SelectInput(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
 export default function WorkbookPage() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("Something went wrong. Please try again.");
   const router = useRouter();
 
   const setField = (name: keyof typeof initialForm, value: string | string[]) => {
@@ -71,6 +72,7 @@ export default function WorkbookPage() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("loading");
+    setErrorMessage("Something went wrong. Please try again.");
 
     try {
       const response = await fetch("/api/workbook", {
@@ -79,9 +81,13 @@ export default function WorkbookPage() {
         body: JSON.stringify(form),
       });
 
-      if (!response.ok) throw new Error("submit failed");
+      if (!response.ok) {
+        const body = await response.json().catch(() => null);
+        throw new Error(body?.error || "Something went wrong. Please try again.");
+      }
       router.push("/workbook-thank-you");
-    } catch {
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong. Please try again.");
       setStatus("error");
     }
   };
@@ -201,7 +207,7 @@ export default function WorkbookPage() {
                 <button className={`${styles.button} ${styles.buttonGold} ${styles.workbookSubmit}`} disabled={status === "loading"} type="submit">
                   {status === "loading" ? "Submitting..." : "Get workbook access"}
                 </button>
-                {status === "error" ? <p className={styles.formError}>Something went wrong. Please try again.</p> : null}
+                {status === "error" ? <p className={styles.formError}>{errorMessage}</p> : null}
           </form>
         </div>
       </section>

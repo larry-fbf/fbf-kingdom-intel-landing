@@ -41,6 +41,14 @@ function normalizeEmail(value = "") {
   return value.trim().toLowerCase();
 }
 
+function normalizeUsPhone(phone = "") {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return "";
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
+  return "";
+}
+
 async function readError(res: Response) {
   const text = await res.text();
   try {
@@ -245,7 +253,7 @@ export async function POST(req: NextRequest) {
       firstName: clean(payload.firstName),
       lastName: clean(payload.lastName),
       email: normalizeEmail(payload.email),
-      phone: clean(payload.phone),
+      phone: normalizeUsPhone(payload.phone),
       company: clean(payload.company),
     };
 
@@ -267,6 +275,10 @@ export async function POST(req: NextRequest) {
 
     if (missing.length > 0) {
       return NextResponse.json({ error: "Missing required fields", fields: missing.map(([name]) => name) }, { status: 400 });
+    }
+
+    if (!contact.phone) {
+      return NextResponse.json({ error: "Enter a valid US phone number.", fields: ["phone"] }, { status: 400 });
     }
 
     const results: Record<string, unknown> = {};
