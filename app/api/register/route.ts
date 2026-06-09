@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const HUBSPOT_PAT = process.env.HUBSPOT_PAT || "";
-const HUBSPOT_LIST_ID = "1015";
-
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const ATTIO_MASTERCLASS_LIST_ID = process.env.ATTIO_MASTERCLASS_LIST_ID || "";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
@@ -102,15 +99,14 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
 async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
   if (!BREVO_API_KEY || !BREVO_MASTERCLASS_LIST_ID) return { skipped: true };
 
-  const attributes: Record<string, string> = {
-    FIRSTNAME: contact.firstName,
-    LASTNAME: contact.lastName,
-  };
-  if (contact.phone) attributes.SMS = contact.phone;
+  const sendToBrevo = async (includeSms: boolean) => {
+    const attributes: Record<string, string> = {
+      FIRSTNAME: contact.firstName,
+      LASTNAME: contact.lastName,
+    };
+    if (includeSms && contact.phone) attributes.SMS = contact.phone;
 
-  await fetchJson(
-    "https://api.brevo.com/v3/contacts",
-    {
+    const res = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
         "api-key": BREVO_API_KEY,
@@ -123,11 +119,33 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
         listIds: [BREVO_MASTERCLASS_LIST_ID],
         updateEnabled: true,
       }),
-    },
-    "Brevo contact"
-  );
+    });
 
-  return { skipped: false };
+    const text = await res.text();
+    const responseBody = text ? JSON.parse(text) : null;
+
+    if (!res.ok) {
+      return { ok: false, status: res.status, body: responseBody };
+    }
+
+    return { ok: true, status: res.status, body: responseBody };
+  };
+
+  const withSms = await sendToBrevo(Boolean(contact.phone));
+  if (withSms.ok) return { skipped: false };
+
+  const duplicateSms =
+    withSms.status === 400 &&
+    withSms.body?.code === "duplicate_parameter" &&
+    typeof withSms.body?.message === "string" &&
+    withSms.body.message.toLowerCase().includes("sms is already associated");
+
+  if (duplicateSms && contact.phone) {
+    const withoutSms = await sendToBrevo(false);
+    if (withoutSms.ok) return { skipped: false, smsSkipped: "duplicate_sms" };
+  }
+
+  throw new Error(`Brevo contact failed (${withSms.status}): ${JSON.stringify(withSms.body)}`);
 }
 
 async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
@@ -172,49 +190,13 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
   return { skipped: false };
 }
 
-async function upsertHubSpotContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
-  if (!HUBSPOT_PAT) return { skipped: true };
-
-  const contactBody = {
-    properties: [
-      { property: "email", value: contact.email },
-      { property: "firstname", value: contact.firstName },
-      { property: "lastname", value: contact.lastName },
-      { property: "phone", value: contact.phone || "" },
-      { property: "hs_lead_status", value: "NEW" },
-      { property: "lifecyclestage", value: "lead" },
-    ],
-  };
-
-  const contactData = await fetchJson(
-    "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/" + encodeURIComponent(contact.email),
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${HUBSPOT_PAT}`,
-      },
-      body: JSON.stringify(contactBody),
-    },
-    "HubSpot contact"
-  );
-
-  if (contactData?.vid) {
-    await fetchJson(
-      `https://api.hubapi.com/crm/v3/lists/${HUBSPOT_LIST_ID}/memberships/add`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${HUBSPOT_PAT}`,
-        },
-        body: JSON.stringify([String(contactData.vid)]),
-      },
-      "HubSpot list"
-    );
+async function captureIntegration<T>(label: string, task: () => Promise<T>) {
+  try {
+    return await task();
+  } catch (error) {
+    console.error(`${label} integration failed`, error);
+    return { skipped: false, error: `${label} integration failed` };
   }
-
-  return { skipped: false, vid: contactData?.vid };
 }
 
 export async function POST(req: NextRequest) {
@@ -232,20 +214,18 @@ export async function POST(req: NextRequest) {
     const contact = { email, firstName, lastName, phone };
     const results: Record<string, unknown> = {};
 
-    results.attio = await upsertAttioContact(contact);
-    results.brevo = await upsertBrevoContact(contact);
+    results.attio = await captureIntegration("Attio", () => upsertAttioContact(contact));
+    results.brevo = await captureIntegration("Brevo", () => upsertBrevoContact(contact));
 
     if (payload.agreed && phone) {
-      results.simpleTexting = await upsertSimpleTextingContact(contact);
+      results.simpleTexting = await captureIntegration("SimpleTexting", () => upsertSimpleTextingContact(contact));
     } else {
       results.simpleTexting = { skipped: true, reason: "missing sms consent or phone" };
     }
 
-    results.hubSpot = await upsertHubSpotContact(contact);
-
     return NextResponse.json({ ok: true, results });
   } catch (e) {
     console.error(e);
-    return NextResponse.json({ error: "Registration failed" }, { status: 500 });
+    return NextResponse.json({ ok: true, warning: "Registration accepted with processing errors" });
   }
 }

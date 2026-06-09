@@ -1,0 +1,5 @@
+worktrees/
+tmp/
+next-*.log
+next-*.err.log
+app/draft/

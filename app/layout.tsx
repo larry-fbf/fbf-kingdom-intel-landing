@@ -34,6 +34,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "if(window.location.pathname==='/network'){const queryString=window.location.search;const urlParams=new URLSearchParams(queryString);const affiliateCode=urlParams.get('affiliate_code');const circleUrls='fbfmastery.circle.so,vault.fbfmastery.com'.split(',');if(affiliateCode){let now=new Date;let days=60;now.setTime(now.getTime()+days*24*60*60*1e3);document.cookie='affiliate_code='+affiliateCode+'; expires='+now.toUTCString()+';'}function getAffiliateCodeCookie(){let cookieArr=document.cookie.split(';');let affiliateCodeCookie=cookieArr.find(cookie=>cookie.split('=')[0].trim()==='affiliate_code');if(affiliateCodeCookie)return decodeURIComponent(affiliateCodeCookie.split('=')[1])}function isCircleUrl(url){return circleUrls.some(circleUrl=>{let circleUrlRegex=new RegExp('^https?://'+circleUrl+'.*');return url.match(circleUrlRegex)})}document.addEventListener('DOMContentLoaded',function(){let links=document.getElementsByTagName('a');let storedAffiliateCode=getAffiliateCodeCookie();if(storedAffiliateCode){for(let i=0;i<links.length;i++){let href=links[i].href;if(href&&isCircleUrl(href)){href+=(href.match(/\\?/)?'&':'?')+'affiliate_code='+storedAffiliateCode;links[i].href=href}}}})}",
+          }}
+        />
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -124,7 +130,7 @@ a { color: inherit; text-decoration: none; }
 .hero-content-row {
   display: flex;
   flex: 1;
-  min-height: 100vh;
+  min-height: calc(100vh - 43px);
 }
 .hero-photo-col {
   flex: 0 0 48%;
@@ -136,9 +142,9 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-photo {
   width: 100%;
-  height: 115%;
+  height: 118%;
   object-fit: cover;
-  object-position: center 8%;
+  object-position: center top;
   position: absolute;
   top: 0; left: 0;
 }

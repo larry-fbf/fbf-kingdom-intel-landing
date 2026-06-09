@@ -13,7 +13,7 @@ const featuredTestimonials = [
   {
     category: "Business Growth",
     quote:
-      "I was an 8th-grade dropout with zero business experience. Larry & Staci helped our company grow to $13 million in 9 months and over $60 million in 3 years!",
+      "I was an 8th-grade dropout with zero business experience. Larry & Staci helped our company grow to $13 million in 9 months and over $70 million in 3 years!",
     name: "Kyler Kropf",
     role: "Founder, SaddleBrookeLife",
     photo: "https://www.kingdomintel.com/images/kyler-headshot.png",
@@ -21,7 +21,7 @@ const featuredTestimonials = [
   {
     category: "Faith, Family & Business Alignment",
     quote:
-      "FBF has had a monumental impact on our lives. We've built an 8-figure commercial investment business while keeping faith and family first.",
+      "FBF has had a monumental impact on our lives and business. We've built an 8-figure commercial investment business while keeping faith and family first.",
     name: "Alex & Irina Chifor",
     role: "Commercial Investors",
     photo: "https://www.kingdomintel.com/images/irina-alex.webp",
@@ -30,31 +30,31 @@ const featuredTestimonials = [
 
 const testimonialCards = [
   {
-    name: "Kolton Kropf",
-    role: "CEO, SaddlebrookeLife",
+    name: "Peter Vandenberg",
+    role: "CEO, Vandenberg Fine Jewelry",
     quote:
-      "Our business was headed toward bankruptcy and after only 9 months, we turned it into an 8-figure success story on target to surpass $100 million in revenue.",
-    photo: "https://www.kingdomintel.com/images/kolton-headshot.png",
+      "Our sales are up 166.4% month over month. There is no explanation other than we have tapped into a God-factor that is driving our growth and legacy impact.",
+    photo: null,
   },
   {
     name: "Eric Moland",
     role: "CEO, Black Dog Insurance",
     quote:
-      "In one month, my income jumped 35%. The next month, the largest commission sales month in 40 years. Our entire business profit is up over 50% this year alone.",
+      "In one month, my income jumped 35%. The next month I had the largest commission sales month in 40 years. Our entire business profit is up over 50% this year alone.",
     photo: "https://www.kingdomintel.com/images/eric-headshot.jpg",
   },
   {
     name: "Dallas Marley",
     role: "Marketing Specialist & Entrepreneur",
     quote:
-      "In less than 12 months, we paid off over $2 million in debt, moved to Ecuador, and stepped into the life of our dreams.",
+      "In less than 12 months, we paid off over $2 million in debt, and stepped into the life of our dreams. We’ve stepped boldly into our God-sized vision of irrational generosity.",
     photo: "https://www.kingdomintel.com/images/dallas-headshot.jpg",
   },
   {
     name: "Lynn Vennefron",
     role: "FBF Client",
     quote:
-      "Since graduating from the Smart Money Makeover course, we have paid off all of our debt other than our mortgage. For the first time in our married life, we are debt free.",
+      "Since graduating from the Smart Money Makeover course, we have paid off all of our debt other than our mortgage. For the first time in our married life, we are debt-free.",
     photo: "https://www.kingdomintel.com/images/lynn-headshot.jpg",
   },
   {
@@ -74,41 +74,41 @@ const testimonialCards = [
 ];
 
 const marqueeTestimonials = [
-  "Kristina Hess - KR Hess Law, P.C.",
-  "Jamie Dahl - Business Owner",
-  "Delbert Friesen - President, Earthmax",
+  "Trusted by leaders including Kristina Hess of KR Hess Law, P.C.",
+  "Jamie Dahl",
+  "Delbert Friesen of Earthmax",
 ];
 
 const expectationCards = [
   {
     icon: "✦",
     title: "vision",
-    copy: "Clarify the God-sized assignment and the next faithful steps.",
+    copy: "Clarify the God-sized assignment and identify the next faithful steps.",
   },
   {
     icon: "↗",
     title: "marketing",
-    copy: "Sharpen your message, offers, funnels, and growth plan.",
+    copy: "Sharpen your message, offers, funnels, content, and growth strategy.",
   },
   {
     icon: "▦",
     title: "operations",
-    copy: "Build systems, team rhythms, and capacity that can scale.",
+    copy: "Build systems, team rhythms, and capacity that can sustain scale.",
   },
   {
     icon: "◈",
     title: "ai + tools",
-    copy: "Use AI wisely to save time, improve decisions, and move faster.",
+    copy: "Use AI wisely to save time, strengthen decisions, and move faster with discernment.",
   },
   {
     icon: "$",
     title: "money",
-    copy: "Strengthen cash flow, pricing, profit, and financial clarity.",
+    copy: "Strengthen cash flow, pricing, profit, stewardship, and financial clarity.",
   },
   {
     icon: "◎",
     title: "leadership",
-    copy: "Lead with wisdom, conviction, and Spirit-led confidence.",
+    copy: "Lead with wisdom, conviction, courage, and Spirit-led confidence.",
   },
 ];
 
@@ -166,12 +166,10 @@ export default function NetworkPage() {
               <span className={styles.heroWordmarkAccent}>Intelligence</span>
               <span>Network</span>
             </div>
-            <p className={styles.heroSubtitle}>Helping you build business God's way.</p>
+            <p className={styles.heroSubtitle}>Build business God's way, with wisdom, counsel, and Spirit-led strategy.</p>
             <p className={styles.heroDescription}>
-              This is a room full of Kingdom leaders and business owners who are actively making it
-              Heaven on earth in the marketplace. With executive-level access, peer counsel, monthly
-              trainings, and real-time support for the decisions that matter most by those doing
-              business the Kingdom Way.
+              A private network for Kingdom entrepreneurs and business owners who want to grow with
+              wisdom, lead with discernment, and make decisions through the lens of Kingdom Intelligence.
             </p>
             <div className={styles.heroActions}>
               <a className={`${styles.button} ${styles.buttonGold}`} href={paymentUrl} target="_blank" rel="noreferrer">
@@ -186,21 +184,18 @@ export default function NetworkPage() {
         <div className={`${styles.container} ${styles.audienceGrid}`}>
           <div>
             <SectionHeading
-              eyebrow="Who This Is For"
-              title="A faith-filled network for leaders who build His way."
-              description="The Kingdom Intelligence Network is an online community of Christian entrepreneurs and business owners learning to build business God's way. This is where faith, leadership, and marketplace growth come together in one room."
+              eyebrow="What Is The Kingdom Intel Network"
+              title="An exclusive leadership room for building business God's way."
+              description="The Kingdom Intelligence Network is for Christian entrepreneurs and business owners who know they are called to build differently."
             />
             <p className={styles.sectionCopy}>
-              In a world rapidly changing through AI, it is more important than ever to build with Kingdom
-              Intelligence and discernment in the marketplace. This is a network of leaders and business
-              owners who refuse to build by the world&apos;s standards and instead lead with wisdom, conviction,
-              and Spirit-led strategy.
+              This is not just another online community. It is a room for leaders who want to grow with
+              wisdom, lead with discernment, and make decisions through the lens of Kingdom Intelligence.
             </p>
             <p className={styles.sectionCopy}>
-              As technology accelerates, discernment matters more. Kingdom Intelligence is what helps you
-              see clearly, lead with authority, and build lasting impact in the marketplace. This room is
-              for leaders who want to grow with that kind of wisdom and stay surrounded by others doing
-              business the Kingdom way.
+              As AI accelerates and the marketplace shifts, discernment matters more than ever. You
+              don&apos;t need more information. You need counsel, clarity, and a trusted room of Kingdom
+              leaders who are committed to building with faith, excellence, and eternal impact.
             </p>
             <div className={styles.tagRow}>
               <span>Christian entrepreneurs</span>
@@ -216,13 +211,13 @@ export default function NetworkPage() {
               <span>per month</span>
             </div>
             <ul className={styles.bulletList}>
-              <li>Weekly mentorship with successful Christian leaders</li>
-              <li>Executive Q&amp;A and peer counsel for real business decisions</li>
-              <li>Podcast, Masterclass, and training replays</li>
-              <li>Direct access to CEO mentors, guests, and members inside the app</li>
-              <li>Weekly events calendar and free resources</li>
-              <li>Access to future Kingdom Intelligence Masterclass VIP rooms</li>
-              <li>Exclusive invites to in-person and online events</li>
+              <li>Weekly mentorship with Christian business leaders</li>
+              <li>Executive Q&amp;A for real-time business decisions</li>
+              <li>Strategic collaboration with Kingdom entrepreneurs</li>
+              <li>Access to trainings, replays, and resources</li>
+              <li>Direct connection inside the private member app</li>
+              <li>Live events calendar and member-only opportunities</li>
+              <li>VIP access to future Kingdom Intelligence rooms</li>
             </ul>
             <a className={`${styles.button} ${styles.buttonRed} ${styles.fullButton}`} href={paymentUrl} target="_blank" rel="noreferrer">
               Join The Network
@@ -234,20 +229,25 @@ export default function NetworkPage() {
       <section className={styles.communitySection}>
         <div className={styles.container}>
           <div className={styles.communityProof}>
-            <div className={styles.communityCopy}>
-              <p className={styles.communityLabel}>Inside The Member Community</p>
-              <h3>Ask questions, watch replays, follow the calendar, and stay close to the room.</h3>
-              <p>
-                Inside the member community, you get weekly mentorship touchpoints, podcast and
-                Masterclass replays, direct messaging access, and resources to build your brand, your
-                business, and your faith.
-              </p>
-            </div>
+            <p className={styles.communityLabel}>Inside The Member Community</p>
             <div className={styles.communityImage}>
               <img
                 src="/community-app-screenshot.png"
-                alt="Kingdom Intelligence Network member community app showing community feed, events, and resources"
+                alt="Kingdom Intelligence Network member community app showing the community feed, upcoming events, replays, and member resources"
               />
+            </div>
+            <div className={styles.communityCopy}>
+              <h3>Stay connected to the counsel, training, and conversations that move your business forward.</h3>
+              <p>
+                Inside the member community, you can ask questions, access weekly mentorship, watch
+                podcast and Masterclass replays, follow the live events calendar, and connect directly
+                with leaders who are building business God&apos;s way.
+              </p>
+              <p>
+                This is where the Network becomes practical: conversations, resources, replays, and
+                real-time support that help you grow your brand, strengthen your business, and stay
+                anchored in faith.
+              </p>
             </div>
           </div>
         </div>
@@ -263,8 +263,12 @@ export default function NetworkPage() {
             <h2 className={styles.lightHeading}>Building businesses God's way.</h2>
             <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
               Fueled by Fire exists to equip Christian entrepreneurs to lead with wisdom, grow with
-              integrity, and bring Heaven into the marketplace. Kingdom Intelligence Network is where that
-              mission becomes practical every week.
+              integrity, and bring Kingdom Intelligence into the marketplace.
+            </p>
+            <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
+              The Kingdom Intelligence Network is where that mission becomes practical every week:
+              through mentorship, counsel, training, prayer, collaboration, and a trusted room of leaders
+              committed to building with faith and excellence.
             </p>
             <div className={styles.finalCtaActions}>
               <a className={`${styles.button} ${styles.buttonRed}`} href={paymentUrl} target="_blank" rel="noreferrer">
@@ -280,30 +284,36 @@ export default function NetworkPage() {
         <div className={styles.container}>
           <div className={styles.eventsIntro}>
             <p className={styles.eyebrow}>Yearly Events &amp; Invites</p>
-            <h2 className={styles.heading}>
-              Get exclusive invites to events, trainings, and leadership retreats.
-            </h2>
           </div>
           <div className={styles.eventsBody}>
+            <div className={styles.eventsImageWrap}>
+              <img
+                src="/images/kingdom-intel-events-invites.jpg"
+                alt="Kingdom Intelligence Network events, gatherings, and leadership retreat invitations"
+              />
+            </div>
             <div className={styles.eventsText}>
+              <h2 className={styles.heading}>
+                Stay close to the rooms where Kingdom leaders gather.
+              </h2>
               <p className={styles.sectionCopy}>
-                As a member, you get invited into Perspective gatherings and leadership development
-                experiences hosted in places like the beach, the Grand Canyon, and the Smoky Mountains.
+                As a member, you receive exclusive invitations to join the Fueled By Fire gatherings,
+                leadership trainings, and transformational experiences hosted throughout the year.
               </p>
               <p className={styles.sectionCopy}>
-                You also get access to the live events calendar inside the community, so you can stay
-                close to upcoming online trainings, special calls, and member moments all year.
+                From Perspective Leadership Summits to retreats in places like the beach, the Grand
+                Canyon, and the Smoky Mountains, these moments are designed to strengthen your faith,
+                expand your leadership, and keep you surrounded by entrepreneurs building business
+                God&apos;s way.
+              </p>
+              <p className={styles.sectionCopy}>
+                You also get access to the live events calendar in the community, so you can stay
+                connected to upcoming online training sessions, special calls, and member-only opportunities.
               </p>
               <a className={`${styles.button} ${styles.buttonRed}`} href={paymentUrl} target="_blank" rel="noreferrer">
                 Join The Network
               </a>
               <p className={styles.eventsNote}>* Tickets and travel not included.</p>
-            </div>
-            <div className={styles.eventsImageWrap}>
-              <img
-                src="/images/kingdom-intel-events-invites.jpg"
-                alt="Kingdom Intelligence Network events and invites"
-              />
             </div>
           </div>
         </div>
@@ -314,6 +324,7 @@ export default function NetworkPage() {
           <SectionHeading
             eyebrow="Results Matter"
             title="Lives Changed. Businesses Built. Legacies Established."
+            description="Kingdom Intelligence is not theory. These are real leaders, real families, and real businesses experiencing transformation through faith, strategy, and stewardship."
             light
           />
 
@@ -337,7 +348,17 @@ export default function NetworkPage() {
             {testimonialCards.map((item) => (
               <article key={item.name} className={styles.testimonialCard}>
                 <div className={styles.testimonialHead}>
-                  <img className={styles.testimonialAvatar} src={item.photo} alt={item.name} />
+                  {item.photo ? (
+                    <img className={styles.testimonialAvatar} src={item.photo} alt={item.name} />
+                  ) : (
+                    <div className={styles.testimonialAvatarFallback} aria-label={item.name}>
+                      {item.name
+                        .split(" ")
+                        .map((part) => part[0])
+                        .join("")
+                        .slice(0, 2)}
+                    </div>
+                  )}
                 </div>
                 <blockquote>{item.quote}</blockquote>
                 <div className={styles.testimonialPerson}>
@@ -361,14 +382,14 @@ export default function NetworkPage() {
           <SectionHeading
             eyebrow="What You Can Expect"
             title="Practical help for the vision God put in your hands."
-            description="Bring the real problems, decisions, and growth opportunities in your business. We work the room together."
+            description="Bring the real decisions, problems, and growth opportunities in your business. Inside the Network, we work the room together with wisdom, strategy, collaboration, and Spirit-led counsel."
             light
           />
           <div className={styles.expectLayout}>
             <div className={styles.expectImageWrap}>
               <img
                 src="/images/kingdom-intel-expect-room.jpg"
-                alt="Kingdom Intelligence Network room"
+                alt="Kingdom Intelligence Network members gathered for business strategy, mentorship, and Kingdom counsel"
               />
             </div>
             <div className={styles.expectGrid}>
@@ -390,8 +411,14 @@ export default function NetworkPage() {
             <p className={`${styles.eyebrow} ${styles.eyebrowLight}`}>Join Kingdom Intelligence Network</p>
             <h2 className={styles.lightHeading}>Get in the room for $197 per month.</h2>
             <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
-              Weekly mentorship, executive Q&amp;A, replays, free resources, and access to a Christian
-              business community built to help you grow God's way.
+              Step into a Christian business community built for leaders who want to grow God&apos;s way.
+              Inside the Network, you will receive weekly mentorship, executive Q&amp;A, replays,
+              practical resources, and access to a room of Kingdom entrepreneurs building with wisdom,
+              faith, and excellence.
+            </p>
+            <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
+              Cancel anytime. Stay as long as the room keeps helping you build with clarity, counsel,
+              and Kingdom Intelligence.
             </p>
           </div>
           <a className={`${styles.button} ${styles.buttonGold}`} href={paymentUrl} target="_blank" rel="noreferrer">

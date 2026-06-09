@@ -5,6 +5,21 @@ import { useRouter } from "next/navigation";
 
 const REGISTER_URL = "#register";
 
+async function postWithTimeout(url: string, body: unknown) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 5000);
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
 /* -- REGISTRATION MODAL -- */
 function RegisterModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState({ email: "", firstName: "", lastName: "", phone: "", agreed: false });
@@ -16,16 +31,11 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
     if (!form.agreed) { alert("Please agree to receive communications to continue."); return; }
     setStatus("loading");
     try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) router.push("/thank-you");
-      else setStatus("error");
+      await postWithTimeout("/api/register", form);
     } catch {
-      setStatus("error");
+      // Keep the visitor flow moving even if a downstream integration is unavailable.
     }
+    router.push("/thank-you");
   };
 
   const inputStyle: React.CSSProperties = {
@@ -64,7 +74,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
                 <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Email *</label>
-                <input required type="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
+                <input required type="text" inputMode="email" autoComplete="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
               </div>
               <div className="modal-name-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                 <div>
@@ -221,10 +231,6 @@ function Hero({ onOpen }: { onOpen: () => void }) {
               <div style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "#BB945A", fontFamily: "'Work Sans', sans-serif", fontWeight: 700, marginBottom: "4px" }}>Date</div>
               <div style={{ fontSize: "clamp(13px, 1.2vw, 16px)", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>June 9–11 @ 12 PM Central</div>
             </div>
-            <div>
-              <div style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "#BB945A", fontFamily: "'Work Sans', sans-serif", fontWeight: 700, marginBottom: "4px" }}>Register</div>
-              <div style={{ fontSize: "clamp(13px, 1.2vw, 16px)", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>www.kingdomintel.com</div>
-            </div>
           </div>
         </div>
       </div>
@@ -369,35 +375,6 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
         <div style={{ width: "60px", height: "3px", background: "rgba(255,255,255,0.4)", margin: "24px auto 16px", borderRadius: "2px" }} />
         <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" as const, position: "relative", zIndex: 1, fontFamily: "'Work Sans', sans-serif" }}>&ndash; Staci Wallace</p>
           <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.82)", lineHeight: 1.75, maxWidth: "640px", margin: "24px auto 0", fontFamily: "'Work Sans', sans-serif", position: "relative", zIndex: 1 }}>The answer is not to shy away from AI. It is to develop the discernment to wield it with wisdom, deploy it with intention, and govern it with Kingdom Intelligence so your business grows without losing its soul.</p>
-      </div>
-    </section>
-  );
-}
-
-/* -- ABOUT STACI -- */
-function AboutStaci() {
-  const ref = useScrollReveal();
-  return (
-    <section style={{ background: "#FFFFFF", padding: "80px 20px", borderTop: "none" }}>
-      <div ref={ref} className="section-reveal about-flex" style={{ maxWidth: "1020px", margin: "0 auto", display: "flex", alignItems: "flex-start", gap: "56px", flexWrap: "wrap" }}>
-        <div style={{ flex: "0 0 auto" }}>
-          <img src="/images/staci-headshot-best.jpg" alt="Staci Wallace" className="about-photo" style={{ width: "100%", maxWidth: "380px", height: "auto", display: "block", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }} />
-        </div>
-        <div style={{ flex: "1 1 380px", minWidth: "280px" }}>
-          <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "8px", fontFamily: "'Work Sans', sans-serif" }}>Your Host</p>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, color: "#111111", marginBottom: "6px" }}>STACI WALLACE</h2>
-          <p style={{ fontSize: "15px", fontWeight: 700, color: "#CC0000", marginBottom: "28px", textTransform: "uppercase" as const, letterSpacing: "0.05em", fontFamily: "'Work Sans', sans-serif" }}>CEO, Fueled By Fire &bull; 8x Best-Selling Author</p>
-          <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-            After 29 years of marriage and nearly four decades of building businesses together, Staci and Larry Wallace have built multiple companies from startup to 7, 8, and 9 figures while raising their family and keeping faith at the center of everything they do. For over a decade, they have used automation, systems, and artificial intelligence to scale companies, streamline operations, and build lean, highly profitable businesses. Today, they teach leaders how to combine Kingdom Intelligence with modern technology to scale their businesses without sacrificing their faith, family, or purpose.
-          </p>
-          <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>
-            
-          </p>
-          <p style={{ fontSize: "17px", color: "#444444", lineHeight: 1.85, marginBottom: "28px", fontFamily: "'Work Sans', sans-serif" }}>
-            <strong style={{ color: "#111" }}>Multiplying what God has entrusted to your stewardship is not just a good idea. It is a divine mandate.</strong>
-          </p>
-          <p style={{ fontSize: "19px", fontWeight: 700, fontStyle: "italic", color: "#CC0000" }}>&ldquo;A dream without a plan of action is nothing but wishful thinking.&rdquo; &ndash; Staci Wallace</p>
-        </div>
       </div>
     </section>
   );
@@ -590,7 +567,8 @@ function TopBanner({ onOpen }: { onOpen: () => void }) {
       style={{
         position: "fixed", top: 0, left: 0, width: "100%", zIndex: 9998,
         background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)",
-        border: "none", cursor: "pointer", padding: "11px 20px",
+        border: "none", cursor: "pointer", height: "43px", padding: "0 20px",
+        boxSizing: "border-box",
         display: "flex", alignItems: "center", justifyContent: "center", gap: "12px",
         transition: "filter 0.2s",
       }}
@@ -619,11 +597,10 @@ export default function Home() {
         <Hero onOpen={open} />
         <div className="event-vsl-wrapper" style={{ display: "flex", flexDirection: "column" }}>
           <div className="vsl-order"><VSLSection onOpen={open} /></div>
-          <div className="event-order"><EventDetails /></div>
+        <div className="event-order"><EventDetails /></div>
         </div>
         <Testimonials3 />
         <Invitation onOpen={open} />
-        <AboutStaci />
         <ECHOBlueprint onOpen={open} />
         <NoteSection onOpen={open} />
         <MoreTestimonials />
