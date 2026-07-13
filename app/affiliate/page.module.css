@@ -77,7 +77,7 @@
 }
 
 .hero h1,
-.guideGrid h2,
+.startSection h2,
 .openersSection h2,
 .sectionHeader h2,
 .finalInner h2 {
@@ -149,6 +149,18 @@
   margin-top: 34px;
 }
 
+.resourceAction {
+  max-width: 260px;
+}
+
+.resourceAction p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.startSection,
 .faqSection,
 .openersSection,
 .swipeSection,
@@ -156,9 +168,85 @@
   padding: 78px 0;
 }
 
+.startSection,
 .faqSection,
 .finalSection {
   background: #ffffff;
+}
+
+.startGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.startCard {
+  min-height: 230px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--cream);
+}
+
+.startCard span {
+  display: block;
+  margin-bottom: 30px;
+  color: var(--red);
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.startCard h3,
+.disclosurePanel h3,
+.channelHeader h3,
+.swipeIntro h4 {
+  margin: 0;
+  font-family: var(--font-serif);
+  letter-spacing: 0;
+}
+
+.startCard h3 {
+  font-size: 1.45rem;
+  line-height: 1.12;
+}
+
+.startCard p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.62;
+}
+
+.disclosurePanel {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 22px;
+  border: 1px solid rgba(170, 0, 0, 0.24);
+  border-radius: 8px;
+  padding: 28px;
+  background: #170d0b;
+  color: #ffffff;
+}
+
+.disclosurePanel .eyebrow {
+  margin-bottom: 10px;
+}
+
+.disclosurePanel h3 {
+  font-size: clamp(1.75rem, 3vw, 2.7rem);
+  line-height: 1;
+}
+
+.disclosurePanel p:last-child {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 17px;
+  line-height: 1.7;
 }
 
 .faqGrid {
@@ -169,6 +257,7 @@
 }
 
 .faqSection h2,
+.startSection h2,
 .openersSection h2,
 .sectionHeader h2,
 .finalInner h2 {
@@ -179,24 +268,15 @@
 .sectionHeader p,
 .finalInner p,
 .swipeIntro p,
-.disclosureCard li,
+.channelHeader p,
 .faqCard p {
   color: var(--muted);
   font-size: 17px;
   line-height: 1.72;
 }
 
-.disclosureCard {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 28px;
-  background: var(--cream);
-}
-
-.disclosureCard h3,
 .faqCard h3,
-.swipeCard h3,
-.followUp h4 {
+.swipeCard h3 {
   margin: 0;
   font-family: var(--font-serif);
   letter-spacing: 0;
@@ -217,17 +297,6 @@
 
 .faqCard p {
   margin: 16px 0 0;
-}
-
-.disclosureCard h3 {
-  font-size: 1.65rem;
-}
-
-.disclosureCard ul {
-  display: grid;
-  gap: 12px;
-  margin: 18px 0 0;
-  padding-left: 20px;
 }
 
 .openersSection {
@@ -272,6 +341,33 @@
   background: var(--paper);
 }
 
+.channelList {
+  display: grid;
+  gap: 34px;
+}
+
+.channelSection {
+  border-top: 1px solid var(--line);
+  padding-top: 30px;
+}
+
+.channelHeader {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.36fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+
+.channelHeader h3 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.98;
+}
+
+.channelHeader p:last-child {
+  margin: 0;
+}
+
 .sectionHeader {
   max-width: 760px;
   margin-bottom: 36px;
@@ -297,8 +393,8 @@
   padding-right: 10px;
 }
 
-.swipeCard h3 {
-  font-size: clamp(1.75rem, 2.4vw, 2.5rem);
+.swipeIntro h4 {
+  font-size: clamp(1.55rem, 2.2vw, 2.25rem);
   line-height: 1.06;
 }
 
@@ -340,16 +436,6 @@
   top: 12px;
   right: 12px;
   z-index: 1;
-}
-
-.followUp {
-  grid-column: 2;
-}
-
-.followUp h4 {
-  margin-bottom: 12px;
-  color: var(--red);
-  font-size: 1.15rem;
 }
 
 .finalSection {
@@ -430,8 +516,14 @@
     font-size: clamp(2.85rem, 11.5vw, 4.6rem);
   }
 
+  .startGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .faqGrid,
+  .disclosurePanel,
   .finalInner,
+  .channelHeader,
   .swipeCard {
     grid-template-columns: 1fr;
   }
@@ -442,10 +534,6 @@
 
   .openerCard {
     min-height: 0;
-  }
-
-  .followUp {
-    grid-column: auto;
   }
 }
 
@@ -479,6 +567,7 @@
     line-height: 0.96;
   }
 
+  .startSection,
   .faqSection,
   .openersSection,
   .swipeSection,
@@ -486,6 +575,7 @@
     padding: 58px 0;
   }
 
+  .startSection h2,
   .faqSection h2,
   .openersSection h2,
   .sectionHeader h2,
@@ -493,7 +583,15 @@
     font-size: clamp(2rem, 12vw, 3rem);
   }
 
-  .disclosureCard,
+  .startGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .startCard {
+    min-height: 0;
+  }
+
+  .disclosurePanel,
   .faqCard,
   .openerCard,
   .swipeCard {

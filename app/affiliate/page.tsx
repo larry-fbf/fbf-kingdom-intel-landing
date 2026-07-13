@@ -76,6 +76,29 @@ const invitationOpeners = [
   "That actually reminds me of a conversation we had recently inside the Kingdom Intelligence Network. It gave me a completely different perspective. I would be happy to share it if you are interested.",
 ];
 
+const startSteps = [
+  {
+    step: "01",
+    title: "Grab your link",
+    body: "Start with your personal shareable link so every message points to the right place.",
+  },
+  {
+    step: "02",
+    title: "Choose the copy",
+    body: "Pick the message that matches the relationship and the channel you are using.",
+  },
+  {
+    step: "03",
+    title: "Personalize it",
+    body: "Add their name, their real business context, and the reason they came to mind.",
+  },
+  {
+    step: "04",
+    title: "Include the disclosure",
+    body: "Keep the referral note close to the link so the invitation stays clear and above board.",
+  },
+];
+
 const faqs = [
   {
     question: "When should I mention the Kingdom Intelligence Network?",
@@ -104,44 +127,71 @@ const faqs = [
   },
 ];
 
-const swipes = [
+const swipeSections = [
   {
     eyebrow: "text / dm",
-    title: "Warm or cold conversation starter",
-    use: "Use this for someone you know personally when you are starting the conversation from scratch.",
-    copy: `Hey [Name]! Random question... how has business been treating you lately?
+    title: "Text / DM",
+    description: "Use these for personal messages when the relationship already has some trust.",
+    items: [
+      {
+        title: "Warm or cold conversation starter",
+        use: "Use this for someone you know personally when you are starting the conversation from scratch.",
+        copy: `Hey [Name]! Random question... how has business been treating you lately?
 
 You have crossed my mind a few times because I know you are building a lot right now.
 
 I recently found a community that has been really helpful for me as an entrepreneur. The conversations have given me a lot of clarity on decisions I was trying to figure out on my own.
 
 I was not sure if something like that would even be relevant for you, but if you are open to it, I would be happy to tell you a little more.`,
-    followUpTitle: "If they are interested, send this",
-    followUp: `It is called the Kingdom Intelligence Network. It is a community of Christian business owners and leaders who come together each week for practical business strategy, mentorship, wise counsel, and accountability. I have gotten a lot out of being around people who challenge my thinking instead of trying to sell me something.
-
-If you would like to take a look, here is the link: [affiliate link]
-
-Full transparency, I do receive a small referral thank-you if you decide to join, but it does not change your price at all.`,
-  },
-  {
-    eyebrow: "dm reply",
-    title: "When someone already shared a struggle",
-    use: "Use this when a friend has just told you they are stuck, overwhelmed, or doing it alone.",
-    copy: `You know... what you just described is something we actually talk through all the time inside the Kingdom Intelligence Network.
+      },
+      {
+        title: "When someone already shared a struggle",
+        use: "Use this when a friend has just told you they are stuck, overwhelmed, or doing it alone.",
+        copy: `You know... what you just described is something we actually talk through all the time inside the Kingdom Intelligence Network.
 
 It is a community of Christian business owners who help each other think through real business challenges instead of trying to figure everything out alone.
 
 It crossed my mind because it seems really relevant to what you are dealing with. Happy to send you the info if you would like to take a look.`,
-    followUpTitle: "If they agree, send this",
-    followUp: `Here is my link: [affiliate link].
+      },
+      {
+        title: "One-liner for comments or tight spaces",
+        use: "Use this when you need something short and simple.",
+        copy: `Praying about who to encourage today, and your name came to mind. I thought of the Kingdom Intelligence Network because it has been such a blessing in my business. Let me know if you would like to hear more.`,
+      },
+    ],
+  },
+  {
+    eyebrow: "follow-up",
+    title: "Follow-up",
+    description: "Use these only after the person asks for more information or says they want the link.",
+    items: [
+      {
+        title: "If they are interested",
+        use: "Send this after the starter message when they ask what the Network is.",
+        copy: `It is called the Kingdom Intelligence Network. It is a community of Christian business owners and leaders who come together each week for practical business strategy, mentorship, wise counsel, and accountability. I have gotten a lot out of being around people who challenge my thinking instead of trying to sell me something.
+
+If you would like to take a look, here is the link: [affiliate link]
+
+Full transparency, I do receive a small referral thank-you if you decide to join, but it does not change your price at all.`,
+      },
+      {
+        title: "If they ask for the link",
+        use: "Send this once they have clearly asked to take a look.",
+        copy: `Here is my link: [affiliate link].
 
 And just so you know, it is an affiliate link, so I receive a small referral commission if you decide to join, but it does not change the price for you.`,
+      },
+    ],
   },
   {
     eyebrow: "email",
-    title: "Longer, warmer relationship",
-    use: "Use this for someone you would actually send an email to, not just a quick text.",
-    copy: `Subject: Thought of you this week
+    title: "Email",
+    description: "Use this when the relationship deserves more context than a quick text.",
+    items: [
+      {
+        title: "Longer, warmer relationship",
+        use: "Use this for someone you would actually send an email to, not just a quick text.",
+        copy: `Subject: Thought of you this week
 
 Hey [Name],
 
@@ -168,12 +218,18 @@ Either way, I am cheering you on and praying for God's wisdom as you continue bu
 Take care,
 
 [Your Name]`,
+      },
+    ],
   },
   {
     eyebrow: "social post",
-    title: "Facebook, Instagram, or LinkedIn caption",
-    use: "Use this when posting publicly rather than messaging someone directly.",
-    copy: `One of the biggest lessons I have learned as an entrepreneur is this:
+    title: "Social Post",
+    description: "Use this when posting publicly instead of messaging someone directly.",
+    items: [
+      {
+        title: "Facebook, Instagram, or LinkedIn caption",
+        use: "Use this when posting publicly rather than messaging someone directly.",
+        copy: `One of the biggest lessons I have learned as an entrepreneur is this:
 
 You do not usually get stuck because you lack information.
 
@@ -188,22 +244,24 @@ If you are building a business and wishing you had more wise counsel, accountabi
 [Affiliate link]
 
 Affiliate disclosure: If you join through my link, I receive a small referral commission at no additional cost to you.`,
+      },
+    ],
   },
   {
     eyebrow: "voice note",
-    title: "Message, WhatsApp, or Facebook voice note",
-    use: "Use this as a rough guide for spoken language. Do not send the link unless the person asks for it.",
-    copy: `Hey [Name], I was thinking about what you shared the other day, and it reminded me of this group I am part of, the Kingdom Intelligence Network.
+    title: "Voice Note",
+    description: "Use this as a spoken guide. Send the link only if they ask for it.",
+    items: [
+      {
+        title: "Message, WhatsApp, or Facebook voice note",
+        use: "Use this as a rough guide for spoken language. Do not send the link unless the person asks for it.",
+        copy: `Hey [Name], I was thinking about what you shared the other day, and it reminded me of this group I am part of, the Kingdom Intelligence Network.
 
 Honestly, I think this is the kind of thing that has been so valuable for me. Having people to bounce ideas off of, get wise counsel from, and think through real business decisions with has made a huge difference.
 
 I do not know if it would be a fit for you, but I thought of you right away. If you are curious, let me know and I would be happy to tell you more.`,
-  },
-  {
-    eyebrow: "quick share",
-    title: "One-liner for comments or tight spaces",
-    use: "Use this when you need something short and simple.",
-    copy: `Praying about who to encourage today, and your name came to mind. I thought of the Kingdom Intelligence Network because it has been such a blessing in my business. Let me know if you would like to hear more.`,
+      },
+    ],
   },
 ];
 
@@ -230,8 +288,8 @@ export default function AffiliatePage() {
       <section className={styles.hero}>
         <img
           className={styles.heroImage}
-          src="/images/kingdom-intel-expect-room.jpg"
-          alt="Kingdom Intelligence Network roundtable discussion"
+          src="/images/kingdom-intel-events-invites.jpg"
+          alt="Kingdom Intelligence Network members gathered together"
         />
         <div className={styles.heroOverlay} />
         <div className={styles.container}>
@@ -244,13 +302,48 @@ export default function AffiliatePage() {
               want to share the Network with warmth, clarity, and integrity.
             </p>
             <div className={styles.resourceActions}>
-              <a className={styles.primaryButton} href={mediaLibraryUrl} target="_blank" rel="noreferrer">
-                Media library
-              </a>
-              <a className={styles.secondaryButton} href="#copy-paste">
-                Copy paste
-              </a>
+              <div className={styles.resourceAction}>
+                <a className={styles.primaryButton} href={mediaLibraryUrl} target="_blank" rel="noreferrer">
+                  Media library
+                </a>
+                <p>Use these official assets when posting publicly.</p>
+              </div>
+              <div className={styles.resourceAction}>
+                <a className={styles.secondaryButton} href="#copy-paste">
+                  Copy paste
+                </a>
+                <p>Jump to ready-to-send copy by channel.</p>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.startSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <p className={styles.eyebrow}>Start here</p>
+            <h2>Share the Network clearly, personally, and with integrity.</h2>
+          </div>
+          <div className={styles.startGrid}>
+            {startSteps.map((item) => (
+              <article className={styles.startCard} key={item.step}>
+                <span>{item.step}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className={styles.disclosurePanel}>
+            <div>
+              <p className={styles.eyebrow}>Disclosure guidance</p>
+              <h3>Keep the referral note close to the link.</h3>
+            </div>
+            <p>
+              Use simple language like: just so you know, it is an affiliate link, so I receive a
+              small referral commission if you decide to join, but it does not change the price for
+              you.
+            </p>
           </div>
         </div>
       </section>
@@ -298,22 +391,26 @@ export default function AffiliatePage() {
             </p>
           </div>
 
-          <div className={styles.swipeList}>
-            {swipes.map((swipe) => (
-              <article className={styles.swipeCard} key={swipe.title}>
-                <div className={styles.swipeIntro}>
-                  <p className={styles.cardEyebrow}>{swipe.eyebrow}</p>
-                  <h3>{swipe.title}</h3>
-                  <p>{swipe.use}</p>
+          <div className={styles.channelList}>
+            {swipeSections.map((section) => (
+              <section className={styles.channelSection} key={section.title}>
+                <div className={styles.channelHeader}>
+                  <p className={styles.cardEyebrow}>{section.eyebrow}</p>
+                  <h3>{section.title}</h3>
+                  <p>{section.description}</p>
                 </div>
-                <CopyBlock text={swipe.copy} />
-                {swipe.followUp ? (
-                  <div className={styles.followUp}>
-                    <h4>{swipe.followUpTitle}</h4>
-                    <CopyBlock text={swipe.followUp} />
-                  </div>
-                ) : null}
-              </article>
+                <div className={styles.swipeList}>
+                  {section.items.map((swipe) => (
+                    <article className={styles.swipeCard} key={swipe.title}>
+                      <div className={styles.swipeIntro}>
+                        <h4>{swipe.title}</h4>
+                        <p>{swipe.use}</p>
+                      </div>
+                      <CopyBlock text={swipe.copy} />
+                    </article>
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </div>
