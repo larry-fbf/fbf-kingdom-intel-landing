@@ -116,11 +116,6 @@ const faqs = [
       "Replace the name, add something specific about their business or challenge, and replace [affiliate link] with your personal shareable link.",
   },
   {
-    question: "Do I need to disclose that it is an affiliate link?",
-    answer:
-      "Yes. Use simple language like: just so you know, it is an affiliate link, so I receive a small referral commission if you decide to join, but it does not change the price for you.",
-  },
-  {
     question: "What tone should the invitation have?",
     answer:
       "Your invitation should feel relational, honest, and helpful. The goal is care, not pressure.",
