@@ -25,6 +25,8 @@ export default function ThankYou() {
           .gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
           .feature-card { transition: border-color 0.3s; }
           .feature-card:hover { border-color: rgba(201,165,90,0.5) !important; }
+          .welcome-video { position: relative; width: 100%; max-width: 900px; padding-top: 56.25%; margin: 0 auto; border: 1px solid rgba(201,165,90,0.22); border-radius: 12px; overflow: hidden; background: #000000; box-shadow: 0 24px 60px rgba(0,0,0,0.32); }
+          .welcome-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
           @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
           .animate { animation: fadeInUp 0.7s ease both; }
           .animate-2 { animation: fadeInUp 0.7s 0.15s ease both; }
@@ -46,7 +48,7 @@ export default function ThankYou() {
         {/* ── REGISTERED BANNER ── */}
         <div style={{ background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", padding: "14px 20px", textAlign: "center" }}>
           <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#FFFFFF" }}>
-            &#10003; &nbsp;You Are Registered · June 9&ndash;11, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
+            &#10003; &nbsp;You Are Registered · July 28&ndash;30, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
           </p>
         </div>
 
@@ -98,6 +100,18 @@ export default function ThankYou() {
                 <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", marginTop: "12px", fontStyle: "italic" }}>Free access included with your registration.</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── WELCOME VIDEO ── */}
+        <section style={{ background: "#080808", padding: "56px 24px 72px" }}>
+          <div className="welcome-video">
+            <iframe
+              src="https://player.vimeo.com/video/1207842514?badge=0&autopause=0&player_id=0&app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              title="KIM Final Registration Welcome"
+            />
           </div>
         </section>
 
@@ -200,6 +214,7 @@ export default function ThankYou() {
   </div>
 </footer>
 
+        <script src="https://player.vimeo.com/api/player.js" />
       </body>
     </html>
   );

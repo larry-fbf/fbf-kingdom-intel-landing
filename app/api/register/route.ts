@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
-const ATTIO_MASTERCLASS_LIST_ID = process.env.ATTIO_MASTERCLASS_LIST_ID || "";
+const ATTIO_MASTERCLASS_LIST_ID = process.env.ATTIO_KIM_JULY_2026_LIST_ID || "979ff89f-4f9e-4af6-828f-9cfd48be52de";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const BREVO_MASTERCLASS_LIST_ID = Number(process.env.BREVO_MASTERCLASS_LIST_ID || "0");
+const BREVO_MASTERCLASS_LIST_ID = Number(process.env.BREVO_KIM_JULY_2026_LIST_ID || "19");
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
-const SIMPLETEXTING_MASTERCLASS_LIST_ID = process.env.SIMPLETEXTING_MASTERCLASS_LIST_ID || "";
-const SIMPLETEXTING_MASTERCLASS_LIST_NAME = process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME || "";
+const SIMPLETEXTING_MASTERCLASS_LIST_ID = process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_ID || "6a3186065d1d20e476b5c75d";
+const SIMPLETEXTING_MASTERCLASS_LIST_NAME = process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME || "K.I.M. - July 2026";
 
 type RegistrationPayload = {
   email?: string;
@@ -24,12 +24,34 @@ function normalizeName(value = "") {
   return value.trim();
 }
 
-function normalizeUsPhone(phone = "") {
-  const digits = phone.replace(/\D/g, "");
+function isValidNanpPhone(e164Phone: string) {
+  const match = e164Phone.match(/^\+1(\d{3})(\d{3})(\d{4})$/);
+  if (!match) return false;
+
+  const [, areaCode, exchange] = match;
+  if (/^[01]/.test(areaCode) || /^[01]/.test(exchange)) return false;
+  if (areaCode === "555" || exchange === "555") return false;
+
+  return true;
+}
+
+function normalizePhoneForSync(phone = "") {
+  const raw = phone.trim();
+  if (!raw) return "";
+
+  const digits = raw.replace(/\D/g, "");
   if (!digits) return "";
-  if (digits.length === 10) return `+1${digits}`;
-  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
-  return phone.trim();
+
+  let normalized = "";
+  if (raw.startsWith("+") && digits.length >= 8 && digits.length <= 15) normalized = `+${digits}`;
+  if (raw.startsWith("00") && digits.length > 2 && digits.length <= 17) normalized = `+${digits.slice(2)}`;
+  if (digits.length === 10) normalized = `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) normalized = `+${digits}`;
+
+  if (!normalized) return "";
+  if (normalized.startsWith("+1") && !isValidNanpPhone(normalized)) return "";
+
+  return normalized;
 }
 
 async function readError(res: Response) {
@@ -38,6 +60,19 @@ async function readError(res: Response) {
     return JSON.stringify(JSON.parse(text));
   } catch {
     return text;
+  }
+}
+
+function parseSimpleTextingResponse(bodyText: string) {
+  try {
+    return JSON.parse(bodyText) as { code?: number; message?: string };
+  } catch {
+    const code = bodyText.match(/<code>(-?\d+)<\/code>/)?.[1];
+    const message = bodyText.match(/<message>(.*?)<\/message>/)?.[1];
+    return {
+      code: code ? Number(code) : undefined,
+      message: message ? message.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">") : bodyText,
+    };
   }
 }
 
@@ -159,7 +194,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
     firstName: contact.firstName,
     lastName: contact.lastName,
     email: contact.email,
-    comment: "Kingdom Intelligence Masterclass - June 2026 registration",
+    comment: "Kingdom Intelligence Masterclass - July 2026 registration",
   });
 
   const res = await fetch("https://app2.simpletexting.com/v1/group/contact/add", {
@@ -172,18 +207,13 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
   });
 
   const bodyText = await res.text();
-  let responseBody: { code?: number; message?: string } | string = bodyText;
-  try {
-    responseBody = JSON.parse(bodyText);
-  } catch {
-    // keep raw text
-  }
+  const responseBody = parseSimpleTextingResponse(bodyText);
 
-  if (typeof responseBody === "object" && responseBody.code === -607) {
+  if (responseBody.code === -607) {
     return { skipped: false, alreadyInList: true };
   }
 
-  if (!res.ok || (typeof responseBody === "object" && typeof responseBody.code === "number" && responseBody.code < 0)) {
+  if (!res.ok || (typeof responseBody.code === "number" && responseBody.code < 0)) {
     throw new Error(`SimpleTexting contact failed (${res.status}): ${JSON.stringify(responseBody)}`);
   }
 
@@ -205,7 +235,7 @@ export async function POST(req: NextRequest) {
     const email = normalizeEmail(payload.email);
     const firstName = normalizeName(payload.firstName);
     const lastName = normalizeName(payload.lastName);
-    const phone = normalizeUsPhone(payload.phone);
+    const phone = normalizePhoneForSync(payload.phone);
 
     if (!email || !firstName || !lastName) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
