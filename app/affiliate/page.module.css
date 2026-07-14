@@ -65,8 +65,7 @@
   max-width: 720px;
 }
 
-.eyebrow,
-.cardEyebrow {
+.eyebrow {
   margin: 0 0 16px;
   color: var(--gold);
   font-size: 12px;
@@ -207,7 +206,6 @@
 }
 
 .startCard h3,
-.disclosurePanel h3,
 .channelHeader h3,
 .swipeIntro h4 {
   margin: 0;
@@ -225,35 +223,6 @@
   color: var(--muted);
   font-size: 14.5px;
   line-height: 1.6;
-}
-
-.disclosurePanel {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
-  gap: 36px;
-  align-items: center;
-  margin-top: 38px;
-  border: 1px solid rgba(170, 0, 0, 0.24);
-  border-radius: 8px;
-  padding: 30px 34px;
-  background: #170d0b;
-  color: #ffffff;
-}
-
-.disclosurePanel .eyebrow {
-  margin-bottom: 10px;
-}
-
-.disclosurePanel h3 {
-  font-size: clamp(1.65rem, 2.8vw, 2.5rem);
-  line-height: 1;
-}
-
-.disclosurePanel p:last-child {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 16px;
-  line-height: 1.68;
 }
 
 .faqGrid {
@@ -322,8 +291,7 @@
   margin-top: 34px;
 }
 
-.openerCard,
-.swipeCard {
+.openerCard {
   background: #ffffff;
 }
 
@@ -396,6 +364,7 @@
   gap: 30px;
   border-top: 1px solid rgba(222, 216, 205, 0.8);
   padding: 28px 0 0;
+  background: transparent;
 }
 
 .swipeIntro {
@@ -530,7 +499,6 @@
   }
 
   .faqGrid,
-  .disclosurePanel,
   .finalInner,
   .channelSection,
   .swipeCard {
@@ -604,10 +572,8 @@
     min-height: 0;
   }
 
-  .disclosurePanel,
   .faqCard,
-  .openerCard,
-  .swipeCard {
+  .openerCard {
     padding: 20px;
   }
 

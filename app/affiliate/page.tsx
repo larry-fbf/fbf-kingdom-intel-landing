@@ -124,7 +124,6 @@ const faqs = [
 
 const swipeSections = [
   {
-    eyebrow: "text / dm",
     title: "Text / DM",
     description: "Use these for personal messages when the relationship already has some trust.",
     items: [
@@ -156,7 +155,6 @@ It crossed my mind because it seems really relevant to what you are dealing with
     ],
   },
   {
-    eyebrow: "follow-up",
     title: "Follow-up",
     description: "Use these only after the person asks for more information or says they want the link.",
     items: [
@@ -179,7 +177,6 @@ And just so you know, it is an affiliate link, so I receive a small referral com
     ],
   },
   {
-    eyebrow: "email",
     title: "Email",
     description: "Use this when the relationship deserves more context than a quick text.",
     items: [
@@ -217,7 +214,6 @@ Take care,
     ],
   },
   {
-    eyebrow: "social post",
     title: "Social Post",
     description: "Use this when posting publicly instead of messaging someone directly.",
     items: [
@@ -243,7 +239,6 @@ Affiliate disclosure: If you join through my link, I receive a small referral co
     ],
   },
   {
-    eyebrow: "voice note",
     title: "Voice Note",
     description: "Use this as a spoken guide. Send the link only if they ask for it.",
     items: [
@@ -329,17 +324,6 @@ export default function AffiliatePage() {
               </article>
             ))}
           </div>
-          <div className={styles.disclosurePanel}>
-            <div>
-              <p className={styles.eyebrow}>Disclosure guidance</p>
-              <h3>Keep the referral note close to the link.</h3>
-            </div>
-            <p>
-              Use simple language like: just so you know, it is an affiliate link, so I receive a
-              small referral commission if you decide to join, but it does not change the price for
-              you.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -390,7 +374,6 @@ export default function AffiliatePage() {
             {swipeSections.map((section) => (
               <section className={styles.channelSection} key={section.title}>
                 <div className={styles.channelHeader}>
-                  <p className={styles.cardEyebrow}>{section.eyebrow}</p>
                   <h3>{section.title}</h3>
                   <p>{section.description}</p>
                 </div>
