@@ -98,26 +98,6 @@
   line-height: 1.7;
 }
 
-.heroHighlights {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 32px 0;
-}
-
-.heroHighlights span {
-  border: 1px solid rgba(201, 165, 90, 0.34);
-  background: rgba(201, 165, 90, 0.08);
-  padding: 9px 12px;
-  border-radius: 4px;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .ctaButton {
   display: inline-flex;
   align-items: center;
@@ -544,10 +524,6 @@
   .heroLead {
     font-size: 16px;
     line-height: 1.55;
-  }
-
-  .heroHighlights {
-    margin: 22px 0;
   }
 
   .urgencyBand {

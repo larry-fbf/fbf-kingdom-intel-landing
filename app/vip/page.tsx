@@ -112,11 +112,6 @@ export default function VIPPage() {
               Join the final-day VIP room after the masterclass at 7pm CT, bring your specific
               questions, and get personalized coaching while the momentum is fresh.
             </p>
-            <div className={styles.heroHighlights}>
-              <span>Final day</span>
-              <span>7pm CT</span>
-              <span>$97</span>
-            </div>
             <CTAButton />
             <p className={styles.microcopy}>Includes FBF Vault access to the masterclass recordings.</p>
           </div>
