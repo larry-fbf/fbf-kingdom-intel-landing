@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -127,7 +128,9 @@ export default function VIPThankYouPage() {
         </div>
       </section>
 
-      <script dangerouslySetInnerHTML={{ __html: syncScript }} />
+      <Script id="vip-thank-you-actions" strategy="afterInteractive">
+        {syncScript}
+      </Script>
     </main>
   );
 }

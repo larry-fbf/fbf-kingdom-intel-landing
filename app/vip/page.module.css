@@ -11,7 +11,7 @@
 
 .hero {
   position: relative;
-  min-height: 94vh;
+  min-height: 88svh;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.84) 0%, rgba(0, 0, 0, 0.58) 48%, rgba(0, 0, 0, 0.9) 100%),
     url("/images/vip-city-bg.png") center / cover;
@@ -47,7 +47,7 @@
   position: relative;
   z-index: 2;
   width: min(980px, calc(100% - 48px));
-  min-height: calc(100vh - 82px);
+  min-height: calc(88svh - 82px);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -55,8 +55,9 @@
 }
 
 .heroCopy {
-  padding: 42px 0 96px;
+  padding: 40px 0 84px;
   text-align: center;
+  width: 100%;
 }
 
 .eyebrow,
@@ -90,12 +91,20 @@
   text-transform: uppercase;
 }
 
+.heroCopy h1 span {
+  display: block;
+}
+
 .heroLead {
   max-width: 640px;
   margin: 0 auto;
   color: rgba(255, 255, 255, 0.76);
   font-size: clamp(17px, 1.55vw, 21px);
   line-height: 1.7;
+}
+
+.heroCopy .ctaButton {
+  margin-top: 30px;
 }
 
 .ctaButton {
@@ -164,7 +173,7 @@
 .centerHeader,
 .centerHeaderDark {
   max-width: 820px;
-  margin: 0 auto 54px;
+  margin: 0 auto 58px;
   text-align: center;
 }
 
@@ -245,7 +254,7 @@
 
 .priceBox,
 .todayBox {
-  margin: 24px 0 0;
+  margin: 26px 0 0;
   padding: 18px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
@@ -268,7 +277,7 @@
 }
 
 .todayBox {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   background: rgba(204, 0, 0, 0.12);
   border: 1px solid rgba(204, 0, 0, 0.26);
 }
@@ -333,6 +342,7 @@
   display: grid;
   gap: 14px;
   margin-top: 26px;
+  padding: 0;
   list-style: none;
 }
 
@@ -458,7 +468,7 @@
 }
 
 .finalCta p {
-  margin: 18px auto 34px;
+  margin: 18px auto 38px;
   max-width: 680px;
 }
 
@@ -512,16 +522,22 @@
   }
 
   .heroCopy {
-    padding: 34px 0 58px;
+    padding: 42px 0 64px;
+  }
+
+  .hero {
+    min-height: auto;
   }
 
   .heroCopy h1 {
-    margin: 12px 0 16px;
-    font-size: clamp(40px, 12vw, 56px);
-    line-height: 0.96;
+    margin: 12px auto 16px;
+    max-width: 100%;
+    font-size: 38px;
+    line-height: 1;
   }
 
   .heroLead {
+    max-width: 34ch;
     font-size: 16px;
     line-height: 1.55;
   }
@@ -529,22 +545,47 @@
   .urgencyBand {
     flex-direction: column;
     gap: 6px;
+    padding: 20px 18px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
   }
 
   .sectionWhite,
   .sectionDark,
   .bonusSection,
   .finalCta {
-    padding: 64px 0;
+    padding: 68px 0;
   }
 
   .offerCard {
     position: static;
+    padding: 28px 22px;
   }
 
   .ctaButton {
     width: 100%;
     padding-inline: 22px;
+    min-height: 60px;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  .microcopy {
+    max-width: 34ch;
+    margin-inline: auto;
+    line-height: 1.45;
+  }
+
+  .centerHeader,
+  .centerHeaderDark {
+    margin-bottom: 38px;
+  }
+
+  .reasonGrid article,
+  .bonusCard,
+  .testimonialCard {
+    padding: 24px 22px;
   }
 
   .imagePanel,

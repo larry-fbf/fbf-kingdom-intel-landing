@@ -107,7 +107,13 @@ export default function VIPPage() {
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>Step 2 of 3</p>
-            <h1>Upgrade to VIP and get direct help with your life and business reset.</h1>
+            <h1>
+              <span>Upgrade to VIP</span>
+              <span>and get direct</span>
+              <span>help with your</span>
+              <span>life and business</span>
+              <span>reset.</span>
+            </h1>
             <p className={styles.heroLead}>
               Join the final-day VIP room after the masterclass at 7pm CT, bring your specific
               questions, and get personalized coaching while the momentum is fresh.
