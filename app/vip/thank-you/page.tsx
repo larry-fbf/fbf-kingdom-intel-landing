@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "VIP Confirmed | Kingdom Intelligence Masterclass",
   description:
-    "Your VIP upgrade is confirmed. Share the masterclass and join the community for reminders and access.",
+    "Your VIP upgrade is confirmed. Share the masterclass, join the community, and watch for your VIP room details.",
 };
 
 const COMMUNITY_URL =
@@ -73,7 +73,8 @@ export default function VIPThankYouPage() {
           <h1>You are in.</h1>
           <p className={styles.lead}>
             Thank you for upgrading to VIP for the Kingdom Intelligence Masterclass. You will get an
-            email and text reminder with your Zoom link before the sessions.
+            email and text reminder with your Zoom link before the final-day VIP room, plus access to
+            the masterclass recordings in the FBF Vault.
           </p>
           <p className={styles.syncNote} data-sync-status>
             Confirming your VIP details...
@@ -110,7 +111,7 @@ export default function VIPThankYouPage() {
             <article>
               <span>01</span>
               <h3>Watch your email and texts.</h3>
-              <p>You will receive reminder details and your Zoom link before the masterclass sessions.</p>
+              <p>You will receive reminder details and your Zoom link before the final-day VIP room.</p>
             </article>
             <article>
               <span>02</span>
@@ -120,7 +121,7 @@ export default function VIPThankYouPage() {
             <article>
               <span>03</span>
               <h3>Bring your real question.</h3>
-              <p>Come ready with the business challenge you want feedback on during the VIP sessions.</p>
+              <p>Come ready with the business challenge you want feedback on during the VIP room.</p>
             </article>
           </div>
         </div>

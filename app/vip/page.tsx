@@ -4,34 +4,37 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "VIP Upgrade | Kingdom Intelligence Masterclass",
   description:
-    "Upgrade to VIP for direct coaching, replay access, and bonus resources during the Kingdom Intelligence Masterclass.",
+    "Upgrade to VIP for the final-day VIP room and FBF Vault recordings for the Kingdom Intelligence Masterclass.",
 };
 
 const PAYMENT_LINK = "https://buy.stripe.com/8x2dRabIR7JA3qQ88t5kk0i";
 
 const bonuses = [
   {
-    title: "Kingdom Intelligence workbook",
+    title: "Masterclass recordings",
     body:
-      "Follow along without distractions, track your progress, and work through the key decisions that shape your next level of business growth.",
+      "Get access to the Kingdom Intelligence Masterclass recordings inside the FBF Vault so you can rewatch the training and keep implementing after the live event.",
+    image: "/images/vip-life-business-bundle.png",
   },
   {
     title: "S.W.E.E.T. Spot audit",
     body:
       "Clarify your mandate, identify blind spots, and remove the roadblocks holding back your next level of revenue, margin, and Kingdom impact.",
+    image: "/images/vip-sweet-spot-audit.png",
   },
   {
     title: "Top 10 CEO leadership hacks",
     body:
       "Activate the leadership disciplines faith-driven CEOs need when markets are noisy, teams need clarity, and the business has to keep moving.",
+    image: "/images/vip-superhero-hacks.png",
   },
 ];
 
 const vipIncludes = [
-  "Three live VIP coaching sessions after the masterclass sessions",
+  "One live VIP room on the final day after the masterclass at 7pm CT",
   "Direct coaching and feedback from Larry, Staci, and the CEO Mentor team",
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
-  "Lifetime replay access to the masterclass and VIP sessions",
+  "Access to the Kingdom Intelligence Masterclass recordings in the FBF Vault",
   "Fast-action bonus resources to help you implement without starting from scratch",
 ];
 
@@ -40,16 +43,31 @@ const testimonials = [
     quote:
       "I joined the VIP session, which led to me taking massive action and joining the Platinum Program. This decision has led to monumental impact in my business and family by showing me how to build a debt-free Kingdom life and business that breeds extravagant generosity.",
     name: "Cindy Simcox",
+    image: "/images/vip-testimonial-cindy.jpg",
   },
   {
     quote:
       "I made my first $100K in commissions after learning about Magnetic Sales and I never could have done that if Staci did not show me the way. I am so grateful!",
     name: "Christina Willis",
+    image: "/images/christina-willis.jpeg",
   },
   {
     quote:
       "In less than 12 months, we paid off over $2 million in debt and stepped into the life of our dreams in Ecuador, creating sustainable businesses and ministries that fight human trafficking.",
     name: "Dallas Marley",
+    image: "/images/dallas-headshot.jpg",
+  },
+  {
+    quote:
+      "Larry and Staci helped our company grow to $13 million in 9 months and over $60 million in 3 years. The choice to join VIP could change your life forever.",
+    name: "Kyler Kropf",
+    image: "/images/vip-testimonial-kyler.png",
+  },
+  {
+    quote:
+      "For the first time in our married life, we are now debt free and able to give from a place of inner peace, profits, and Kingdom generosity.",
+    name: "Lynn Vennefron",
+    image: "/images/vip-testimonial-lynn.png",
   },
 ];
 
@@ -65,18 +83,14 @@ function OfferCard() {
   return (
     <aside className={styles.offerCard} aria-label="VIP offer">
       <p className={styles.offerKicker}>Limited time offer</p>
-      <h2>VIP Masterclass</h2>
-      <p className={styles.offerSubtitle}>Direct coaching. Personal feedback. Lifetime replay access.</p>
-      <div className={styles.priceBox}>
-        <span>Normally</span>
-        <strong>$2,997</strong>
-      </div>
+      <h2>VIP Room</h2>
+      <p className={styles.offerSubtitle}>Final day after the masterclass at 7pm CT.</p>
       <div className={styles.todayBox}>
-        <span>Today only</span>
+        <span>VIP upgrade</span>
         <strong>$97</strong>
       </div>
       <CTAButton />
-      <p className={styles.expiryNote}>This upgrade is designed for fast-action takers and may close without notice.</p>
+      <p className={styles.expiryNote}>Includes the VIP room, direct coaching, bonus resources, and FBF Vault recording access.</p>
     </aside>
   );
 }
@@ -91,23 +105,20 @@ export default function VIPPage() {
         </div>
 
         <div className={styles.heroGrid}>
-          <div className={styles.heroPhoto}>
-            <img src="/images/staci-larry-hero-2026.png" alt="Larry and Staci Wallace" />
-          </div>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>Step 2 of 3</p>
             <h1>Upgrade to VIP and get direct help with your life and business reset.</h1>
             <p className={styles.heroLead}>
-              This is a rare opportunity to get personalized feedback, ask your specific questions,
-              and receive coaching at a fraction of what this level of access normally costs.
+              Join the final-day VIP room after the masterclass at 7pm CT, bring your specific
+              questions, and get personalized coaching while the momentum is fresh.
             </p>
             <div className={styles.heroHighlights}>
-              <span>July 28-30</span>
-              <span>VIP sessions</span>
-              <span>$97 today</span>
+              <span>Final day</span>
+              <span>7pm CT</span>
+              <span>$97</span>
             </div>
             <CTAButton />
-            <p className={styles.microcopy}>Includes masterclass replay access and VIP session replays.</p>
+            <p className={styles.microcopy}>Includes FBF Vault access to the masterclass recordings.</p>
           </div>
         </div>
       </section>
@@ -121,7 +132,7 @@ export default function VIPPage() {
         <div className={styles.container}>
           <div className={styles.centerHeader}>
             <p className={styles.eyebrowRed}>Exclusive access upgrade</p>
-            <h2>Get personal coaching inside the Multiplication Boardroom.</h2>
+            <h2>Get personal coaching inside the final-day VIP room.</h2>
             <p>
               Go to the next level with direct coaching from Larry and Staci. Learn how to turn
               years of experience into a clearer offer, stronger sales message, and Kingdom business
@@ -137,10 +148,10 @@ export default function VIPPage() {
                 the Kingdom Intelligence Masterclass.
               </p>
               <p>
-                When you upgrade now, you gain access to live coaching where your specific questions
-                can be answered in real time. No matter the product, service, or offer, the goal is
-                to help you lead with certainty, operate with Kingdom authority, and multiply your
-                impact like never before.
+                When you upgrade now, you get access to the final-day VIP room at 7pm CT where your
+                specific questions can be answered in real time. No matter the product, service, or
+                offer, the goal is to help you lead with certainty, operate with Kingdom authority,
+                and multiply your impact like never before.
               </p>
               <p>
                 Larry, Staci, and the CEO Mentor team will be taking questions live, evaluating
@@ -165,17 +176,16 @@ export default function VIPPage() {
               <h3>This level of access is rare.</h3>
               <p>
                 Between coaching high-ticket clients, running multiple businesses and ministries,
-                and leading live rooms, Larry and Staci rarely offer this degree of direct daily
-                access for personal coaching.
+                and leading live rooms, Larry and Staci rarely open this kind of direct coaching
+                room during a public masterclass.
               </p>
             </article>
             <article>
               <span>Reason 2</span>
               <h3>Proximity can compress years.</h3>
               <p>
-                Premium clients often invest $50K-$250K for this level of attention. VIP gives you
-                a focused chance to bring your real questions and receive direction while momentum is
-                high.
+                VIP gives you a focused chance to bring your real questions, hear what others are
+                asking, and receive direction while momentum from the masterclass is high.
               </p>
             </article>
           </div>
@@ -200,7 +210,7 @@ export default function VIPPage() {
               </ul>
             </div>
             <div className={styles.imagePanel}>
-              <img src="/images/larry-staci-couch.jpg" alt="Larry and Staci coaching" />
+              <img src="/images/vip-coaching-room.png" alt="Live coaching room" />
             </div>
           </div>
         </div>
@@ -215,6 +225,7 @@ export default function VIPPage() {
           <div className={styles.bonusGrid}>
             {bonuses.map((bonus, index) => (
               <article key={bonus.title} className={styles.bonusCard}>
+                <img src={bonus.image} alt="" />
                 <span>Bonus {index + 1}</span>
                 <h3>{bonus.title}</h3>
                 <p>{bonus.body}</p>
@@ -240,6 +251,7 @@ export default function VIPPage() {
           <div className={styles.testimonialGrid}>
             {testimonials.map((testimonial) => (
               <article key={testimonial.name} className={styles.testimonialCard}>
+                <img src={testimonial.image} alt="" />
                 <span>&ldquo;</span>
                 <p>{testimonial.quote}</p>
                 <strong>{testimonial.name}</strong>
@@ -252,10 +264,10 @@ export default function VIPPage() {
       <section className={styles.finalCta}>
         <div className={styles.container}>
           <p className={styles.eyebrowGold}>Do not miss out</p>
-          <h2>Normally $2,997. Today only $97.</h2>
+          <h2>Upgrade to VIP for $97.</h2>
           <p>
-            For less than one date night, you can get direct access, personal guidance, VIP sessions,
-            and replay access designed to help you grow business God's way.
+            Join the final-day VIP room at 7pm CT, bring your real questions, and get access to the
+            masterclass recordings in the FBF Vault so you can keep moving after the live event.
           </p>
           <CTAButton />
           <p className={styles.microcopy}>Secure checkout through Stripe.</p>
