@@ -110,6 +110,10 @@
   font-size: 0.88em;
 }
 
+.supportingLine {
+  font-size: 0.82em;
+}
+
 .goldUnderline {
   display: inline-block !important;
   width: fit-content;
@@ -214,8 +218,93 @@
 .sectionWhite,
 .sectionDark,
 .bonusSection,
+.featuredTestimonialSection,
 .finalCta {
   padding: 88px 0;
+}
+
+.featuredTestimonialSection {
+  background: #eef1f5;
+  color: #111111;
+}
+
+.featuredTestimonial {
+  position: relative;
+  overflow: visible;
+  border: 2px solid #d9bd72;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(217, 189, 114, 0.14) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    #fffefa;
+  padding: 58px 62px 54px;
+}
+
+.quoteBadge {
+  position: absolute;
+  top: -42px;
+  left: 34px;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: #d9bd72;
+  color: #050505;
+  font-family: Georgia, serif;
+  font-size: 84px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.featuredTestimonial blockquote {
+  margin: 0 0 34px;
+  color: #333333;
+  font-size: clamp(26px, 2.7vw, 42px);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.42;
+}
+
+.featuredTestimonialFooter {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.avatarFallback {
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: #111111;
+  color: #d9bd72;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.featuredTestimonialFooter strong {
+  display: block;
+  color: #0b1d28;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.starRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.starRow span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  background: #d9bd72;
+  color: #050505;
+  font-size: 16px;
+  line-height: 1;
 }
 
 .coachingIntro {
@@ -549,11 +638,6 @@
   line-height: 1.16;
 }
 
-.testimonialCard {
-  border-color: #eeeeee;
-  background: #f8f8f8;
-}
-
 .bonusCard img {
   display: block;
   width: 100%;
@@ -566,12 +650,13 @@
 
 .testimonialCard img {
   display: block;
-  width: 86px;
-  height: 86px;
+  width: 72px;
+  height: 72px;
   margin-bottom: 18px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+  border: 2px solid rgba(201, 165, 90, 0.45);
 }
 
 .testimonialCard span {
@@ -585,17 +670,26 @@
 
 .testimonialCard p {
   margin-bottom: 18px;
-  color: #333333;
-  font-size: 15px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 16px;
   font-style: italic;
   line-height: 1.72;
 }
 
 .testimonialCard strong {
-  color: #111111;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: block;
+  color: #ffffff;
+  font-size: 17px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.testimonialCard small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 15px;
+  line-height: 1.35;
 }
 
 .finalCta {
@@ -691,6 +785,10 @@
     line-height: 1.1;
   }
 
+  .supportingLine {
+    font-size: 0.74em;
+  }
+
   .heroCopy h1 span {
     display: block;
   }
@@ -771,8 +869,40 @@
   .sectionWhite,
   .sectionDark,
   .bonusSection,
+  .featuredTestimonialSection,
   .finalCta {
     padding: 68px 0;
+  }
+
+  .featuredTestimonial {
+    padding: 48px 22px 32px;
+  }
+
+  .quoteBadge {
+    left: 22px;
+    width: 68px;
+    height: 68px;
+    font-size: 68px;
+  }
+
+  .featuredTestimonial blockquote {
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    line-height: 1.42;
+  }
+
+  .featuredTestimonialFooter {
+    gap: 14px;
+  }
+
+  .avatarFallback {
+    width: 64px;
+    height: 64px;
+    font-size: 18px;
+  }
+
+  .featuredTestimonialFooter strong {
+    font-size: 26px;
   }
 
   .offerCard {

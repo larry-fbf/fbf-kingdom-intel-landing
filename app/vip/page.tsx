@@ -39,24 +39,33 @@ const vipIncludes = [
   "Fast-action bonus resources to help you implement without starting from scratch",
 ];
 
+const cindyTestimonial = {
+  quote:
+    "I joined the VIP session, which led to me taking massive action and joining the Platinum Program. This decision has led to monumental impact in my business and family by showing me how to build a debt-free Kingdom life and business that breeds extravagant generosity.",
+  name: "Cindy Simcox",
+};
+
 const testimonials = [
   {
     quote:
-      "I made my first $100K in commissions after learning about Magnetic Sales and I never could have done that if Staci did not show me the way. I am so grateful!",
-    name: "Christina Willis",
-    image: "/images/christina-willis.jpeg",
+      "I was an 8th-grade dropout with zero business experience. Larry & Staci helped our company grow to $13 million in 9 months and over $60 million in 3 years!",
+    name: "Kyler Kropf",
+    role: "Founder, SaddleBrookeLife",
+    image: "/images/kyler-headshot.png",
   },
   {
     quote:
-      "In less than 12 months, we paid off over $2 million in debt and stepped into the life of our dreams in Ecuador, creating sustainable businesses and ministries that fight human trafficking.",
+      "In less than 12 months, we paid off over $2 million in debt, moved to Ecuador, and stepped into the life of our dreams.",
     name: "Dallas Marley",
+    role: "Marketing Specialist & Entrepreneur",
     image: "/images/dallas-headshot.jpg",
   },
   {
     quote:
-      "Larry and Staci helped our company grow to $13 million in 9 months and over $60 million in 3 years. The choice to join VIP could change your life forever.",
-    name: "Kyler Kropf",
-    image: "/images/vip-testimonial-kyler.png",
+      "Our company is thriving, but the greatest transformation has been in our marriage and with our kids. Having coaches walk with us weekly has been a game-changer.",
+    name: "Vangel Roberts",
+    role: "CMO, Wade Roberts Plumbing",
+    image: "/images/vangel-headshot.jpg",
   },
 ];
 
@@ -99,8 +108,8 @@ export default function VIPPage() {
                 <span>Upgrade To</span>
                 <span>&apos;VIP Mastermind&apos;</span>
               </span>
-              <span>And Get Direct Help With</span>
-              <span>
+              <span className={styles.supportingLine}>And Get Direct Help With</span>
+              <span className={styles.supportingLine}>
                 Your <em>Life &amp; Business Reset</em>
               </span>
             </h1>
@@ -124,6 +133,28 @@ export default function VIPPage() {
           </p>
         </div>
         <CountdownTimer />
+      </section>
+
+      <section className={styles.featuredTestimonialSection}>
+        <div className={styles.container}>
+          <article className={styles.featuredTestimonial}>
+            <span className={styles.quoteBadge}>&ldquo;</span>
+            <blockquote>&ldquo;{cindyTestimonial.quote}&rdquo;</blockquote>
+            <div className={styles.featuredTestimonialFooter}>
+              <div className={styles.avatarFallback}>CS</div>
+              <div>
+                <strong>{cindyTestimonial.name}</strong>
+                <div className={styles.starRow} aria-label="5 star rating">
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section className={styles.coachingIntro}>
@@ -244,10 +275,10 @@ export default function VIPPage() {
         </blockquote>
       </section>
 
-      <section className={styles.sectionWhite}>
+      <section className={styles.sectionDark}>
         <div className={styles.container}>
-          <div className={styles.centerHeader}>
-            <p className={styles.eyebrowRed}>Results matter</p>
+          <div className={styles.centerHeaderDark}>
+            <p className={styles.eyebrowGold}>Results matter</p>
             <h2>Leaders have used this kind of coaching to take massive action.</h2>
           </div>
           <div className={styles.testimonialGrid}>
@@ -257,6 +288,7 @@ export default function VIPPage() {
                 <span>&ldquo;</span>
                 <p>{testimonial.quote}</p>
                 <strong>{testimonial.name}</strong>
+                <small>{testimonial.role}</small>
               </article>
             ))}
           </div>
