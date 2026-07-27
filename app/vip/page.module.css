@@ -259,10 +259,11 @@
 .featuredTestimonial blockquote {
   margin: 0 0 34px;
   color: #333333;
-  font-size: clamp(26px, 2.7vw, 42px);
+  max-width: 920px;
+  font-size: clamp(18px, 1.7vw, 25px);
   font-weight: 400;
-  letter-spacing: 0.08em;
-  line-height: 1.42;
+  letter-spacing: 0.01em;
+  line-height: 1.58;
 }
 
 .featuredTestimonialFooter {
@@ -886,9 +887,9 @@
   }
 
   .featuredTestimonial blockquote {
-    font-size: 22px;
-    letter-spacing: 0.04em;
-    line-height: 1.42;
+    font-size: 17px;
+    letter-spacing: 0.01em;
+    line-height: 1.56;
   }
 
   .featuredTestimonialFooter {
