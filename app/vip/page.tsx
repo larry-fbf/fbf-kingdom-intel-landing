@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CountdownTimer from "./CountdownTimer";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -83,12 +84,13 @@ function OfferCard() {
   return (
     <aside className={styles.offerCard} aria-label="VIP offer">
       <p className={styles.offerKicker}>Limited time offer</p>
-      <h2>VIP Room</h2>
-      <p className={styles.offerSubtitle}>Final day after the masterclass at 7pm CT.</p>
+      <h2>VIP Mastermind</h2>
+      <p className={styles.offerSubtitle}>Live - 1 x 1 training with direct coaching at 7pm CT.</p>
       <div className={styles.todayBox}>
-        <span>VIP upgrade</span>
-        <strong>$97</strong>
+        <span>Normally $2,997</span>
+        <strong>Only $97</strong>
       </div>
+      <CountdownTimer />
       <CTAButton />
       <p className={styles.expiryNote}>Includes the VIP room, direct coaching, bonus resources, and FBF Vault recording access.</p>
     </aside>
@@ -100,23 +102,25 @@ export default function VIPPage() {
     <main className={styles.pageShell}>
       <section className={styles.hero}>
         <div className={styles.heroOverlay} />
-        <div className={styles.logoBar}>
-          <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
-        </div>
+        <div className={styles.topAnnouncement}>You have an opportunity to enhance your experience</div>
 
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Step 2 of 3</p>
             <h1>
-              <span>Upgrade to VIP</span>
-              <span>and get direct</span>
-              <span>help with your</span>
-              <span>life and business</span>
-              <span>reset.</span>
+              <span className={styles.accessLine}>&ldquo;Exclusive Access&rdquo;</span>
+              <span className={styles.goldUnderline}>
+                <span>Upgrade To</span>
+                <span>&apos;VIP Mastermind&apos;</span>
+              </span>
+              <span>And Get Direct Help With</span>
+              <span>
+                Your <em>Life &amp; Business Reset</em>
+              </span>
             </h1>
             <p className={styles.heroLead}>
-              Join the final-day VIP room after the masterclass at 7pm CT, bring your specific
-              questions, and get personalized coaching while the momentum is fresh.
+              This is a <strong>unique opportunity</strong> to get personalized feedback and your
+              questions answered for a <strong>fraction</strong> of the price we normally charge
+              for one-on-one coaching!
             </p>
             <CTAButton />
             <p className={styles.microcopy}>Includes FBF Vault access to the masterclass recordings.</p>
@@ -125,8 +129,14 @@ export default function VIPPage() {
       </section>
 
       <section className={styles.urgencyBand}>
-        <p>Do not click back or exit out.</p>
-        <strong>This VIP upgrade is only available on this page.</strong>
+        <div className={styles.urgencyCopy}>
+          <strong>PLUS!</strong>
+          <p>
+            When you upgrade on this page, you&apos;ll also get the Kingdom Wealth Alliance
+            training replays free for life.
+          </p>
+        </div>
+        <CountdownTimer />
       </section>
 
       <section className={styles.sectionWhite}>
