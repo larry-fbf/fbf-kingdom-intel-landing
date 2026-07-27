@@ -42,12 +42,6 @@ const vipIncludes = [
 const testimonials = [
   {
     quote:
-      "I joined the VIP session, which led to me taking massive action and joining the Platinum Program. This decision has led to monumental impact in my business and family by showing me how to build a debt-free Kingdom life and business that breeds extravagant generosity.",
-    name: "Cindy Simcox",
-    image: "/images/vip-testimonial-cindy.jpg",
-  },
-  {
-    quote:
       "I made my first $100K in commissions after learning about Magnetic Sales and I never could have done that if Staci did not show me the way. I am so grateful!",
     name: "Christina Willis",
     image: "/images/christina-willis.jpeg",
@@ -63,12 +57,6 @@ const testimonials = [
       "Larry and Staci helped our company grow to $13 million in 9 months and over $60 million in 3 years. The choice to join VIP could change your life forever.",
     name: "Kyler Kropf",
     image: "/images/vip-testimonial-kyler.png",
-  },
-  {
-    quote:
-      "For the first time in our married life, we are now debt free and able to give from a place of inner peace, profits, and Kingdom generosity.",
-    name: "Lynn Vennefron",
-    image: "/images/vip-testimonial-lynn.png",
   },
 ];
 
@@ -90,7 +78,6 @@ function OfferCard() {
         <span>Normally $2,997</span>
         <strong>Only $97</strong>
       </div>
-      <CountdownTimer />
       <CTAButton />
       <p className={styles.expiryNote}>Includes the VIP room, direct coaching, bonus resources, and FBF Vault recording access.</p>
     </aside>
@@ -132,16 +119,16 @@ export default function VIPPage() {
         <div className={styles.urgencyCopy}>
           <strong>PLUS!</strong>
           <p>
-            When you upgrade on this page, you&apos;ll also get the Kingdom Wealth Alliance
+            When you upgrade on this page, you&apos;ll also get the Kingdom Intelligence Masterclass
             training replays free for life.
           </p>
         </div>
         <CountdownTimer />
       </section>
 
-      <section className={styles.sectionWhite}>
+      <section className={styles.coachingIntro}>
         <div className={styles.container}>
-          <div className={styles.centerHeader}>
+          <div className={styles.centerHeaderDark}>
             <p className={styles.eyebrowRed}>Exclusive access upgrade</p>
             <h2>Get personal coaching inside the final-day VIP room.</h2>
             <p>
@@ -150,7 +137,11 @@ export default function VIPPage() {
               strategy that creates more profits, more margin, and more generosity.
             </p>
           </div>
+        </div>
+      </section>
 
+      <section className={styles.sectionWhite}>
+        <div className={styles.container}>
           <div className={styles.twoColumn}>
             <div className={styles.copyStack}>
               <h3>Friend, let me cut to the chase.</h3>

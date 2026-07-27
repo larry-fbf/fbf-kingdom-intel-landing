@@ -11,7 +11,7 @@
 
 .hero {
   position: relative;
-  min-height: 82svh;
+  min-height: 78svh;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.52) 48%, rgba(0, 0, 0, 0.88) 100%),
     url("/images/vip-city-bg.png") center / cover;
@@ -53,7 +53,7 @@
   position: relative;
   z-index: 2;
   width: min(1280px, calc(100% - 48px));
-  min-height: calc(82svh - 47px);
+  min-height: calc(78svh - 47px);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -89,11 +89,11 @@
 
 .heroCopy h1 {
   max-width: 1180px;
-  margin: 0 auto 22px;
+  margin: 0 auto 28px;
   font-family: "Anton", Impact, sans-serif;
-  font-size: clamp(48px, 5.3vw, 86px);
+  font-size: clamp(42px, 4.7vw, 76px);
   font-weight: 400;
-  line-height: 1.02;
+  line-height: 1.06;
   text-transform: uppercase;
 }
 
@@ -114,10 +114,10 @@
   display: inline-block !important;
   width: fit-content;
   max-width: 100%;
-  margin: 2px auto 0;
+  margin: 2px auto 18px;
   color: #e6c979;
   border-bottom: 4px solid #e6c979;
-  line-height: 0.95;
+  line-height: 1.02;
 }
 
 .goldUnderline span {
@@ -128,7 +128,7 @@
   max-width: 850px;
   margin: 0 auto;
   color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(20px, 2.2vw, 30px);
+  font-size: clamp(19px, 1.9vw, 26px);
   font-style: italic;
   line-height: 1.18;
 }
@@ -183,8 +183,8 @@
   justify-content: center;
   gap: 34px;
   width: min(1120px, calc(100% - 40px));
-  margin: 34px auto 0;
-  padding: 22px 28px;
+  margin: 46px auto 48px;
+  padding: 28px 34px;
   border: 2px solid #d9bd72;
   border-radius: 8px;
   background: #050505;
@@ -207,8 +207,8 @@
 
 .urgencyCopy p {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 18px;
-  line-height: 1.18;
+  font-size: 17px;
+  line-height: 1.34;
 }
 
 .sectionWhite,
@@ -216,6 +216,23 @@
 .bonusSection,
 .finalCta {
   padding: 88px 0;
+}
+
+.coachingIntro {
+  padding: 74px 0 78px;
+  border-top: 1px solid rgba(217, 189, 114, 0.25);
+  border-bottom: 1px solid rgba(217, 189, 114, 0.25);
+  background:
+    linear-gradient(180deg, rgba(8, 8, 8, 0.94), rgba(8, 8, 8, 0.98)),
+    url("/images/vip-city-bg.png") center / cover;
+}
+
+.coachingIntro .centerHeaderDark {
+  margin-bottom: 0;
+}
+
+.coachingIntro .eyebrowRed {
+  color: #e6c979;
 }
 
 .sectionWhite {
@@ -298,7 +315,7 @@
 .offerCard h2 {
   margin: 10px 0;
   font-family: "Anton", Impact, sans-serif;
-  font-size: 50px;
+  font-size: 44px;
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -342,7 +359,7 @@
 .todayBox strong {
   display: block;
   color: #ffffff;
-  font-size: 54px;
+  font-size: 46px;
   line-height: 1.05;
   text-transform: uppercase;
 }
