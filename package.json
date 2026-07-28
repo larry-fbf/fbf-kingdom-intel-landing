@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/verify-production-copy.mjs",
     "build": "next build",
     "start": "next start",
     "deploy:prod": "powershell -ExecutionPolicy Bypass -File scripts/safe-vercel-deploy.ps1"
