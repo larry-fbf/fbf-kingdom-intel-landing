@@ -5,38 +5,16 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "VIP Upgrade | Kingdom Intelligence Masterclass",
   description:
-    "Upgrade to VIP for the final-day VIP room and FBF Vault recordings for the Kingdom Intelligence Masterclass.",
+    "Upgrade to VIP for the July 30th VIP room and FBF Vault recordings for the Kingdom Intelligence Masterclass.",
 };
 
 const PAYMENT_LINK = "https://buy.stripe.com/8x2dRabIR7JA3qQ88t5kk0i";
 
-const bonuses = [
-  {
-    title: "Masterclass recordings",
-    body:
-      "Get access to the Kingdom Intelligence Masterclass recordings inside the FBF Vault so you can rewatch the training and keep implementing after the live event.",
-    image: "/images/vip-life-business-bundle.png",
-  },
-  {
-    title: "S.W.E.E.T. Spot audit",
-    body:
-      "Clarify your mandate, identify blind spots, and remove the roadblocks holding back your next level of revenue, margin, and Kingdom impact.",
-    image: "/images/vip-sweet-spot-audit.png",
-  },
-  {
-    title: "Top 10 CEO leadership hacks",
-    body:
-      "Activate the leadership disciplines faith-driven CEOs need when markets are noisy, teams need clarity, and the business has to keep moving.",
-    image: "/images/vip-superhero-hacks.png",
-  },
-];
-
 const vipIncludes = [
-  "One live VIP room on the final day after the masterclass at 7pm CT",
+  "One live VIP room on July 30th at 7pm CT on Zoom",
   "Direct coaching and feedback from Larry, Staci, and the CEO Mentor team",
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
   "Access to the Kingdom Intelligence Masterclass recordings in the FBF Vault",
-  "Fast-action bonus resources to help you implement without starting from scratch",
 ];
 
 const cindyTestimonial = {
@@ -82,13 +60,13 @@ function OfferCard() {
     <aside className={styles.offerCard} aria-label="VIP offer">
       <p className={styles.offerKicker}>Limited time offer</p>
       <h2>VIP Mastermind</h2>
-      <p className={styles.offerSubtitle}>Live - 1 x 1 training with direct coaching at 7pm CT.</p>
+      <p className={styles.offerSubtitle}>Live 1 x 1 training with direct coaching on July 30th at 7pm CT on Zoom.</p>
       <div className={styles.todayBox}>
         <span>Normally $2,997</span>
         <strong>Only $97</strong>
       </div>
       <CTAButton />
-      <p className={styles.expiryNote}>Includes the VIP room, direct coaching, bonus resources, and FBF Vault recording access.</p>
+      <p className={styles.expiryNote}>Includes the VIP room, direct coaching, and FBF Vault recording access.</p>
     </aside>
   );
 }
@@ -181,7 +159,7 @@ export default function VIPPage() {
         <div className={styles.container}>
           <div className={styles.centerHeaderDark}>
             <p className={styles.eyebrowRed}>Exclusive access upgrade</p>
-            <h2>Get personal coaching inside the final-day VIP room.</h2>
+            <h2>Get personal coaching inside the July 30th VIP room.</h2>
             <p>
               Go to the next level with direct coaching from Larry and Staci. Learn how to turn
               years of experience into a clearer offer, stronger sales message, and Kingdom business
@@ -201,10 +179,10 @@ export default function VIPPage() {
                 the Kingdom Intelligence Masterclass.
               </p>
               <p>
-                When you upgrade now, you get access to the final-day VIP room at 7pm CT where your
-                specific questions can be answered in real time. No matter the product, service, or
-                offer, the goal is to help you lead with certainty, operate with Kingdom authority,
-                and multiply your impact like never before.
+                When you upgrade now, you get access to the VIP room on July 30th at 7pm CT on Zoom
+                where your specific questions can be answered in real time. No matter the product,
+                service, or offer, the goal is to help you lead with certainty, operate with Kingdom
+                authority, and multiply your impact like never before.
               </p>
               <p>
                 Larry, Staci, and the CEO Mentor team will be taking questions live, evaluating
@@ -269,25 +247,6 @@ export default function VIPPage() {
         </div>
       </section>
 
-      <section className={styles.bonusSection}>
-        <div className={styles.container}>
-          <div className={styles.centerHeaderDark}>
-            <p className={styles.eyebrowGold}>Fast-action bonuses</p>
-            <h2>Plus, you get these resources included.</h2>
-          </div>
-          <div className={styles.bonusGrid}>
-            {bonuses.map((bonus, index) => (
-              <article key={bonus.title} className={styles.bonusCard}>
-                <img src={bonus.image} alt="" />
-                <span>Bonus {index + 1}</span>
-                <h3>{bonus.title}</h3>
-                <p>{bonus.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className={styles.quoteBand}>
         <blockquote>
           This offer is not for everyone. It is for the leader who feels called by God to step into
@@ -320,8 +279,9 @@ export default function VIPPage() {
           <p className={styles.eyebrowGold}>Do not miss out</p>
           <h2>Upgrade to VIP for $97.</h2>
           <p>
-            Join the final-day VIP room at 7pm CT, bring your real questions, and get access to the
-            masterclass recordings in the FBF Vault so you can keep moving after the live event.
+            Join the VIP room on July 30th at 7pm CT on Zoom, bring your real questions, and get
+            access to the masterclass recordings in the FBF Vault so you can keep moving after the
+            live event.
           </p>
           <CTAButton />
           <p className={styles.microcopy}>Secure checkout through Stripe.</p>
