@@ -30,21 +30,6 @@ const initialForm = {
 
 type Status = "idle" | "loading" | "error";
 
-async function postWithTimeout(url: string, body: unknown) {
-  const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 5000);
-  try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-      signal: controller.signal,
-    });
-  } finally {
-    window.clearTimeout(timeout);
-  }
-}
-
 function FieldLabel({ children, required = false }: { children: React.ReactNode; required?: boolean }) {
   return (
     <label className={styles.formLabel}>
@@ -68,6 +53,7 @@ function SelectInput(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
 export default function WorkbookPage() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("Something went wrong. Please try again.");
   const router = useRouter();
 
   const setField = (name: keyof typeof initialForm, value: string | string[]) => {
@@ -86,13 +72,24 @@ export default function WorkbookPage() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("loading");
+    setErrorMessage("Something went wrong. Please try again.");
 
     try {
-      await postWithTimeout("/api/workbook", form);
-    } catch {
-      // Keep the visitor flow moving even if a downstream integration is unavailable.
+      const response = await fetch("/api/workbook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const body = await response.json().catch(() => null);
+        throw new Error(body?.error || "Something went wrong. Please try again.");
+      }
+      router.push("/workbook-thank-you");
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+      setStatus("error");
     }
-    router.push("/workbook-thank-you");
   };
 
   return (
@@ -136,8 +133,8 @@ export default function WorkbookPage() {
                 </div>
 
                 <div className={styles.formGridTwo}>
-                  <div><FieldLabel required>Email</FieldLabel><TextInput required type="text" inputMode="email" autoComplete="email" value={form.email} onChange={(e) => setField("email", e.target.value)} /></div>
-                  <div><FieldLabel>Phone</FieldLabel><TextInput type="tel" value={form.phone} onChange={(e) => setField("phone", e.target.value)} /></div>
+                  <div><FieldLabel required>Email</FieldLabel><TextInput required type="email" value={form.email} onChange={(e) => setField("email", e.target.value)} /></div>
+                  <div><FieldLabel required>Phone</FieldLabel><TextInput required type="tel" value={form.phone} onChange={(e) => setField("phone", e.target.value)} /></div>
                 </div>
 
                 <div className={styles.formGridTwo}>
@@ -210,7 +207,7 @@ export default function WorkbookPage() {
                 <button className={`${styles.button} ${styles.buttonGold} ${styles.workbookSubmit}`} disabled={status === "loading"} type="submit">
                   {status === "loading" ? "Submitting..." : "Get workbook access"}
                 </button>
-                {status === "error" ? <p className={styles.formError}>Something went wrong. Please try again.</p> : null}
+                {status === "error" ? <p className={styles.formError}>{errorMessage}</p> : null}
           </form>
         </div>
       </section>

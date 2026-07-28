@@ -41,6 +41,36 @@ function normalizeEmail(value = "") {
   return value.trim().toLowerCase();
 }
 
+function isValidNanpPhone(e164Phone: string) {
+  const match = e164Phone.match(/^\+1(\d{3})(\d{3})(\d{4})$/);
+  if (!match) return false;
+
+  const [, areaCode, exchange] = match;
+  if (/^[01]/.test(areaCode) || /^[01]/.test(exchange)) return false;
+  if (areaCode === "555" || exchange === "555") return false;
+
+  return true;
+}
+
+function normalizeE164Phone(phone = "") {
+  const raw = clean(phone);
+  if (!raw) return "";
+
+  const digits = raw.replace(/\D/g, "");
+  if (!digits) return "";
+
+  let normalized = "";
+  if (raw.startsWith("+") && digits.length >= 8 && digits.length <= 15) normalized = `+${digits}`;
+  if (raw.startsWith("00") && digits.length > 2 && digits.length <= 17) normalized = `+${digits.slice(2)}`;
+  if (digits.length === 10) normalized = `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) normalized = `+${digits}`;
+
+  if (!normalized) return "";
+  if (normalized.startsWith("+1") && !isValidNanpPhone(normalized)) return "";
+
+  return normalized;
+}
+
 async function readError(res: Response) {
   const text = await res.text();
   try {
@@ -65,24 +95,6 @@ function required(value: string | string[] | undefined) {
 
 function answer(value?: string) {
   return clean(value || "") || "Not provided";
-}
-
-function isPhoneError(error: unknown) {
-  return error instanceof Error && /phone|number/i.test(error.message);
-}
-
-function normalizePhone(value = "") {
-  const raw = clean(value);
-  const digits = raw.replace(/\D/g, "");
-
-  if (!raw) return "";
-  if (raw.startsWith("+")) return `+${digits}`;
-  if (raw.startsWith("00") && digits.length > 2) return `+${digits.slice(2)}`;
-  if (digits.length === 10) return `+1${digits}`;
-  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
-  if (digits.length === 11 && digits.startsWith("0")) return `+44${digits.slice(1)}`;
-
-  return raw;
 }
 
 function normalizeSelect(value?: string, options: string[] = []) {
@@ -136,8 +148,9 @@ function attioPersonValues(contact: WorkbookContact) {
     }],
   };
 
-  if (contact.phone) {
-    values.phone_numbers = [{ original_phone_number: contact.phone }];
+  const normalizedPhone = normalizeE164Phone(contact.phone);
+  if (normalizedPhone) {
+    values.phone_numbers = [{ original_phone_number: normalizedPhone }];
   }
 
   return values;
@@ -255,15 +268,6 @@ async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
   return { skipped: false };
 }
 
-async function captureIntegration<T>(label: string, task: () => Promise<T>) {
-  try {
-    return await task();
-  } catch (error) {
-    console.error(`${label} integration failed`, error);
-    return { skipped: false, error: `${label} integration failed` };
-  }
-}
-
 export async function POST(req: NextRequest) {
   try {
     const payload = normalizedPayload((await req.json()) as WorkbookPayload);
@@ -271,7 +275,7 @@ export async function POST(req: NextRequest) {
       firstName: clean(payload.firstName),
       lastName: clean(payload.lastName),
       email: normalizeEmail(payload.email),
-      phone: normalizePhone(payload.phone),
+      phone: clean(payload.phone),
       company: clean(payload.company),
     };
 
@@ -279,6 +283,7 @@ export async function POST(req: NextRequest) {
       ["firstName", contact.firstName],
       ["lastName", contact.lastName],
       ["email", contact.email],
+      ["phone", contact.phone],
       ["company", contact.company],
       ["whichOfTheFollowingBestDescribesYou", payload.whichOfTheFollowingBestDescribesYou],
       ["oneThing", payload.oneThing],
@@ -297,42 +302,32 @@ export async function POST(req: NextRequest) {
     const results: Record<string, unknown> = {};
 
     if (!ATTIO_API_KEY) {
-      results.attio = { skipped: true, reason: "ATTIO_API_KEY is not configured" };
-      results.attioList = { skipped: true, reason: "ATTIO_API_KEY is not configured" };
-      results.attioNote = { skipped: true, reason: "ATTIO_API_KEY is not configured" };
+      results.attio = { skipped: true, error: "Attio is not configured" };
     } else {
-      const attio = await captureIntegration("Attio qualification contact", async () => {
-        let record;
-        let phoneSkipped = false;
-        try {
-          record = await upsertAttioPerson(payload, contact);
-        } catch (error) {
-          if (!contact.phone || !isPhoneError(error)) throw error;
-          console.error(error);
-          record = await upsertAttioPerson(payload, { ...contact, phone: "" });
-          phoneSkipped = true;
-        }
-        return { skipped: false, recordId: record.recordId, phoneSkipped };
-      });
-      results.attio = attio;
+      try {
+        const attio = await upsertAttioPerson(payload, contact);
+        results.attio = { skipped: false, recordId: attio.recordId };
 
-      if ("recordId" in attio && typeof attio.recordId === "string") {
-        results.attioList = await captureIntegration("Attio K.I.M. qualification list entry", () => addAttioQualificationListEntry(attio.recordId));
-        results.attioNote = await captureIntegration("Attio qualification note", async () => {
-          await createAttioWorkbookNote(attio.recordId, payload, contact);
-          return { skipped: false };
-        });
-      } else {
-        results.attioList = { skipped: true, reason: "missing Attio record id" };
-        results.attioNote = { skipped: true, reason: "missing Attio record id" };
+        results.attioList = await addAttioQualificationListEntry(attio.recordId);
+
+        await createAttioWorkbookNote(attio.recordId, payload, contact);
+        results.attioNote = { skipped: false };
+      } catch (error) {
+        console.error(error);
+        results.attio = { skipped: false, error: "Attio qualification sync failed" };
       }
     }
 
-    results.slack = await captureIntegration("Slack notification", () => notifySlack(payload, contact));
+    try {
+      results.slack = await notifySlack(payload, contact);
+    } catch (error) {
+      console.error(error);
+      results.slack = { skipped: false, error: "Slack notification failed" };
+    }
 
     return NextResponse.json({ ok: true, results });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ ok: true, warning: "Workbook form accepted with processing errors" });
+    return NextResponse.json({ error: "Workbook form submission failed" }, { status: 500 });
   }
 }

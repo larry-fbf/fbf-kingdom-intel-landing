@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kingdom Intelligence Masterclass | Fueled By Fire",
   description:
-    "Free 3-day live online event for faith-driven business owners. June 9-11, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+    "Free 3-day live online event for faith-driven business owners. July 28-30, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta property="og:title" content="Kingdom Intelligence Masterclass | Fueled By Fire" />
-        <meta property="og:description" content="Free 3-day live event June 9-11, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era." />
+        <meta property="og:description" content="Free 3-day live event July 28-30, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era." />
         <meta property="og:image" content="https://www.kingdomintel.com/images/og-share.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="1200" />

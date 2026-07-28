@@ -1,0 +1,124 @@
+.page {
+  min-height: 100svh;
+  background:
+    linear-gradient(110deg, rgba(8, 8, 8, 0.96) 0%, rgba(22, 17, 14, 0.9) 48%, rgba(88, 16, 16, 0.78) 100%),
+    url("/images/kingdom-intel-network-hero.jpg") center / cover;
+  color: #fff;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.88fr) minmax(520px, 1.12fr);
+  gap: 32px;
+  align-items: center;
+  min-height: 100svh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px clamp(28px, 5vw, 72px);
+}
+
+.copy {
+  max-width: 560px;
+}
+
+.logo {
+  width: 154px;
+  height: auto;
+  margin-bottom: 44px;
+}
+
+.kicker {
+  margin-bottom: 16px;
+  color: #d6b36b;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.copy h1 {
+  margin: 0;
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-size: clamp(54px, 6vw, 92px);
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.lead {
+  max-width: 500px;
+  margin-top: 24px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 20px;
+  line-height: 1.55;
+}
+
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.notes span {
+  border: 1px solid rgba(214, 179, 107, 0.36);
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: rgba(0, 0, 0, 0.26);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.embedWrap {
+  height: min(760px, calc(100svh - 72px));
+  min-height: 580px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
+.embed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
+
+@media (min-width: 900px) {
+  .page {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 899px) {
+  .shell {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: auto;
+    padding: 28px 18px 24px;
+  }
+
+  .logo {
+    width: 132px;
+    margin-bottom: 34px;
+  }
+
+  .copy h1 {
+    font-size: clamp(46px, 14vw, 64px);
+  }
+
+  .lead {
+    font-size: 17px;
+  }
+
+  .notes {
+    display: none;
+  }
+
+  .embedWrap {
+    height: 720px;
+    min-height: 640px;
+  }
+}
