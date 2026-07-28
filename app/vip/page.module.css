@@ -44,6 +44,14 @@
   text-transform: uppercase;
 }
 
+.topAnnouncement span {
+  display: inline;
+}
+
+.topAnnouncement span:not(:last-child)::after {
+  content: " ";
+}
+
 .footer img {
   height: 54px;
   width: auto;
@@ -142,6 +150,31 @@
   font-style: italic;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.heroLead span {
+  display: inline;
+}
+
+.heroLead span:not(:last-child)::after {
+  content: " ";
+}
+
+.inviteVideo {
+  width: min(760px, 100%);
+  margin: 0 auto 28px;
+  overflow: hidden;
+  border: 2px solid rgba(217, 189, 114, 0.82);
+  border-radius: 10px;
+  background: #050505;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.48);
+}
+
+.inviteVideo iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
 }
 
 .heroCopy .ctaButton {
@@ -747,9 +780,19 @@
   }
 
   .topAnnouncement {
+    padding: 15px 18px 13px;
     font-size: 11px;
     letter-spacing: 0.1em;
     line-height: 1.45;
+    text-wrap: balance;
+  }
+
+  .topAnnouncement span {
+    display: block;
+  }
+
+  .topAnnouncement span:not(:last-child)::after {
+    content: "";
   }
 
   .footer img {
@@ -767,27 +810,40 @@
 
   .heroGrid {
     min-height: auto;
-    width: min(100%, calc(100% - 24px));
+    width: min(100%, calc(100% - 48px));
     gap: 0;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
   }
 
   .heroCopy {
-    padding: 42px 0 64px;
+    padding: 38px 0 60px;
+    min-width: 0;
   }
 
   .hero {
     min-height: auto;
+    padding: 0 !important;
+    background-position: center top;
   }
 
   .heroCopy h1 {
-    margin: 12px auto 16px;
-    max-width: 100%;
-    font-size: 24px;
-    line-height: 1.1;
+    display: grid;
+    gap: 8px;
+    margin: 0 auto 24px;
+    max-width: 22rem;
+    font-size: clamp(30px, 8.3vw, 42px);
+    line-height: 1.02;
+    overflow-wrap: break-word;
+  }
+
+  .accessLine {
+    font-size: 0.84em;
   }
 
   .supportingLine {
-    font-size: 0.74em;
+    font-size: 0.62em;
+    line-height: 1.08;
   }
 
   .heroCopy h1 span {
@@ -796,19 +852,41 @@
 
   .goldUnderline {
     display: block !important;
-    width: 100%;
+    width: min(100%, 20rem);
+    margin: 0 auto 4px;
     border-bottom-width: 3px;
-    line-height: 1.02;
+    padding-bottom: 8px;
+    line-height: 0.98;
   }
 
   .goldUnderline span {
     display: block;
   }
 
+  .inviteVideo {
+    margin-bottom: 24px;
+    border-width: 1px;
+    border-radius: 8px;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.52);
+  }
+
   .heroLead {
-    max-width: 30ch;
-    font-size: 16px;
-    line-height: 1.28;
+    max-width: 25ch;
+    font-size: clamp(17px, 4.5vw, 19px);
+    line-height: 1.46;
+    overflow-wrap: break-word;
+  }
+
+  .heroLead span {
+    display: block;
+  }
+
+  .heroLead span:not(:last-child)::after {
+    content: "";
+  }
+
+  .heroCopy .ctaButton {
+    margin-top: 28px;
   }
 
   .urgencyBand {

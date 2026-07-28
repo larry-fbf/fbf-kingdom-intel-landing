@@ -98,7 +98,11 @@ export default function VIPPage() {
     <main className={styles.pageShell}>
       <section className={styles.hero}>
         <div className={styles.heroOverlay} />
-        <div className={styles.topAnnouncement}>You have an opportunity to enhance your experience</div>
+        <div className={styles.topAnnouncement}>
+          <span>You have an opportunity</span>
+          <span>to enhance your</span>
+          <span>experience</span>
+        </div>
 
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
@@ -113,10 +117,26 @@ export default function VIPPage() {
                 Your <em>Life &amp; Business Reset</em>
               </span>
             </h1>
+            <div className={styles.inviteVideo}>
+              <iframe
+                src="https://player.vimeo.com/video/1213609996?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                title="VIP Mastermind invite video"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
             <p className={styles.heroLead}>
-              This is a <strong>unique opportunity</strong> to get personalized feedback and your
-              questions answered for a <strong>fraction</strong> of the price we normally charge
-              for one-on-one coaching!
+              <span>
+                This is a <strong>unique opportunity</strong>
+              </span>
+              <span>to get personalized feedback</span>
+              <span>and your questions answered</span>
+              <span>
+                for a <strong>fraction</strong> of the price
+              </span>
+              <span>we normally charge for</span>
+              <span>one-on-one coaching!</span>
             </p>
             <CTAButton />
             <p className={styles.microcopy}>Includes FBF Vault access to the masterclass recordings.</p>
