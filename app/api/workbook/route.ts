@@ -71,6 +71,20 @@ function isPhoneError(error: unknown) {
   return error instanceof Error && /phone|number/i.test(error.message);
 }
 
+function normalizePhone(value = "") {
+  const raw = clean(value);
+  const digits = raw.replace(/\D/g, "");
+
+  if (!raw) return "";
+  if (raw.startsWith("+")) return `+${digits}`;
+  if (raw.startsWith("00") && digits.length > 2) return `+${digits.slice(2)}`;
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
+  if (digits.length === 11 && digits.startsWith("0")) return `+44${digits.slice(1)}`;
+
+  return raw;
+}
+
 function normalizeSelect(value?: string, options: string[] = []) {
   const raw = clean(value || "");
   if (!raw) return raw;
@@ -257,7 +271,7 @@ export async function POST(req: NextRequest) {
       firstName: clean(payload.firstName),
       lastName: clean(payload.lastName),
       email: normalizeEmail(payload.email),
-      phone: clean(payload.phone),
+      phone: normalizePhone(payload.phone),
       company: clean(payload.company),
     };
 
