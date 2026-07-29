@@ -10,11 +10,34 @@ export const metadata: Metadata = {
 
 const PAYMENT_LINK = "https://buy.stripe.com/8x2dRabIR7JA3qQ88t5kk0i";
 
+const bonuses = [
+  {
+    title: "Lifetime access to the K.I. Masterclass replays",
+    body:
+      "Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.",
+    image: "/images/vip-life-business-bundle.png",
+  },
+  {
+    title: "The S.W.E.E.T. Spot Audit",
+    body:
+      "Clarify your mandate, identify blind spots, and remove the roadblocks holding back your next level of revenue, margin, and Kingdom impact.",
+    image: "/images/vip-sweet-spot-audit.png",
+  },
+  {
+    title: "The Superpower Leadership document",
+    body:
+      "Activate the leadership disciplines faith-driven CEOs need when markets are noisy, teams need clarity, and the business has to keep moving.",
+    image: "/images/vip-superhero-hacks.png",
+  },
+];
+
 const vipIncludes = [
   "One live VIP room on July 30th at 7pm CT on Zoom",
   "Direct coaching and feedback from Larry, Staci, and the CEO Mentor team",
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
-  "Access to the Kingdom Intelligence Masterclass recordings in the FBF Vault",
+  "Lifetime access to the K.I. Masterclass replays in the FBF Vault",
+  "The S.W.E.E.T. Spot Audit",
+  "The Superpower Leadership document",
 ];
 
 const cindyTestimonial = {
@@ -66,7 +89,7 @@ function OfferCard() {
         <strong>Only $97</strong>
       </div>
       <CTAButton />
-      <p className={styles.expiryNote}>Includes the VIP room, direct coaching, and FBF Vault recording access.</p>
+      <p className={styles.expiryNote}>Includes the VIP room, direct coaching, lifetime replay access, and bonus resources.</p>
     </aside>
   );
 }
@@ -117,7 +140,7 @@ export default function VIPPage() {
               <span>one-on-one coaching!</span>
             </p>
             <CTAButton />
-            <p className={styles.microcopy}>Includes FBF Vault access to the masterclass recordings.</p>
+            <p className={styles.microcopy}>Includes lifetime access to the K.I. Masterclass replays.</p>
           </div>
         </div>
       </section>
@@ -126,8 +149,8 @@ export default function VIPPage() {
         <div className={styles.urgencyCopy}>
           <strong>PLUS!</strong>
           <p>
-            When you upgrade on this page, you&apos;ll also get the Kingdom Intelligence Masterclass
-            training replays free for life.
+            When you upgrade on this page, you&apos;ll also get lifetime access to the K.I.
+            Masterclass replays.
           </p>
         </div>
         <CountdownTimer />
@@ -247,6 +270,25 @@ export default function VIPPage() {
         </div>
       </section>
 
+      <section className={styles.bonusSection}>
+        <div className={styles.container}>
+          <div className={styles.centerHeaderDark}>
+            <p className={styles.eyebrowGold}>Fast-action bonuses</p>
+            <h2>Plus, you get these resources included.</h2>
+          </div>
+          <div className={styles.bonusGrid}>
+            {bonuses.map((bonus, index) => (
+              <article key={bonus.title} className={styles.bonusCard}>
+                <img src={bonus.image} alt="" />
+                <span>Bonus {index + 1}</span>
+                <h3>{bonus.title}</h3>
+                <p>{bonus.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className={styles.quoteBand}>
         <blockquote>
           This offer is not for everyone. It is for the leader who feels called by God to step into
@@ -280,8 +322,8 @@ export default function VIPPage() {
           <h2>Upgrade to VIP for $97.</h2>
           <p>
             Join the VIP room on July 30th at 7pm CT on Zoom, bring your real questions, and get
-            access to the masterclass recordings in the FBF Vault so you can keep moving after the
-            live event.
+            lifetime access to the K.I. Masterclass replays so you can keep moving after the live
+            event.
           </p>
           <CTAButton />
           <p className={styles.microcopy}>Secure checkout through Stripe.</p>

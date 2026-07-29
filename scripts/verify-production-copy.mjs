@@ -12,8 +12,13 @@ const checks = [
   },
   {
     file: "app/vip/page.tsx",
-    mustInclude: ["July 30th at 7pm CT on Zoom"],
-    mustNotMatch: [/Fast-action bonuses/i, /Plus, you get these resources included/i, /bonus resources/i],
+    mustInclude: [
+      "July 30th at 7pm CT on Zoom",
+      "Lifetime access to the K.I. Masterclass replays",
+      "The S.W.E.E.T. Spot Audit",
+      "The Superpower Leadership document",
+    ],
+    mustNotMatch: [/Top 10 CEO leadership hacks/i],
   },
 ];
 
