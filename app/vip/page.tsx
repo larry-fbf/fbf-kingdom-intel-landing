@@ -6,6 +6,31 @@ export const metadata: Metadata = {
   title: "VIP Upgrade | Kingdom Intelligence Masterclass",
   description:
     "Upgrade to VIP for the July 30th VIP room and FBF Vault recordings for the Kingdom Intelligence Masterclass.",
+  alternates: {
+    canonical: "https://www.kingdomintel.com/vip",
+  },
+  openGraph: {
+    title: "VIP Mastermind | Kingdom Intelligence Masterclass",
+    description:
+      "Exclusive VIP access with Larry and Staci Wallace for the Kingdom Intelligence Masterclass.",
+    url: "https://www.kingdomintel.com/vip",
+    type: "website",
+    images: [
+      {
+        url: "https://www.kingdomintel.com/images/vip-mastermind-og.jpg",
+        width: 1620,
+        height: 1620,
+        alt: "VIP Mastermind Exclusive Access with Staci and Larry Wallace",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VIP Mastermind | Kingdom Intelligence Masterclass",
+    description:
+      "Exclusive VIP access with Larry and Staci Wallace for the Kingdom Intelligence Masterclass.",
+    images: ["https://www.kingdomintel.com/images/vip-mastermind-og.jpg"],
+  },
 };
 
 const PAYMENT_LINK = "https://buy.stripe.com/8x2dRabIR7JA3qQ88t5kk0i";

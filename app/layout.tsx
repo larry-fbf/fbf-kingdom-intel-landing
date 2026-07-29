@@ -4,6 +4,25 @@ export const metadata: Metadata = {
   title: "Kingdom Intelligence Masterclass | Fueled By Fire",
   description:
     "Free 3-day live online event for faith-driven business owners. July 28-30, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+  openGraph: {
+    title: "Kingdom Intelligence Masterclass | Fueled By Fire",
+    description:
+      "Free 3-day live event July 28-30, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.",
+    url: "https://www.kingdomintel.com",
+    type: "website",
+    images: [
+      {
+        url: "https://www.kingdomintel.com/images/og-share.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "Kingdom Intelligence Masterclass",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["https://www.kingdomintel.com/images/og-share.jpg"],
+  },
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
@@ -19,15 +38,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta property="og:title" content="Kingdom Intelligence Masterclass | Fueled By Fire" />
-        <meta property="og:description" content="Free 3-day live event July 28-30, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era." />
-        <meta property="og:image" content="https://www.kingdomintel.com/images/og-share.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="1200" />
-        <meta property="og:url" content="https://www.kingdomintel.com" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://www.kingdomintel.com/images/og-share.jpg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
