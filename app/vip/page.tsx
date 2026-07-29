@@ -40,7 +40,7 @@ const bonuses = [
     title: "Lifetime access to the K.I. Masterclass replays",
     body:
       "Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.",
-    image: "/images/vip-life-business-bundle.png",
+    image: "/images/vip-mastermind-og.jpg",
   },
   {
     title: "The S.W.E.E.T. Spot Audit",
