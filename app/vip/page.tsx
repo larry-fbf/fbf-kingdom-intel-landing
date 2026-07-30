@@ -49,7 +49,7 @@ const bonuses = [
     image: "/images/vip-sweet-spot-audit.png",
   },
   {
-    title: "The Superpower Leadership document",
+    title: "Our 10 hacks to Superpower Leadership",
     body:
       "Activate the leadership disciplines faith-driven CEOs need when markets are noisy, teams need clarity, and the business has to keep moving.",
     image: "/images/vip-superhero-hacks.png",
@@ -62,7 +62,7 @@ const vipIncludes = [
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
   "Lifetime access to the K.I. Masterclass replays in the FBF Vault",
   "The S.W.E.E.T. Spot Audit",
-  "The Superpower Leadership document",
+  "Our 10 hacks to Superpower Leadership",
 ];
 
 const cindyTestimonial = {
