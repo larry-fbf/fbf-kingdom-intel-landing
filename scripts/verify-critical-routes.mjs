@@ -11,6 +11,7 @@ const criticalRoutes = [
   "/api/workshop/register",
   "/api/register",
   "/thank-you",
+  "/dashboard",
   "/workbook",
   "/workbook-thank-you",
 ];
