@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     images: ["/images/og-share.jpg"],
   },
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.png?v=fbf",
+    shortcut: "/favicon.ico?v=fbf",
+    apple: "/favicon.png?v=fbf",
   },
 };
 
