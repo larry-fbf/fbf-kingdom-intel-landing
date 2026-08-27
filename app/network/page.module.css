@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("/fonts/glacial-indifference-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("/fonts/glacial-indifference-bold.woff2") format("woff2");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 .pageShell {
   background: #ffffff;
   color: #111111;
@@ -187,10 +203,10 @@
 
 .heroSubtitle {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-body);
   font-size: clamp(1.7rem, 3vw, 2.7rem);
-  font-weight: 900;
-  line-height: 1.04;
+  font-weight: 700;
+  line-height: 1.08;
 }
 
 .heroDescription,
@@ -268,10 +284,10 @@
 .heading,
 .lightHeading {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-body);
   font-size: clamp(2.3rem, 4vw, 3.6rem);
-  font-weight: 900;
-  line-height: 1.08;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .heading {
@@ -961,6 +977,25 @@
   margin: 0 0 20px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.2);
+}
+
+.footerCallCta {
+  max-width: 560px;
+  margin: 0 auto 22px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.footerCallCta a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footerCallCta a:hover {
+  color: #f6d37d;
 }
 
 .footerLinks {

@@ -41,12 +41,34 @@ function normalizeEmail(value = "") {
   return value.trim().toLowerCase();
 }
 
-function normalizeUsPhone(phone = "") {
-  const digits = phone.replace(/\D/g, "");
+function isValidNanpPhone(e164Phone: string) {
+  const match = e164Phone.match(/^\+1(\d{3})(\d{3})(\d{4})$/);
+  if (!match) return false;
+
+  const [, areaCode, exchange] = match;
+  if (/^[01]/.test(areaCode) || /^[01]/.test(exchange)) return false;
+  if (areaCode === "555" || exchange === "555") return false;
+
+  return true;
+}
+
+function normalizeE164Phone(phone = "") {
+  const raw = clean(phone);
+  if (!raw) return "";
+
+  const digits = raw.replace(/\D/g, "");
   if (!digits) return "";
-  if (digits.length === 10) return `+1${digits}`;
-  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
-  return "";
+
+  let normalized = "";
+  if (raw.startsWith("+") && digits.length >= 8 && digits.length <= 15) normalized = `+${digits}`;
+  if (raw.startsWith("00") && digits.length > 2 && digits.length <= 17) normalized = `+${digits.slice(2)}`;
+  if (digits.length === 10) normalized = `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) normalized = `+${digits}`;
+
+  if (!normalized) return "";
+  if (normalized.startsWith("+1") && !isValidNanpPhone(normalized)) return "";
+
+  return normalized;
 }
 
 async function readError(res: Response) {
@@ -119,13 +141,17 @@ function formatWorkbookNote(payload: WorkbookPayload, contact: WorkbookContact) 
 function attioPersonValues(contact: WorkbookContact) {
   const values: Record<string, unknown> = {
     email_addresses: [{ email_address: contact.email }],
-    phone_numbers: [{ original_phone_number: contact.phone }],
     name: [{
       first_name: contact.firstName,
       last_name: contact.lastName,
       full_name: `${contact.firstName} ${contact.lastName}`.trim(),
     }],
   };
+
+  const normalizedPhone = normalizeE164Phone(contact.phone);
+  if (normalizedPhone) {
+    values.phone_numbers = [{ original_phone_number: normalizedPhone }];
+  }
 
   return values;
 }
@@ -244,16 +270,12 @@ async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
 
 export async function POST(req: NextRequest) {
   try {
-    if (!ATTIO_API_KEY) {
-      return NextResponse.json({ error: "Attio is not configured" }, { status: 500 });
-    }
-
     const payload = normalizedPayload((await req.json()) as WorkbookPayload);
     const contact = {
       firstName: clean(payload.firstName),
       lastName: clean(payload.lastName),
       email: normalizeEmail(payload.email),
-      phone: normalizeUsPhone(payload.phone),
+      phone: clean(payload.phone),
       company: clean(payload.company),
     };
 
@@ -277,19 +299,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields", fields: missing.map(([name]) => name) }, { status: 400 });
     }
 
-    if (!contact.phone) {
-      return NextResponse.json({ error: "Enter a valid US phone number.", fields: ["phone"] }, { status: 400 });
-    }
-
     const results: Record<string, unknown> = {};
 
-    const attio = await upsertAttioPerson(payload, contact);
-    results.attio = { skipped: false, recordId: attio.recordId };
+    if (!ATTIO_API_KEY) {
+      results.attio = { skipped: true, error: "Attio is not configured" };
+    } else {
+      try {
+        const attio = await upsertAttioPerson(payload, contact);
+        results.attio = { skipped: false, recordId: attio.recordId };
 
-    results.attioList = await addAttioQualificationListEntry(attio.recordId);
+        results.attioList = await addAttioQualificationListEntry(attio.recordId);
 
-    await createAttioWorkbookNote(attio.recordId, payload, contact);
-    results.attioNote = { skipped: false };
+        await createAttioWorkbookNote(attio.recordId, payload, contact);
+        results.attioNote = { skipped: false };
+      } catch (error) {
+        console.error(error);
+        results.attio = { skipped: false, error: "Attio qualification sync failed" };
+      }
+    }
 
     try {
       results.slack = await notifySlack(payload, contact);

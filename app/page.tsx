@@ -64,7 +64,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
             <div style={{ textAlign: "center", marginBottom: "28px" }}>
               <img src="/images/fbf-logo-black.png" alt="FBF" style={{ height: "36px", marginBottom: "20px", display: "inline-block" }} />
               <h2 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 900, color: "#111", lineHeight: 1.2, marginBottom: "8px" }}>
-                Join the FREE Kingdom Intelligence<br />Masterclass · June 9&ndash;11, 2026
+                Join the FREE Kingdom Intelligence<br />Masterclass · September 15&ndash;17, 2026
               </h2>
               <p style={{ fontSize: "14px", color: "#CC0000", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
                 Your decision to join has the potential to be the biggest choice you make in 2026.
@@ -92,13 +92,16 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
               </div>
 
               <div style={{ borderTop: "1px solid #F0F0F0", paddingTop: "16px" }}>
-                <p style={{ fontSize: "12px", color: "#666", lineHeight: 1.6, marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
+                <p style={{ fontSize: "11px", color: "#666", lineHeight: 1.6, marginBottom: "12px", fontFamily: "'Work Sans', sans-serif" }}>
                   Fueled By Fire, LLC values your privacy. We&rsquo;ll use your info to manage your account and deliver the services you&rsquo;ve asked for.
                 </p>
                 <label style={{ display: "flex", alignItems: "flex-start", gap: "10px", cursor: "pointer" }}>
                   <input type="checkbox" checked={form.agreed} onChange={e => setForm(f => ({...f, agreed: e.target.checked}))} style={{ marginTop: "3px", flexShrink: 0, width: "16px", height: "16px", accentColor: "#CC0000" }} />
-                  <span style={{ fontSize: "13px", color: "#444", fontFamily: "'Work Sans', sans-serif", lineHeight: 1.5 }}>
-                    I agree to receive emails and, optionally, SMS from Fueled By Fire, LLC.*
+                  <span style={{ fontSize: "11px", color: "#444", fontFamily: "'Work Sans', sans-serif", lineHeight: 1.5 }}>
+                    By checking this box, I consent to receive text messages from Fueled By Fire, LLC about event reminders and customer care updates. Reply STOP to opt out at any time. Reply HELP for assistance. Msg &amp; data rates may apply. Message frequency varies.{" "}
+                    <a href="https://www.fbfchallenge.com/privacy" target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} style={{ color: "#444", textDecoration: "underline", textUnderlineOffset: "2px" }}>Privacy Policy</a>
+                    {" | "}
+                    <a href="https://www.fbfchallenge.com/terms" target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} style={{ color: "#444", textDecoration: "underline", textUnderlineOffset: "2px" }}>Terms</a>
                   </span>
                 </label>
               </div>
@@ -229,7 +232,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           <div className="hero-event-bar">
             <div>
               <div style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "#BB945A", fontFamily: "'Work Sans', sans-serif", fontWeight: 700, marginBottom: "4px" }}>Date</div>
-              <div style={{ fontSize: "clamp(13px, 1.2vw, 16px)", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>June 9–11 @ 12 PM Central</div>
+              <div style={{ fontSize: "clamp(13px, 1.2vw, 16px)", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>September 15&ndash;17 @ 12 PM Central</div>
             </div>
           </div>
         </div>
@@ -255,7 +258,7 @@ function EventDetails() {
         </p>
         <div className="event-details-row" style={{ display: "flex", justifyContent: "center", gap: "40px", flexWrap: "wrap", marginBottom: "32px" }}>
           {[
-            { label: "Date", value: "June 9\u201311, 2026" },
+            { label: "Date", value: "September 15\u201317, 2026" },
             { label: "Time", value: "12:00 PM CST Daily" },
             { label: "Format", value: "Free Live Online Event" },
           ].map((item, i) => (
@@ -423,7 +426,7 @@ function ECHOBlueprint({ onOpen }: { onOpen: () => void }) {
 
 /* -- PREPARE -- */
 const prepSteps = [
-  { number: "01", title: "Block Your Calendar", body: "All sessions are LIVE June 9\u201311, 12:00 PM CST. Set your notifications and treat these three days like a board meeting, not a webinar." },
+  { number: "01", title: "Block Your Calendar", body: "All sessions are LIVE September 15\u201317, 12:00 PM CST. Set your notifications and treat these three days like a board meeting, not a webinar." },
   { number: "02", title: "Bring Your Biggest Challenge", body: "Come with the one thing that's been holding your business back. We built this Masterclass to solve real problems in real time." },
   { number: "03", title: "Invite Collaborators", body: "Bring your team or key leaders so implementation happens immediately after the event." },
 ];
@@ -524,7 +527,7 @@ function FinalCTA({ onOpen }: { onOpen: () => void }) {
   return (
     <section style={{ background: "#FFFFFF", padding: "100px 20px", position: "relative", overflow: "hidden" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>June 9&ndash;11, 2026 &middot; Free Live Event</p>
+        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>September 15&ndash;17, 2026 &middot; Free Live Event</p>
         <h2 style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 900, color: "#111111", marginBottom: "20px", lineHeight: 1.1 }}>
           Playing Small Has Never<br />Changed The World.
         </h2>
@@ -576,7 +579,7 @@ function TopBanner({ onOpen }: { onOpen: () => void }) {
       onMouseLeave={e => (e.currentTarget.style.filter = "brightness(1)")}
     >
       <span style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif" }}>
-        Free 3-Day Live Event &nbsp;&middot;&nbsp; June 9&ndash;11, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;
+        Free 3-Day Live Event &nbsp;&middot;&nbsp; September 15&ndash;17, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;
         <span style={{ color: "#FFE599", textDecoration: "underline" }}>Register Now &rarr;</span>
       </span>
     </button>

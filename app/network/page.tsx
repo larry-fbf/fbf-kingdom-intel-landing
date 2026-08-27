@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Kingdom Intelligence Network | Fueled By Fire",
   description:
-    "An online community of Christian entrepreneurs building business God's way with weekly mentorship, executive Q&A, replays, resources, and exclusive event invites.",
+    "An online network of Christian entrepreneurs building business God's way with weekly mentorship, executive Q&A, replays, resources, and exclusive event invites.",
 };
 
 const paymentUrl = "https://vault.fbfmastery.com/checkout/network";
@@ -34,7 +34,7 @@ const testimonialCards = [
     role: "CEO, Vandenberg Fine Jewelry",
     quote:
       "Our sales are up 166.4% month over month. There is no explanation other than we have tapped into a God-factor that is driving our growth and legacy impact.",
-    photo: null,
+    photo: "https://www.kingdomintel.com/images/peter-vandenberg-headshot.jpg",
   },
   {
     name: "Eric Moland",
@@ -189,7 +189,7 @@ export default function NetworkPage() {
               description="The Kingdom Intelligence Network is for Christian entrepreneurs and business owners who know they are called to build differently."
             />
             <p className={styles.sectionCopy}>
-              This is not just another online community. It is a room for leaders who want to grow with
+              This is not just another online network. It is a room for leaders who want to grow with
               wisdom, lead with discernment, and make decisions through the lens of Kingdom Intelligence.
             </p>
             <p className={styles.sectionCopy}>
@@ -229,17 +229,17 @@ export default function NetworkPage() {
       <section className={styles.communitySection}>
         <div className={styles.container}>
           <div className={styles.communityProof}>
-            <p className={styles.communityLabel}>Inside The Member Community</p>
+            <p className={styles.communityLabel}>Inside The Network</p>
             <div className={styles.communityImage}>
               <img
-                src="/community-app-screenshot.png"
-                alt="Kingdom Intelligence Network member community app showing the community feed, upcoming events, replays, and member resources"
+                src="/images/inside-the-network.png"
+                alt="Kingdom Intelligence Network app showing the network feed, upcoming events, replays, and member resources"
               />
             </div>
             <div className={styles.communityCopy}>
               <h3>Stay connected to the counsel, training, and conversations that move your business forward.</h3>
               <p>
-                Inside the member community, you can ask questions, access weekly mentorship, watch
+                Inside the Network, you can ask questions, access weekly mentorship, watch
                 podcast and Masterclass replays, follow the live events calendar, and connect directly
                 with leaders who are building business God&apos;s way.
               </p>
@@ -256,7 +256,7 @@ export default function NetworkPage() {
       <section className={styles.finalCtaSection}>
         <div className={`${styles.container} ${styles.finalCtaLayout}`}>
           <div className={styles.finalCtaImageWrap}>
-            <img src="/final-cta-prayer.jpg" alt="Fueled by Fire community gathered in prayer" />
+            <img src="/final-cta-prayer.jpg" alt="Fueled by Fire network gathered in prayer" />
           </div>
           <div className={styles.finalCtaCopy}>
             <p className={`${styles.eyebrow} ${styles.eyebrowLight}`}>Our Shared Mission</p>
@@ -307,7 +307,7 @@ export default function NetworkPage() {
                 God&apos;s way.
               </p>
               <p className={styles.sectionCopy}>
-                You also get access to the live events calendar in the community, so you can stay
+                You also get access to the live events calendar in the Network, so you can stay
                 connected to upcoming online training sessions, special calls, and member-only opportunities.
               </p>
               <a className={`${styles.button} ${styles.buttonRed}`} href={paymentUrl} target="_blank" rel="noreferrer">
@@ -411,7 +411,7 @@ export default function NetworkPage() {
             <p className={`${styles.eyebrow} ${styles.eyebrowLight}`}>Join Kingdom Intelligence Network</p>
             <h2 className={styles.lightHeading}>Get in the room for $197 per month.</h2>
             <p className={`${styles.sectionCopy} ${styles.sectionCopyLight}`}>
-              Step into a Christian business community built for leaders who want to grow God&apos;s way.
+              Step into a Christian business network built for leaders who want to grow God&apos;s way.
               Inside the Network, you will receive weekly mentorship, executive Q&amp;A, replays,
               practical resources, and access to a room of Kingdom entrepreneurs building with wisdom,
               faith, and excellence.
@@ -443,10 +443,10 @@ export default function NetworkPage() {
                 While AI increases speed, <span>Kingdom Intelligence determines discernment, authority, and long-term impact in the marketplace.</span> The leaders who thrive in this season will not simply move faster. They will build with wisdom, conviction, and Spirit-led strategy.
               </p>
               <p className={styles.personalWordBody}>
-                Kingdom Intelligence Network was created for Christian entrepreneurs and business owners who want weekly access to mentorship, executive counsel, and a faith-filled community of leaders committed to building His way.
+                Kingdom Intelligence Network was created for Christian entrepreneurs and business owners who want weekly access to mentorship, executive counsel, and a faith-filled network of leaders committed to building His way.
               </p>
               <p className={styles.personalWordBody}>
-                Inside this room, you get weekly mentorship, executive Q&amp;A, member community access, replays, resources, and future Kingdom Intelligence Masterclass VIP rooms that keep you close to the conversations and relationships that matter most.
+                Inside this room, you get weekly mentorship, executive Q&amp;A, member network access, replays, resources, and future Kingdom Intelligence Masterclass VIP rooms that keep you close to the conversations and relationships that matter most.
               </p>
               <p className={styles.personalWordEmphasis}>
                 Build with discernment. Lead with conviction. Grow with people who refuse to separate business from obedience.
@@ -475,6 +475,10 @@ export default function NetworkPage() {
             <p className={styles.footerCopyright}>&copy; 2026 Fueled By Fire. All Rights Reserved.</p>
             <p className={styles.footerSupport}>
               10% of every program fee supports Epiphany Global (Uganda) &amp; EMwomen.
+            </p>
+            <p className={styles.footerCallCta}>
+              If you want to book a call to hear more about the Network or what we do at Fueled by Fire,{" "}
+              <a href="/bookacall">click this link</a>.
             </p>
             <div className={styles.footerLinks}>
               <a href="https://www.fbfchallenge.com/privacy" target="_blank" rel="noreferrer">

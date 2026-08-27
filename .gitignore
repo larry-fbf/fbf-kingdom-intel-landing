@@ -52,3 +52,9 @@ next-env.d.ts
 /tmp/
 /worktrees/
 /app/draft/
+tmp-*.log
+tmp-*.err.log
+tmp-*.png
+tmp-*.jpg
+tmp-*.jpeg
+tmp-chrome-profile*/

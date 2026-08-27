@@ -1,9 +1,37 @@
 import type { Metadata } from "next";
+import MicrosoftClarity from "./components/MicrosoftClarity";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.kingdomintel.com"),
   title: "Kingdom Intelligence Masterclass | Fueled By Fire",
   description:
-    "Free 3-day live online event for faith-driven business owners. June 9-11, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+    "Free 3-day live online event for faith-driven business owners. September 15-17, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Kingdom Intelligence Masterclass | Fueled By Fire",
+    description:
+      "Free 3-day live event September 15-17, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.",
+    url: "/",
+    siteName: "Kingdom Intel",
+    images: [
+      {
+        url: "/images/og-share.jpg",
+        width: 1080,
+        height: 1080,
+        alt: "Kingdom Intelligence Masterclass",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kingdom Intelligence Masterclass | Fueled By Fire",
+    description:
+      "Free 3-day live event September 15-17, 2026. Learn how to scale your business God's way.",
+    images: ["/images/og-share.jpg"],
+  },
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
@@ -19,15 +47,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta property="og:title" content="Kingdom Intelligence Masterclass | Fueled By Fire" />
-        <meta property="og:description" content="Free 3-day live event June 9-11, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era." />
-        <meta property="og:image" content="https://www.kingdomintel.com/images/og-share.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="1200" />
-        <meta property="og:url" content="https://www.kingdomintel.com" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://www.kingdomintel.com/images/og-share.jpg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -259,7 +278,10 @@ a { color: inherit; text-decoration: none; }
         `}} />
         <noscript><img height="1" width="1" style={{display:"none"}} src="https://www.facebook.com/tr?id=386045455794262&ev=PageView&noscript=1" /></noscript>
       </head>
-      <body>{children}</body>
+      <body>
+        <MicrosoftClarity />
+        {children}
+      </body>
     </html>
   );
 }
