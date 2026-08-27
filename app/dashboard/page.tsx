@@ -109,7 +109,7 @@ export default function DashboardPage() {
         .vip-card {
           background: #090909;
           border-color: #222;
-          color: #e00000;
+          color: #fff;
         }
 
         .action-eyebrow {
@@ -121,10 +121,13 @@ export default function DashboardPage() {
           text-transform: uppercase;
         }
 
-        .vip-card .action-eyebrow,
+        .vip-card .action-eyebrow {
+          color: #e00000;
+        }
+
         .vip-card .action-title,
         .vip-card .action-detail {
-          color: #e00000;
+          color: #fff;
         }
 
         .action-title {
@@ -163,56 +166,6 @@ export default function DashboardPage() {
         .vip-card .action-cta {
           background: #cc0000;
           color: #fff;
-        }
-
-        .workbook-content {
-          position: relative;
-          z-index: 2;
-        }
-
-        .workbook-box {
-          width: 138px;
-          max-width: 46%;
-          margin: 10px 0 12px;
-          perspective: 900px;
-        }
-
-        .workbook-box-inner {
-          position: relative;
-          width: 104px;
-          aspect-ratio: 0.66;
-          transform: rotateY(-22deg) rotateX(2deg);
-          transform-style: preserve-3d;
-          filter: drop-shadow(18px 18px 20px rgba(55, 38, 8, 0.32));
-        }
-
-        .workbook-box-inner::before {
-          content: "";
-          position: absolute;
-          top: 6px;
-          left: 100%;
-          width: 18px;
-          height: calc(100% - 12px);
-          background: linear-gradient(90deg, #171717, #4e3512);
-          transform: rotateY(90deg);
-          transform-origin: left;
-        }
-
-        .workbook-box-inner::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          border: 1px solid rgba(255,255,255,0.34);
-          box-shadow: inset -10px 0 24px rgba(0,0,0,0.28);
-          pointer-events: none;
-        }
-
-        .workbook-box img {
-          display: block;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          background: #111;
         }
 
         .hero-image-card {
@@ -459,10 +412,6 @@ export default function DashboardPage() {
             min-height: 210px;
           }
 
-          .workbook-box {
-            max-width: 34%;
-          }
-
           .hero-image-card {
             min-height: auto;
           }
@@ -508,15 +457,10 @@ export default function DashboardPage() {
           <div className="hero-grid">
             <div className="side-actions">
               <a className="action-card workbook-card" href={WORKBOOK_URL}>
-                <div className="workbook-content">
+                <div>
                   <p className="action-eyebrow">Workbook</p>
                   <h2 className="action-title">Grab Your Workbook</h2>
                   <p className="action-detail">Complete the form and get your workbook sent to you.</p>
-                </div>
-                <div className="workbook-box" aria-hidden="true">
-                  <div className="workbook-box-inner">
-                    <img src="/images/kingdom-intelligence-workbook-cover.png" alt="" />
-                  </div>
                 </div>
                 <span className="action-cta">Get Workbook</span>
               </a>
