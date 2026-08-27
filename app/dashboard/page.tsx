@@ -61,8 +61,8 @@ export default function DashboardPage() {
       <style>{`
         .dashboard-shell {
           min-height: 100vh;
-          background: #080808;
-          color: #fff;
+          background: #f4f2ee;
+          color: #121212;
           font-family: 'Work Sans', Arial, sans-serif;
           overflow-x: hidden;
         }
@@ -72,8 +72,8 @@ export default function DashboardPage() {
         }
 
         .dashboard-top {
-          background: #080808;
-          color: #fff;
+          background: #f4f2ee;
+          color: #121212;
         }
 
         .dashboard-bar,
@@ -84,60 +84,59 @@ export default function DashboardPage() {
         }
 
         .dashboard-bar {
-          min-height: 98px;
+          min-height: 132px;
           display: grid;
-          grid-template-columns: 86px minmax(0, 1fr) 86px;
+          grid-template-columns: 96px minmax(0, 1fr) 96px;
           align-items: center;
-          gap: 18px;
-          padding-top: 8px;
+          gap: 20px;
+          padding: 24px 0 10px;
         }
 
         .dashboard-logo {
-          height: 44px;
+          height: 52px;
           width: auto;
           display: block;
         }
 
         .dashboard-kicker {
-          margin: 0 0 6px;
-          color: #c9a55a;
-          font-size: 11px;
+          margin: 0 0 4px;
+          color: #8d7338;
+          font-size: clamp(14px, 1.25vw, 18px);
           font-weight: 800;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.1em;
           text-align: center;
-          text-transform: uppercase;
         }
 
         .dashboard-title {
           margin: 0;
-          color: #fff;
+          color: #cc0000;
           font-family: 'Anton', Arial, sans-serif;
-          font-size: clamp(30px, 3.6vw, 54px);
+          font-size: clamp(54px, 6vw, 88px);
           font-weight: 400;
           letter-spacing: 0.02em;
-          line-height: 1.02;
+          line-height: 0.94;
           text-align: center;
         }
 
         .hero-block {
-          padding: 4px 0 14px;
-          background: #080808;
+          padding: 8px 0 22px;
+          background: #f4f2ee;
         }
 
         .hero-image {
           display: block;
-          width: 820px;
+          width: 780px;
           max-width: 100%;
           margin: 0 auto;
           height: auto;
-          border: 1px solid rgba(201,165,90,0.26);
-          box-shadow: 0 22px 70px rgba(0,0,0,0.42);
+          border: 1px solid #d6caae;
+          box-shadow: 0 18px 44px rgba(0,0,0,0.16);
         }
 
         .quick-links {
           margin-top: -1px;
-          padding: 10px 0 38px;
-          background: #080808;
+          padding: 0 0 48px;
+          background: #f4f2ee;
         }
 
         .quick-links-head {
@@ -150,7 +149,7 @@ export default function DashboardPage() {
 
         .section-label {
           margin: 0 0 7px;
-          color: #c9a55a;
+          color: #cc0000;
           font-size: 11px;
           font-weight: 800;
           letter-spacing: 0.2em;
@@ -158,7 +157,7 @@ export default function DashboardPage() {
 
         .section-title {
           margin: 0;
-          color: #fff;
+          color: #121212;
           font-family: 'Frank Ruhl Libre', Georgia, serif;
           font-size: clamp(26px, 3vw, 38px);
           font-weight: 900;
@@ -168,10 +167,10 @@ export default function DashboardPage() {
 
         .date-pill {
           flex: 0 0 auto;
-          border: 1px solid rgba(201,165,90,0.34);
+          border: 1px solid #d8d3c9;
           border-radius: 999px;
           padding: 10px 16px;
-          color: rgba(255,255,255,0.72);
+          color: #3a352f;
           font-size: 12px;
           font-weight: 800;
           letter-spacing: 0.08em;
@@ -186,15 +185,15 @@ export default function DashboardPage() {
         .action-card {
           width: 100%;
           min-width: 0;
-          min-height: 132px;
+          min-height: 148px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          border: 1px solid rgba(255,255,255,0.14);
+          border: 1px solid #ddd8ce;
           border-radius: 8px;
-          background: #151515;
-          padding: 18px;
-          color: #fff;
+          background: #fff;
+          padding: 22px;
+          color: #121212;
           text-decoration: none;
           transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
         }
@@ -202,13 +201,13 @@ export default function DashboardPage() {
         .action-card:hover {
           transform: translateY(-2px);
           border-color: #c9a55a;
-          box-shadow: 0 16px 34px rgba(0,0,0,0.32);
+          box-shadow: 0 16px 34px rgba(0,0,0,0.12);
         }
 
         .action-card.dark {
-          background: #0f0f0f;
-          border-color: #2a2a2a;
-          color: #fff;
+          background: #fff;
+          border-color: #ddd8ce;
+          color: #121212;
         }
 
         .action-card.red {
@@ -224,7 +223,7 @@ export default function DashboardPage() {
 
         .action-eyebrow {
           margin: 0 0 8px;
-          color: #c9a55a;
+          color: #cc0000;
           font-size: 11px;
           font-weight: 900;
           letter-spacing: 0.08em;
@@ -248,7 +247,7 @@ export default function DashboardPage() {
 
         .action-detail {
           margin: 0 0 16px;
-          color: rgba(255,255,255,0.68);
+          color: #5d5a55;
           font-size: 14px;
           line-height: 1.55;
           overflow-wrap: break-word;
@@ -288,9 +287,9 @@ export default function DashboardPage() {
         }
 
         .replays-section {
-          background: #f4f2ee;
+          background: #080808;
           padding: 54px 0 64px;
-          color: #121212;
+          color: #fff;
         }
 
         .replay-head {
@@ -302,13 +301,13 @@ export default function DashboardPage() {
         }
 
         .replay-head .section-title {
-          color: #121212;
+          color: #fff;
         }
 
         .replay-note {
           max-width: 390px;
           margin: 0;
-          color: #5d5a55;
+          color: rgba(255,255,255,0.64);
           font-size: 14px;
           line-height: 1.6;
           text-align: right;
@@ -322,9 +321,9 @@ export default function DashboardPage() {
 
         .replay-card {
           min-height: 138px;
-          border: 1px solid #ddd8ce;
+          border: 1px solid rgba(255,255,255,0.12);
           border-radius: 8px;
-          background: #fff;
+          background: linear-gradient(135deg, #151515, #070707);
           padding: 22px;
           position: relative;
           overflow: hidden;
@@ -337,7 +336,7 @@ export default function DashboardPage() {
           background-image: url('/images/kingdom-intel-dashboard-header.jpg');
           background-position: center;
           background-size: cover;
-          opacity: 0.08;
+          opacity: 0.13;
         }
 
         .replay-card > * {
@@ -347,7 +346,7 @@ export default function DashboardPage() {
 
         .replay-day {
           margin: 0 0 12px;
-          color: #cc0000;
+          color: #c9a55a;
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.18em;
@@ -355,7 +354,7 @@ export default function DashboardPage() {
 
         .replay-title {
           margin: 0;
-          color: #121212;
+          color: #fff;
           font-family: 'Frank Ruhl Libre', Georgia, serif;
           font-size: 26px;
           font-weight: 900;
@@ -396,6 +395,10 @@ export default function DashboardPage() {
         }
 
         @media (max-width: 860px) {
+          .dashboard-top {
+            padding: 0 !important;
+          }
+
           .dashboard-bar,
           .dashboard-wrap {
             width: calc(100vw - 36px) !important;
@@ -405,32 +408,37 @@ export default function DashboardPage() {
           }
 
           .dashboard-bar {
+            display: flex;
+            flex-direction: column;
             min-height: auto;
-            grid-template-columns: 1fr;
-            justify-items: center;
+            align-items: center;
             gap: 8px;
-            padding: 12px 0 8px;
+            padding: 18px 0 8px;
+          }
+
+          .dashboard-bar > span {
+            display: none;
           }
 
           .dashboard-title {
             max-width: 100%;
-            font-size: 26px;
-            line-height: 1.06;
+            font-size: 48px;
+            line-height: 0.95;
           }
 
           .dashboard-kicker {
             max-width: 100%;
-            font-size: 9px;
-            letter-spacing: 0.14em;
+            font-size: 13px;
+            letter-spacing: 0.08em;
             overflow-wrap: break-word;
           }
 
           .dashboard-logo {
-            height: 30px;
+            height: 36px;
           }
 
           .hero-block {
-            padding: 8px 0 12px;
+            padding: 10px 0 18px !important;
           }
 
           .hero-image {
@@ -441,7 +449,11 @@ export default function DashboardPage() {
           }
 
           .quick-links {
-            padding: 18px 0 36px;
+            padding: 0 0 40px !important;
+          }
+
+          .replays-section {
+            padding: 44px 0 54px !important;
           }
 
           .quick-links-head,
@@ -462,7 +474,7 @@ export default function DashboardPage() {
           }
 
           .action-card {
-            min-height: 150px;
+            min-height: 146px;
             overflow: hidden;
           }
 
@@ -476,10 +488,11 @@ export default function DashboardPage() {
       <section className="dashboard-top">
         <div className="dashboard-bar">
           <a href="/" aria-label="Kingdom Intelligence Masterclass home">
-            <img className="dashboard-logo" src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
+            <img className="dashboard-logo" src="/images/fbf-logo-black.png" alt="Fueled By Fire" />
           </a>
           <div>
-            <h1 className="dashboard-title">Kingdom Intelligence Masterclass Event Dashboard</h1>
+            <p className="dashboard-kicker">Kingdom Intelligence Masterclass</p>
+            <h1 className="dashboard-title">Event Dashboard</h1>
           </div>
           <span aria-hidden="true" />
         </div>
