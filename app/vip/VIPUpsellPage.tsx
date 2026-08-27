@@ -11,22 +11,16 @@ const bonuses = [
     image: "/images/kingdom-intelligence-workbook-cover.png",
   },
   {
-    title: "Lifetime access to the K.I. Masterclass replays",
-    body:
-      "Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.",
-    image: "/images/vip-mastermind-og.jpg",
-  },
-  {
     title: "The S.W.E.E.T. Spot Audit",
     body:
       "Clarify your mandate, identify blind spots, and remove the roadblocks holding back your next level of revenue, margin, and Kingdom impact.",
     image: "/images/vip-sweet-spot-audit.png",
   },
   {
-    title: "Our 10 hacks to Superpower Leadership",
+    title: "Lifetime access to the K.I. Masterclass replays",
     body:
-      "Activate the leadership disciplines faith-driven CEOs need when markets are noisy, teams need clarity, and the business has to keep moving.",
-    image: "/images/vip-superhero-hacks.png",
+      "Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.",
+    image: "/images/vip-mastermind-og.jpg",
   },
 ];
 
@@ -35,9 +29,8 @@ const vipIncludes = [
   "Direct coaching and feedback from Larry, Staci, and the CEO Mentor team",
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
   "The K.I. Masterclass workbook",
-  "Lifetime access to the K.I. Masterclass replays in the FBF Vault",
   "The S.W.E.E.T. Spot Audit",
-  "Our 10 hacks to Superpower Leadership",
+  "Lifetime access to the K.I. Masterclass replays in the FBF Vault",
 ];
 
 const cindyTestimonial = {
