@@ -13,33 +13,6 @@ const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
 const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8waQcQ";
 
-const actions = [
-  {
-    eyebrow: "Workbook",
-    title: "Grab Your Workbook",
-    detail: "Complete the form and get your workbook sent to you.",
-    href: WORKBOOK_URL,
-    cta: "Get Workbook",
-    tone: "gold",
-  },
-  {
-    eyebrow: "Live Room",
-    title: "Join the Room",
-    detail: "Enter the live Zoom room for each masterclass session.",
-    href: ZOOM_URL,
-    cta: "Join Live",
-    tone: "dark",
-  },
-  {
-    eyebrow: "VIP",
-    title: "VIP Upgrade",
-    detail: "Unlock the VIP room, direct coaching, bonuses, and replay access.",
-    href: VIP_URL,
-    cta: "Upgrade to VIP",
-    tone: "red",
-  },
-];
-
 const replays = [
   {
     day: "Day 1",
@@ -71,121 +44,43 @@ export default function DashboardPage() {
           box-sizing: border-box;
         }
 
-        .dashboard-top {
-          background: #f4f2ee;
-          color: #121212;
-        }
-
-        .dashboard-bar,
         .dashboard-wrap {
           width: calc(100% - 48px);
           max-width: 1180px;
           margin: 0 auto;
         }
 
-        .dashboard-bar {
-          min-height: 132px;
-          display: grid;
-          grid-template-columns: 96px minmax(0, 1fr) 96px;
-          align-items: center;
-          gap: 20px;
-          padding: 24px 0 10px;
-        }
-
-        .dashboard-logo {
-          height: 52px;
-          width: auto;
-          display: block;
-        }
-
-        .dashboard-kicker {
-          margin: 0 0 4px;
-          color: #8d7338;
-          font-size: clamp(14px, 1.25vw, 18px);
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-align: center;
+        .dashboard-top {
+          background: #f4f2ee;
+          padding: 26px 0 46px;
         }
 
         .dashboard-title {
-          margin: 0;
+          margin: 0 auto 22px;
           color: #cc0000;
           font-family: 'Anton', Arial, sans-serif;
-          font-size: clamp(54px, 6vw, 88px);
+          font-size: clamp(54px, 7.4vw, 104px);
           font-weight: 400;
           letter-spacing: 0.02em;
-          line-height: 0.94;
+          line-height: 0.92;
           text-align: center;
         }
 
-        .hero-block {
-          padding: 8px 0 22px;
-          background: #f4f2ee;
-        }
-
-        .hero-image {
-          display: block;
-          width: 780px;
-          max-width: 100%;
-          margin: 0 auto;
-          height: auto;
-          border: 1px solid #d6caae;
-          box-shadow: 0 18px 44px rgba(0,0,0,0.16);
-        }
-
-        .quick-links {
-          margin-top: -1px;
-          padding: 0 0 48px;
-          background: #f4f2ee;
-        }
-
-        .quick-links-head {
-          display: flex;
-          align-items: end;
-          justify-content: space-between;
-          gap: 24px;
-          margin-bottom: 12px;
-        }
-
-        .section-label {
-          margin: 0 0 7px;
-          color: #cc0000;
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 0.2em;
-        }
-
-        .section-title {
-          margin: 0;
-          color: #121212;
-          font-family: 'Frank Ruhl Libre', Georgia, serif;
-          font-size: clamp(26px, 3vw, 38px);
-          font-weight: 900;
-          letter-spacing: 0;
-          line-height: 1;
-        }
-
-        .date-pill {
-          flex: 0 0 auto;
-          border: 1px solid #d8d3c9;
-          border-radius: 999px;
-          padding: 10px 16px;
-          color: #3a352f;
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-        }
-
-        .action-grid {
+        .hero-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 14px;
+          grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.55fr);
+          gap: 20px;
+          align-items: start;
+        }
+
+        .side-actions {
+          display: grid;
+          gap: 16px;
         }
 
         .action-card {
-          width: 100%;
           min-width: 0;
-          min-height: 148px;
+          min-height: 210px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -195,6 +90,7 @@ export default function DashboardPage() {
           padding: 22px;
           color: #121212;
           text-decoration: none;
+          overflow: hidden;
           transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
         }
 
@@ -204,61 +100,48 @@ export default function DashboardPage() {
           box-shadow: 0 16px 34px rgba(0,0,0,0.12);
         }
 
-        .action-card.dark {
-          background: #fff;
-          border-color: #ddd8ce;
-          color: #121212;
-        }
-
-        .action-card.red {
-          background: #cc0000;
-          border-color: #e33a32;
-          color: #fff;
-        }
-
-        .action-card.gold {
-          background: linear-gradient(135deg, #c9a55a 0%, #e8d080 52%, #bb945a 100%);
+        .workbook-card {
+          background: linear-gradient(135deg, #c9a55a 0%, #ead686 58%, #b98b49 100%);
           border-color: #c9a55a;
+          padding-bottom: 18px;
+        }
+
+        .vip-card {
+          background: #090909;
+          border-color: #222;
+          color: #e00000;
         }
 
         .action-eyebrow {
           margin: 0 0 8px;
-          color: #cc0000;
+          color: #5a3300;
           font-size: 11px;
           font-weight: 900;
           letter-spacing: 0.08em;
+          text-transform: uppercase;
         }
 
-        .action-card.red .action-eyebrow {
-          color: rgba(255,255,255,0.84);
-        }
-
-        .action-card.gold .action-eyebrow {
-          color: #4c2b00;
+        .vip-card .action-eyebrow,
+        .vip-card .action-title,
+        .vip-card .action-detail {
+          color: #e00000;
         }
 
         .action-title {
           margin: 0 0 8px;
           font-family: 'Frank Ruhl Libre', Georgia, serif;
-          font-size: clamp(22px, 1.8vw, 26px);
+          font-size: clamp(24px, 2vw, 31px);
           font-weight: 900;
-          line-height: 1;
+          letter-spacing: 0;
+          line-height: 0.98;
         }
 
         .action-detail {
-          margin: 0 0 16px;
-          color: #5d5a55;
-          font-size: 14px;
-          line-height: 1.55;
-          overflow-wrap: break-word;
-        }
-
-        .action-card.red .action-detail {
-          color: rgba(255,255,255,0.82);
-        }
-
-        .action-card.gold .action-detail {
+          margin: 0;
           color: #3b2c14;
+          font-size: 14px;
+          line-height: 1.5;
+          overflow-wrap: break-word;
         }
 
         .action-cta {
@@ -274,16 +157,142 @@ export default function DashboardPage() {
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
-        .action-card.red .action-cta {
+        .vip-card .action-cta {
+          background: #cc0000;
+          color: #fff;
+        }
+
+        .workbook-content {
+          position: relative;
+          z-index: 2;
+        }
+
+        .workbook-box {
+          width: 138px;
+          max-width: 46%;
+          margin: 10px 0 12px;
+          perspective: 900px;
+        }
+
+        .workbook-box-inner {
+          position: relative;
+          width: 104px;
+          aspect-ratio: 0.66;
+          transform: rotateY(-22deg) rotateX(2deg);
+          transform-style: preserve-3d;
+          filter: drop-shadow(18px 18px 20px rgba(55, 38, 8, 0.32));
+        }
+
+        .workbook-box-inner::before {
+          content: "";
+          position: absolute;
+          top: 6px;
+          left: 100%;
+          width: 18px;
+          height: calc(100% - 12px);
+          background: linear-gradient(90deg, #171717, #4e3512);
+          transform: rotateY(90deg);
+          transform-origin: left;
+        }
+
+        .workbook-box-inner::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border: 1px solid rgba(255,255,255,0.34);
+          box-shadow: inset -10px 0 24px rgba(0,0,0,0.28);
+          pointer-events: none;
+        }
+
+        .workbook-box img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          background: #111;
+        }
+
+        .hero-image-card {
+          border: 1px solid #d6caae;
+          border-radius: 8px;
+          background: #0b0b0b;
+          box-shadow: 0 18px 44px rgba(0,0,0,0.16);
+          overflow: hidden;
+        }
+
+        .hero-image {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .join-strip {
+          margin-top: 18px;
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: center;
+          gap: 22px;
+          border: 1px solid #ddd8ce;
+          border-radius: 8px;
           background: #fff;
+          padding: 20px 22px;
+        }
+
+        .join-label {
+          margin: 0 0 5px;
           color: #cc0000;
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
         }
 
-        .action-card.gold .action-cta {
-          background: #fff;
-          color: #111;
+        .join-title {
+          margin: 0;
+          font-family: 'Frank Ruhl Libre', Georgia, serif;
+          font-size: clamp(25px, 2.4vw, 35px);
+          font-weight: 900;
+          line-height: 1;
+        }
+
+        .join-detail {
+          margin: 8px 0 0;
+          color: #5d5a55;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        .join-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 220px;
+          min-height: 52px;
+          border-radius: 5px;
+          background: #cc0000;
+          color: #fff;
+          padding: 14px 24px;
+          font-size: 13px;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          text-align: center;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+
+        .date-pill {
+          display: inline-flex;
+          margin-top: 16px;
+          border: 1px solid #d8d3c9;
+          border-radius: 999px;
+          padding: 10px 16px;
+          color: #3a352f;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
         }
 
         .replays-section {
@@ -292,16 +301,31 @@ export default function DashboardPage() {
           color: #fff;
         }
 
+        .section-label {
+          margin: 0 0 7px;
+          color: #cc0000;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+        }
+
+        .section-title {
+          margin: 0;
+          color: #fff;
+          font-family: 'Frank Ruhl Libre', Georgia, serif;
+          font-size: clamp(26px, 3vw, 38px);
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 1;
+        }
+
         .replay-head {
           display: flex;
           align-items: end;
           justify-content: space-between;
           gap: 22px;
           margin-bottom: 20px;
-        }
-
-        .replay-head .section-title {
-          color: #fff;
         }
 
         .replay-note {
@@ -350,6 +374,7 @@ export default function DashboardPage() {
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.18em;
+          text-transform: uppercase;
         }
 
         .replay-title {
@@ -394,12 +419,22 @@ export default function DashboardPage() {
           text-decoration: none;
         }
 
-        @media (max-width: 860px) {
-          .dashboard-top {
-            padding: 0 !important;
+        @media (max-width: 980px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
           }
 
-          .dashboard-bar,
+          .side-actions {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: auto;
+          }
+
+          .hero-image-card {
+            min-height: 420px;
+          }
+        }
+
+        @media (max-width: 720px) {
           .dashboard-wrap {
             width: calc(100vw - 36px) !important;
             max-width: calc(100vw - 36px) !important;
@@ -407,134 +442,120 @@ export default function DashboardPage() {
             padding-right: 0 !important;
           }
 
-          .dashboard-bar {
-            display: flex;
-            flex-direction: column;
-            min-height: auto;
-            align-items: center;
-            gap: 8px;
-            padding: 18px 0 8px;
-          }
-
-          .dashboard-bar > span {
-            display: none;
+          .dashboard-top {
+            padding: 22px 0 38px !important;
           }
 
           .dashboard-title {
-            max-width: 100%;
-            font-size: 48px;
-            line-height: 0.95;
+            font-size: 58px;
+            margin-bottom: 18px;
           }
 
-          .dashboard-kicker {
-            max-width: 100%;
-            font-size: 13px;
-            letter-spacing: 0.08em;
-            overflow-wrap: break-word;
+          .side-actions {
+            grid-template-columns: 1fr;
           }
 
-          .dashboard-logo {
-            height: 36px;
+          .action-card {
+            min-height: 210px;
           }
 
-          .hero-block {
-            padding: 10px 0 18px !important;
+          .workbook-box {
+            max-width: 34%;
           }
 
-          .hero-image {
-            width: 100% !important;
-            max-width: 100% !important;
-            height: auto !important;
-            object-fit: contain !important;
+          .hero-image-card {
+            min-height: auto;
           }
 
-          .quick-links {
-            padding: 0 0 40px !important;
+          .join-strip {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .join-button {
+            width: 100%;
+            min-width: 0;
+          }
+
+          .date-pill {
+            white-space: normal;
+            line-height: 1.4;
           }
 
           .replays-section {
             padding: 44px 0 54px !important;
           }
 
-          .quick-links-head,
           .replay-head {
             display: block;
-          }
-
-          .date-pill {
-            display: inline-flex;
-            margin-top: 14px;
-            white-space: normal;
-            line-height: 1.4;
-          }
-
-          .action-grid,
-          .replay-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .action-card {
-            min-height: 146px;
-            overflow: hidden;
           }
 
           .replay-note {
             text-align: left;
             margin-top: 12px;
           }
+
+          .replay-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
 
       <section className="dashboard-top">
-        <div className="dashboard-bar">
-          <a href="/" aria-label="Kingdom Intelligence Masterclass home">
-            <img className="dashboard-logo" src="/images/fbf-logo-black.png" alt="Fueled By Fire" />
-          </a>
-          <div>
-            <p className="dashboard-kicker">Kingdom Intelligence Masterclass</p>
-            <h1 className="dashboard-title">Event Dashboard</h1>
-          </div>
-          <span aria-hidden="true" />
-        </div>
-      </section>
-
-      <section className="hero-block">
         <div className="dashboard-wrap">
-          <img
-            className="hero-image"
-            src="/images/kingdom-intel-dashboard-header.jpg"
-            alt="Kingdom Intelligence Masterclass"
-          />
-        </div>
-      </section>
+          <h1 className="dashboard-title">Event Dashboard</h1>
 
-      <section className="quick-links">
-        <div className="dashboard-wrap">
-          <div className="quick-links-head">
-            <div>
-              <p className="section-label">Start Here</p>
-              <h2 className="section-title">Your Masterclass Links</h2>
-            </div>
-            <div className="date-pill">September 15-17 | 12 PM Central</div>
-          </div>
-
-          <div className="action-grid">
-            {actions.map((action) => (
-              <a
-                key={action.title}
-                className={`action-card ${action.tone}`}
-                href={action.href}
-                target={action.href.startsWith("http") ? "_blank" : undefined}
-                rel={action.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              >
-                <div>
-                  <p className="action-eyebrow">{action.eyebrow}</p>
-                  <h3 className="action-title">{action.title}</h3>
-                  <p className="action-detail">{action.detail}</p>
+          <div className="hero-grid">
+            <div className="side-actions">
+              <a className="action-card workbook-card" href={WORKBOOK_URL}>
+                <div className="workbook-content">
+                  <p className="action-eyebrow">Workbook</p>
+                  <h2 className="action-title">Grab Your Workbook</h2>
+                  <p className="action-detail">Complete the form and get your workbook sent to you.</p>
                 </div>
-                <span className="action-cta">{action.cta}</span>
+                <div className="workbook-box" aria-hidden="true">
+                  <div className="workbook-box-inner">
+                    <img src="/images/kingdom-intelligence-workbook-cover.png" alt="" />
+                  </div>
+                </div>
+                <span className="action-cta">Get Workbook</span>
               </a>
-            ))}
+
+              <a className="action-card vip-card" href={VIP_URL}>
+                <div>
+                  <p className="action-eyebrow">VIP</p>
+                  <h2 className="action-title">VIP Upgrade</h2>
+                  <p className="action-detail">
+                    Unlock the VIP room, direct coaching, bonuses, and replay access.
+                  </p>
+                </div>
+                <span className="action-cta">Upgrade to VIP</span>
+              </a>
+            </div>
+
+            <div
+              className="hero-image-card"
+              role="img"
+              aria-label="Kingdom Intelligence Masterclass"
+            >
+              <img
+                className="hero-image"
+                src="/images/kingdom-intel-dashboard-header.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <div className="join-strip">
+            <div>
+              <p className="join-label">Live Room</p>
+              <h2 className="join-title">Join the Room</h2>
+              <p className="join-detail">Enter the live Zoom room for each masterclass session.</p>
+              <div className="date-pill">September 15-17 | 12 PM Central</div>
+            </div>
+            <a className="join-button" href={ZOOM_URL} target="_blank" rel="noopener noreferrer">
+              Join the Room
+            </a>
           </div>
         </div>
       </section>
