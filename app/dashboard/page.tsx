@@ -17,7 +17,7 @@ const actions = [
   {
     eyebrow: "live room",
     title: "enter the main stage",
-    detail: "Join the live Zoom room for each masterclass session.",
+    detail: "Join the live Zoom room.",
     href: ZOOM_URL,
     cta: "watch live",
     tone: "red",
@@ -25,7 +25,7 @@ const actions = [
   {
     eyebrow: "workbook",
     title: "grab your workbook",
-    detail: "Complete the form and get the workbook sent to you.",
+    detail: "Complete the form and get your workbook.",
     href: WORKBOOK_URL,
     cta: "get workbook",
     tone: "gold",
@@ -33,7 +33,7 @@ const actions = [
   {
     eyebrow: "vip",
     title: "upgrade your experience",
-    detail: "Get the VIP room, direct coaching, bonuses, and replay access.",
+    detail: "Get coaching, bonuses, and replay access.",
     href: VIP_URL,
     cta: "view vip",
     tone: "dark",
