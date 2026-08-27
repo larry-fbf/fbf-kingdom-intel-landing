@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,357 +13,551 @@ const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
 const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8waQcQ";
 
-const pageStyle: CSSProperties = {
-  background: "#080808",
-  color: "#ffffff",
-  fontFamily: "'Work Sans', Arial, sans-serif",
-  overflowX: "hidden",
-};
-
-const containerStyle: CSSProperties = {
-  width: "100%",
-  maxWidth: "1120px",
-  margin: "0 auto",
-  padding: "0 24px",
-  boxSizing: "border-box",
-};
-
-const goldButtonStyle: CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  minHeight: "54px",
-  background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
-  color: "#120800",
-  fontWeight: 800,
-  padding: "16px 30px",
-  borderRadius: "6px",
-  fontSize: "14px",
-  textTransform: "uppercase",
-  letterSpacing: "0.08em",
-  boxShadow: "0 8px 28px rgba(185,148,90,0.38)",
-  textDecoration: "none",
-};
-
-const redButtonStyle: CSSProperties = {
-  ...goldButtonStyle,
-  background: "linear-gradient(135deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)",
-  color: "#FFFFFF",
-  boxShadow: "0 8px 28px rgba(204,0,0,0.34)",
-};
-
-const sectionLabelStyle: CSSProperties = {
-  fontSize: "12px",
-  fontWeight: 800,
-  letterSpacing: "0.22em",
-  textTransform: "uppercase",
-  color: "#C9A55A",
-  marginBottom: "14px",
-};
-
-const actionCards = [
+const actions = [
   {
-    label: "Workbook",
-    title: "Grab your workbook",
-    body:
-      "Use the Kingdom Intelligence Workbook to follow each lesson, capture notes, set action steps, and track your progress.",
-    href: WORKBOOK_URL,
-    cta: "Get Workbook",
-    variant: "gold",
-  },
-  {
-    label: "Live sessions",
-    title: "Enter the live Zoom room",
-    body:
-      "Use this link when it is time to join the live masterclass sessions. Keep it handy for all three days.",
+    eyebrow: "live room",
+    title: "enter the main stage",
+    detail: "Join the live Zoom room for each masterclass session.",
     href: ZOOM_URL,
-    cta: "Join Live Room",
-    variant: "red",
+    cta: "watch live",
+    tone: "red",
   },
   {
-    label: "VIP",
-    title: "Upgrade your experience",
-    body:
-      "Step into the VIP rooms for direct coaching, additional support, bonus resources, and lifetime replay access.",
+    eyebrow: "workbook",
+    title: "grab your workbook",
+    detail: "Complete the form and get the workbook sent to you.",
+    href: WORKBOOK_URL,
+    cta: "get workbook",
+    tone: "gold",
+  },
+  {
+    eyebrow: "vip",
+    title: "upgrade your experience",
+    detail: "Get the VIP room, direct coaching, bonuses, and replay access.",
     href: VIP_URL,
-    cta: "View VIP Upgrade",
-    variant: "gold",
+    cta: "view vip",
+    tone: "dark",
   },
 ];
 
-const replayCards = [
+const replays = [
   {
-    day: "Day 1",
-    title: "Replay coming soon",
-    body: "The Day 1 replay will be posted here after the live session is processed.",
+    day: "day 1",
+    title: "replay coming soon",
   },
   {
-    day: "Day 2",
-    title: "Replay coming soon",
-    body: "The Day 2 replay will be posted here after the live session is processed.",
+    day: "day 2",
+    title: "replay coming soon",
   },
   {
-    day: "Day 3",
-    title: "Replay coming soon",
-    body: "The Day 3 replay will be posted here after the live session is processed.",
+    day: "day 3",
+    title: "replay coming soon",
   },
 ];
-
-function DashboardFooter() {
-  return (
-    <footer
-      style={{
-        background: "#050505",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        padding: "48px 20px",
-        textAlign: "center",
-      }}
-    >
-      <img
-        src="/images/fbf-logo-white.png"
-        alt="Fueled By Fire"
-        style={{ height: "58px", width: "auto", display: "inline-block", marginBottom: "22px" }}
-      />
-      <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.32)", marginBottom: "8px" }}>
-        Fueled By Fire, LLC | Copyright 2026 | All Rights Reserved
-      </p>
-      <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.22)", marginBottom: "20px" }}>
-        10% of every program fee supports Epiphany Global and EMwomen.
-      </p>
-      <div style={{ display: "flex", justifyContent: "center", gap: "24px", flexWrap: "wrap" }}>
-        <a href="https://www.fbfchallenge.com/privacy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
-          Privacy Policy
-        </a>
-        <a href="https://www.fbfchallenge.com/terms" style={{ fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
-          Terms of Service
-        </a>
-        <a href="https://www.fbfchallenge.com/disclaimer" style={{ fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
-          Disclaimer
-        </a>
-      </div>
-    </footer>
-  );
-}
 
 export default function DashboardPage() {
   return (
-    <main style={pageStyle}>
+    <main className="dashboard-shell">
       <style>{`
-        .dashboard-topbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 0; }
-        .dashboard-container { width: 100%; box-sizing: border-box; }
-        .dashboard-toplinks { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-        .dashboard-link { color: rgba(255,255,255,0.72); font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
-        .dashboard-link:hover { color: #C9A55A; }
-        .dashboard-hero-grid { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 48px; align-items: center; padding: 48px 0 76px; }
-        .dashboard-hero-grid > * { min-width: 0; }
-        .dashboard-title { font-size: clamp(44px, 7vw, 86px); font-weight: 400; color: #FFFFFF; line-height: 0.95; margin-bottom: 22px; font-family: 'Anton', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.01em; }
-        .dashboard-title span { display: block; }
-        .dashboard-section-title { font-size: clamp(30px, 4.5vw, 50px); font-weight: 900; line-height: 1.1; text-align: center; margin-bottom: 42px; }
-        .dashboard-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-        .dashboard-card { background: #111111; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 28px; min-height: 100%; }
-        .dashboard-card:hover { border-color: rgba(201,165,90,0.45); }
-        .dashboard-cta { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
-        .dashboard-cta:hover { filter: brightness(1.08); transform: translateY(-2px); }
-        .dashboard-replays { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-        .replay-thumb { aspect-ratio: 16 / 9; border-radius: 10px; background: radial-gradient(circle at 50% 30%, rgba(201,165,90,0.18), transparent 45%), linear-gradient(135deg, #151515, #050505); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-        .replay-thumb::after { content: ""; position: absolute; inset: 0; background-image: url('/images/hero-ai-bg.png'); background-size: cover; background-position: center; opacity: 0.24; }
-        .play-mark { position: relative; z-index: 1; width: 64px; height: 64px; border-radius: 50%; background: rgba(204,0,0,0.92); display: flex; align-items: center; justify-content: center; }
-        .play-mark::before { content: ""; width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 18px solid #fff; margin-left: 5px; }
+        .dashboard-shell {
+          min-height: 100vh;
+          background: #f4f2ee;
+          color: #121212;
+          font-family: 'Work Sans', Arial, sans-serif;
+          overflow-x: hidden;
+        }
+
+        .dashboard-shell * {
+          box-sizing: border-box;
+        }
+
+        .dashboard-top {
+          background: #080808;
+          color: #fff;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dashboard-bar,
+        .dashboard-wrap {
+          width: calc(100% - 48px);
+          max-width: 1180px;
+          margin: 0 auto;
+        }
+
+        .dashboard-bar {
+          min-height: 72px;
+          display: grid;
+          grid-template-columns: 120px minmax(0, 1fr) 120px;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .dashboard-logo {
+          height: 44px;
+          width: auto;
+          display: block;
+        }
+
+        .dashboard-kicker {
+          margin: 0;
+          color: #c9a55a;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.22em;
+          text-align: center;
+          text-transform: uppercase;
+        }
+
+        .dashboard-title {
+          margin: 2px 0 0;
+          color: #fff;
+          font-family: 'Anton', Arial, sans-serif;
+          font-size: clamp(28px, 3.2vw, 46px);
+          font-weight: 400;
+          letter-spacing: 0.04em;
+          line-height: 1;
+          text-align: center;
+          text-transform: uppercase;
+        }
+
+        .hero-block {
+          padding: 28px 0 30px;
+          background: #080808;
+        }
+
+        .hero-image {
+          display: block;
+          width: 960px;
+          max-width: 100%;
+          margin: 0 auto;
+          height: auto;
+          border: 1px solid rgba(201,165,90,0.26);
+          box-shadow: 0 22px 70px rgba(0,0,0,0.42);
+        }
+
+        .quick-links {
+          margin-top: -1px;
+          padding: 30px 0 46px;
+          background: #f4f2ee;
+        }
+
+        .quick-links-head {
+          display: flex;
+          align-items: end;
+          justify-content: space-between;
+          gap: 24px;
+          margin-bottom: 18px;
+        }
+
+        .section-label {
+          margin: 0 0 7px;
+          color: #cc0000;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+        }
+
+        .section-title {
+          margin: 0;
+          color: #121212;
+          font-family: 'Frank Ruhl Libre', Georgia, serif;
+          font-size: clamp(28px, 3.7vw, 46px);
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 1;
+        }
+
+        .date-pill {
+          flex: 0 0 auto;
+          border: 1px solid #d8d3c9;
+          border-radius: 999px;
+          padding: 10px 16px;
+          color: #3a352f;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .action-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .action-card {
+          width: 100%;
+          min-width: 0;
+          min-height: 166px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          border: 1px solid #ddd8ce;
+          border-radius: 8px;
+          background: #fff;
+          padding: 22px;
+          color: #121212;
+          text-decoration: none;
+          transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .action-card:hover {
+          transform: translateY(-2px);
+          border-color: #c9a55a;
+          box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+        }
+
+        .action-card.red {
+          background: #0f0f0f;
+          border-color: #2a2a2a;
+          color: #fff;
+        }
+
+        .action-card.gold {
+          background: linear-gradient(135deg, #c9a55a 0%, #e8d080 52%, #bb945a 100%);
+          border-color: #c9a55a;
+        }
+
+        .action-eyebrow {
+          margin: 0 0 8px;
+          color: #cc0000;
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+
+        .action-card.red .action-eyebrow {
+          color: #c9a55a;
+        }
+
+        .action-card.gold .action-eyebrow {
+          color: #4c2b00;
+        }
+
+        .action-title {
+          margin: 0 0 8px;
+          font-family: 'Frank Ruhl Libre', Georgia, serif;
+          font-size: clamp(22px, 2vw, 28px);
+          font-weight: 900;
+          line-height: 1;
+        }
+
+        .action-detail {
+          margin: 0 0 20px;
+          color: #5d5a55;
+          font-size: 14px;
+          line-height: 1.55;
+          overflow-wrap: break-word;
+        }
+
+        .action-card.red .action-detail {
+          color: rgba(255,255,255,0.68);
+        }
+
+        .action-card.gold .action-detail {
+          color: #3b2c14;
+        }
+
+        .action-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: fit-content;
+          min-height: 38px;
+          border-radius: 5px;
+          background: #111;
+          color: #fff;
+          padding: 10px 16px;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .action-card.red .action-cta {
+          background: #cc0000;
+        }
+
+        .action-card.gold .action-cta {
+          background: #fff;
+          color: #111;
+        }
+
+        .replays-section {
+          background: #080808;
+          padding: 54px 0 64px;
+          color: #fff;
+        }
+
+        .replay-head {
+          display: flex;
+          align-items: end;
+          justify-content: space-between;
+          gap: 22px;
+          margin-bottom: 20px;
+        }
+
+        .replay-head .section-title {
+          color: #fff;
+        }
+
+        .replay-note {
+          max-width: 390px;
+          margin: 0;
+          color: rgba(255,255,255,0.64);
+          font-size: 14px;
+          line-height: 1.6;
+          text-align: right;
+        }
+
+        .replay-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .replay-card {
+          min-height: 138px;
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 8px;
+          background: linear-gradient(135deg, #151515, #070707);
+          padding: 22px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .replay-card::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: url('/images/kingdom-intel-dashboard-header.jpg');
+          background-position: center;
+          background-size: cover;
+          opacity: 0.13;
+        }
+
+        .replay-card > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .replay-day {
+          margin: 0 0 12px;
+          color: #c9a55a;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+
+        .replay-title {
+          margin: 0;
+          color: #fff;
+          font-family: 'Frank Ruhl Libre', Georgia, serif;
+          font-size: 26px;
+          font-weight: 900;
+          line-height: 1;
+        }
+
+        .footer {
+          background: #050505;
+          border-top: 1px solid rgba(255,255,255,0.08);
+          padding: 38px 20px;
+          text-align: center;
+        }
+
+        .footer img {
+          height: 44px;
+          width: auto;
+          margin-bottom: 18px;
+        }
+
+        .footer p {
+          margin: 0 0 8px;
+          color: rgba(255,255,255,0.32);
+          font-size: 12px;
+        }
+
+        .footer-links {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 20px;
+          margin-top: 16px;
+        }
+
+        .footer-links a {
+          color: rgba(255,255,255,0.36);
+          font-size: 12px;
+          text-decoration: none;
+        }
+
         @media (max-width: 860px) {
-          .dashboard-topbar { flex-direction: column; align-items: flex-start; padding: 22px 0; }
-          .dashboard-container { max-width: 100vw !important; padding-left: 20px !important; padding-right: 20px !important; }
-          .dashboard-toplinks { width: 100%; gap: 12px; }
-          .dashboard-link { font-size: 12px; }
-          .dashboard-hero-grid { grid-template-columns: 1fr; gap: 32px; padding: 32px 0 56px; }
-          .dashboard-hero-grid p { max-width: 330px !important; font-size: 16px !important; overflow-wrap: break-word; }
-          .dashboard-section-title { max-width: 330px !important; overflow-wrap: break-word; }
-          .dashboard-card h3, .dashboard-card p { max-width: 300px !important; overflow-wrap: break-word; }
-          .dashboard-title { font-size: clamp(42px, 11.8vw, 54px); line-height: 0.98; }
-          .dashboard-section-title { font-size: 28px; }
-          .dashboard-actions { grid-template-columns: 1fr; }
-          .dashboard-replays { grid-template-columns: 1fr; }
-          .dashboard-card { padding: 24px; }
-          .dashboard-cta { width: 100%; max-width: calc(100vw - 40px); }
+          .dashboard-bar,
+          .dashboard-wrap {
+            width: calc(100vw - 36px) !important;
+            max-width: calc(100vw - 36px) !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+          }
+
+          .dashboard-bar {
+            min-height: 86px;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            gap: 10px;
+            padding: 18px 0;
+          }
+
+          .dashboard-title {
+            max-width: 100%;
+            font-size: 28px;
+          }
+
+          .dashboard-kicker {
+            max-width: 100%;
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            overflow-wrap: break-word;
+          }
+
+          .dashboard-logo {
+            height: 38px;
+          }
+
+          .hero-block {
+            padding: 18px 0 20px;
+          }
+
+          .hero-image {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            object-fit: contain !important;
+          }
+
+          .quick-links {
+            padding: 28px 0 42px;
+          }
+
+          .quick-links-head,
+          .replay-head {
+            display: block;
+          }
+
+          .date-pill {
+            display: inline-flex;
+            margin-top: 14px;
+            white-space: normal;
+            line-height: 1.4;
+          }
+
+          .action-grid,
+          .replay-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .action-card {
+            min-height: 150px;
+            overflow: hidden;
+          }
+
+          .replay-note {
+            text-align: left;
+            margin-top: 12px;
+          }
         }
       `}</style>
 
-      <section
-        style={{
-          backgroundImage: "linear-gradient(180deg, rgba(8,8,8,0.72), #080808 94%), url('/images/hero-ai-bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
-        }}
-      >
-        <div className="dashboard-container" style={containerStyle}>
-          <div className="dashboard-topbar">
-            <a href="/" aria-label="Kingdom Intelligence Masterclass home">
-              <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "56px", display: "block" }} />
-            </a>
-            <nav className="dashboard-toplinks" aria-label="Dashboard links">
-              <a className="dashboard-link" href={WORKBOOK_URL}>
-                Workbook
-              </a>
-              <a className="dashboard-link" href={VIP_URL}>
-                VIP
-              </a>
-              <a className="dashboard-link" href={ZOOM_URL} target="_blank" rel="noopener noreferrer">
-                Live Zoom Room
-              </a>
-            </nav>
+      <section className="dashboard-top">
+        <div className="dashboard-bar">
+          <a href="/" aria-label="Kingdom Intelligence Masterclass home">
+            <img className="dashboard-logo" src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
+          </a>
+          <div>
+            <p className="dashboard-kicker">Kingdom Intelligence Masterclass</p>
+            <h1 className="dashboard-title">Event Dashboard</h1>
           </div>
-
-          <div className="dashboard-hero-grid">
-            <div>
-              <p style={sectionLabelStyle}>September 15-17, 2026 | 12 PM Central</p>
-              <h1 className="dashboard-title">
-                <span>Kingdom</span>
-                <span>Intelligence</span>
-                <span>Dashboard</span>
-              </h1>
-              <p
-                style={{
-                  fontSize: "18px",
-                  color: "rgba(255,255,255,0.74)",
-                  lineHeight: 1.8,
-                  maxWidth: "580px",
-                  marginBottom: "34px",
-                }}
-              >
-                This is your hub for the free masterclass. Grab your workbook, join the live Zoom
-                room, explore the VIP upgrade, and check back here after each session for replays.
-              </p>
-              <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-                <a className="dashboard-cta" href={ZOOM_URL} target="_blank" rel="noopener noreferrer" style={redButtonStyle}>
-                  Enter Live Zoom Room
-                </a>
-                <a className="dashboard-cta" href={WORKBOOK_URL} style={goldButtonStyle}>
-                  Grab Workbook
-                </a>
-              </div>
-            </div>
-
-            <div
-              style={{
-                position: "relative",
-                borderRadius: "14px",
-                overflow: "hidden",
-                minHeight: "420px",
-                border: "1px solid rgba(201,165,90,0.24)",
-                boxShadow: "0 28px 80px rgba(0,0,0,0.48)",
-              }}
-            >
-              <img
-                src="/images/staci-larry-hero-2026.png"
-                alt="Staci and Larry Wallace"
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-              />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(8,8,8,0.9), transparent 58%)" }} />
-              <div style={{ position: "absolute", left: "28px", right: "28px", bottom: "26px" }}>
-                <p style={{ fontSize: "12px", color: "#C9A55A", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: "8px" }}>
-                  Free live online event
-                </p>
-                <p style={{ fontSize: "22px", fontWeight: 900, color: "#FFFFFF", lineHeight: 1.15 }}>
-                  Build a company that can carry the weight of what you are praying for.
-                </p>
-              </div>
-            </div>
-          </div>
+          <span aria-hidden="true" />
         </div>
       </section>
 
-      <section style={{ background: "#FFFFFF", color: "#111111", padding: "76px 0" }}>
-        <div className="dashboard-container" style={containerStyle}>
-          <p style={{ ...sectionLabelStyle, color: "#CC0000", textAlign: "center" }}>Start here</p>
-          <h2 className="dashboard-section-title">
-            Your Masterclass Links
-          </h2>
-          <div className="dashboard-actions">
-            {actionCards.map((card) => (
-              <article key={card.title} className="dashboard-card" style={{ background: "#F8F8F8", borderColor: "#E6E6E6" }}>
-                <p style={{ fontSize: "11px", color: "#CC0000", fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: "10px" }}>
-                  {card.label}
-                </p>
-                <h3 style={{ fontSize: "22px", color: "#111111", lineHeight: 1.15, marginBottom: "12px", fontWeight: 900 }}>
-                  {card.title}
-                </h3>
-                <p style={{ fontSize: "15px", color: "#555555", lineHeight: 1.7, marginBottom: "24px" }}>
-                  {card.body}
-                </p>
-                <a
-                  className="dashboard-cta"
-                  href={card.href}
-                  target={card.href.startsWith("http") ? "_blank" : undefined}
-                  rel={card.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  style={card.variant === "red" ? redButtonStyle : goldButtonStyle}
-                >
-                  {card.cta}
-                </a>
-              </article>
+      <section className="hero-block">
+        <div className="dashboard-wrap">
+          <img
+            className="hero-image"
+            src="/images/kingdom-intel-dashboard-header.jpg"
+            alt="Kingdom Intelligence Masterclass"
+          />
+        </div>
+      </section>
+
+      <section className="quick-links">
+        <div className="dashboard-wrap">
+          <div className="quick-links-head">
+            <div>
+              <p className="section-label">Start here</p>
+              <h2 className="section-title">Your masterclass links</h2>
+            </div>
+            <div className="date-pill">September 15-17 | 12 PM Central</div>
+          </div>
+
+          <div className="action-grid">
+            {actions.map((action) => (
+              <a
+                key={action.title}
+                className={`action-card ${action.tone}`}
+                href={action.href}
+                target={action.href.startsWith("http") ? "_blank" : undefined}
+                rel={action.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              >
+                <div>
+                  <p className="action-eyebrow">{action.eyebrow}</p>
+                  <h3 className="action-title">{action.title}</h3>
+                  <p className="action-detail">{action.detail}</p>
+                </div>
+                <span className="action-cta">{action.cta}</span>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      <section style={{ background: "#080808", padding: "82px 0" }}>
-        <div className="dashboard-container" style={containerStyle}>
-          <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 44px" }}>
-            <p style={sectionLabelStyle}>Replay library</p>
-            <h2
-              style={{
-                fontSize: "clamp(34px, 5vw, 58px)",
-                fontWeight: 900,
-                color: "#FFFFFF",
-                lineHeight: 1.05,
-                marginBottom: "16px",
-                textTransform: "uppercase",
-              }}
-            >
-              Replays Coming Soon
-            </h2>
-            <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.68)", lineHeight: 1.75 }}>
-              After each live session, the replay will be posted here so you can revisit the
-              teaching and share it with your team.
+      <section className="replays-section">
+        <div className="dashboard-wrap">
+          <div className="replay-head">
+            <div>
+              <p className="section-label">Replay library</p>
+              <h2 className="section-title">Coming soon</h2>
+            </div>
+            <p className="replay-note">
+              Replays will be posted here after each live session is processed.
             </p>
           </div>
-          <div className="dashboard-replays">
-            {replayCards.map((replay) => (
-              <article key={replay.day} className="dashboard-card">
-                <div className="replay-thumb" aria-hidden="true">
-                  <span className="play-mark" />
-                </div>
-                <p style={{ fontSize: "12px", color: "#C9A55A", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", marginTop: "22px", marginBottom: "8px" }}>
-                  {replay.day}
-                </p>
-                <h3 style={{ fontSize: "22px", color: "#FFFFFF", marginBottom: "10px", lineHeight: 1.2 }}>
-                  {replay.title}
-                </h3>
-                <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.62)", lineHeight: 1.7 }}>
-                  {replay.body}
-                </p>
+
+          <div className="replay-grid">
+            {replays.map((replay) => (
+              <article className="replay-card" key={replay.day}>
+                <p className="replay-day">{replay.day}</p>
+                <h3 className="replay-title">{replay.title}</h3>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section style={{ background: "#111111", padding: "72px 0", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div className="dashboard-container" style={{ ...containerStyle, textAlign: "center", maxWidth: "860px" }}>
-          <p style={sectionLabelStyle}>Before the first session</p>
-          <h2 style={{ fontSize: "clamp(28px, 4.5vw, 48px)", color: "#FFFFFF", lineHeight: 1.12, marginBottom: "18px" }}>
-            Keep this dashboard link handy.
-          </h2>
-          <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, marginBottom: "32px" }}>
-            You will receive this page by SMS and email. Use it as the central place for your
-            workbook, live room, VIP upgrade, and replay access.
-          </p>
-          <a className="dashboard-cta" href={VIP_URL} style={goldButtonStyle}>
-            See VIP Details
-          </a>
+      <footer className="footer">
+        <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
+        <p>Fueled By Fire, LLC | Copyright 2026 | All Rights Reserved</p>
+        <p>10% of every program fee supports Epiphany Global and EMwomen.</p>
+        <div className="footer-links">
+          <a href="https://www.fbfchallenge.com/privacy">Privacy Policy</a>
+          <a href="https://www.fbfchallenge.com/terms">Terms of Service</a>
+          <a href="https://www.fbfchallenge.com/disclaimer">Disclaimer</a>
         </div>
-      </section>
-
-      <DashboardFooter />
+      </footer>
     </main>
   );
 }
