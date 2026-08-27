@@ -101,9 +101,16 @@ export default function DashboardPage() {
         }
 
         .workbook-card {
-          background: linear-gradient(135deg, #c9a55a 0%, #ead686 58%, #b98b49 100%);
+          background: linear-gradient(135deg, #b98b49 0%, #d7b55f 52%, #9f6e31 100%);
           border-color: #c9a55a;
           padding-bottom: 18px;
+        }
+
+        .workbook-card .action-eyebrow,
+        .workbook-card .action-title,
+        .workbook-card .action-detail {
+          color: #fff;
+          text-shadow: 0 1px 8px rgba(62, 39, 0, 0.22);
         }
 
         .vip-card {
@@ -399,13 +406,35 @@ export default function DashboardPage() {
             padding: 22px 0 38px !important;
           }
 
+          .dashboard-top > .dashboard-wrap {
+            display: flex;
+            flex-direction: column;
+          }
+
           .dashboard-title {
             font-size: 58px;
             margin-bottom: 18px;
           }
 
+          .hero-grid {
+            display: contents;
+          }
+
+          .hero-image-card {
+            order: 1;
+          }
+
+          .join-strip {
+            order: 2;
+            margin-top: 14px;
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
           .side-actions {
             grid-template-columns: 1fr;
+            order: 3;
+            margin-top: 16px;
           }
 
           .action-card {
@@ -414,11 +443,6 @@ export default function DashboardPage() {
 
           .hero-image-card {
             min-height: auto;
-          }
-
-          .join-strip {
-            grid-template-columns: 1fr;
-            gap: 16px;
           }
 
           .join-button {
