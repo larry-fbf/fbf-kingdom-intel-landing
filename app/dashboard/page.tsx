@@ -101,8 +101,8 @@ export default function DashboardPage() {
         }
 
         .workbook-card {
-          background: linear-gradient(135deg, #b98b49 0%, #d7b55f 52%, #9f6e31 100%);
-          border-color: #c9a55a;
+          background: #090909;
+          border-color: #222;
           padding-bottom: 18px;
         }
 
@@ -110,7 +110,7 @@ export default function DashboardPage() {
         .workbook-card .action-title,
         .workbook-card .action-detail {
           color: #fff;
-          text-shadow: 0 1px 8px rgba(62, 39, 0, 0.22);
+          text-shadow: none;
         }
 
         .vip-card {
@@ -171,6 +171,11 @@ export default function DashboardPage() {
         }
 
         .vip-card .action-cta {
+          background: #cc0000;
+          color: #fff;
+        }
+
+        .workbook-card .action-cta {
           background: #cc0000;
           color: #fff;
         }
