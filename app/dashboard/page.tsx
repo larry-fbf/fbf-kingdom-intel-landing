@@ -15,43 +15,43 @@ const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8w
 
 const actions = [
   {
-    eyebrow: "live room",
-    title: "enter the main stage",
-    detail: "Join the live Zoom room.",
-    href: ZOOM_URL,
-    cta: "watch live",
-    tone: "red",
-  },
-  {
-    eyebrow: "workbook",
-    title: "grab your workbook",
-    detail: "Complete the form and get your workbook.",
+    eyebrow: "Workbook",
+    title: "Grab Your Workbook",
+    detail: "Complete the form and get your workbook sent to you.",
     href: WORKBOOK_URL,
-    cta: "get workbook",
+    cta: "Get Workbook",
     tone: "gold",
   },
   {
-    eyebrow: "vip",
-    title: "upgrade your experience",
-    detail: "Get coaching, bonuses, and replay access.",
-    href: VIP_URL,
-    cta: "view vip",
+    eyebrow: "Live Room",
+    title: "Join the Room",
+    detail: "Enter the live Zoom room for each masterclass session.",
+    href: ZOOM_URL,
+    cta: "Join Live",
     tone: "dark",
+  },
+  {
+    eyebrow: "VIP",
+    title: "VIP Upgrade",
+    detail: "Unlock the VIP room, direct coaching, bonuses, and replay access.",
+    href: VIP_URL,
+    cta: "Upgrade to VIP",
+    tone: "red",
   },
 ];
 
 const replays = [
   {
-    day: "day 1",
-    title: "replay coming soon",
+    day: "Day 1",
+    title: "Replay Coming Soon",
   },
   {
-    day: "day 2",
-    title: "replay coming soon",
+    day: "Day 2",
+    title: "Replay Coming Soon",
   },
   {
-    day: "day 3",
-    title: "replay coming soon",
+    day: "Day 3",
+    title: "Replay Coming Soon",
   },
 ];
 
@@ -61,8 +61,8 @@ export default function DashboardPage() {
       <style>{`
         .dashboard-shell {
           min-height: 100vh;
-          background: #f4f2ee;
-          color: #121212;
+          background: #080808;
+          color: #fff;
           font-family: 'Work Sans', Arial, sans-serif;
           overflow-x: hidden;
         }
@@ -74,7 +74,6 @@ export default function DashboardPage() {
         .dashboard-top {
           background: #080808;
           color: #fff;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .dashboard-bar,
@@ -85,11 +84,12 @@ export default function DashboardPage() {
         }
 
         .dashboard-bar {
-          min-height: 72px;
+          min-height: 98px;
           display: grid;
-          grid-template-columns: 120px minmax(0, 1fr) 120px;
+          grid-template-columns: 86px minmax(0, 1fr) 86px;
           align-items: center;
-          gap: 20px;
+          gap: 18px;
+          padding-top: 8px;
         }
 
         .dashboard-logo {
@@ -99,35 +99,34 @@ export default function DashboardPage() {
         }
 
         .dashboard-kicker {
-          margin: 0;
+          margin: 0 0 6px;
           color: #c9a55a;
           font-size: 11px;
           font-weight: 800;
-          letter-spacing: 0.22em;
+          letter-spacing: 0.16em;
           text-align: center;
           text-transform: uppercase;
         }
 
         .dashboard-title {
-          margin: 2px 0 0;
+          margin: 0;
           color: #fff;
           font-family: 'Anton', Arial, sans-serif;
-          font-size: clamp(28px, 3.2vw, 46px);
+          font-size: clamp(30px, 3.6vw, 54px);
           font-weight: 400;
-          letter-spacing: 0.04em;
-          line-height: 1;
+          letter-spacing: 0.02em;
+          line-height: 1.02;
           text-align: center;
-          text-transform: uppercase;
         }
 
         .hero-block {
-          padding: 28px 0 30px;
+          padding: 4px 0 14px;
           background: #080808;
         }
 
         .hero-image {
           display: block;
-          width: 960px;
+          width: 820px;
           max-width: 100%;
           margin: 0 auto;
           height: auto;
@@ -137,8 +136,8 @@ export default function DashboardPage() {
 
         .quick-links {
           margin-top: -1px;
-          padding: 30px 0 46px;
-          background: #f4f2ee;
+          padding: 10px 0 38px;
+          background: #080808;
         }
 
         .quick-links-head {
@@ -146,23 +145,22 @@ export default function DashboardPage() {
           align-items: end;
           justify-content: space-between;
           gap: 24px;
-          margin-bottom: 18px;
+          margin-bottom: 12px;
         }
 
         .section-label {
           margin: 0 0 7px;
-          color: #cc0000;
+          color: #c9a55a;
           font-size: 11px;
           font-weight: 800;
           letter-spacing: 0.2em;
-          text-transform: uppercase;
         }
 
         .section-title {
           margin: 0;
-          color: #121212;
+          color: #fff;
           font-family: 'Frank Ruhl Libre', Georgia, serif;
-          font-size: clamp(28px, 3.7vw, 46px);
+          font-size: clamp(26px, 3vw, 38px);
           font-weight: 900;
           letter-spacing: 0;
           line-height: 1;
@@ -170,14 +168,13 @@ export default function DashboardPage() {
 
         .date-pill {
           flex: 0 0 auto;
-          border: 1px solid #d8d3c9;
+          border: 1px solid rgba(201,165,90,0.34);
           border-radius: 999px;
           padding: 10px 16px;
-          color: #3a352f;
+          color: rgba(255,255,255,0.72);
           font-size: 12px;
           font-weight: 800;
           letter-spacing: 0.08em;
-          text-transform: uppercase;
         }
 
         .action-grid {
@@ -189,15 +186,15 @@ export default function DashboardPage() {
         .action-card {
           width: 100%;
           min-width: 0;
-          min-height: 166px;
+          min-height: 132px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          border: 1px solid #ddd8ce;
+          border: 1px solid rgba(255,255,255,0.14);
           border-radius: 8px;
-          background: #fff;
-          padding: 22px;
-          color: #121212;
+          background: #151515;
+          padding: 18px;
+          color: #fff;
           text-decoration: none;
           transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
         }
@@ -205,12 +202,18 @@ export default function DashboardPage() {
         .action-card:hover {
           transform: translateY(-2px);
           border-color: #c9a55a;
-          box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+          box-shadow: 0 16px 34px rgba(0,0,0,0.32);
+        }
+
+        .action-card.dark {
+          background: #0f0f0f;
+          border-color: #2a2a2a;
+          color: #fff;
         }
 
         .action-card.red {
-          background: #0f0f0f;
-          border-color: #2a2a2a;
+          background: #cc0000;
+          border-color: #e33a32;
           color: #fff;
         }
 
@@ -221,15 +224,14 @@ export default function DashboardPage() {
 
         .action-eyebrow {
           margin: 0 0 8px;
-          color: #cc0000;
+          color: #c9a55a;
           font-size: 11px;
           font-weight: 900;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
+          letter-spacing: 0.08em;
         }
 
         .action-card.red .action-eyebrow {
-          color: #c9a55a;
+          color: rgba(255,255,255,0.84);
         }
 
         .action-card.gold .action-eyebrow {
@@ -239,21 +241,21 @@ export default function DashboardPage() {
         .action-title {
           margin: 0 0 8px;
           font-family: 'Frank Ruhl Libre', Georgia, serif;
-          font-size: clamp(22px, 2vw, 28px);
+          font-size: clamp(22px, 1.8vw, 26px);
           font-weight: 900;
           line-height: 1;
         }
 
         .action-detail {
-          margin: 0 0 20px;
-          color: #5d5a55;
+          margin: 0 0 16px;
+          color: rgba(255,255,255,0.68);
           font-size: 14px;
           line-height: 1.55;
           overflow-wrap: break-word;
         }
 
         .action-card.red .action-detail {
-          color: rgba(255,255,255,0.68);
+          color: rgba(255,255,255,0.82);
         }
 
         .action-card.gold .action-detail {
@@ -272,12 +274,12 @@ export default function DashboardPage() {
           padding: 10px 16px;
           font-size: 12px;
           font-weight: 900;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .action-card.red .action-cta {
-          background: #cc0000;
+          background: #fff;
+          color: #cc0000;
         }
 
         .action-card.gold .action-cta {
@@ -286,9 +288,9 @@ export default function DashboardPage() {
         }
 
         .replays-section {
-          background: #080808;
+          background: #f4f2ee;
           padding: 54px 0 64px;
-          color: #fff;
+          color: #121212;
         }
 
         .replay-head {
@@ -300,13 +302,13 @@ export default function DashboardPage() {
         }
 
         .replay-head .section-title {
-          color: #fff;
+          color: #121212;
         }
 
         .replay-note {
           max-width: 390px;
           margin: 0;
-          color: rgba(255,255,255,0.64);
+          color: #5d5a55;
           font-size: 14px;
           line-height: 1.6;
           text-align: right;
@@ -320,9 +322,9 @@ export default function DashboardPage() {
 
         .replay-card {
           min-height: 138px;
-          border: 1px solid rgba(255,255,255,0.12);
+          border: 1px solid #ddd8ce;
           border-radius: 8px;
-          background: linear-gradient(135deg, #151515, #070707);
+          background: #fff;
           padding: 22px;
           position: relative;
           overflow: hidden;
@@ -335,7 +337,7 @@ export default function DashboardPage() {
           background-image: url('/images/kingdom-intel-dashboard-header.jpg');
           background-position: center;
           background-size: cover;
-          opacity: 0.13;
+          opacity: 0.08;
         }
 
         .replay-card > * {
@@ -345,16 +347,15 @@ export default function DashboardPage() {
 
         .replay-day {
           margin: 0 0 12px;
-          color: #c9a55a;
+          color: #cc0000;
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.18em;
-          text-transform: uppercase;
         }
 
         .replay-title {
           margin: 0;
-          color: #fff;
+          color: #121212;
           font-family: 'Frank Ruhl Libre', Georgia, serif;
           font-size: 26px;
           font-weight: 900;
@@ -404,16 +405,17 @@ export default function DashboardPage() {
           }
 
           .dashboard-bar {
-            min-height: 86px;
+            min-height: auto;
             grid-template-columns: 1fr;
             justify-items: center;
-            gap: 10px;
-            padding: 18px 0;
+            gap: 8px;
+            padding: 12px 0 8px;
           }
 
           .dashboard-title {
             max-width: 100%;
-            font-size: 28px;
+            font-size: 26px;
+            line-height: 1.06;
           }
 
           .dashboard-kicker {
@@ -424,11 +426,11 @@ export default function DashboardPage() {
           }
 
           .dashboard-logo {
-            height: 38px;
+            height: 30px;
           }
 
           .hero-block {
-            padding: 18px 0 20px;
+            padding: 8px 0 12px;
           }
 
           .hero-image {
@@ -439,7 +441,7 @@ export default function DashboardPage() {
           }
 
           .quick-links {
-            padding: 28px 0 42px;
+            padding: 18px 0 36px;
           }
 
           .quick-links-head,
@@ -477,8 +479,7 @@ export default function DashboardPage() {
             <img className="dashboard-logo" src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
           </a>
           <div>
-            <p className="dashboard-kicker">Kingdom Intelligence Masterclass</p>
-            <h1 className="dashboard-title">Event Dashboard</h1>
+            <h1 className="dashboard-title">Kingdom Intelligence Masterclass Event Dashboard</h1>
           </div>
           <span aria-hidden="true" />
         </div>
@@ -498,8 +499,8 @@ export default function DashboardPage() {
         <div className="dashboard-wrap">
           <div className="quick-links-head">
             <div>
-              <p className="section-label">Start here</p>
-              <h2 className="section-title">Your masterclass links</h2>
+              <p className="section-label">Start Here</p>
+              <h2 className="section-title">Your Masterclass Links</h2>
             </div>
             <div className="date-pill">September 15-17 | 12 PM Central</div>
           </div>
@@ -529,8 +530,8 @@ export default function DashboardPage() {
         <div className="dashboard-wrap">
           <div className="replay-head">
             <div>
-              <p className="section-label">Replay library</p>
-              <h2 className="section-title">Coming soon</h2>
+              <p className="section-label">Replay Library</p>
+              <h2 className="section-title">Coming Soon</h2>
             </div>
             <p className="replay-note">
               Replays will be posted here after each live session is processed.
