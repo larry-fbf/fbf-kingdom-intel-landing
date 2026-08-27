@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const LANDING_URL = "/";
+const WORKBOOK_URL = "/workbook";
 
 const pageStyle: CSSProperties = {
   background: "#080808",
@@ -70,6 +71,10 @@ export default function ThankYou() {
         .thank-you-copy { flex: 1 1 56%; display: flex; align-items: center; padding: 72px 64px 72px 40px; }
         .thank-you-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .thank-you-card { background: #F8F8F8; border: 1px solid #E8E8E8; border-radius: 10px; padding: 28px 24px; }
+        .workbook-section { background: #111111; padding: 88px 24px; }
+        .workbook-panel { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; max-width: 1060px; margin: 0 auto; }
+        .workbook-cover-wrap { display: flex; justify-content: center; }
+        .workbook-cover { width: min(100%, 360px); border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,0.5); border: 1px solid rgba(201,165,90,0.25); }
         .thank-you-gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
         .thank-you-gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
         @media (max-width: 768px) {
@@ -78,6 +83,9 @@ export default function ThankYou() {
           .thank-you-photo-gradient-side { display: none; }
           .thank-you-copy { padding: 40px 20px 56px; }
           .thank-you-features { grid-template-columns: 1fr; }
+          .workbook-section { padding: 64px 20px; }
+          .workbook-panel { grid-template-columns: 1fr; gap: 34px; }
+          .workbook-cover { width: min(100%, 300px); }
           .thank-you-gold-btn { width: 100%; text-align: center; }
         }
       `}</style>
@@ -225,6 +233,45 @@ export default function ThankYou() {
           <div style={{ textAlign: "center", marginTop: "48px" }}>
             <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle}>
               Join Now - It&apos;s Free
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="workbook-section">
+        <div className="workbook-panel">
+          <div className="workbook-cover-wrap">
+            <img
+              src="/images/kingdom-intelligence-workbook-cover.png"
+              alt="Kingdom Intelligence Masterclass workbook"
+              className="workbook-cover"
+            />
+          </div>
+          <div>
+            <p style={sectionLabelStyle}>Grab your workbook</p>
+            <h2
+              style={{
+                fontSize: "clamp(30px, 4.5vw, 50px)",
+                fontWeight: 900,
+                color: "#FFFFFF",
+                lineHeight: 1.1,
+                marginBottom: "24px",
+                fontFamily: "'Frank Ruhl Libre', Georgia, serif",
+              }}
+            >
+              Take Your Masterclass Experience Deeper.
+            </h2>
+            <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.78)", lineHeight: 1.85, marginBottom: "18px" }}>
+              Enhance your experience with the exclusive Kingdom Intelligence Workbook. This
+              companion will guide you step by step through each lesson, helping you dive deeper
+              into the strategies and principles you learn each day.
+            </p>
+            <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.78)", lineHeight: 1.85, marginBottom: "34px" }}>
+              Use it to reinforce your learning, set actionable goals, and track your progress
+              throughout the masterclass. Fill out the form and we will send your workbook.
+            </p>
+            <a href={WORKBOOK_URL} className="thank-you-gold-btn" style={goldButtonStyle}>
+              Grab Your Workbook
             </a>
           </div>
         </div>
