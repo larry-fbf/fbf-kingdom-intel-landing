@@ -129,7 +129,6 @@ const faqs = [
 
 const swipeSections = [
   {
-    eyebrow: "text / dm",
     title: "Text / DM",
     description: "Use these for personal messages when the relationship already has some trust.",
     items: [
@@ -161,7 +160,6 @@ It crossed my mind because it seems really relevant to what you are dealing with
     ],
   },
   {
-    eyebrow: "follow-up",
     title: "Follow-up",
     description: "Use these only after the person asks for more information or says they want the link.",
     items: [
@@ -184,7 +182,6 @@ And just so you know, it is an affiliate link, so I receive a small referral com
     ],
   },
   {
-    eyebrow: "email",
     title: "Email",
     description: "Use this when the relationship deserves more context than a quick text.",
     items: [
@@ -222,7 +219,6 @@ Take care,
     ],
   },
   {
-    eyebrow: "social post",
     title: "Social Post",
     description: "Use this when posting publicly instead of messaging someone directly.",
     items: [
@@ -248,7 +244,6 @@ Affiliate disclosure: If you join through my link, I receive a small referral co
     ],
   },
   {
-    eyebrow: "voice note",
     title: "Voice Note",
     description: "Use this as a spoken guide. Send the link only if they ask for it.",
     items: [
@@ -286,16 +281,13 @@ export default function AffiliatePage() {
   return (
     <main className={styles.pageShell}>
       <section className={styles.hero}>
-        <img
-          className={styles.heroImage}
-          src="/images/kingdom-intel-events-invites.jpg"
-          alt="Kingdom Intelligence Network members gathered together"
-        />
-        <div className={styles.heroOverlay} />
         <div className={styles.container}>
-          <img className={styles.logo} src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Kingdom Intelligence Network</p>
+            <div className={styles.heroBrandRow}>
+              <img className={styles.logo} src="/images/fbf-logo-white.png" alt="Fueled By Fire" />
+              <p className={styles.heroKicker}>Kingdom Intelligence Network</p>
+            </div>
+            <p className={styles.eyebrow}>Affiliate Resource Hub</p>
             <h1>Affiliate Resources</h1>
             <p>
               Use these media assets and copy-paste invitations when someone comes to mind and you
@@ -310,12 +302,19 @@ export default function AffiliatePage() {
               </div>
               <div className={styles.resourceAction}>
                 <a className={styles.secondaryButton} href="#copy-paste">
-                  Copy paste
+                  Copy Messages
                 </a>
                 <p>Jump to ready-to-send copy by channel.</p>
               </div>
             </div>
           </div>
+          <figure className={styles.heroVisual}>
+            <img
+              src="/images/kingdom-intel-events-invites.jpg"
+              alt="Kingdom Intelligence Network members gathered together"
+            />
+            <figcaption>Share the Network like an invitation into the room.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -344,6 +343,17 @@ export default function AffiliatePage() {
               small referral commission if you decide to join, but it does not change the price for
               you.
             </p>
+          </div>
+          <div className={styles.communityPanel}>
+            <img src="/images/kingdom-intel-expect-room.jpg" alt="Kingdom Intelligence leaders in discussion" />
+            <div>
+              <p className={styles.eyebrow}>Community and sharing</p>
+              <h3>Make the invitation feel like a warm handoff.</h3>
+              <p>
+                The goal is to help the right leader see the people, wisdom, and support behind the
+                Network, then give them a simple next step when they are ready.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -395,7 +405,6 @@ export default function AffiliatePage() {
             {swipeSections.map((section) => (
               <section className={styles.channelSection} key={section.title}>
                 <div className={styles.channelHeader}>
-                  <p className={styles.cardEyebrow}>{section.eyebrow}</p>
                   <h3>{section.title}</h3>
                   <p>{section.description}</p>
                 </div>

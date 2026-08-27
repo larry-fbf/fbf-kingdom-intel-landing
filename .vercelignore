@@ -1,0 +1,11 @@
+worktrees/
+tmp/
+next-*.log
+next-*.err.log
+tmp-*.log
+tmp-*.err.log
+tmp-*.png
+tmp-*.jpg
+tmp-*.jpeg
+tmp-chrome-profile*/
+app/draft/

@@ -1,12 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
-const ATTIO_VIP_LIST_ID = process.env.ATTIO_KIM_VIP_JULY_2026_LIST_ID || "d60168f2-ec59-4c60-ac9d-40d55f3d9b22";
+const ATTIO_VIP_LIST_ID =
+  process.env.ATTIO_KIM_VIP_SEPTEMBER_2026_LIST_ID ||
+  process.env.ATTIO_KIM_VIP_JULY_2026_LIST_ID ||
+  "d60168f2-ec59-4c60-ac9d-40d55f3d9b22";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const BREVO_MASTERCLASS_LIST_ID = Number(process.env.BREVO_KIM_JULY_2026_LIST_ID || process.env.BREVO_MASTERCLASS_LIST_ID || "19");
+const BREVO_VIP_LIST_ID = Number(
+  process.env.BREVO_KIM_VIP_SEPTEMBER_2026_LIST_ID ||
+    process.env.BREVO_KIM_VIP_JULY_2026_LIST_ID ||
+    process.env.BREVO_KIM_SEPTEMBER_2026_LIST_ID ||
+    process.env.BREVO_MASTERCLASS_LIST_ID ||
+    "24",
+);
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
-const SIMPLETEXTING_MASTERCLASS_LIST_NAME =
-  process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME || process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME || "K.I.M. - July 2026";
+const SIMPLETEXTING_VIP_LIST_ID =
+  process.env.SIMPLETEXTING_KIM_VIP_SEPTEMBER_2026_LIST_ID ||
+  process.env.SIMPLETEXTING_KIM_VIP_JULY_2026_LIST_ID ||
+  "";
+const SIMPLETEXTING_VIP_LIST_NAME =
+  process.env.SIMPLETEXTING_KIM_VIP_SEPTEMBER_2026_LIST_NAME ||
+  process.env.SIMPLETEXTING_KIM_VIP_JULY_2026_LIST_NAME ||
+  process.env.SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME ||
+  process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME ||
+  "K.I.M. - VIP Sept 2026";
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
 
 type StripeSession = {
@@ -144,7 +161,7 @@ async function upsertAttioVipContact(contact: Contact) {
 }
 
 async function upsertBrevoReminderContact(contact: Contact) {
-  if (!BREVO_API_KEY || !BREVO_MASTERCLASS_LIST_ID) return { skipped: true, reason: "missing_brevo_env" };
+  if (!BREVO_API_KEY || !BREVO_VIP_LIST_ID) return { skipped: true, reason: "missing_brevo_env" };
 
   await fetchJson(
     "https://api.brevo.com/v3/contacts",
@@ -162,7 +179,7 @@ async function upsertBrevoReminderContact(contact: Contact) {
           LASTNAME: contact.lastName,
           ...(contact.phone ? { SMS: contact.phone } : {}),
         },
-        listIds: [BREVO_MASTERCLASS_LIST_ID],
+        listIds: [BREVO_VIP_LIST_ID],
         updateEnabled: true,
       }),
     },
@@ -173,18 +190,19 @@ async function upsertBrevoReminderContact(contact: Contact) {
 }
 
 async function upsertSimpleTextingReminderContact(contact: Contact) {
-  if (!SIMPLETEXTING_API_KEY || !SIMPLETEXTING_MASTERCLASS_LIST_NAME || !contact.phone) {
+  const simpleTextingGroup = SIMPLETEXTING_VIP_LIST_ID || SIMPLETEXTING_VIP_LIST_NAME;
+  if (!SIMPLETEXTING_API_KEY || !simpleTextingGroup || !contact.phone) {
     return { skipped: true, reason: "missing_sms_env_or_phone" };
   }
 
   const body = new URLSearchParams({
     token: SIMPLETEXTING_API_KEY,
-    group: SIMPLETEXTING_MASTERCLASS_LIST_NAME,
+    group: simpleTextingGroup,
     phone: contact.phone,
     firstName: contact.firstName,
     lastName: contact.lastName,
     email: contact.email,
-    comment: "Kingdom Intelligence Masterclass VIP July 2026 purchase",
+    comment: "Kingdom Intelligence Masterclass VIP September 2026 purchase",
   });
 
   const res = await fetch("https://app2.simpletexting.com/v1/group/contact/add", {

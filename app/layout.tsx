@@ -1,27 +1,36 @@
 import type { Metadata } from "next";
+import MicrosoftClarity from "./components/MicrosoftClarity";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.kingdomintel.com"),
   title: "Kingdom Intelligence Masterclass | Fueled By Fire",
   description:
-    "Free 3-day live online event for faith-driven business owners. July 28-30, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+    "Free 3-day live online event for faith-driven business owners. September 15-17, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Kingdom Intelligence Masterclass | Fueled By Fire",
     description:
-      "Free 3-day live event July 28-30, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.",
-    url: "https://www.kingdomintel.com",
-    type: "website",
+      "Free 3-day live event September 15-17, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.",
+    url: "/",
+    siteName: "Kingdom Intel",
     images: [
       {
-        url: "https://www.kingdomintel.com/images/og-share.jpg",
-        width: 1200,
-        height: 1200,
+        url: "/images/og-share.jpg",
+        width: 1080,
+        height: 1080,
         alt: "Kingdom Intelligence Masterclass",
       },
     ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://www.kingdomintel.com/images/og-share.jpg"],
+    title: "Kingdom Intelligence Masterclass | Fueled By Fire",
+    description:
+      "Free 3-day live event September 15-17, 2026. Learn how to scale your business God's way.",
+    images: ["/images/og-share.jpg"],
   },
   icons: {
     icon: "/favicon.png",
@@ -269,7 +278,10 @@ a { color: inherit; text-decoration: none; }
         `}} />
         <noscript><img height="1" width="1" style={{display:"none"}} src="https://www.facebook.com/tr?id=386045455794262&ev=PageView&noscript=1" /></noscript>
       </head>
-      <body>{children}</body>
+      <body>
+        <MicrosoftClarity />
+        {children}
+      </body>
     </html>
   );
 }

@@ -74,7 +74,7 @@ export default function VIPThankYouPage() {
           <h1>You are in.</h1>
           <p className={styles.lead}>
             Thank you for upgrading to VIP for the Kingdom Intelligence Masterclass. You will get an
-            email and text reminder with your Zoom link before the final-day VIP room, plus access to
+            email and text reminder with your Zoom link before the VIP rooms, plus access to
             the masterclass recordings in the FBF Vault.
           </p>
           <p className={styles.syncNote} data-sync-status>
@@ -112,7 +112,7 @@ export default function VIPThankYouPage() {
             <article>
               <span>01</span>
               <h3>Watch your email and texts.</h3>
-              <p>You will receive reminder details and your Zoom link before the final-day VIP room.</p>
+              <p>You will receive reminder details and your Zoom link before the VIP rooms.</p>
             </article>
             <article>
               <span>02</span>

@@ -522,6 +522,7 @@
   font-weight: 900;
   line-height: 1.08;
   text-transform: uppercase;
+  overflow-wrap: break-word;
 }
 
 .countdownNumbers {
@@ -925,7 +926,7 @@
   }
 
   .countdown p {
-    max-width: none;
+    max-width: 28ch;
     font-size: 10px;
     text-align: center;
     line-height: 1.18;

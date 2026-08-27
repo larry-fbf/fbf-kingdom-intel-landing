@@ -1,12 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
-const ATTIO_MASTERCLASS_LIST_ID = process.env.ATTIO_KIM_JULY_2026_LIST_ID || "979ff89f-4f9e-4af6-828f-9cfd48be52de";
+const ATTIO_MASTERCLASS_LIST_ID =
+  process.env.ATTIO_KIM_SEPTEMBER_2026_LIST_ID ||
+  process.env.ATTIO_KIM_JULY_2026_LIST_ID ||
+  process.env.ATTIO_MASTERCLASS_LIST_ID ||
+  "979ff89f-4f9e-4af6-828f-9cfd48be52de";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const BREVO_MASTERCLASS_LIST_ID = Number(process.env.BREVO_KIM_JULY_2026_LIST_ID || "19");
+const BREVO_MASTERCLASS_LIST_ID = Number(
+  process.env.BREVO_KIM_SEPTEMBER_2026_LIST_ID ||
+    process.env.BREVO_KIM_JULY_2026_LIST_ID ||
+    process.env.BREVO_MASTERCLASS_LIST_ID ||
+    "19",
+);
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
-const SIMPLETEXTING_MASTERCLASS_LIST_ID = process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_ID || "6a3186065d1d20e476b5c75d";
-const SIMPLETEXTING_MASTERCLASS_LIST_NAME = process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME || "K.I.M. - July 2026";
+const SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID = process.env.SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID || "";
+const SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME = process.env.SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME || "";
+const SIMPLETEXTING_MASTERCLASS_LIST_ID =
+  SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID ||
+  process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_ID ||
+  process.env.SIMPLETEXTING_MASTERCLASS_LIST_ID ||
+  "6a3186065d1d20e476b5c75d";
+const SIMPLETEXTING_MASTERCLASS_LIST_NAME =
+  SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME ||
+  process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME ||
+  process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME ||
+  "K.I.M. - September 2026";
 
 type RegistrationPayload = {
   email?: string;
@@ -184,7 +203,11 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
 }
 
 async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
-  const simpleTextingGroup = SIMPLETEXTING_MASTERCLASS_LIST_NAME || SIMPLETEXTING_MASTERCLASS_LIST_ID;
+  const simpleTextingGroup =
+    SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID ||
+    SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME ||
+    SIMPLETEXTING_MASTERCLASS_LIST_ID ||
+    SIMPLETEXTING_MASTERCLASS_LIST_NAME;
   if (!SIMPLETEXTING_API_KEY || !simpleTextingGroup || !contact.phone) return { skipped: true };
 
   const body = new URLSearchParams({
@@ -194,7 +217,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
     firstName: contact.firstName,
     lastName: contact.lastName,
     email: contact.email,
-    comment: "Kingdom Intelligence Masterclass - July 2026 registration",
+    comment: "Kingdom Intelligence Masterclass - September 2026 registration",
   });
 
   const res = await fetch("https://app2.simpletexting.com/v1/group/contact/add", {

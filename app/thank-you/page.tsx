@@ -1,222 +1,280 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "You Are Registered | Kingdom Intelligence Masterclass",
-  description: "Welcome to the Kingdom Intelligence community. Join us and start your journey today.",
+  description:
+    "Your seat is confirmed for the Kingdom Intelligence Masterclass. Join the FBF community and check your email for next steps.",
 };
 
-const COMMUNITY_URL = "https://vault.fbfmastery.com/join?invitation_token=b0c8c0451f281ece962ad9e00e5c739000d5e1b9-e61c108d-7479-4d7b-8079-f258420879bb";
+const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const LANDING_URL = "/";
+
+const pageStyle: CSSProperties = {
+  background: "#080808",
+  color: "#ffffff",
+  fontFamily: "'Work Sans', Arial, sans-serif",
+  overflowX: "hidden",
+};
+
+const goldButtonStyle: CSSProperties = {
+  display: "inline-block",
+  background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
+  color: "#120800",
+  fontWeight: 800,
+  padding: "18px 44px",
+  borderRadius: "6px",
+  fontSize: "16px",
+  textTransform: "uppercase",
+  letterSpacing: "0.08em",
+  boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
+  textDecoration: "none",
+};
+
+const sectionLabelStyle: CSSProperties = {
+  fontSize: "12px",
+  fontWeight: 700,
+  letterSpacing: "0.22em",
+  textTransform: "uppercase",
+  color: "#C9A55A",
+  marginBottom: "16px",
+};
+
+const features = [
+  {
+    title: "Community updates",
+    body: "Stay close to announcements, reminders, and conversation around the Kingdom Intelligence Masterclass.",
+  },
+  {
+    title: "Kingdom CEO connection",
+    body: "Step into a community of faith-driven leaders who are building businesses with God-sized vision.",
+  },
+  {
+    title: "Next-step reminders",
+    body: "Watch your email and texts for the dashboard link, workbook access, VIP invitation, live Zoom link, and replay updates.",
+  },
+];
 
 export default function ThankYou() {
   return (
-    <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-        <style>{`
-          *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-          body { font-family: 'Work Sans', sans-serif; background: #080808; color: #FFFFFF; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-          h1, h2, h3 { font-family: 'Frank Ruhl Libre', Georgia, serif; }
-          a { text-decoration: none; color: inherit; }
-          .gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
-          .gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
-          .feature-card { transition: border-color 0.3s; }
-          .feature-card:hover { border-color: rgba(201,165,90,0.5) !important; }
-          .welcome-video { position: relative; width: 100%; max-width: 900px; padding-top: 56.25%; margin: 0 auto; border: 1px solid rgba(201,165,90,0.22); border-radius: 12px; overflow: hidden; background: #000000; box-shadow: 0 24px 60px rgba(0,0,0,0.32); }
-          .welcome-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-          @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-          .animate { animation: fadeInUp 0.7s ease both; }
-          .animate-2 { animation: fadeInUp 0.7s 0.15s ease both; }
-          .animate-3 { animation: fadeInUp 0.7s 0.3s ease both; }
-          @media (max-width: 768px) {
-            .hero-split { flex-direction: column !important; }
-            .hero-photo { height: 320px !important; min-height: 320px !important; width: 100% !important; }
-            .hero-text { padding: 40px 20px 56px !important; }
-            .features-grid { grid-template-columns: 1fr !important; }
-            .invite-grid { flex-direction: column !important; }
-            .gold-btn { width: 100% !important; text-align: center !important; display: block !important; }
-          }
-        `}</style>
-        {/* Facebook Pixel - CompleteRegistration */}
-        <script dangerouslySetInnerHTML={{ __html: `fbq('track', 'CompleteRegistration');` }} />
-      </head>
-      <body>
+    <main style={pageStyle}>
+      <Script id="fb-complete-registration" strategy="afterInteractive">
+        {`if (window.fbq) window.fbq("track", "CompleteRegistration");`}
+      </Script>
 
-        {/* ── REGISTERED BANNER ── */}
-        <div style={{ background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)", padding: "14px 20px", textAlign: "center" }}>
-          <p style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#FFFFFF" }}>
-            &#10003; &nbsp;You Are Registered · July 28&ndash;30, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp; Free Live Online Event
-          </p>
-        </div>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap');
+        .thank-you-hero { display: flex; max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
+        .thank-you-photo { flex: 0 0 44%; position: relative; overflow: hidden; min-height: 560px; }
+        .thank-you-copy { flex: 1 1 56%; display: flex; align-items: center; padding: 72px 64px 72px 40px; }
+        .thank-you-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .thank-you-card { background: #F8F8F8; border: 1px solid #E8E8E8; border-radius: 10px; padding: 28px 24px; }
+        .thank-you-gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
+        .thank-you-gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
+        @media (max-width: 768px) {
+          .thank-you-hero { flex-direction: column; }
+          .thank-you-photo { height: 320px; min-height: 320px; width: 100%; }
+          .thank-you-photo-gradient-side { display: none; }
+          .thank-you-copy { padding: 40px 20px 56px; }
+          .thank-you-features { grid-template-columns: 1fr; }
+          .thank-you-gold-btn { width: 100%; text-align: center; }
+        }
+      `}</style>
 
-        {/* ── LOGO BAR ── */}
-        
+      <div
+        style={{
+          background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)",
+          padding: "14px 20px",
+          textAlign: "center",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "13px",
+            fontWeight: 700,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#FFFFFF",
+          }}
+        >
+          You are registered | September 15-17, 2026 | 12:00 PM Central | Free live online event
+        </p>
+      </div>
 
-        {/* ── SECTION 1: HERO ── */}
-        <section style={{ background: "#080808", position: "relative", overflow: "hidden" }}>
-          {/* Subtle gold glow */}
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "800px", height: "600px", background: "radial-gradient(ellipse, rgba(201,165,90,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
+      <section style={{ background: "#080808", position: "relative", overflow: "hidden" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "800px",
+            height: "600px",
+            background: "radial-gradient(ellipse, rgba(201,165,90,0.06) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
 
-          <div className="hero-split" style={{ display: "flex", maxWidth: "1160px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-            {/* Photo */}
-            <div className="hero-photo" style={{ flex: "0 0 44%", position: "relative", overflow: "hidden", minHeight: "560px" }}>
-              <img src="/images/staci-larry-split.webp" alt="Larry and Staci Wallace" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 55%, #080808 100%)" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 70%, #080808 100%)" }} />
-            </div>
-
-            {/* Text */}
-            <div className="hero-text" style={{ flex: "1 1 56%", display: "flex", alignItems: "center", padding: "72px 64px 72px 40px" }}>
-              <div className="animate" style={{ maxWidth: "540px" }}>
-                <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "20px" }}>
-                  Welcome to the Masterclass Community
-                </p>
-                <h1 style={{ fontSize: "clamp(38px, 6vw, 72px)", fontWeight: 400, color: "#FFFFFF", lineHeight: 1.0, marginBottom: "12px", fontFamily: "'Anton', sans-serif", textTransform: "uppercase", letterSpacing: "0.01em" }}>
-                  One More Step Before You Go.
-                </h1>
-                <h2 style={{ fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 700, color: "#CC0000", lineHeight: 1.2, marginBottom: "32px" }}>
-                  Join the Masterclass Community.
-                </h2>
-                <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
-                <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "20px" }}>
-                  Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong>{" "}for a welcome message from Staci with everything you need. (Check spam/promotions if you don&rsquo;t see it.)
-                </p>
-                <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.85, marginBottom: "40px" }}>
-                  Join the <strong style={{ color: "#C9A55A" }}>Masterclass Community</strong>, the home base for live session access, updates, chat, replays, and workbook resources during the Kingdom Intelligence Masterclass.
-                </p>
-                <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
-                  display: "inline-block",
-                  background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
-                  color: "#120800", fontWeight: 800, padding: "18px 44px",
-                  borderRadius: "6px", fontSize: "16px",
-                  textTransform: "uppercase", letterSpacing: "0.08em",
-                  boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
-                }}>
-                  Join the Masterclass Community
-                </a>
-                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", marginTop: "12px", fontStyle: "italic" }}>Free access included with your registration.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── WELCOME VIDEO ── */}
-        <section style={{ background: "#080808", padding: "56px 24px 72px" }}>
-          <div className="welcome-video">
-            <iframe
-              src="https://player.vimeo.com/video/1207842514?badge=0&autopause=0&player_id=0&app_id=58479"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              title="KIM Final Registration Welcome"
+        <div className="thank-you-hero">
+          <div className="thank-you-photo">
+            <img
+              src="/images/staci-larry-split.webp"
+              alt="Larry and Staci Wallace"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+                display: "block",
+              }}
             />
+            <div
+              className="thank-you-photo-gradient-side"
+              style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 55%, #080808 100%)" }}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 70%, #080808 100%)" }} />
           </div>
-        </section>
 
-        {/* ── SECTION 2: WHAT YOU GET ── */}
-        <section style={{ background: "#FFFFFF", padding: "80px 24px" }}>
-          <div style={{ maxWidth: "1060px", margin: "0 auto" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#CC0000", textAlign: "center", marginBottom: "16px" }}>Inside the Masterclass Community</p>
-            <h2 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 900, color: "#111111", textAlign: "center", marginBottom: "52px", lineHeight: 1.15 }}>
-              What Awaits You in the Masterclass Community
-            </h2>
-            <div className="features-grid animate-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-              {[
-                { icon: "▶", title: "Bonus Training Videos", body: "3 exclusive bonus sessions on Mindset, Economy, and Time Expansion, only available to registered members." },
-                { icon: "🤝", title: "Kingdom CEO Community", body: "Connect with hundreds of faith-driven leaders scaling businesses without sacrificing what matters most." },
-                { icon: "📖", title: "Daily Encouragement", body: "Spirit-led content, frameworks, and insights delivered directly to your feed to keep you moving forward." },
-                { icon: "⚡", title: "Live Event Access", body: "Get all Masterclass links, reminders, and updates through the community so you never miss a session." },
-                { icon: "🌍", title: "Kingdom Impact Network", body: "Connect with leaders across industries who are using business as a platform for generosity and global impact." },
-                { icon: "📋", title: "Masterclass Workbook", body: "Download the Kingdom Intelligence workbook inside the community and come prepared for every session." },
-              ].map((f, i) => (
-                <div key={i} className="feature-card" style={{ background: "#F8F8F8", border: "1px solid #E8E8E8", borderRadius: "14px", padding: "28px 24px" }}>
-                  <div style={{ marginBottom: "14px", lineHeight: 1 }}>
-                  {f.icon === "VIDEO" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>}
-                  {f.icon === "COMMUNITY" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
-                  {f.icon === "ENCOURAGEMENT" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>}
-                  {f.icon === "EVENT" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>}
-                  {f.icon === "NETWORK" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>}
-                  {f.icon === "WORKBOOK" && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>}
-                </div>
-                  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#111111", marginBottom: "8px", fontFamily: "'Work Sans', sans-serif" }}>{f.title}</h3>
-                  <p style={{ fontSize: "14px", color: "#555555", lineHeight: 1.7 }}>{f.body}</p>
-                </div>
-              ))}
-            </div>
-            <div style={{ textAlign: "center", marginTop: "48px" }}>
-              <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
-                display: "inline-block",
-                background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
-                color: "#120800", fontWeight: 800, padding: "18px 48px",
-                borderRadius: "6px", fontSize: "16px",
-                textTransform: "uppercase", letterSpacing: "0.08em",
-                boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
-              }}>
-                Join Now &ndash; It&rsquo;s Free
+          <div className="thank-you-copy">
+            <div style={{ maxWidth: "540px" }}>
+              <p style={{ ...sectionLabelStyle, marginBottom: "20px" }}>Welcome to the FBF community</p>
+              <h1
+                style={{
+                  fontSize: "clamp(38px, 6vw, 72px)",
+                  fontWeight: 400,
+                  color: "#FFFFFF",
+                  lineHeight: 1,
+                  marginBottom: "12px",
+                  fontFamily: "'Anton', Arial, sans-serif",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.01em",
+                }}
+              >
+                One More Thing Before You Go.
+              </h1>
+              <h2
+                style={{
+                  fontSize: "clamp(22px, 3vw, 34px)",
+                  fontWeight: 700,
+                  color: "#CC0000",
+                  lineHeight: 1.2,
+                  marginBottom: "32px",
+                  fontFamily: "'Frank Ruhl Libre', Georgia, serif",
+                }}
+              >
+                Join the free FBF community.
+              </h2>
+              <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
+              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.76)", lineHeight: 1.85, marginBottom: "20px" }}>
+                Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for your
+                confirmation and next steps. If you do not see it, check spam or promotions.
+              </p>
+              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.76)", lineHeight: 1.85, marginBottom: "40px" }}>
+                While you are here, join the <strong style={{ color: "#C9A55A" }}>Fueled By Fire
+                community</strong> so you can stay connected with other faith-driven leaders and keep
+                momentum going before the masterclass begins.
+              </p>
+              <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle}>
+                Join the FBF Community
               </a>
+              <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.38)", marginTop: "12px", fontStyle: "italic" }}>
+                Your dashboard, workbook, VIP invite, and live Zoom link will come by email and text.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ── SECTION 3: INVITE FRIENDS ── */}
-        <section style={{ background: "#080808", padding: "80px 24px" }}>
-          <div style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A55A", marginBottom: "16px" }}>Share the Mission</p>
-            <h2 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "40px", textTransform: "uppercase" }}>
-              Invite Your Friends!
-            </h2>
-            <div style={{ borderLeft: "3px solid #CC0000", paddingLeft: "28px", textAlign: "left", marginBottom: "40px" }}>
-              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontStyle: "italic" }}>
-                &ldquo;If you&rsquo;re anything like me, you are deeply passionate about helping others live a purpose-driven life and build a lasting legacy for their families. Give your friends, family, and colleagues a powerful gift worth $7,500 by inviting them to sign up today.
-              </p>
-              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontStyle: "italic", marginTop: "16px" }}>
-                You will think of many people during the three days that need to hear these messages, so why not start now? Make a list and send them to the link below.&rdquo;
-              </p>
-              <p style={{ fontSize: "15px", fontWeight: 700, color: "#C9A55A", marginTop: "20px", fontStyle: "normal" }}>&ndash; Staci Wallace</p>
-            </div>
-            <p style={{ fontSize: "18px", fontWeight: 700, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "32px" }}>
-              This one decision today could change their life and business forever.
-            </p>
-            <a href={LANDING_URL} target="_blank" rel="noopener noreferrer" className="gold-btn" style={{
-              display: "inline-block",
-              background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
-              color: "#120800", fontWeight: 800, padding: "18px 48px",
-              borderRadius: "6px", fontSize: "16px",
-              textTransform: "uppercase", letterSpacing: "0.08em",
-              boxShadow: "0 6px 24px rgba(185,148,90,0.45)",
-            }}>
-              Share the Masterclass
+      <section style={{ background: "#FFFFFF", padding: "80px 24px" }}>
+        <div style={{ maxWidth: "1060px", margin: "0 auto" }}>
+          <p style={{ ...sectionLabelStyle, color: "#CC0000", textAlign: "center" }}>What happens next</p>
+          <h2
+            style={{
+              fontSize: "clamp(26px, 4vw, 42px)",
+              fontWeight: 900,
+              color: "#111111",
+              textAlign: "center",
+              marginBottom: "52px",
+              lineHeight: 1.15,
+              fontFamily: "'Frank Ruhl Libre', Georgia, serif",
+            }}
+          >
+            Watch Your Email and Text Messages.
+          </h2>
+          <div className="thank-you-features">
+            {features.map((feature) => (
+              <article key={feature.title} className="thank-you-card">
+                <h3
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: 800,
+                    color: "#111111",
+                    marginBottom: "8px",
+                    fontFamily: "'Work Sans', Arial, sans-serif",
+                  }}
+                >
+                  {feature.title}
+                </h3>
+                <p style={{ fontSize: "14px", color: "#555555", lineHeight: 1.7 }}>{feature.body}</p>
+              </article>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: "48px" }}>
+            <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle}>
+              Join Now - It&apos;s Free
             </a>
           </div>
-        </section>
-
-        {/* ── WARRIORS QUOTE ── */}
-        <div style={{ background: "#CC0000", padding: "64px 20px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", top: "-20px", left: "50%", transform: "translateX(-50%)", fontSize: "220px", color: "rgba(255,255,255,0.05)", fontFamily: "'Frank Ruhl Libre', Georgia, serif", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>&ldquo;</div>
-          <p style={{ fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 900, color: "#FFFFFF", fontStyle: "italic", lineHeight: 1.15, position: "relative", zIndex: 1, textTransform: "uppercase", letterSpacing: "-0.01em" }}>
-            Warriors don&rsquo;t retreat.<br />They reload.
-          </p>
-          <div style={{ width: "48px", height: "3px", background: "rgba(255,255,255,0.4)", margin: "20px auto 14px", borderRadius: "2px" }} />
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", position: "relative", zIndex: 1 }}>&ndash; Staci Wallace</p>
         </div>
+      </section>
 
-        {/* ── FOOTER ── */}
-<footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
-  <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
-  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>Fueled By Fire&reg; LLC &nbsp;|&nbsp; Copyright &copy; 2020&ndash;2026 &nbsp;|&nbsp; All Rights Reserved</p>
-  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.2)", marginBottom: "16px" }}>10% of every program fee supports Epiphany Global &amp; EMwomen.</p>
-  <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-    <a href="https://www.fbfchallenge.com/privacy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.25)" }}>Privacy Policy</a>
-    <a href="https://www.fbfchallenge.com/terms" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)" }}>Terms of Service</a>
-    <a href="https://www.fbfchallenge.com/disclaimer" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)" }}>Disclaimer</a>
-  </div>
-</footer>
+      <section style={{ background: "#080808", padding: "80px 24px" }}>
+        <div style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
+          <p style={sectionLabelStyle}>Share the mission</p>
+          <h2
+            style={{
+              fontSize: "clamp(28px, 5vw, 52px)",
+              fontWeight: 900,
+              color: "#FFFFFF",
+              marginBottom: "32px",
+              textTransform: "uppercase",
+              fontFamily: "'Frank Ruhl Libre', Georgia, serif",
+            }}
+          >
+            Invite Someone Who Needs This.
+          </h2>
+          <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.78)", lineHeight: 1.85, marginBottom: "36px" }}>
+            Think of one business owner, founder, or leader who is trying to build with faith,
+            clarity, and Kingdom impact. Send them the registration page so they can join you.
+          </p>
+          <a href={LANDING_URL} className="thank-you-gold-btn" style={goldButtonStyle}>
+            Share the Masterclass
+          </a>
+        </div>
+      </section>
 
-        <script src="https://player.vimeo.com/api/player.js" />
-      </body>
-    </html>
+      <footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
+        <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
+        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
+          Fueled By Fire, LLC | Copyright 2026 | All Rights Reserved
+        </p>
+        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.2)", marginBottom: "16px" }}>
+          10% of every program fee supports Epiphany Global and EMwomen.
+        </p>
+        <div style={{ display: "flex", justifyContent: "center", gap: "20px", flexWrap: "wrap" }}>
+          <a href="https://www.fbfchallenge.com/privacy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
+            Privacy Policy
+          </a>
+          <a href="https://www.fbfchallenge.com/terms" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
+            Terms of Service
+          </a>
+          <a href="https://www.fbfchallenge.com/disclaimer" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
+            Disclaimer
+          </a>
+        </div>
+      </footer>
+    </main>
   );
 }
-
