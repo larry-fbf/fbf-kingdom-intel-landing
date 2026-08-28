@@ -28,6 +28,7 @@ const workshopSource = readFileSync(join(process.cwd(), "app", "workshop", "Work
 const workshopPage = readFileSync(join(process.cwd(), "app", "workshop", "page.tsx"), "utf8");
 const thankYouPage = readFileSync(join(process.cwd(), "app", "thank-you", "page.tsx"), "utf8");
 const vipUpsellPage = readFileSync(join(process.cwd(), "app", "vip", "VIPUpsellPage.tsx"), "utf8");
+const shareMasterclassSection = readFileSync(join(process.cwd(), "app", "components", "ShareMasterclassSection.tsx"), "utf8");
 const dashboardPage = readFileSync(join(process.cwd(), "app", "dashboard", "page.tsx"), "utf8");
 const dashboardShareButton = readFileSync(join(process.cwd(), "app", "dashboard", "ShareMasterclassButton.tsx"), "utf8");
 const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8");
@@ -71,9 +72,13 @@ const requiredThankYouMarkers = [
   "1194072208",
   "KIM Final Registration Welcome",
   "A message from Staci",
+  "Share the masterclass with a friend.",
+  "Masterclass share link",
+  "data-copy-share-link",
 ];
 
-const missingThankYouMarkers = requiredThankYouMarkers.filter((marker) => !thankYouPage.includes(marker));
+const thankYouContent = `${thankYouPage}\n${shareMasterclassSection}`;
+const missingThankYouMarkers = requiredThankYouMarkers.filter((marker) => !thankYouContent.includes(marker));
 
 if (missingThankYouMarkers.length > 0) {
   console.error(`Thank-you content check failed. Missing markers: ${missingThankYouMarkers.join(", ")}`);

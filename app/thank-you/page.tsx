@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
+import ShareMasterclassSection from "../components/ShareMasterclassSection";
 
 export const metadata: Metadata = {
   title: "You Are Registered | Kingdom Intelligence Masterclass",
@@ -9,8 +10,22 @@ export const metadata: Metadata = {
 };
 
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
-const LANDING_URL = "/";
 const WORKBOOK_URL = "/workbook";
+
+const shareSteps = [
+  {
+    title: "Watch your email and texts.",
+    body: "You will receive reminder details and your Zoom link before the masterclass.",
+  },
+  {
+    title: "Join the community.",
+    body: "The community is the home base for updates, conversation, and masterclass resources.",
+  },
+  {
+    title: "Bring your real question.",
+    body: "Come ready with the business challenge you want feedback on during the masterclass.",
+  },
+];
 
 const pageStyle: CSSProperties = {
   background: "#080808",
@@ -302,30 +317,7 @@ export default function ThankYou() {
         </div>
       </section>
 
-      <section style={{ background: "#080808", padding: "80px 24px" }}>
-        <div style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
-          <p style={sectionLabelStyle}>Share the mission</p>
-          <h2
-            style={{
-              fontSize: "clamp(28px, 5vw, 52px)",
-              fontWeight: 900,
-              color: "#FFFFFF",
-              marginBottom: "32px",
-              textTransform: "uppercase",
-              fontFamily: "'Frank Ruhl Libre', Georgia, serif",
-            }}
-          >
-            Invite Someone Who Needs This.
-          </h2>
-          <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.78)", lineHeight: 1.85, marginBottom: "36px" }}>
-            Think of one business owner, founder, or leader who is trying to build with faith,
-            clarity, and Kingdom impact. Send them the registration page so they can join you.
-          </p>
-          <a href={LANDING_URL} className="thank-you-gold-btn" style={goldButtonStyle}>
-            Share the Masterclass
-          </a>
-        </div>
-      </section>
+      <ShareMasterclassSection steps={shareSteps} />
 
       <footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
         <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
