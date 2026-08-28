@@ -57,20 +57,37 @@ const features = [
   },
 ];
 
+function VimeoWelcomeVideo() {
+  return (
+    <div className="welcome-video" aria-label="A welcome message from Staci Wallace">
+      <iframe
+        src="https://player.vimeo.com/video/1194072208?badge=0&autopause=0&player_id=0&app_id=58479"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        title="KIM Final Registration Welcome"
+      />
+    </div>
+  );
+}
+
 export default function ThankYou() {
   return (
     <main style={pageStyle}>
       <Script id="fb-complete-registration" strategy="afterInteractive">
         {`if (window.fbq) window.fbq("track", "CompleteRegistration");`}
       </Script>
+      <Script src="https://player.vimeo.com/api/player.js" strategy="lazyOnload" />
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap');
         .thank-you-hero { display: flex; max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
         .thank-you-photo { flex: 0 0 44%; position: relative; overflow: hidden; min-height: 560px; }
-        .thank-you-copy { flex: 1 1 56%; display: flex; align-items: center; padding: 72px 64px 72px 40px; }
+        .thank-you-copy { flex: 1 1 56%; display: flex; align-items: center; min-width: 0; padding: 72px 64px 72px 40px; }
+        .thank-you-copy-inner { width: 100%; max-width: 540px; min-width: 0; }
         .thank-you-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .thank-you-card { background: #F8F8F8; border: 1px solid #E8E8E8; border-radius: 10px; padding: 28px 24px; }
+        .welcome-video { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(201,165,90,0.35); border-radius: 8px; background: #000000; box-shadow: 0 18px 54px rgba(0,0,0,0.45); margin: 0 0 30px; }
+        .welcome-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .workbook-section { background: #111111; padding: 88px 24px; }
         .workbook-panel { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; max-width: 1060px; margin: 0 auto; }
         .workbook-cover-wrap { display: flex; justify-content: center; }
@@ -78,10 +95,14 @@ export default function ThankYou() {
         .thank-you-gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
         .thank-you-gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
         @media (max-width: 768px) {
-          .thank-you-hero { flex-direction: column; }
+          .thank-you-hero { flex-direction: column; width: 100%; max-width: 100%; padding-left: 0 !important; padding-right: 0 !important; overflow: hidden; }
           .thank-you-photo { height: 320px; min-height: 320px; width: 100%; }
           .thank-you-photo-gradient-side { display: none; }
-          .thank-you-copy { padding: 40px 20px 56px; }
+          .thank-you-copy { width: 100%; max-width: 100%; box-sizing: border-box; padding: 40px 32px 56px; }
+          .thank-you-copy-inner { width: 100%; max-width: 100%; }
+          .welcome-video { max-width: 100%; }
+          .registered-banner { padding: 12px 18px !important; }
+          .registered-banner-text { font-size: 11px !important; letter-spacing: 0.1em !important; line-height: 1.35 !important; }
           .thank-you-features { grid-template-columns: 1fr; }
           .workbook-section { padding: 64px 20px; }
           .workbook-panel { grid-template-columns: 1fr; gap: 34px; }
@@ -91,6 +112,7 @@ export default function ThankYou() {
       `}</style>
 
       <div
+        className="registered-banner"
         style={{
           background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)",
           padding: "14px 20px",
@@ -98,6 +120,7 @@ export default function ThankYou() {
         }}
       >
         <p
+          className="registered-banner-text"
           style={{
             fontSize: "13px",
             fontWeight: 700,
@@ -147,7 +170,7 @@ export default function ThankYou() {
           </div>
 
           <div className="thank-you-copy">
-            <div style={{ maxWidth: "540px" }}>
+            <div className="thank-you-copy-inner">
               <p style={{ ...sectionLabelStyle, marginBottom: "20px" }}>Welcome to the FBF community</p>
               <h1
                 style={{
@@ -176,6 +199,8 @@ export default function ThankYou() {
                 Join the free FBF community.
               </h2>
               <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
+              <p style={sectionLabelStyle}>A message from Staci</p>
+              <VimeoWelcomeVideo />
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.76)", lineHeight: 1.85, marginBottom: "20px" }}>
                 Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for your
                 confirmation and next steps. If you do not see it, check spam or promotions.

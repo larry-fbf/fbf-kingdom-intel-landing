@@ -25,6 +25,7 @@ if (missingRoutes.length > 0) {
 
 const workshopSource = readFileSync(join(process.cwd(), "app", "workshop", "WorkshopLanding.tsx"), "utf8");
 const workshopPage = readFileSync(join(process.cwd(), "app", "workshop", "page.tsx"), "utf8");
+const thankYouPage = readFileSync(join(process.cwd(), "app", "thank-you", "page.tsx"), "utf8");
 const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8");
 const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "MicrosoftClarity.tsx"), "utf8");
 
@@ -59,6 +60,19 @@ const missingMetadata = requiredWorkshopMetadata.filter((marker) => !workshopPag
 
 if (missingMetadata.length > 0) {
   console.error(`Workshop metadata check failed. Missing markers: ${missingMetadata.join(", ")}`);
+  process.exit(1);
+}
+
+const requiredThankYouMarkers = [
+  "1194072208",
+  "KIM Final Registration Welcome",
+  "A message from Staci",
+];
+
+const missingThankYouMarkers = requiredThankYouMarkers.filter((marker) => !thankYouPage.includes(marker));
+
+if (missingThankYouMarkers.length > 0) {
+  console.error(`Thank-you content check failed. Missing markers: ${missingThankYouMarkers.join(", ")}`);
   process.exit(1);
 }
 
