@@ -47,7 +47,7 @@ export default function DashboardPage() {
 
         .dashboard-wrap {
           width: calc(100% - 48px);
-          max-width: 1180px;
+          max-width: 1220px;
           margin: 0 auto;
         }
 
@@ -104,7 +104,7 @@ export default function DashboardPage() {
 
         .hero-grid {
           display: grid;
-          grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.55fr);
+          grid-template-columns: minmax(300px, 0.68fr) minmax(0, 1.72fr);
           gap: 20px;
           align-items: start;
         }
