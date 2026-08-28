@@ -124,6 +124,7 @@ export default function DashboardPage() {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          gap: 18px;
           border: 1px solid #ddd8ce;
           border-radius: 8px;
           background: #fff;
@@ -196,16 +197,20 @@ export default function DashboardPage() {
 
         .action-date {
           display: inline-flex;
+          align-items: center;
+          justify-content: center;
           width: fit-content;
-          margin-top: 14px;
+          max-width: 100%;
+          margin-top: 18px;
           border: 1px solid rgba(255,255,255,0.22);
           border-radius: 999px;
-          padding: 9px 13px;
+          padding: 10px 15px;
           color: rgba(255,255,255,0.86);
           font-size: 11px;
           font-weight: 900;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.04em;
           line-height: 1.25;
+          text-align: center;
           text-transform: uppercase;
         }
 
@@ -477,16 +482,18 @@ export default function DashboardPage() {
           }
 
           .schedule-row {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) auto;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
+            width: 100%;
             margin-bottom: 18px;
           }
 
           .schedule-pill {
+            min-width: 0;
             border-radius: 8px;
-            padding: 12px 10px;
+            padding: 12px 12px;
             font-size: 11px;
             letter-spacing: 0.01em;
           }
@@ -526,6 +533,11 @@ export default function DashboardPage() {
             min-height: 210px;
             width: 100%;
             max-width: 100%;
+          }
+
+          .action-date {
+            margin-top: 20px;
+            white-space: normal;
           }
 
           .hero-image-card {

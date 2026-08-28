@@ -36,6 +36,7 @@ export default function ShareMasterclassButton() {
         title="Share the masterclass"
         onClick={() => setIsOpen(true)}
       >
+        <span className="share-trigger-text">Share</span>
         <svg
           width="21"
           height="21"
@@ -118,15 +119,30 @@ export default function ShareMasterclassButton() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 46px;
+          gap: 8px;
+          min-width: 104px;
           height: 46px;
           border: 1px solid #d8d3c9;
           border-radius: 999px;
           background: #fff;
           color: #cc0000;
+          padding: 0 16px;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.11);
           cursor: pointer;
           transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .share-trigger-text {
+          color: #121212;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          line-height: 1;
+          text-transform: uppercase;
+        }
+
+        .share-trigger svg {
+          flex: 0 0 auto;
         }
 
         .share-trigger:hover,
@@ -249,8 +265,20 @@ export default function ShareMasterclassButton() {
 
         @media (max-width: 720px) {
           .share-trigger {
-            width: 42px;
+            gap: 6px;
+            min-width: 82px;
             height: 42px;
+            padding: 0 10px;
+          }
+
+          .share-trigger-text {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+          }
+
+          .share-trigger svg {
+            width: 18px;
+            height: 18px;
           }
 
           .share-modal {
