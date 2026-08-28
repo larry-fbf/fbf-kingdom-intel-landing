@@ -199,6 +199,21 @@ export default function DashboardPage() {
           overflow-wrap: break-word;
         }
 
+        .action-date {
+          display: inline-flex;
+          width: fit-content;
+          margin-top: 14px;
+          border: 1px solid rgba(255,255,255,0.22);
+          border-radius: 999px;
+          padding: 9px 13px;
+          color: rgba(255,255,255,0.86);
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 0.06em;
+          line-height: 1.25;
+          text-transform: uppercase;
+        }
+
         .action-cta {
           display: inline-flex;
           align-items: center;
@@ -462,7 +477,7 @@ export default function DashboardPage() {
           }
 
           .dashboard-title {
-            font-size: 58px;
+            font-size: 38px;
             margin-bottom: 18px;
           }
 
@@ -490,6 +505,8 @@ export default function DashboardPage() {
 
           .main-feature {
             order: 1;
+            width: 100%;
+            max-width: 100%;
           }
 
           .share-align {
@@ -501,20 +518,28 @@ export default function DashboardPage() {
             margin-top: 14px;
             grid-template-columns: 1fr;
             gap: 16px;
+            width: 100%;
+            max-width: 100%;
           }
 
           .side-actions {
             grid-template-columns: 1fr;
             order: 3;
             margin-top: 16px;
+            width: 100%;
+            max-width: 100%;
           }
 
           .action-card {
             min-height: 210px;
+            width: 100%;
+            max-width: 100%;
           }
 
           .hero-image-card {
             min-height: auto;
+            width: 100%;
+            max-width: 100%;
           }
 
           .join-button {
@@ -551,12 +576,7 @@ export default function DashboardPage() {
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
             <div className="schedule-pill">
-              <strong>Challenge</strong>
               <span>September 15-17 | 12 PM Central</span>
-            </div>
-            <div className="schedule-pill">
-              <strong>VIP</strong>
-              <span>September 16-17 | 7 PM Central</span>
             </div>
           </div>
 
@@ -578,6 +598,7 @@ export default function DashboardPage() {
                   <p className="action-detail">
                     Unlock the VIP room, direct coaching, bonuses, and replay access.
                   </p>
+                  <div className="action-date">September 16-17 | 7 PM Central</div>
                 </div>
                 <span className="action-cta">Upgrade to VIP</span>
               </a>
