@@ -108,6 +108,16 @@ export default function DashboardPage() {
           align-items: start;
         }
 
+        .main-feature {
+          min-width: 0;
+        }
+
+        .share-align {
+          display: flex;
+          justify-content: flex-end;
+          margin-bottom: 12px;
+        }
+
         .side-actions {
           display: grid;
           gap: 16px;
@@ -478,6 +488,14 @@ export default function DashboardPage() {
             order: 1;
           }
 
+          .main-feature {
+            order: 1;
+          }
+
+          .share-align {
+            margin-bottom: 10px;
+          }
+
           .join-strip {
             order: 2;
             margin-top: 14px;
@@ -529,7 +547,6 @@ export default function DashboardPage() {
       `}</style>
 
       <section className="dashboard-top">
-        <ShareMasterclassButton />
         <div className="dashboard-wrap">
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
@@ -566,16 +583,22 @@ export default function DashboardPage() {
               </a>
             </div>
 
-            <div
-              className="hero-image-card"
-              role="img"
-              aria-label="Kingdom Intelligence Masterclass"
-            >
-              <img
-                className="hero-image"
-                src="/images/kingdom-intel-dashboard-header.jpg"
-                alt=""
-              />
+            <div className="main-feature">
+              <div className="share-align">
+                <ShareMasterclassButton />
+              </div>
+
+              <div
+                className="hero-image-card"
+                role="img"
+                aria-label="Kingdom Intelligence Masterclass"
+              >
+                <img
+                  className="hero-image"
+                  src="/images/kingdom-intel-dashboard-header.jpg"
+                  alt=""
+                />
+              </div>
             </div>
           </div>
 

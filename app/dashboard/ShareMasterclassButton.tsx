@@ -115,10 +115,6 @@ export default function ShareMasterclassButton() {
 
       <style jsx>{`
         .share-trigger {
-          position: absolute;
-          top: 24px;
-          right: 24px;
-          z-index: 4;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -253,8 +249,6 @@ export default function ShareMasterclassButton() {
 
         @media (max-width: 720px) {
           .share-trigger {
-            top: 12px;
-            right: 12px;
             width: 42px;
             height: 42px;
           }
