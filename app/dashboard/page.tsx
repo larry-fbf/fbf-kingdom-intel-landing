@@ -66,6 +66,39 @@ export default function DashboardPage() {
           text-align: center;
         }
 
+        .schedule-row {
+          display: flex;
+          justify-content: center;
+          gap: 14px;
+          flex-wrap: wrap;
+          margin: 0 auto 24px;
+        }
+
+        .schedule-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          min-height: 44px;
+          border: 1px solid #d8d3c9;
+          border-radius: 999px;
+          background: #fff;
+          padding: 12px 18px;
+          color: #24201b;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 0.02em;
+          line-height: 1.25;
+          text-align: center;
+        }
+
+        .schedule-pill strong {
+          color: #cc0000;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
         .hero-grid {
           display: grid;
           grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.55fr);
@@ -421,6 +454,20 @@ export default function DashboardPage() {
             margin-bottom: 18px;
           }
 
+          .schedule-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 18px;
+          }
+
+          .schedule-pill {
+            border-radius: 8px;
+            flex-direction: column;
+            gap: 3px;
+            padding: 12px 14px;
+          }
+
           .hero-grid {
             display: contents;
           }
@@ -482,6 +529,16 @@ export default function DashboardPage() {
       <section className="dashboard-top">
         <div className="dashboard-wrap">
           <h1 className="dashboard-title">Event Dashboard</h1>
+          <div className="schedule-row" aria-label="Event schedule">
+            <div className="schedule-pill">
+              <strong>Challenge</strong>
+              <span>September 15-17 | 12 PM Central</span>
+            </div>
+            <div className="schedule-pill">
+              <strong>VIP</strong>
+              <span>September 16-17 | 7 PM Central</span>
+            </div>
+          </div>
 
           <div className="hero-grid">
             <div className="side-actions">

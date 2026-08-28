@@ -28,6 +28,7 @@ const workshopSource = readFileSync(join(process.cwd(), "app", "workshop", "Work
 const workshopPage = readFileSync(join(process.cwd(), "app", "workshop", "page.tsx"), "utf8");
 const thankYouPage = readFileSync(join(process.cwd(), "app", "thank-you", "page.tsx"), "utf8");
 const vipUpsellPage = readFileSync(join(process.cwd(), "app", "vip", "VIPUpsellPage.tsx"), "utf8");
+const dashboardPage = readFileSync(join(process.cwd(), "app", "dashboard", "page.tsx"), "utf8");
 const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8");
 const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "MicrosoftClarity.tsx"), "utf8");
 
@@ -88,6 +89,21 @@ const missingVipMarkers = requiredVipMarkers.filter((marker) => !vipUpsellPage.i
 
 if (missingVipMarkers.length > 0) {
   console.error(`VIP content check failed. Missing markers: ${missingVipMarkers.join(", ")}`);
+  process.exit(1);
+}
+
+const requiredDashboardMarkers = [
+  "Event Dashboard",
+  "Challenge",
+  "September 15-17 | 12 PM Central",
+  "VIP",
+  "September 16-17 | 7 PM Central",
+];
+
+const missingDashboardMarkers = requiredDashboardMarkers.filter((marker) => !dashboardPage.includes(marker));
+
+if (missingDashboardMarkers.length > 0) {
+  console.error(`Dashboard content check failed. Missing markers: ${missingDashboardMarkers.join(", ")}`);
   process.exit(1);
 }
 
