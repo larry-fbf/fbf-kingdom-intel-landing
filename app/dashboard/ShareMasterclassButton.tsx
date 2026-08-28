@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 
 const SHARE_TEXT =
   "Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass September 15-17 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/";
@@ -8,6 +8,7 @@ const SHARE_TEXT =
 export default function ShareMasterclassButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState("Copy Blurb");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const shareTextId = useId();
 
   async function copyShareText() {
@@ -16,7 +17,13 @@ export default function ShareMasterclassButton() {
       setCopyStatus("Copied");
       window.setTimeout(() => setCopyStatus("Copy Blurb"), 1800);
     } catch {
-      setCopyStatus("Select Text");
+      textareaRef.current?.select();
+      if (document.execCommand("copy")) {
+        setCopyStatus("Copied");
+        window.setTimeout(() => setCopyStatus("Copy Blurb"), 1800);
+      } else {
+        setCopyStatus("Select Text");
+      }
     }
   }
 
@@ -88,6 +95,7 @@ export default function ShareMasterclassButton() {
             </div>
             <textarea
               id={shareTextId}
+              ref={textareaRef}
               className="share-textarea"
               readOnly
               value={SHARE_TEXT}
