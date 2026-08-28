@@ -29,6 +29,7 @@ const workshopPage = readFileSync(join(process.cwd(), "app", "workshop", "page.t
 const thankYouPage = readFileSync(join(process.cwd(), "app", "thank-you", "page.tsx"), "utf8");
 const vipUpsellPage = readFileSync(join(process.cwd(), "app", "vip", "VIPUpsellPage.tsx"), "utf8");
 const dashboardPage = readFileSync(join(process.cwd(), "app", "dashboard", "page.tsx"), "utf8");
+const dashboardShareButton = readFileSync(join(process.cwd(), "app", "dashboard", "ShareMasterclassButton.tsx"), "utf8");
 const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8");
 const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "MicrosoftClarity.tsx"), "utf8");
 
@@ -98,12 +99,22 @@ const requiredDashboardMarkers = [
   "September 15-17 | 12 PM Central",
   "VIP",
   "September 16-17 | 7 PM Central",
+  "ShareMasterclassButton",
+];
+
+const requiredDashboardShareMarkers = [
+  "Share the masterclass",
+  "Copy Blurb",
+  "https://www.kingdomintel.com/",
+  "Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass",
 ];
 
 const missingDashboardMarkers = requiredDashboardMarkers.filter((marker) => !dashboardPage.includes(marker));
+const missingDashboardShareMarkers = requiredDashboardShareMarkers.filter((marker) => !dashboardShareButton.includes(marker));
 
-if (missingDashboardMarkers.length > 0) {
-  console.error(`Dashboard content check failed. Missing markers: ${missingDashboardMarkers.join(", ")}`);
+if (missingDashboardMarkers.length > 0 || missingDashboardShareMarkers.length > 0) {
+  const missingDashboardContent = [...missingDashboardMarkers, ...missingDashboardShareMarkers];
+  console.error(`Dashboard content check failed. Missing markers: ${missingDashboardContent.join(", ")}`);
   process.exit(1);
 }
 

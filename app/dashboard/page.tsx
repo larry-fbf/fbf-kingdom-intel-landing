@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ShareMasterclassButton from "./ShareMasterclassButton";
 
 export const metadata: Metadata = {
   title: "Event Dashboard | Kingdom Intelligence Masterclass",
@@ -53,6 +54,7 @@ export default function DashboardPage() {
         .dashboard-top {
           background: #f4f2ee;
           padding: 26px 0 46px;
+          position: relative;
         }
 
         .dashboard-title {
@@ -527,6 +529,7 @@ export default function DashboardPage() {
       `}</style>
 
       <section className="dashboard-top">
+        <ShareMasterclassButton />
         <div className="dashboard-wrap">
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
