@@ -70,6 +70,7 @@ export default function DashboardPage() {
 
         .schedule-row {
           display: flex;
+          align-items: center;
           justify-content: center;
           gap: 14px;
           flex-wrap: wrap;
@@ -110,12 +111,6 @@ export default function DashboardPage() {
 
         .main-feature {
           min-width: 0;
-        }
-
-        .share-align {
-          display: flex;
-          justify-content: flex-end;
-          margin-bottom: 12px;
         }
 
         .side-actions {
@@ -483,16 +478,17 @@ export default function DashboardPage() {
 
           .schedule-row {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
             gap: 10px;
             margin-bottom: 18px;
           }
 
           .schedule-pill {
             border-radius: 8px;
-            flex-direction: column;
-            gap: 3px;
-            padding: 12px 14px;
+            padding: 12px 10px;
+            font-size: 11px;
+            letter-spacing: 0.01em;
           }
 
           .hero-grid {
@@ -507,10 +503,6 @@ export default function DashboardPage() {
             order: 1;
             width: 100%;
             max-width: 100%;
-          }
-
-          .share-align {
-            margin-bottom: 10px;
           }
 
           .join-strip {
@@ -578,6 +570,7 @@ export default function DashboardPage() {
             <div className="schedule-pill">
               <span>September 15-17 | 12 PM Central</span>
             </div>
+            <ShareMasterclassButton />
           </div>
 
           <div className="hero-grid">
@@ -605,10 +598,6 @@ export default function DashboardPage() {
             </div>
 
             <div className="main-feature">
-              <div className="share-align">
-                <ShareMasterclassButton />
-              </div>
-
               <div
                 className="hero-image-card"
                 role="img"
