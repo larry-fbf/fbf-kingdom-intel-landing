@@ -136,8 +136,8 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
             )}
             <div className={styles.inviteVideo}>
               <iframe
-                src="https://player.vimeo.com/video/1213609996?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-                title="VIP Mastermind invite video"
+                src="https://player.vimeo.com/video/1222112622?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                title="VIP 2026 (Evergreen)"
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
