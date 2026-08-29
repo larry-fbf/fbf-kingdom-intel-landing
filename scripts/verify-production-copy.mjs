@@ -4,21 +4,28 @@ const checks = [
   {
     file: "app/page.tsx",
     mustInclude: [
-      "July 28&ndash;30, 2026",
-      "July 28–30 @ 12 PM Central",
-      "July 28\\u201330, 2026",
+      "September 15&ndash;17, 2026",
+      "September 15&ndash;17 @ 12 PM Central",
+      "September 15\\u201317, 2026",
     ],
-    mustNotMatch: [/June\s*9/i, /June\s*10/i, /June\s*11/i, /June\s*9\s*(?:-|–|&ndash;|\\u2013)\s*11/i],
+    mustNotMatch: [
+      /June\s*9/i,
+      /June\s*10/i,
+      /June\s*11/i,
+      /June\s*9\s*(?:-|&ndash;|\\u2013)\s*11/i,
+      /July\s*28/i,
+      /August\s*18/i,
+    ],
   },
   {
-    file: "app/vip/page.tsx",
+    file: "app/vip/VIPUpsellPage.tsx",
     mustInclude: [
-      "July 30th at 7pm CT on Zoom",
+      "September 16th and 17th",
       "Lifetime access to the K.I. Masterclass replays",
       "The S.W.E.E.T. Spot Audit",
-      "Our 10 hacks to Superpower Leadership",
+      "VIP rooms",
     ],
-    mustNotMatch: [/Top 10 CEO leadership hacks/i],
+    mustNotMatch: [/Top 10 CEO leadership hacks/i, /July\s*30/i],
   },
 ];
 

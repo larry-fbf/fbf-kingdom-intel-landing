@@ -26,11 +26,13 @@ if (missingRoutes.length > 0) {
 
 const workshopSource = readFileSync(join(process.cwd(), "app", "workshop", "WorkshopLanding.tsx"), "utf8");
 const workshopPage = readFileSync(join(process.cwd(), "app", "workshop", "page.tsx"), "utf8");
+const rootPage = readFileSync(join(process.cwd(), "app", "page.tsx"), "utf8");
 const thankYouPage = readFileSync(join(process.cwd(), "app", "thank-you", "page.tsx"), "utf8");
 const vipUpsellPage = readFileSync(join(process.cwd(), "app", "vip", "VIPUpsellPage.tsx"), "utf8");
 const shareMasterclassSection = readFileSync(join(process.cwd(), "app", "components", "ShareMasterclassSection.tsx"), "utf8");
 const dashboardPage = readFileSync(join(process.cwd(), "app", "dashboard", "page.tsx"), "utf8");
 const dashboardShareButton = readFileSync(join(process.cwd(), "app", "dashboard", "ShareMasterclassButton.tsx"), "utf8");
+const workbookThankYouPage = readFileSync(join(process.cwd(), "app", "workbook-thank-you", "page.tsx"), "utf8");
 const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8");
 const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "MicrosoftClarity.tsx"), "utf8");
 
@@ -65,6 +67,23 @@ const missingMetadata = requiredWorkshopMetadata.filter((marker) => !workshopPag
 
 if (missingMetadata.length > 0) {
   console.error(`Workshop metadata check failed. Missing markers: ${missingMetadata.join(", ")}`);
+  process.exit(1);
+}
+
+const requiredRegistrationPageMarkers = [
+  "September 15&ndash;17, 2026",
+  "September 15&ndash;17 @ 12 PM Central",
+  "/api/register",
+  "SAVE MY SEAT",
+];
+
+const missingRegistrationPageMarkers = requiredRegistrationPageMarkers.filter((marker) => !rootPage.includes(marker));
+
+if (missingRegistrationPageMarkers.length > 0 || /July\s*28|August\s*18/i.test(rootPage)) {
+  const missingRegistrationPageContent = missingRegistrationPageMarkers.length
+    ? ` Missing markers: ${missingRegistrationPageMarkers.join(", ")}`
+    : "";
+  console.error(`Registration page content check failed.${missingRegistrationPageContent}`);
   process.exit(1);
 }
 
@@ -120,6 +139,22 @@ const missingDashboardShareMarkers = requiredDashboardShareMarkers.filter((marke
 if (missingDashboardMarkers.length > 0 || missingDashboardShareMarkers.length > 0) {
   const missingDashboardContent = [...missingDashboardMarkers, ...missingDashboardShareMarkers];
   console.error(`Dashboard content check failed. Missing markers: ${missingDashboardContent.join(", ")}`);
+  process.exit(1);
+}
+
+const requiredWorkbookThankYouMarkers = [
+  'const DASHBOARD_URL = "/dashboard"',
+  "Open the event dashboard",
+  "Your workbook is ready.",
+];
+
+const missingWorkbookThankYouMarkers = requiredWorkbookThankYouMarkers.filter((marker) => !workbookThankYouPage.includes(marker));
+
+if (missingWorkbookThankYouMarkers.length > 0 || workbookThankYouPage.includes("vault.fbfmastery.com/join")) {
+  const missingWorkbookThankYouContent = missingWorkbookThankYouMarkers.length
+    ? ` Missing markers: ${missingWorkbookThankYouMarkers.join(", ")}`
+    : "";
+  console.error(`Workbook thank-you content check failed.${missingWorkbookThankYouContent}`);
   process.exit(1);
 }
 
