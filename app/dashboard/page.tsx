@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
 const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8waQcQ";
+const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 
 const replays = [
   {
@@ -393,6 +394,65 @@ export default function DashboardPage() {
           z-index: 1;
         }
 
+        .community-strip {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: center;
+          gap: 22px;
+          margin-top: 18px;
+          border: 1px solid rgba(255,255,255,0.13);
+          border-radius: 8px;
+          background: #101010;
+          padding: 22px;
+        }
+
+        .community-label {
+          margin: 0 0 7px;
+          color: #c9a55a;
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+        }
+
+        .community-title {
+          margin: 0;
+          color: #fff;
+          font-family: 'Frank Ruhl Libre', Georgia, serif;
+          font-size: clamp(24px, 2.4vw, 34px);
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 1;
+          overflow-wrap: break-word;
+        }
+
+        .community-detail {
+          max-width: 660px;
+          margin: 8px 0 0;
+          color: rgba(255,255,255,0.62);
+          font-size: 14px;
+          line-height: 1.55;
+        }
+
+        .community-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 214px;
+          min-height: 48px;
+          border-radius: 5px;
+          background: #cc0000;
+          color: #fff;
+          padding: 13px 20px;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          line-height: 1.15;
+          text-align: center;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+
         .replay-day {
           margin: 0 0 12px;
           color: #c9a55a;
@@ -572,6 +632,17 @@ export default function DashboardPage() {
           .replay-grid {
             grid-template-columns: 1fr;
           }
+
+          .community-strip {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 20px;
+          }
+
+          .community-button {
+            width: 100%;
+            min-width: 0;
+          }
         }
       `}</style>
 
@@ -657,6 +728,25 @@ export default function DashboardPage() {
                 <h3 className="replay-title">{replay.title}</h3>
               </article>
             ))}
+          </div>
+
+          <div className="community-strip">
+            <div>
+              <p className="community-label">FB Community</p>
+              <h2 className="community-title">Join the FB Community</h2>
+              <p className="community-detail">
+                Connect with other faith-driven business owners and get masterclass updates inside
+                the free Facebook group.
+              </p>
+            </div>
+            <a
+              className="community-button"
+              href={COMMUNITY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join the Community
+            </a>
           </div>
         </div>
       </section>
