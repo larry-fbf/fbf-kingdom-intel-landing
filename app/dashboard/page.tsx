@@ -14,6 +14,7 @@ const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
 const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8waQcQ";
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
+const WHATSAPP_URL = "https://whatsapp.com/channel/0029VbDiXJN7T8bbQGSxqt2H";
 
 const replays = [
   {
@@ -396,7 +397,7 @@ export default function DashboardPage() {
 
         .community-strip {
           display: grid;
-          grid-template-columns: minmax(0, 1fr) auto;
+          grid-template-columns: minmax(0, 1fr) minmax(214px, auto);
           align-items: center;
           gap: 22px;
           margin-top: 18px;
@@ -404,6 +405,7 @@ export default function DashboardPage() {
           border-radius: 8px;
           background: #101010;
           padding: 22px;
+          overflow: hidden;
         }
 
         .community-label {
@@ -432,6 +434,13 @@ export default function DashboardPage() {
           color: rgba(255,255,255,0.62);
           font-size: 14px;
           line-height: 1.55;
+          overflow-wrap: break-word;
+        }
+
+        .community-actions {
+          display: grid;
+          gap: 10px;
+          min-width: 0;
         }
 
         .community-button {
@@ -451,6 +460,10 @@ export default function DashboardPage() {
           text-align: center;
           text-decoration: none;
           text-transform: uppercase;
+        }
+
+        .whatsapp-button {
+          background: #1f7a4f;
         }
 
         .replay-day {
@@ -735,18 +748,28 @@ export default function DashboardPage() {
               <p className="community-label">FB Community</p>
               <h2 className="community-title">Join the FB Community</h2>
               <p className="community-detail">
-                Connect with other faith-driven business owners and get masterclass updates inside
-                the free Facebook group.
+                Connect with other faith-driven business owners in the Facebook group, then join
+                the WhatsApp channel for live updates, links, and resources during the masterclass.
               </p>
             </div>
-            <a
-              className="community-button"
-              href={COMMUNITY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Join the Community
-            </a>
+            <div className="community-actions">
+              <a
+                className="community-button"
+                href={COMMUNITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join the Community
+              </a>
+              <a
+                className="community-button whatsapp-button"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>
