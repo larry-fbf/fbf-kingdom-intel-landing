@@ -6,6 +6,10 @@ const ATTIO_MASTERCLASS_LIST_ID =
   process.env.ATTIO_KIM_JULY_2026_LIST_ID ||
   process.env.ATTIO_MASTERCLASS_LIST_ID ||
   "979ff89f-4f9e-4af6-828f-9cfd48be52de";
+const ATTIO_DEFAULT_DEAL_OWNER_ID =
+  process.env.ATTIO_KIM_SEPTEMBER_2026_DEAL_OWNER_ID ||
+  process.env.ATTIO_DEFAULT_DEAL_OWNER_ID ||
+  "8d56cf8c-8535-4c80-8cf7-4650694e368f";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
 const BREVO_MASTERCLASS_LIST_ID = Number(
   process.env.BREVO_KIM_SEPTEMBER_2026_LIST_ID ||
@@ -104,6 +108,118 @@ async function fetchJson(url: string, init: RequestInit, label: string) {
   return text ? JSON.parse(text) : null;
 }
 
+function firstRecordValue(record: { values?: Record<string, unknown[]> } | null | undefined, slug: string) {
+  return record?.values?.[slug]?.[0] as Record<string, unknown> | undefined;
+}
+
+function recordRefs(record: { values?: Record<string, unknown[]> } | null | undefined, slug: string) {
+  return (record?.values?.[slug] || [])
+    .map((item) => (item as { target_record_id?: string }).target_record_id)
+    .filter(Boolean) as string[];
+}
+
+function attioTextValue(item: Record<string, unknown> | undefined) {
+  const value =
+    item?.value ||
+    item?.title ||
+    (item?.status as { title?: string } | undefined)?.title ||
+    item?.full_name ||
+    "";
+  return String(value).replace(/\s+/g, " ").trim();
+}
+
+function attioFullName(record: { values?: Record<string, unknown[]> } | null | undefined, fallback: string) {
+  const name = firstRecordValue(record, "name");
+  return attioTextValue(name) || fallback;
+}
+
+function isStaffOrTestContact(contact: { email: string; firstName: string; lastName: string }) {
+  const [localPart = "", domain = ""] = contact.email.split("@");
+  const name = `${contact.firstName} ${contact.lastName}`.toLowerCase();
+  const staffDomains = new Set(["fbfmastery.com", "paytonwallace.com", "christianeelizabeth.com"]);
+
+  return (
+    staffDomains.has(domain) ||
+    ["example.com", "example.org", "test.com"].includes(domain) ||
+    /\b(test|dummy|sample)\b/i.test(localPart.replace(/[._+-]/g, " ")) ||
+    /\b(test|dummy|sample)\b/i.test(name)
+  );
+}
+
+function isClientOrDoNotContact(record: { values?: Record<string, unknown[]> } | null | undefined) {
+  const status = attioTextValue(firstRecordValue(record, "lead_status_1")).toLowerCase();
+  return ["client", "onboarding", "alumni/past client", "past client", "do not contact"].includes(status);
+}
+
+async function getAttioPerson(recordId: string) {
+  const person = await fetchJson(
+    `https://api.attio.com/v2/objects/people/records/${encodeURIComponent(recordId)}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${ATTIO_API_KEY}`,
+        Accept: "application/json",
+      },
+    },
+    "Attio person lookup",
+  );
+
+  return person?.data;
+}
+
+async function createAttioDealForRegistrant(
+  contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string },
+  recordId: string,
+) {
+  if (!ATTIO_DEFAULT_DEAL_OWNER_ID) return { skipped: true, reason: "missing deal owner" };
+
+  const person = await getAttioPerson(recordId);
+
+  if (isStaffOrTestContact(contact)) return { skipped: true, reason: "staff_or_test" };
+  if (isClientOrDoNotContact(person)) return { skipped: true, reason: "client_or_do_not_contact" };
+  if (recordRefs(person, "associated_deals").length > 0) return { skipped: true, reason: "existing_deal" };
+
+  const companyId = recordRefs(person, "company")[0] || "";
+  const fullName = attioFullName(person, `${contact.firstName} ${contact.lastName}`.trim());
+  const values: Record<string, unknown> = {
+    name: `${fullName} - KIM Sept 2026`,
+    stage: "Outreach",
+    owner: {
+      referenced_actor_type: "workspace-member",
+      referenced_actor_id: ATTIO_DEFAULT_DEAL_OWNER_ID,
+    },
+    associated_people: [
+      {
+        target_object: "people",
+        target_record_id: recordId,
+      },
+    ],
+  };
+
+  if (companyId) {
+    values.associated_company = {
+      target_object: "companies",
+      target_record_id: companyId,
+    };
+  }
+
+  const deal = await fetchJson(
+    "https://api.attio.com/v2/objects/deals/records",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${ATTIO_API_KEY}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ data: { values } }),
+    },
+    "Attio deal",
+  );
+
+  return { skipped: false, recordId: deal?.data?.id?.record_id };
+}
+
 async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
   if (!ATTIO_API_KEY || !ATTIO_MASTERCLASS_LIST_ID) return { skipped: true };
 
@@ -147,7 +263,9 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
     "Attio list entry"
   );
 
-  return { skipped: false, recordId };
+  const deal = await createAttioDealForRegistrant(contact, recordId);
+
+  return { skipped: false, recordId, deal };
 }
 
 async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
