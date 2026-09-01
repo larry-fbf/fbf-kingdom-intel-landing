@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { trackClarityEvent } from "./lib/clarity-events";
 
 const REGISTER_URL = "#register";
 
@@ -30,10 +31,13 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
     e.preventDefault();
     if (!form.agreed) { alert("Please agree to receive communications to continue."); return; }
     setStatus("loading");
+    trackClarityEvent("kim_registration_submit");
     try {
       await postWithTimeout("/api/register", form);
+      trackClarityEvent("kim_registration_success");
     } catch {
       // Keep the visitor flow moving even if a downstream integration is unavailable.
+      trackClarityEvent("kim_registration_processing_warning");
     }
     router.push("/thank-you");
   };
@@ -589,7 +593,10 @@ function TopBanner({ onOpen }: { onOpen: () => void }) {
 /* -- PAGE -- */
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
-  const open = () => setModalOpen(true);
+  const open = () => {
+    trackClarityEvent("kim_registration_modal_open");
+    setModalOpen(true);
+  };
   const close = () => setModalOpen(false);
 
   return (

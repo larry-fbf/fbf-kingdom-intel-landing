@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
+import { trackClarityEvent } from "../lib/clarity-events";
 
 const SHARE_TEXT =
   "Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass September 15-17 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/";
@@ -12,6 +13,7 @@ export default function ShareMasterclassButton() {
   const shareTextId = useId();
 
   async function copyShareText() {
+    trackClarityEvent("kim_dashboard_share_copy");
     try {
       await navigator.clipboard.writeText(SHARE_TEXT);
       setCopyStatus("Copied");
@@ -34,7 +36,10 @@ export default function ShareMasterclassButton() {
         type="button"
         aria-label="Share the masterclass"
         title="Share the masterclass"
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          trackClarityEvent("kim_dashboard_share_open");
+          setIsOpen(true);
+        }}
       >
         <span className="share-trigger-text">Share</span>
         <svg
@@ -106,7 +111,11 @@ export default function ShareMasterclassButton() {
               <button className="share-copy" type="button" onClick={copyShareText}>
                 {copyStatus}
               </button>
-              <a className="share-link" href="https://www.kingdomintel.com/">
+              <a
+                className="share-link"
+                href="https://www.kingdomintel.com/"
+                onClick={() => trackClarityEvent("kim_dashboard_share_page_click")}
+              >
                 Open Page
               </a>
             </div>

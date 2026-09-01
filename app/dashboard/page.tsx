@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import ClarityPageViewEvent from "../components/ClarityPageViewEvent";
+import TrackedClarityLink from "../components/TrackedClarityLink";
 import ShareMasterclassButton from "./ShareMasterclassButton";
 
 export const metadata: Metadata = {
@@ -34,6 +36,7 @@ const replays = [
 export default function DashboardPage() {
   return (
     <main className="dashboard-shell">
+      <ClarityPageViewEvent eventName="kim_dashboard_visit" />
       <style>{`
         .dashboard-shell {
           min-height: 100vh;
@@ -671,16 +674,24 @@ export default function DashboardPage() {
 
           <div className="hero-grid">
             <div className="side-actions">
-              <a className="action-card workbook-card" href={WORKBOOK_URL}>
+              <TrackedClarityLink
+                className="action-card workbook-card"
+                eventName="kim_dashboard_workbook_click"
+                href={WORKBOOK_URL}
+              >
                 <div>
                   <p className="action-eyebrow">Workbook</p>
                   <h2 className="action-title">Grab Your Workbook</h2>
                   <p className="action-detail">Complete the form and get your workbook sent to you.</p>
                 </div>
                 <span className="action-cta">Get Workbook</span>
-              </a>
+              </TrackedClarityLink>
 
-              <a className="action-card vip-card" href={VIP_URL}>
+              <TrackedClarityLink
+                className="action-card vip-card"
+                eventName="kim_dashboard_vip_click"
+                href={VIP_URL}
+              >
                 <div>
                   <p className="action-eyebrow">VIP</p>
                   <h2 className="action-title">VIP Upgrade</h2>
@@ -690,7 +701,7 @@ export default function DashboardPage() {
                   <div className="action-date">September 16-17 | 7 PM Central</div>
                 </div>
                 <span className="action-cta">Upgrade to VIP</span>
-              </a>
+              </TrackedClarityLink>
             </div>
 
             <div className="main-feature">
@@ -715,9 +726,16 @@ export default function DashboardPage() {
               <p className="join-detail">Enter the live Zoom room for each masterclass session.</p>
               <div className="date-pill">September 15-17 | 12 PM Central</div>
             </div>
-            <a className="join-button" href={ZOOM_URL} target="_blank" rel="noopener noreferrer">
+            <TrackedClarityLink
+              className="join-button"
+              eventName="kim_dashboard_zoom_click"
+              eventTags={{ destination: "zoom" }}
+              href={ZOOM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Join the Room
-            </a>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>
@@ -753,22 +771,26 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="community-actions">
-              <a
+              <TrackedClarityLink
                 className="community-button"
+                eventName="kim_dashboard_facebook_click"
+                eventTags={{ destination: "facebook_group" }}
                 href={COMMUNITY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Join the Community
-              </a>
-              <a
+              </TrackedClarityLink>
+              <TrackedClarityLink
                 className="community-button whatsapp-button"
+                eventName="kim_dashboard_whatsapp_click"
+                eventTags={{ destination: "whatsapp_channel" }}
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Join WhatsApp
-              </a>
+              </TrackedClarityLink>
             </div>
           </div>
         </div>

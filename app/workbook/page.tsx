@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { trackClarityEvent } from "../lib/clarity-events";
 import styles from "./page.module.css";
 
 const descriptors = ["CEO (Decision Maker)", "Entrepreneur/Expert", "Startup", "Coach/ Consultant", "Dreamer"];
@@ -56,6 +57,10 @@ export default function WorkbookPage() {
   const [errorMessage, setErrorMessage] = useState("Something went wrong. Please try again.");
   const router = useRouter();
 
+  useEffect(() => {
+    trackClarityEvent("kim_workbook_visit");
+  }, []);
+
   const setField = (name: keyof typeof initialForm, value: string | string[]) => {
     setForm((current) => ({ ...current, [name]: value }));
   };
@@ -73,6 +78,10 @@ export default function WorkbookPage() {
     event.preventDefault();
     setStatus("loading");
     setErrorMessage("Something went wrong. Please try again.");
+    trackClarityEvent("kim_workbook_submit", {
+      help_area: form.helpAreas,
+      income_range: form.monthlyIncomeRange,
+    });
 
     try {
       const response = await fetch("/api/workbook", {
@@ -85,8 +94,10 @@ export default function WorkbookPage() {
         const body = await response.json().catch(() => null);
         throw new Error(body?.error || "Something went wrong. Please try again.");
       }
+      trackClarityEvent("kim_workbook_success");
       router.push("/workbook-thank-you");
     } catch (error) {
+      trackClarityEvent("kim_workbook_error");
       setErrorMessage(error instanceof Error ? error.message : "Something went wrong. Please try again.");
       setStatus("error");
     }
