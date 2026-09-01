@@ -118,6 +118,15 @@ function recordRefs(record: { values?: Record<string, unknown[]> } | null | unde
     .filter(Boolean) as string[];
 }
 
+function attioActorId(record: { values?: Record<string, unknown[]> } | null | undefined, slug: string) {
+  const value = firstRecordValue(record, slug);
+  return (
+    (value?.referenced_actor_type === "workspace-member" && typeof value.referenced_actor_id === "string"
+      ? value.referenced_actor_id
+      : "") || ""
+  );
+}
+
 function attioTextValue(item: Record<string, unknown> | undefined) {
   const value =
     item?.value ||
@@ -169,11 +178,10 @@ async function getAttioPerson(recordId: string) {
 
 async function createAttioDealForRegistrant(
   contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string },
+  person: { values?: Record<string, unknown[]> } | null | undefined,
   recordId: string,
 ) {
   if (!ATTIO_DEFAULT_DEAL_OWNER_ID) return { skipped: true, reason: "missing deal owner" };
-
-  const person = await getAttioPerson(recordId);
 
   if (isStaffOrTestContact(contact)) return { skipped: true, reason: "staff_or_test" };
   if (isClientOrDoNotContact(person)) return { skipped: true, reason: "client_or_do_not_contact" };
@@ -181,12 +189,13 @@ async function createAttioDealForRegistrant(
 
   const companyId = recordRefs(person, "company")[0] || "";
   const fullName = attioFullName(person, `${contact.firstName} ${contact.lastName}`.trim());
+  const ownerId = attioActorId(person, "contact_owner") || ATTIO_DEFAULT_DEAL_OWNER_ID;
   const values: Record<string, unknown> = {
     name: `${fullName} - KIM Sept 2026`,
     stage: "Outreach",
     owner: {
       referenced_actor_type: "workspace-member",
-      referenced_actor_id: ATTIO_DEFAULT_DEAL_OWNER_ID,
+      referenced_actor_id: ownerId,
     },
     associated_people: [
       {
@@ -249,6 +258,9 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
   const recordId = person?.data?.id?.record_id;
   if (!recordId) throw new Error("Attio contact failed: missing record id");
 
+  const attioPerson = await getAttioPerson(recordId);
+  const deal = await createAttioDealForRegistrant(contact, attioPerson, recordId);
+
   await fetchJson(
     `https://api.attio.com/v2/lists/${encodeURIComponent(ATTIO_MASTERCLASS_LIST_ID)}/entries`,
     {
@@ -262,8 +274,6 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
     },
     "Attio list entry"
   );
-
-  const deal = await createAttioDealForRegistrant(contact, recordId);
 
   return { skipped: false, recordId, deal };
 }
