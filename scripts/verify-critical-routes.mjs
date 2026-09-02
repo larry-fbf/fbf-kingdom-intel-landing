@@ -126,6 +126,10 @@ const requiredDashboardMarkers = [
   "ShareMasterclassButton",
   "kim_dashboard_facebook_top_click",
   "Join the Community",
+  "Priority dashboard workflow",
+  "kim_dashboard_whatsapp_click",
+  "Say hello, meet the other business owners in the room",
+  "Get session reminders, links, and extra free resources sent straight to your phone",
 ];
 
 const requiredDashboardShareMarkers = [
