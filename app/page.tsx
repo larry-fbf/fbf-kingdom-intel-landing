@@ -74,7 +74,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
         maxHeight: "92vh", overflowY: "auto",
         boxShadow: "0 24px 80px rgba(0,0,0,0.5)"
       }}>
-        <button onClick={onClose} style={{ position: "absolute", top: "16px", right: "20px", background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#aaa", lineHeight: 1, fontWeight: 700 }}>X</button>
+        <button aria-label="Close registration form" onClick={onClose} style={{ position: "absolute", top: "16px", right: "20px", background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#aaa", lineHeight: 1, fontWeight: 700 }}>X</button>
 
         <>
             <div style={{ textAlign: "center", marginBottom: "28px" }}>
@@ -89,22 +89,22 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
 
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
-                <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Email *</label>
-                <input required type="email" inputMode="email" autoComplete="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
+                <label htmlFor="registration-email" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Email *</label>
+                <input id="registration-email" required type="email" inputMode="email" autoComplete="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
               </div>
               <div className="modal-name-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                 <div>
-                  <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>First Name *</label>
-                  <input required type="text" autoComplete="given-name" style={inputStyle} value={form.firstName} onChange={e => setForm(f => ({...f, firstName: e.target.value}))} />
+                  <label htmlFor="registration-first-name" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>First Name *</label>
+                  <input id="registration-first-name" required type="text" autoComplete="given-name" style={inputStyle} value={form.firstName} onChange={e => setForm(f => ({...f, firstName: e.target.value}))} />
                 </div>
                 <div>
-                  <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Last Name *</label>
-                  <input required type="text" autoComplete="family-name" style={inputStyle} value={form.lastName} onChange={e => setForm(f => ({...f, lastName: e.target.value}))} />
+                  <label htmlFor="registration-last-name" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Last Name *</label>
+                  <input id="registration-last-name" required type="text" autoComplete="family-name" style={inputStyle} value={form.lastName} onChange={e => setForm(f => ({...f, lastName: e.target.value}))} />
                 </div>
               </div>
               <div>
-                <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Mobile Number</label>
-                <input type="tel" inputMode="tel" autoComplete="tel" placeholder="+1 (555) 000-0000" style={inputStyle} value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
+                <label htmlFor="registration-phone" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Mobile Number</label>
+                <input id="registration-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+1 (555) 000-0000" style={inputStyle} value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
               </div>
 
               <div style={{ borderTop: "1px solid #F0F0F0", paddingTop: "16px" }}>
