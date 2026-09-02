@@ -2,44 +2,63 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { trackClarityEvent } from "./lib/clarity-events";
+import { FUNNEL_EVENTS } from "./lib/funnel-events";
+import { postJsonWithTimeout, RegistrationRequestError } from "./lib/post-json";
+import TrackedVimeoVideo from "./components/TrackedVimeoVideo";
 
 const REGISTER_URL = "#register";
-
-async function postWithTimeout(url: string, body: unknown) {
-  const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 5000);
-  try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-      signal: controller.signal,
-    });
-  } finally {
-    window.clearTimeout(timeout);
-  }
-}
 
 /* -- REGISTRATION MODAL -- */
 function RegisterModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState({ email: "", firstName: "", lastName: "", phone: "", agreed: false });
   const [status, setStatus] = useState<"idle"|"loading"|"error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const errorRef = useRef<HTMLParagraphElement>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [errorMessage]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.agreed) { alert("Please agree to receive communications to continue."); return; }
-    setStatus("loading");
-    trackClarityEvent("kim_registration_submit");
-    try {
-      await postWithTimeout("/api/register", form);
-      trackClarityEvent("kim_registration_success");
-    } catch {
-      // Keep the visitor flow moving even if a downstream integration is unavailable.
-      trackClarityEvent("kim_registration_processing_warning");
+    if (!form.agreed) {
+      setErrorMessage("Please agree to receive communications to continue.");
+      setStatus("error");
+      return;
     }
-    router.push("/thank-you");
+    setStatus("loading");
+    setErrorMessage("");
+    trackClarityEvent(FUNNEL_EVENTS.registrationSubmitAttempt, {
+      has_phone: form.phone.trim() ? "true" : "false",
+    });
+    try {
+      const result = await postJsonWithTimeout<{ ok: true; degraded?: boolean; registrationId?: string }>(
+        "/api/register",
+        form,
+      );
+      trackClarityEvent(FUNNEL_EVENTS.registrationConfirmed, {
+        degraded: result.degraded ? "true" : "false",
+      });
+      try {
+        window.sessionStorage.setItem("kim_registration_confirmed", "true");
+      } catch {
+        // Storage can be unavailable in privacy-restricted in-app browsers.
+      }
+      router.push("/thank-you");
+    } catch (error) {
+      const requestError = error instanceof RegistrationRequestError ? error : null;
+      trackClarityEvent(FUNNEL_EVENTS.registrationFailed, {
+        failure_kind: requestError?.kind || "unknown",
+        http_status: requestError?.status ? String(requestError.status) : undefined,
+      });
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+      setStatus("error");
+    }
   };
 
   const inputStyle: React.CSSProperties = {
@@ -62,11 +81,11 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
         maxHeight: "92vh", overflowY: "auto",
         boxShadow: "0 24px 80px rgba(0,0,0,0.5)"
       }}>
-        <button onClick={onClose} style={{ position: "absolute", top: "16px", right: "20px", background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#aaa", lineHeight: 1, fontWeight: 700 }}>X</button>
+        <button aria-label="Close registration form" onClick={onClose} style={{ position: "absolute", top: "16px", right: "20px", background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#aaa", lineHeight: 1, fontWeight: 700 }}>X</button>
 
         <>
             <div style={{ textAlign: "center", marginBottom: "28px" }}>
-              <img src="/images/fbf-logo-black.png" alt="FBF" style={{ height: "36px", marginBottom: "20px", display: "inline-block" }} />
+              <Image src="/images/fbf-logo-black.png" alt="FBF" width={41} height={36} sizes="41px" style={{ height: "36px", width: "auto", marginBottom: "20px", display: "inline-block" }} />
               <h2 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 900, color: "#111", lineHeight: 1.2, marginBottom: "8px" }}>
                 Join the FREE Kingdom Intelligence<br />Masterclass · September 15&ndash;17, 2026
               </h2>
@@ -77,22 +96,22 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
 
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
-                <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Email *</label>
-                <input required type="text" inputMode="email" autoComplete="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
+                <label htmlFor="registration-email" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Email *</label>
+                <input id="registration-email" required type="email" inputMode="email" autoComplete="email" style={inputStyle} value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
               </div>
               <div className="modal-name-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                 <div>
-                  <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>First Name *</label>
-                  <input required type="text" style={inputStyle} value={form.firstName} onChange={e => setForm(f => ({...f, firstName: e.target.value}))} />
+                  <label htmlFor="registration-first-name" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>First Name *</label>
+                  <input id="registration-first-name" required type="text" autoComplete="given-name" style={inputStyle} value={form.firstName} onChange={e => setForm(f => ({...f, firstName: e.target.value}))} />
                 </div>
                 <div>
-                  <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Last Name *</label>
-                  <input required type="text" style={inputStyle} value={form.lastName} onChange={e => setForm(f => ({...f, lastName: e.target.value}))} />
+                  <label htmlFor="registration-last-name" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Last Name *</label>
+                  <input id="registration-last-name" required type="text" autoComplete="family-name" style={inputStyle} value={form.lastName} onChange={e => setForm(f => ({...f, lastName: e.target.value}))} />
                 </div>
               </div>
               <div>
-                <label style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Mobile Number</label>
-                <input type="tel" placeholder="+1 (555) 000-0000" style={inputStyle} value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
+                <label htmlFor="registration-phone" style={{ fontSize: "13px", fontWeight: 700, color: "#111", display: "block", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>Mobile Number</label>
+                <input id="registration-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+1 (555) 000-0000" style={inputStyle} value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
               </div>
 
               <div style={{ borderTop: "1px solid #F0F0F0", paddingTop: "16px" }}>
@@ -121,8 +140,8 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
               </button>
 
               {status === "error" && (
-                <p style={{ fontSize: "13px", color: "#CC0000", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
-                  Something went wrong. Please try again.
+                <p ref={errorRef} role="alert" aria-live="assertive" style={{ fontSize: "13px", color: "#CC0000", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
+                  {errorMessage} Your information is still here—please retry.
                 </p>
               )}
             </form>
@@ -171,7 +190,17 @@ function CTAButton({ text = "SAVE MY SEAT", dark = false, onOpen }: { text?: str
 /* -- HERO -- */
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <section className="hero-section" style={{ background: "#0d0d0d", position: "relative", overflow: "hidden", backgroundImage: "url(/images/hero-ai-bg.png)", backgroundSize: "cover", backgroundPosition: "center center", marginBottom: 0, borderBottom: "none" }}>
+    <section className="hero-section" style={{ background: "#0d0d0d", position: "relative", overflow: "hidden", marginBottom: 0, borderBottom: "none" }}>
+      <Image
+        src="/images/hero-ai-bg.png"
+        alt=""
+        aria-hidden="true"
+        fill
+        preload
+        quality={60}
+        sizes="100vw"
+        style={{ objectFit: "cover", objectPosition: "center center", zIndex: 0 }}
+      />
       {/* Dark overlay */}
       <div style={{
         position: "absolute", inset: 0,
@@ -182,7 +211,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
 
       {/* FBF Logo */}
       <div className="hero-logo-bar">
-        <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" className="hero-logo" />
+        <Image src="/images/fbf-logo-white.png" alt="Fueled By Fire" width={114} height={100} sizes="114px" className="hero-logo" />
       </div>
 
       {/* Main content row */}
@@ -190,9 +219,12 @@ function Hero({ onOpen }: { onOpen: () => void }) {
 
         {/* Photo col */}
         <div className="hero-photo-col">
-          <img
+          <Image
             src="/images/staci-larry-hero-2026.png"
             alt="Staci and Larry Wallace"
+            width={1080}
+            height={1080}
+            sizes="(max-width: 900px) 16px, 44vw"
             className="hero-photo"
           />
           </div>
@@ -288,9 +320,12 @@ function VSLSection({ onOpen }: { onOpen: () => void }) {
         <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 900, color: "#FFFFFF", marginBottom: "40px", lineHeight: 1.15 }}>
           See Why Thousands of Kingdom CEOs<br />Are Going ALL IN
         </h2>
-        <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.6)", border: "1px solid rgba(201,165,90,0.2)", background: "#111" }}>
-          <iframe src="https://player.vimeo.com/video/1177090365?badge=0&autopause=0&player_id=0&app_id=58479" title="Kingdom Intelligence Masterclass" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowFullScreen style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} />
-        </div>
+        <TrackedVimeoVideo
+          videoId="1177090365"
+          title="Kingdom Intelligence Masterclass"
+          eventName={FUNNEL_EVENTS.homepageVideoPlay}
+          style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", overflow: "hidden", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.6)", border: "1px solid rgba(201,165,90,0.2)", background: "#111" }}
+        />
         <div style={{ marginTop: "40px" }}>
           <CTAButton text="SAVE MY SEAT" onOpen={onOpen} />
         </div>
@@ -310,7 +345,7 @@ function TestimonialCard({ t }: { t: { name: string; title: string; quote: strin
   return (
     <div className="testimonial-card" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(204,0,0,0.2)", borderRadius: "16px", padding: "32px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "20px" }}>
-        {t.photo && <img src={t.photo} alt={t.name} style={{ width: "64px", height: "64px", borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: "2px solid rgba(201,165,90,0.4)" }} />}
+        {t.photo && <Image src={t.photo} alt={t.name} width={64} height={64} sizes="64px" loading="lazy" style={{ width: "64px", height: "64px", borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: "2px solid rgba(201,165,90,0.4)" }} />}
         <p style={{ fontSize: "14px", color: "#ccc", fontFamily: "'Work Sans', sans-serif" }}>
           <strong style={{ color: "#FFFFFF", display: "block", fontSize: "15px" }}>{t.name}</strong>
           <span style={{ color: "#666" }}>{t.title}</span>
@@ -344,7 +379,7 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
     <section style={{ background: "#0d0d0d", overflow: "hidden" }}>
       <div ref={ref} className="section-reveal invitation-split" style={{ display: "flex", minHeight: "80vh" }}>
         <div className="invitation-photo" style={{ flex: "0 0 45%", position: "relative", overflow: "hidden", minHeight: "600px" }}>
-          <img src="/images/larry-staci-couch.jpg" alt="Larry and Staci Wallace" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} />
+          <Image src="/images/larry-staci-couch.jpg" alt="Larry and Staci Wallace" fill sizes="(max-width: 768px) 100vw, 45vw" loading="lazy" style={{ objectFit: "cover", objectPosition: "center center" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 60%, #0d0d0d 100%)" }} />
         </div>
         <div className="invitation-content" style={{ flex: "0 0 55%", display: "flex", alignItems: "center", padding: "80px 8vw 80px 48px" }}>
@@ -499,7 +534,7 @@ function MoreTestimonials() {
             <div key={`${current}-${i}`} className="testimonial-card" style={{ background: "#0a0a0a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "14px", overflow: "hidden", animation: "fadeInUp 0.4s ease both" }}>
               {t.photo && (
                 <div className="slider-photo" style={{ width: "100%", height: "200px", overflow: "hidden", position: "relative" }}>
-                  <img src={t.photo} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 25%", display: "block" }} />
+                  <Image src={t.photo} alt={t.name} fill sizes="(max-width: 768px) 100vw, 350px" loading="lazy" style={{ objectFit: "cover", objectPosition: "center 25%" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 40%, #0a0a0a 100%)" }} />
                 </div>
               )}
@@ -512,13 +547,13 @@ function MoreTestimonials() {
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px" }}>
-          <button onClick={() => setCurrent(c => (c - 1 + pages) % pages)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "50%", width: "40px", height: "40px", cursor: "pointer", color: "#FFFFFF", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>&#8249;</button>
+          <button aria-label="Previous testimonial page" onClick={() => setCurrent(c => (c - 1 + pages) % pages)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "50%", width: "40px", height: "40px", cursor: "pointer", color: "#FFFFFF", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>&#8249;</button>
           <div style={{ display: "flex", gap: "8px" }}>
             {Array.from({ length: pages }).map((_, i) => (
-              <button key={i} onClick={() => setCurrent(i)} style={{ width: i === current ? "24px" : "8px", height: "8px", borderRadius: "4px", background: i === current ? "#C9A55A" : "rgba(255,255,255,0.2)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
+              <button key={i} aria-label={`Show testimonial page ${i + 1}`} aria-current={i === current ? "true" : undefined} onClick={() => setCurrent(i)} style={{ width: i === current ? "24px" : "8px", height: "8px", borderRadius: "4px", background: i === current ? "#C9A55A" : "rgba(255,255,255,0.2)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
             ))}
           </div>
-          <button onClick={() => setCurrent(c => (c + 1) % pages)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "50%", width: "40px", height: "40px", cursor: "pointer", color: "#FFFFFF", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>&#8250;</button>
+          <button aria-label="Next testimonial page" onClick={() => setCurrent(c => (c + 1) % pages)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "50%", width: "40px", height: "40px", cursor: "pointer", color: "#FFFFFF", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>&#8250;</button>
         </div>
       </div>
     </section>
@@ -554,13 +589,13 @@ function FinalCTA({ onOpen }: { onOpen: () => void }) {
 function Footer() {
   return (
     <footer style={{ background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.08)", padding: "48px 20px", textAlign: "center" }}>
-      <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "72px", width: "auto", display: "inline-block", marginBottom: "24px" }} />
-      <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.3)", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>&copy; 2026 Fueled By Fire. All Rights Reserved.</p>
-      <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.2)", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>10% of every program fee supports Epiphany Global (Uganda) &amp; EMwomen.</p>
+      <Image src="/images/fbf-logo-white.png" alt="Fueled By Fire" width={82} height={72} sizes="82px" loading="lazy" style={{ height: "72px", width: "auto", display: "inline-block", marginBottom: "24px" }} />
+      <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.7)", marginBottom: "6px", fontFamily: "'Work Sans', sans-serif" }}>&copy; 2026 Fueled By Fire. All Rights Reserved.</p>
+      <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.7)", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>10% of every program fee supports Epiphany Global (Uganda) &amp; EMwomen.</p>
       <div style={{ display: "flex", justifyContent: "center", gap: "28px" }}>
-        <a href="https://www.fbfchallenge.com/privacy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", fontFamily: "'Work Sans', sans-serif" }}>Privacy Policy</a>
-        <a href="https://www.fbfchallenge.com/terms" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", fontFamily: "'Work Sans', sans-serif" }}>Terms of Service</a>
-        <a href="https://www.fbfchallenge.com/disclaimer" style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", fontFamily: "'Work Sans', sans-serif" }}>Disclaimer</a>
+        <a href="https://www.fbfchallenge.com/privacy" style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", fontFamily: "'Work Sans', sans-serif", textDecoration: "none" }}>Privacy Policy</a>
+        <a href="https://www.fbfchallenge.com/terms" style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", fontFamily: "'Work Sans', sans-serif", textDecoration: "none" }}>Terms of Service</a>
+        <a href="https://www.fbfchallenge.com/disclaimer" style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", fontFamily: "'Work Sans', sans-serif", textDecoration: "none" }}>Disclaimer</a>
       </div>
     </footer>
   );
@@ -598,7 +633,7 @@ function TopBanner({ onOpen }: { onOpen: () => void }) {
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => {
-    trackClarityEvent("kim_registration_modal_open");
+    trackClarityEvent(FUNNEL_EVENTS.registrationModalOpen);
     setModalOpen(true);
   };
   const close = () => setModalOpen(false);
