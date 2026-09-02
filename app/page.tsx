@@ -15,7 +15,14 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState({ email: "", firstName: "", lastName: "", phone: "", agreed: false });
   const [status, setStatus] = useState<"idle"|"loading"|"error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const errorRef = useRef<HTMLParagraphElement>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [errorMessage]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,7 +140,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
               </button>
 
               {status === "error" && (
-                <p role="alert" aria-live="assertive" style={{ fontSize: "13px", color: "#CC0000", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
+                <p ref={errorRef} role="alert" aria-live="assertive" style={{ fontSize: "13px", color: "#CC0000", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
                   {errorMessage} Your information is still here—please retry.
                 </p>
               )}
