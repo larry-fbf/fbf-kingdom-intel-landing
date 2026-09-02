@@ -609,17 +609,21 @@ function TopBanner({ onOpen }: { onOpen: () => void }) {
       style={{
         position: "fixed", top: 0, left: 0, width: "100%", zIndex: 9998,
         background: "linear-gradient(90deg, #AA0000 0%, #CC0000 50%, #AA0000 100%)",
-        border: "none", cursor: "pointer", height: "43px", padding: "0 20px",
+        border: "none", cursor: "pointer", height: "43px", padding: "0 14px",
         boxSizing: "border-box",
         display: "flex", alignItems: "center", justifyContent: "center", gap: "12px",
         transition: "filter 0.2s",
+        overflow: "hidden",
       }}
       onMouseEnter={e => (e.currentTarget.style.filter = "brightness(1.1)")}
       onMouseLeave={e => (e.currentTarget.style.filter = "brightness(1)")}
     >
-      <span style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif" }}>
+      <span className="top-banner-text" style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", whiteSpace: "nowrap" }}>
         Free 3-Day Live Event &nbsp;&middot;&nbsp; September 15&ndash;17, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;
         <span style={{ color: "#FFE599", textDecoration: "underline" }}>Register Now &rarr;</span>
+      </span>
+      <span className="top-banner-mobile-text" style={{ display: "none", fontSize: "10px", fontWeight: 800, letterSpacing: "0.1em", lineHeight: 1, textTransform: "uppercase", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", whiteSpace: "nowrap" }}>
+        Free Event &middot; Sept 15-17 &middot; <span style={{ color: "#FFE599", textDecoration: "underline", textUnderlineOffset: "3px" }}>Register Now &rarr;</span>
       </span>
     </button>
   );

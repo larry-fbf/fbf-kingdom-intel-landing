@@ -108,6 +108,52 @@ export default function DashboardPage() {
           text-transform: uppercase;
         }
 
+        .top-action-group {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        .top-community-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          min-height: 46px;
+          border: 1px solid #d8d3c9;
+          border-radius: 999px;
+          background: #fff;
+          color: #1877f2;
+          padding: 0 16px;
+          box-shadow: 0 12px 30px rgba(0,0,0,0.11);
+          text-decoration: none;
+          transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .top-community-button span {
+          color: #121212;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          line-height: 1;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+
+        .top-community-button svg {
+          flex: 0 0 auto;
+        }
+
+        .top-community-button:hover,
+        .top-community-button:focus-visible {
+          border-color: #1877f2;
+          box-shadow: 0 16px 36px rgba(0,0,0,0.16);
+          outline: none;
+          transform: translateY(-1px);
+        }
+
         .hero-grid {
           display: grid;
           grid-template-columns: minmax(300px, 0.68fr) minmax(0, 1.72fr);
@@ -589,6 +635,26 @@ export default function DashboardPage() {
             letter-spacing: 0.01em;
           }
 
+          .top-action-group {
+            width: 100%;
+            gap: 10px;
+          }
+
+          .top-community-button {
+            min-height: 42px;
+            padding: 0 12px;
+          }
+
+          .top-community-button span {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+          }
+
+          .top-community-button svg {
+            width: 15px;
+            height: 15px;
+          }
+
           .hero-grid {
             display: contents;
           }
@@ -684,7 +750,28 @@ export default function DashboardPage() {
             <div className="schedule-pill">
               <span>September 15-17 | 12 PM Central</span>
             </div>
-            <ShareMasterclassButton />
+            <div className="top-action-group">
+              <ShareMasterclassButton />
+              <TrackedClarityLink
+                className="top-community-button"
+                eventName="kim_dashboard_facebook_top_click"
+                eventTags={{ destination: "facebook_group", placement: "top" }}
+                href={COMMUNITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M18.77 7.46h-3.52V5.51c0-.91.6-1.12 1.02-1.12h2.44V.15L15.35.14c-3.73 0-4.58 2.8-4.58 4.58v2.74H7.83v4.38h2.94V24h4.48V11.84h3.02l.5-4.38z" />
+                </svg>
+                <span>Join the Community</span>
+              </TrackedClarityLink>
+            </div>
           </div>
 
           <div className="hero-grid">

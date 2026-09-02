@@ -189,7 +189,8 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 768px) {
 
   /* ── TOP BANNER ── */
-  .top-banner-text { font-size: 11px !important; letter-spacing: 0.12em !important; }
+  .top-banner-text { display: none !important; }
+  .top-banner-mobile-text { display: inline !important; }
 
   /* ── HERO — stack vertically, photo on top ── */
   .hero-section { min-height: auto; }
