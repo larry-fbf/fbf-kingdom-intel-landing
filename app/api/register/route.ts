@@ -1,4 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { captureIntegration, classifyRegistrationResults } from "../../lib/registration-outcome";
+import { hasAffirmativeConsent } from "../../lib/registration-input";
+import {
+  getRegistrationConfirmationSecret,
+  REGISTRATION_CONFIRMATION_COOKIE,
+  signRegistrationConfirmation,
+} from "../../lib/registration-confirmation";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const ATTIO_MASTERCLASS_LIST_ID =
@@ -30,6 +37,7 @@ const SIMPLETEXTING_MASTERCLASS_LIST_NAME =
   process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME ||
   process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME ||
   "K.I.M. - September 2026";
+const INTEGRATION_TIMEOUT_MS = 10000;
 
 type RegistrationPayload = {
   email?: string;
@@ -100,7 +108,7 @@ function parseSimpleTextingResponse(bodyText: string) {
 }
 
 async function fetchJson(url: string, init: RequestInit, label: string) {
-  const res = await fetch(url, init);
+  const res = await fetch(url, { ...init, signal: init.signal || AbortSignal.timeout(INTEGRATION_TIMEOUT_MS) });
   if (!res.ok) {
     throw new Error(`${label} failed (${res.status}): ${await readError(res)}`);
   }
@@ -301,6 +309,7 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
         listIds: [BREVO_MASTERCLASS_LIST_ID],
         updateEnabled: true,
       }),
+      signal: AbortSignal.timeout(INTEGRATION_TIMEOUT_MS),
     });
 
     const text = await res.text();
@@ -355,6 +364,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body,
+    signal: AbortSignal.timeout(INTEGRATION_TIMEOUT_MS),
   });
 
   const bodyText = await res.text();
@@ -371,16 +381,8 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
   return { skipped: false };
 }
 
-async function captureIntegration<T>(label: string, task: () => Promise<T>) {
-  try {
-    return await task();
-  } catch (error) {
-    console.error(`${label} integration failed`, error);
-    return { skipped: false, error: `${label} integration failed` };
-  }
-}
-
 export async function POST(req: NextRequest) {
+  const registrationId = crypto.randomUUID();
   try {
     const payload = (await req.json()) as RegistrationPayload;
     const email = normalizeEmail(payload.email);
@@ -388,25 +390,65 @@ export async function POST(req: NextRequest) {
     const lastName = normalizeName(payload.lastName);
     const phone = normalizePhoneForSync(payload.phone);
 
-    if (!email || !firstName || !lastName) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    if (!email || !/^\S+@\S+\.\S+$/.test(email) || !firstName || !lastName) {
+      return NextResponse.json({ ok: false, error: "Missing required fields", registrationId }, { status: 400 });
+    }
+
+    if (!hasAffirmativeConsent(payload.agreed)) {
+      return NextResponse.json({ ok: false, error: "Consent is required", registrationId }, { status: 400 });
     }
 
     const contact = { email, firstName, lastName, phone };
-    const results: Record<string, unknown> = {};
+    const [attio, brevo, simpleTexting] = await Promise.all([
+      captureIntegration("Attio", () => upsertAttioContact(contact)),
+      captureIntegration("Brevo", () => upsertBrevoContact(contact)),
+      phone
+        ? captureIntegration("SimpleTexting", () => upsertSimpleTextingContact(contact))
+        : Promise.resolve({ ok: true, value: { skipped: true, reason: "no phone supplied" } }),
+    ]);
+    const results = { attio, brevo, simpleTexting };
+    const outcome = classifyRegistrationResults(results);
 
-    results.attio = await captureIntegration("Attio", () => upsertAttioContact(contact));
-    results.brevo = await captureIntegration("Brevo", () => upsertBrevoContact(contact));
-
-    if (payload.agreed && phone) {
-      results.simpleTexting = await captureIntegration("SimpleTexting", () => upsertSimpleTextingContact(contact));
-    } else {
-      results.simpleTexting = { skipped: true, reason: "missing sms consent or phone" };
+    if (!outcome.accepted) {
+      console.error("Registration was not durably saved", { registrationId, failedIntegrations: outcome.failedIntegrations });
+      return NextResponse.json(
+        { ok: false, error: "Registration could not be saved. Please try again.", retryable: true, registrationId },
+        { status: 503 },
+      );
     }
 
-    return NextResponse.json({ ok: true, results });
+    if (outcome.degraded) {
+      console.warn("Registration accepted with integration warnings", {
+        registrationId,
+        failedIntegrations: outcome.failedIntegrations,
+      });
+    }
+
+    const confirmationSecret = getRegistrationConfirmationSecret();
+    if (!confirmationSecret) {
+      console.error("Registration confirmation secret is unavailable", { registrationId });
+      return NextResponse.json(
+        { ok: false, error: "Registration was saved, but confirmation is unavailable. Please try again.", retryable: true, registrationId },
+        { status: 503 },
+      );
+    }
+
+    const response = NextResponse.json({ ok: true, degraded: outcome.degraded, registrationId });
+    response.cookies.set({
+      name: REGISTRATION_CONFIRMATION_COOKIE,
+      value: signRegistrationConfirmation(registrationId, confirmationSecret),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/thank-you",
+      maxAge: 60 * 60,
+    });
+    return response;
   } catch (e) {
-    console.error(e);
-    return NextResponse.json({ ok: true, warning: "Registration accepted with processing errors" });
+    console.error("Registration request failed", { registrationId, error: e });
+    return NextResponse.json(
+      { ok: false, error: "Registration could not be processed. Please try again.", retryable: true, registrationId },
+      { status: 500 },
+    );
   }
 }

@@ -1,7 +1,18 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
-import Script from "next/script";
+import Image from "next/image";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import ShareMasterclassSection from "../components/ShareMasterclassSection";
+import ConfirmedRegistrationAnalytics from "../components/ConfirmedRegistrationAnalytics";
+import TrackedClarityLink from "../components/TrackedClarityLink";
+import TrackedVimeoVideo from "../components/TrackedVimeoVideo";
+import { FUNNEL_EVENTS } from "../lib/funnel-events";
+import {
+  getRegistrationConfirmationSecret,
+  REGISTRATION_CONFIRMATION_COOKIE,
+  verifyRegistrationConfirmation,
+} from "../lib/registration-confirmation";
 
 export const metadata: Metadata = {
   title: "You Are Registered | Kingdom Intelligence Masterclass",
@@ -72,26 +83,18 @@ const features = [
   },
 ];
 
-function VimeoWelcomeVideo() {
-  return (
-    <div className="welcome-video" aria-label="A welcome message from Staci Wallace">
-      <iframe
-        src="https://player.vimeo.com/video/1194072208?badge=0&autopause=0&player_id=0&app_id=58479"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        title="KIM Final Registration Welcome"
-      />
-    </div>
-  );
-}
+export default async function ThankYou() {
+  const confirmationToken = (await cookies()).get(REGISTRATION_CONFIRMATION_COOKIE)?.value;
+  if (
+    !confirmationToken ||
+    !verifyRegistrationConfirmation(confirmationToken, getRegistrationConfirmationSecret())
+  ) {
+    redirect("/?registration=required");
+  }
 
-export default function ThankYou() {
   return (
     <main style={pageStyle}>
-      <Script id="fb-complete-registration" strategy="afterInteractive">
-        {`if (window.fbq) window.fbq("track", "CompleteRegistration");`}
-      </Script>
-      <Script src="https://player.vimeo.com/api/player.js" strategy="lazyOnload" />
+      <ConfirmedRegistrationAnalytics />
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap');
@@ -164,17 +167,15 @@ export default function ThankYou() {
 
         <div className="thank-you-hero">
           <div className="thank-you-photo">
-            <img
+            <Image
               src="/images/staci-larry-split.webp"
               alt="Larry and Staci Wallace"
+              fill
+              sizes="(max-width: 768px) 100vw, 44vw"
+              preload
               style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
                 objectFit: "cover",
                 objectPosition: "center top",
-                display: "block",
               }}
             />
             <div
@@ -215,7 +216,12 @@ export default function ThankYou() {
               </h2>
               <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
               <p style={sectionLabelStyle}>A message from Staci</p>
-              <VimeoWelcomeVideo />
+              <TrackedVimeoVideo
+                className="welcome-video"
+                videoId="1194072208"
+                title="KIM Final Registration Welcome"
+                eventName={FUNNEL_EVENTS.thankYouVideoPlay}
+              />
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.76)", lineHeight: 1.85, marginBottom: "20px" }}>
                 Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for your
                 confirmation and next steps. If you do not see it, check spam or promotions.
@@ -225,9 +231,9 @@ export default function ThankYou() {
                 community</strong> so you can stay connected with other faith-driven leaders and keep
                 momentum going before the masterclass begins.
               </p>
-              <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle}>
+              <TrackedClarityLink href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle} eventName={FUNNEL_EVENTS.thankYouCommunityClick} eventTags={{ placement: "hero" }}>
                 Join the FBF Community
-              </a>
+              </TrackedClarityLink>
               <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.38)", marginTop: "12px", fontStyle: "italic" }}>
                 Your dashboard, workbook, VIP invite, and live Zoom link will come by email and text.
               </p>
@@ -271,9 +277,9 @@ export default function ThankYou() {
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: "48px" }}>
-            <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle}>
+            <TrackedClarityLink href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle} eventName={FUNNEL_EVENTS.thankYouCommunityClick} eventTags={{ placement: "next_steps" }}>
               Join Now - It&apos;s Free
-            </a>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>
@@ -281,9 +287,13 @@ export default function ThankYou() {
       <section className="workbook-section">
         <div className="workbook-panel">
           <div className="workbook-cover-wrap">
-            <img
+            <Image
               src="/images/kingdom-intelligence-workbook-cover.png"
               alt="Kingdom Intelligence Masterclass workbook"
+              width={1125}
+              height={1609}
+              sizes="(max-width: 768px) 300px, 360px"
+              loading="lazy"
               className="workbook-cover"
             />
           </div>
@@ -310,9 +320,9 @@ export default function ThankYou() {
               Use it to reinforce your learning, set actionable goals, and track your progress
               throughout the masterclass. Fill out the form and we will send your workbook.
             </p>
-            <a href={WORKBOOK_URL} className="thank-you-gold-btn" style={goldButtonStyle}>
+            <TrackedClarityLink href={WORKBOOK_URL} className="thank-you-gold-btn" style={goldButtonStyle} eventName={FUNNEL_EVENTS.thankYouWorkbookClick}>
               Grab Your Workbook
-            </a>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>
@@ -320,7 +330,7 @@ export default function ThankYou() {
       <ShareMasterclassSection steps={shareSteps} />
 
       <footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
-        <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
+        <Image src="/images/fbf-logo-white.png" alt="Fueled By Fire" width={46} height={40} sizes="46px" loading="lazy" style={{ height: "40px", width: "auto", display: "inline-block", marginBottom: "20px" }} />
         <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
           Fueled By Fire, LLC | Copyright 2026 | All Rights Reserved
         </p>
