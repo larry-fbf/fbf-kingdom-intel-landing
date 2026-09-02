@@ -124,6 +124,8 @@ const requiredDashboardMarkers = [
   "action-date",
   "September 16-17 | 7 PM Central",
   "ShareMasterclassButton",
+  "kim_dashboard_facebook_top_click",
+  "Join the Community",
 ];
 
 const requiredDashboardShareMarkers = [
