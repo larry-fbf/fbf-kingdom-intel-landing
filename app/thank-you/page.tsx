@@ -95,10 +95,9 @@ export default function ThankYou() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap');
-        .thank-you-hero { display: flex; max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
-        .thank-you-photo { flex: 0 0 44%; position: relative; overflow: hidden; min-height: 560px; }
-        .thank-you-copy { flex: 1 1 56%; display: flex; align-items: center; min-width: 0; padding: 72px 64px 72px 40px; }
-        .thank-you-copy-inner { width: 100%; max-width: 540px; min-width: 0; }
+        .thank-you-hero { max-width: 980px; margin: 0 auto; position: relative; z-index: 1; }
+        .thank-you-copy { display: flex; align-items: center; min-width: 0; padding: 76px 24px 88px; }
+        .thank-you-copy-inner { width: 100%; max-width: 720px; min-width: 0; }
         .thank-you-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .thank-you-card { background: #F8F8F8; border: 1px solid #E8E8E8; border-radius: 10px; padding: 28px 24px; }
         .welcome-video { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(201,165,90,0.35); border-radius: 8px; background: #000000; box-shadow: 0 18px 54px rgba(0,0,0,0.45); margin: 0 0 30px; }
@@ -110,10 +109,8 @@ export default function ThankYou() {
         .thank-you-gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
         .thank-you-gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
         @media (max-width: 768px) {
-          .thank-you-hero { flex-direction: column; width: 100%; max-width: 100%; padding-left: 0 !important; padding-right: 0 !important; overflow: hidden; }
-          .thank-you-photo { height: 320px; min-height: 320px; width: 100%; }
-          .thank-you-photo-gradient-side { display: none; }
-          .thank-you-copy { width: 100%; max-width: 100%; box-sizing: border-box; padding: 40px 32px 56px; }
+          .thank-you-hero { width: 100%; max-width: 100%; padding-left: 0 !important; padding-right: 0 !important; overflow: hidden; }
+          .thank-you-copy { width: 100%; max-width: 100%; box-sizing: border-box; padding: 42px 28px 56px; }
           .thank-you-copy-inner { width: 100%; max-width: 100%; }
           .welcome-video { max-width: 100%; }
           .registered-banner { padding: 12px 18px !important; }
@@ -163,27 +160,6 @@ export default function ThankYou() {
         />
 
         <div className="thank-you-hero">
-          <div className="thank-you-photo">
-            <img
-              src="/images/staci-larry-split.webp"
-              alt="Larry and Staci Wallace"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center top",
-                display: "block",
-              }}
-            />
-            <div
-              className="thank-you-photo-gradient-side"
-              style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 55%, #080808 100%)" }}
-            />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 70%, #080808 100%)" }} />
-          </div>
-
           <div className="thank-you-copy">
             <div className="thank-you-copy-inner">
               <p style={{ ...sectionLabelStyle, marginBottom: "20px" }}>Welcome to the FBF community</p>
