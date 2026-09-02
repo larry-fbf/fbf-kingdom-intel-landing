@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
+const REGISTRATION_URL = "https://www.kingdomintel.com/";
 const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8waQcQ";
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const WHATSAPP_URL = "https://whatsapp.com/channel/0029VbDiXJN7T8bbQGSxqt2H";
@@ -246,11 +247,25 @@ export default function DashboardPage() {
         }
 
         .hero-image-card {
+          display: block;
           border: 1px solid #d6caae;
           border-radius: 8px;
           background: #0b0b0b;
           box-shadow: 0 18px 44px rgba(0,0,0,0.16);
           overflow: hidden;
+          text-decoration: none;
+          transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+        }
+
+        .hero-image-card:hover {
+          transform: translateY(-2px);
+          border-color: #c9a55a;
+          box-shadow: 0 20px 48px rgba(0,0,0,0.2);
+        }
+
+        .hero-image-card:focus-visible {
+          outline: 3px solid #cc0000;
+          outline-offset: 4px;
         }
 
         .hero-image {
@@ -705,17 +720,21 @@ export default function DashboardPage() {
             </div>
 
             <div className="main-feature">
-              <div
+              <TrackedClarityLink
                 className="hero-image-card"
-                role="img"
                 aria-label="Kingdom Intelligence Masterclass"
+                eventName="kim_dashboard_registration_image_click"
+                eventTags={{ destination: "registration" }}
+                href={REGISTRATION_URL}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <img
                   className="hero-image"
                   src="/images/kingdom-intel-dashboard-header.jpg"
-                  alt=""
+                  alt="Kingdom Intelligence Masterclass"
                 />
-              </div>
+              </TrackedClarityLink>
             </div>
           </div>
 
