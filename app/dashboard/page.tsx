@@ -781,11 +781,14 @@ export default function DashboardPage() {
                 <p className="join-label">Live Room</p>
                 <h2 className="join-title">Join the Room</h2>
                 <p className="join-detail">
-                  This is where the live Kingdom Intelligence sessions happen each day. Join a few
-                  minutes early, keep your workbook nearby, and use the room to follow the training,
-                  hear the coaching, and stay connected with what is happening live.
+                  Your seat is ready. Join us live for three days of Kingdom-centered strategy,
+                  practical implementation, and real-time coaching.
                 </p>
-                <div className="date-pill">September 15-17 | 12 PM Central</div>
+                <p className="join-detail">
+                  Bring your workbook, arrive a few minutes early, and come prepared to turn insight
+                  into action.
+                </p>
+                <div className="date-pill">September 15 to 17 | 12 PM Central</div>
               </div>
               <TrackedClarityLink
                 className="join-button"
@@ -795,7 +798,7 @@ export default function DashboardPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Join the Room
+                Enter the Live Room
               </TrackedClarityLink>
             </div>
           </div>
