@@ -10,6 +10,14 @@ import TrackedVimeoVideo from "./components/TrackedVimeoVideo";
 
 const REGISTER_URL = "#register";
 
+function getBrowserTimeZone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  } catch {
+    return "";
+  }
+}
+
 /* -- REGISTRATION MODAL -- */
 function RegisterModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState({ email: "", firstName: "", lastName: "", phone: "", agreed: false });
@@ -37,9 +45,10 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
       has_phone: form.phone.trim() ? "true" : "false",
     });
     try {
+      const timeZone = getBrowserTimeZone();
       const result = await postJsonWithTimeout<{ ok: true; degraded?: boolean; registrationId?: string }>(
         "/api/register",
-        form,
+        { ...form, timeZone },
       );
       trackClarityEvent(FUNNEL_EVENTS.registrationConfirmed, {
         degraded: result.degraded ? "true" : "false",

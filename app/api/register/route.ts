@@ -6,6 +6,7 @@ import {
   REGISTRATION_CONFIRMATION_COOKIE,
   signRegistrationConfirmation,
 } from "../../lib/registration-confirmation";
+import { registrationTimeZoneFromPayloadAndHeaders } from "../../lib/registration-timezone";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const ATTIO_MASTERCLASS_LIST_ID =
@@ -45,6 +46,7 @@ type RegistrationPayload = {
   lastName?: string;
   phone?: string;
   agreed?: boolean;
+  timeZone?: string;
 };
 
 function normalizeEmail(email = "") {
@@ -185,7 +187,7 @@ async function getAttioPerson(recordId: string) {
 }
 
 async function createAttioDealForRegistrant(
-  contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string },
+  contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string; timeZone: string },
   person: { values?: Record<string, unknown[]> } | null | undefined,
   recordId: string,
 ) {
@@ -237,7 +239,7 @@ async function createAttioDealForRegistrant(
   return { skipped: false, recordId: deal?.data?.id?.record_id };
 }
 
-async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
+async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string; timeZone: string }) {
   if (!ATTIO_API_KEY || !ATTIO_MASTERCLASS_LIST_ID) return { skipped: true };
 
   const values: Record<string, unknown> = {
@@ -247,6 +249,9 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
 
   if (contact.phone) {
     values.phone_numbers = [{ original_phone_number: contact.phone, country_code: "US" }];
+  }
+  if (contact.timeZone) {
+    values.time_zone = contact.timeZone;
   }
 
   const person = await fetchJson(
@@ -389,6 +394,7 @@ export async function POST(req: NextRequest) {
     const firstName = normalizeName(payload.firstName);
     const lastName = normalizeName(payload.lastName);
     const phone = normalizePhoneForSync(payload.phone);
+    const timeZone = registrationTimeZoneFromPayloadAndHeaders(payload.timeZone, req.headers);
 
     if (!email || !/^\S+@\S+\.\S+$/.test(email) || !firstName || !lastName) {
       return NextResponse.json({ ok: false, error: "Missing required fields", registrationId }, { status: 400 });
@@ -398,7 +404,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: "Consent is required", registrationId }, { status: 400 });
     }
 
-    const contact = { email, firstName, lastName, phone };
+    const contact = { email, firstName, lastName, phone, timeZone };
     const [attio, brevo, simpleTexting] = await Promise.all([
       captureIntegration("Attio", () => upsertAttioContact(contact)),
       captureIntegration("Brevo", () => upsertBrevoContact(contact)),
