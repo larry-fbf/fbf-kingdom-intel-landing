@@ -131,10 +131,10 @@ export default function ShareMasterclassButton() {
           gap: 8px;
           min-width: 104px;
           height: 46px;
-          border: 1px solid #d8d3c9;
+          border: 1px solid #cc0000;
           border-radius: 999px;
-          background: #fff;
-          color: #cc0000;
+          background: #cc0000;
+          color: #fff;
           padding: 0 16px;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.11);
           cursor: pointer;
@@ -142,7 +142,7 @@ export default function ShareMasterclassButton() {
         }
 
         .share-trigger-text {
-          color: #121212;
+          color: #fff;
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.08em;
@@ -157,7 +157,7 @@ export default function ShareMasterclassButton() {
         .share-trigger:hover,
         .share-trigger:focus-visible {
           border-color: #cc0000;
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+          box-shadow: 0 16px 36px rgba(204, 0, 0, 0.24);
           outline: none;
           transform: translateY(-1px);
         }

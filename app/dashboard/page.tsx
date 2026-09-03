@@ -116,49 +116,12 @@ export default function DashboardPage() {
           flex-wrap: wrap;
         }
 
-        .top-community-button {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          min-height: 46px;
-          border: 1px solid #d8d3c9;
-          border-radius: 999px;
-          background: #fff;
-          color: #1877f2;
-          padding: 0 16px;
-          box-shadow: 0 12px 30px rgba(0,0,0,0.11);
-          text-decoration: none;
-          transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-        }
-
-        .top-community-button span {
-          color: #121212;
-          font-size: 12px;
-          font-weight: 900;
-          letter-spacing: 0.08em;
-          line-height: 1;
-          text-transform: uppercase;
-          white-space: nowrap;
-        }
-
-        .top-community-button svg {
-          flex: 0 0 auto;
-        }
-
-        .top-community-button:hover,
-        .top-community-button:focus-visible {
-          border-color: #1877f2;
-          box-shadow: 0 16px 36px rgba(0,0,0,0.16);
-          outline: none;
-          transform: translateY(-1px);
-        }
-
         .hero-grid {
           display: grid;
           grid-template-columns: minmax(0, 1.55fr) minmax(270px, 0.55fr);
           gap: 20px;
           align-items: stretch;
+          margin-bottom: 20px;
         }
 
         .main-feature {
@@ -201,25 +164,8 @@ export default function DashboardPage() {
           box-shadow: 0 16px 34px rgba(0,0,0,0.12);
         }
 
-        .workbook-card {
-          background: #090909;
-          border-color: #222;
-          padding-bottom: 18px;
-        }
-
-        .workbook-card .action-eyebrow,
-        .workbook-card .action-title,
-        .workbook-card .action-detail {
-          color: #fff;
-          text-shadow: none;
-        }
-
-        .vip-card {
-          background: #090909;
-          border-color: #222;
-          color: #fff;
-        }
-
+        .workbook-card,
+        .vip-card,
         .community-card,
         .whatsapp-card {
           background: #fff;
@@ -250,12 +196,6 @@ export default function DashboardPage() {
           text-transform: uppercase;
         }
 
-        .workbook-card .action-step,
-        .vip-card .action-step {
-          background: rgba(255,255,255,0.1);
-          color: rgba(255,255,255,0.78);
-        }
-
         .action-icon {
           display: inline-flex;
           align-items: center;
@@ -280,13 +220,9 @@ export default function DashboardPage() {
           text-transform: uppercase;
         }
 
-        .vip-card .action-eyebrow {
-          color: #e00000;
-        }
-
-        .vip-card .action-title,
-        .vip-card .action-detail {
-          color: #fff;
+        .vip-card .action-eyebrow,
+        .workbook-card .action-eyebrow {
+          color: #5a3300;
         }
 
         .action-title {
@@ -314,10 +250,10 @@ export default function DashboardPage() {
           width: fit-content;
           max-width: 100%;
           margin-top: 18px;
-          border: 1px solid rgba(255,255,255,0.22);
+          border: 1px solid #d8d3c9;
           border-radius: 999px;
           padding: 10px 15px;
-          color: rgba(255,255,255,0.86);
+          color: #3a352f;
           font-size: 11px;
           font-weight: 900;
           letter-spacing: 0.04em;
@@ -333,33 +269,13 @@ export default function DashboardPage() {
           width: fit-content;
           min-height: 38px;
           border-radius: 5px;
-          background: #111;
+          background: #cc0000;
           color: #fff;
           padding: 10px 16px;
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-        }
-
-        .vip-card .action-cta {
-          background: #cc0000;
-          color: #fff;
-        }
-
-        .workbook-card .action-cta {
-          background: #cc0000;
-          color: #fff;
-        }
-
-        .community-card .action-cta {
-          background: #1877f2;
-          color: #fff;
-        }
-
-        .whatsapp-card .action-cta {
-          background: #1f7a4f;
-          color: #fff;
         }
 
         .hero-image-card {
@@ -399,10 +315,11 @@ export default function DashboardPage() {
           grid-template-columns: 1fr;
           align-content: space-between;
           gap: 18px;
-          border: 1px solid #ddd8ce;
+          border: 1px solid #222;
           border-radius: 8px;
-          background: #fff;
-          padding: 20px 22px;
+          background: #090909;
+          color: #fff;
+          padding: 24px;
         }
 
         .join-label {
@@ -416,6 +333,7 @@ export default function DashboardPage() {
 
         .join-title {
           margin: 0;
+          color: #fff;
           font-family: 'Frank Ruhl Libre', Georgia, serif;
           font-size: clamp(25px, 2.4vw, 35px);
           font-weight: 900;
@@ -423,10 +341,10 @@ export default function DashboardPage() {
         }
 
         .join-detail {
-          margin: 8px 0 0;
-          color: #5d5a55;
+          margin: 10px 0 0;
+          color: rgba(255,255,255,0.76);
           font-size: 14px;
-          line-height: 1.5;
+          line-height: 1.6;
         }
 
         .join-button {
@@ -451,10 +369,10 @@ export default function DashboardPage() {
         .date-pill {
           display: inline-flex;
           margin-top: 16px;
-          border: 1px solid #d8d3c9;
+          border: 1px solid rgba(255,255,255,0.2);
           border-radius: 999px;
           padding: 10px 16px;
-          color: #3a352f;
+          color: rgba(255,255,255,0.88);
           font-size: 12px;
           font-weight: 800;
           letter-spacing: 0.08em;
@@ -716,21 +634,6 @@ export default function DashboardPage() {
             gap: 10px;
           }
 
-          .top-community-button {
-            min-height: 42px;
-            padding: 0 12px;
-          }
-
-          .top-community-button span {
-            font-size: 10px;
-            letter-spacing: 0.06em;
-          }
-
-          .top-community-button svg {
-            width: 15px;
-            height: 15px;
-          }
-
           .hero-grid {
             display: contents;
           }
@@ -746,7 +649,7 @@ export default function DashboardPage() {
           }
 
           .join-strip {
-            order: 3;
+            order: 4;
             margin-top: 14px;
             grid-template-columns: 1fr;
             gap: 16px;
@@ -756,7 +659,7 @@ export default function DashboardPage() {
 
           .workflow-grid {
             grid-template-columns: 1fr;
-            order: 4;
+            order: 5;
             margin-top: 0;
             margin-bottom: 16px;
             width: 100%;
@@ -846,24 +749,48 @@ export default function DashboardPage() {
             </div>
             <div className="top-action-group">
               <ShareMasterclassButton />
+            </div>
+          </div>
+
+          <div className="hero-grid">
+            <div className="main-feature">
               <TrackedClarityLink
-                className="top-community-button"
-                eventName="kim_dashboard_facebook_top_click"
-                eventTags={{ destination: "facebook_group", placement: "top" }}
-                href={COMMUNITY_URL}
+                className="hero-image-card"
+                aria-label="Kingdom Intelligence Masterclass"
+                eventName="kim_dashboard_registration_image_click"
+                eventTags={{ destination: "registration" }}
+                href={REGISTRATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <svg
-                  width="17"
-                  height="17"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M18.77 7.46h-3.52V5.51c0-.91.6-1.12 1.02-1.12h2.44V.15L15.35.14c-3.73 0-4.58 2.8-4.58 4.58v2.74H7.83v4.38h2.94V24h4.48V11.84h3.02l.5-4.38z" />
-                </svg>
-                <span>Join the Community</span>
+                <img
+                  className="hero-image"
+                  src="/images/kingdom-intel-dashboard-header.jpg"
+                  alt="Kingdom Intelligence Masterclass"
+                />
+              </TrackedClarityLink>
+            </div>
+
+            <div className="join-strip">
+              <div>
+                <p className="join-label">Live Room</p>
+                <h2 className="join-title">Join the Room</h2>
+                <p className="join-detail">
+                  This is where the live Kingdom Intelligence sessions happen each day. Join a few
+                  minutes early, keep your workbook nearby, and use the room to follow the training,
+                  hear the coaching, and stay connected with what is happening live.
+                </p>
+                <div className="date-pill">September 15-17 | 12 PM Central</div>
+              </div>
+              <TrackedClarityLink
+                className="join-button"
+                eventName="kim_dashboard_zoom_click"
+                eventTags={{ destination: "zoom" }}
+                href={ZOOM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join the Room
               </TrackedClarityLink>
             </div>
           </div>
@@ -963,45 +890,6 @@ export default function DashboardPage() {
               </div>
               <span className="action-cta">Join WhatsApp</span>
             </TrackedClarityLink>
-          </div>
-
-          <div className="hero-grid">
-            <div className="main-feature">
-              <TrackedClarityLink
-                className="hero-image-card"
-                aria-label="Kingdom Intelligence Masterclass"
-                eventName="kim_dashboard_registration_image_click"
-                eventTags={{ destination: "registration" }}
-                href={REGISTRATION_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="hero-image"
-                  src="/images/kingdom-intel-dashboard-header.jpg"
-                  alt="Kingdom Intelligence Masterclass"
-                />
-              </TrackedClarityLink>
-            </div>
-
-            <div className="join-strip">
-              <div>
-                <p className="join-label">Live Room</p>
-                <h2 className="join-title">Join the Room</h2>
-                <p className="join-detail">Enter the live Zoom room for each masterclass session.</p>
-                <div className="date-pill">September 15-17 | 12 PM Central</div>
-              </div>
-              <TrackedClarityLink
-                className="join-button"
-                eventName="kim_dashboard_zoom_click"
-                eventTags={{ destination: "zoom" }}
-                href={ZOOM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Join the Room
-              </TrackedClarityLink>
-            </div>
           </div>
         </div>
       </section>

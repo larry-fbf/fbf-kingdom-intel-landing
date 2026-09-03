@@ -124,10 +124,10 @@ const requiredDashboardMarkers = [
   "action-date",
   "September 16-17 | 7 PM Central",
   "ShareMasterclassButton",
-  "kim_dashboard_facebook_top_click",
   "Join the Community",
   "Priority dashboard workflow",
   "kim_dashboard_whatsapp_click",
+  "This is where the live Kingdom Intelligence sessions happen each day",
   "Say hello, meet the other business owners in the room",
   "Get session reminders, links, and extra free resources sent straight to your phone",
 ];
