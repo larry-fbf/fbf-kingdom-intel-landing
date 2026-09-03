@@ -107,9 +107,9 @@ export default async function ThankYou() {
         .welcome-video { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(201,165,90,0.35); border-radius: 8px; background: #000000; box-shadow: 0 18px 54px rgba(0,0,0,0.45); margin: 0 0 30px; }
         .welcome-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .workbook-section { background: #111111; padding: 88px 24px; }
-        .workbook-panel { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; max-width: 1060px; margin: 0 auto; }
-        .workbook-cover-wrap { display: flex; justify-content: center; }
-        .workbook-cover { width: min(100%, 360px); border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,0.5); border: 1px solid rgba(201,165,90,0.25); }
+        .workbook-panel { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: 56px; align-items: center; max-width: 1060px; margin: 0 auto; }
+        .workbook-cover-wrap { display: flex; justify-content: center; align-items: center; min-width: 0; }
+        .workbook-cover { display: block; width: min(100%, 330px); height: auto; max-height: min(64vh, 520px); object-fit: contain; border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,0.5); border: 1px solid rgba(201,165,90,0.25); }
         .thank-you-gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
         .thank-you-gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
         @media (max-width: 900px) {
@@ -123,7 +123,7 @@ export default async function ThankYou() {
           .thank-you-features { grid-template-columns: 1fr; }
           .workbook-section { padding: 64px 20px; }
           .workbook-panel { grid-template-columns: 1fr; gap: 34px; }
-          .workbook-cover { width: min(100%, 300px); }
+          .workbook-cover { width: min(100%, 280px); max-height: 420px; }
           .thank-you-gold-btn { width: 100%; text-align: center; }
         }
       `}</style>
