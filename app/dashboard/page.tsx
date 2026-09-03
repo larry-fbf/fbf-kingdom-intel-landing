@@ -158,10 +158,11 @@ export default function DashboardPage() {
           display: grid;
           grid-template-columns: minmax(0, 1.55fr) minmax(270px, 0.55fr);
           gap: 20px;
-          align-items: start;
+          align-items: stretch;
         }
 
         .main-feature {
+          display: flex;
           min-width: 0;
         }
 
@@ -170,6 +171,7 @@ export default function DashboardPage() {
           grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 14px;
           margin: 0 0 20px;
+          align-items: stretch;
           min-width: 0;
         }
 
@@ -177,6 +179,7 @@ export default function DashboardPage() {
           min-width: 0;
           max-width: 100%;
           min-height: 196px;
+          height: 100%;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -361,6 +364,8 @@ export default function DashboardPage() {
 
         .hero-image-card {
           display: block;
+          width: 100%;
+          height: 100%;
           border: 1px solid #d6caae;
           border-radius: 8px;
           background: #0b0b0b;
@@ -384,7 +389,8 @@ export default function DashboardPage() {
         .hero-image {
           display: block;
           width: 100%;
-          height: auto;
+          height: 100%;
+          object-fit: cover;
         }
 
         .join-strip {
@@ -682,17 +688,19 @@ export default function DashboardPage() {
           }
 
           .dashboard-title {
+            order: 1;
             font-size: 38px;
             margin-bottom: 18px;
           }
 
           .schedule-row {
+            order: 3;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             width: 100%;
-            margin-bottom: 18px;
+            margin: 18px 0;
           }
 
           .schedule-pill {
@@ -728,7 +736,7 @@ export default function DashboardPage() {
           }
 
           .hero-image-card {
-            order: 1;
+            order: 2;
           }
 
           .main-feature {
@@ -748,7 +756,7 @@ export default function DashboardPage() {
 
           .workflow-grid {
             grid-template-columns: 1fr;
-            order: 1;
+            order: 4;
             margin-top: 0;
             margin-bottom: 16px;
             width: 100%;
@@ -781,6 +789,12 @@ export default function DashboardPage() {
             min-height: auto;
             width: 100%;
             max-width: 100%;
+            height: auto;
+          }
+
+          .hero-image {
+            height: auto;
+            object-fit: contain;
           }
 
           .join-button {
