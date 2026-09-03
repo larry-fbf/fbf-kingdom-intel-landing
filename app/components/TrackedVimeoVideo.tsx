@@ -10,9 +10,19 @@ type TrackedVimeoVideoProps = {
   eventName: string;
   className?: string;
   style?: CSSProperties;
+  posterSrc?: string;
+  posterAlt?: string;
 };
 
-export default function TrackedVimeoVideo({ videoId, title, eventName, className, style }: TrackedVimeoVideoProps) {
+export default function TrackedVimeoVideo({
+  videoId,
+  title,
+  eventName,
+  className,
+  style,
+  posterSrc,
+  posterAlt,
+}: TrackedVimeoVideoProps) {
   const [playing, setPlaying] = useState(false);
 
   if (playing) {
@@ -45,13 +55,59 @@ export default function TrackedVimeoVideo({ videoId, title, eventName, className
         placeItems: "center",
         color: "#ffffff",
         cursor: "pointer",
-        background: "radial-gradient(circle at center, #292929 0%, #080808 72%)",
+        backgroundColor: "#080808",
+        backgroundImage: posterSrc
+          ? `linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.34)), url("${posterSrc}")`
+          : "radial-gradient(circle at center, #292929 0%, #080808 72%)",
+        backgroundPosition: "center center",
+        backgroundSize: "cover",
       }}
     >
-      <span aria-hidden="true" style={{ fontSize: "58px", lineHeight: 1, color: "#C9A55A", filter: "drop-shadow(0 5px 16px rgba(0,0,0,.7))" }}>
-        ▶
+      {posterSrc ? (
+        <span style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap" }}>
+          {posterAlt ?? title}
+        </span>
+      ) : null}
+      <span
+        aria-hidden="true"
+        style={{
+          display: "grid",
+          placeItems: "center",
+          width: "74px",
+          height: "74px",
+          borderRadius: "999px",
+          background: "rgba(8,8,8,0.72)",
+          border: "1px solid rgba(201,165,90,0.6)",
+          boxShadow: "0 12px 34px rgba(0,0,0,0.45)",
+        }}
+      >
+        <span
+          style={{
+            width: 0,
+            height: 0,
+            borderTop: "14px solid transparent",
+            borderBottom: "14px solid transparent",
+            borderLeft: "22px solid #C9A55A",
+            marginLeft: "6px",
+          }}
+        />
       </span>
-      <span style={{ position: "absolute", bottom: "22px", fontSize: "13px", fontWeight: 700, letterSpacing: ".08em" }}>
+      <span
+        style={{
+          position: "absolute",
+          left: "18px",
+          right: "18px",
+          bottom: "18px",
+          padding: "10px 14px",
+          borderRadius: "6px",
+          background: "rgba(8,8,8,0.72)",
+          fontSize: "12px",
+          fontWeight: 800,
+          letterSpacing: ".08em",
+          textTransform: "uppercase",
+          textAlign: "center",
+        }}
+      >
         PLAY WELCOME MESSAGE
       </span>
     </button>

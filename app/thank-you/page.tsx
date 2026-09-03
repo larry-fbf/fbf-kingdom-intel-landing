@@ -98,9 +98,10 @@ export default async function ThankYou() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap');
-        .thank-you-hero { max-width: 980px; margin: 0 auto; position: relative; z-index: 1; }
-        .thank-you-copy { display: flex; align-items: center; min-width: 0; padding: 76px 24px 88px; }
-        .thank-you-copy-inner { width: 100%; max-width: 720px; min-width: 0; }
+        .thank-you-hero { display: grid; grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr); gap: 36px; align-items: center; max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
+        .thank-you-photo { position: relative; align-self: stretch; min-height: 620px; overflow: hidden; border-right: 1px solid rgba(201,165,90,0.18); }
+        .thank-you-copy { display: flex; align-items: center; min-width: 0; padding: 76px 24px 88px 0; }
+        .thank-you-copy-inner { width: 100%; max-width: 620px; min-width: 0; }
         .thank-you-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .thank-you-card { background: #F8F8F8; border: 1px solid #E8E8E8; border-radius: 10px; padding: 28px 24px; }
         .welcome-video { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(201,165,90,0.35); border-radius: 8px; background: #000000; box-shadow: 0 18px 54px rgba(0,0,0,0.45); margin: 0 0 30px; }
@@ -111,8 +112,9 @@ export default async function ThankYou() {
         .workbook-cover { width: min(100%, 360px); border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,0.5); border: 1px solid rgba(201,165,90,0.25); }
         .thank-you-gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
         .thank-you-gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
-        @media (max-width: 768px) {
-          .thank-you-hero { width: 100%; max-width: 100%; padding-left: 0 !important; padding-right: 0 !important; overflow: hidden; }
+        @media (max-width: 900px) {
+          .thank-you-hero { display: block; width: 100%; max-width: 100%; padding-left: 0 !important; padding-right: 0 !important; overflow: hidden; }
+          .thank-you-photo { display: none; }
           .thank-you-copy { width: 100%; max-width: 100%; box-sizing: border-box; padding: 42px 28px 56px; }
           .thank-you-copy-inner { width: 100%; max-width: 100%; }
           .welcome-video { max-width: 100%; }
@@ -163,6 +165,21 @@ export default async function ThankYou() {
         />
 
         <div className="thank-you-hero">
+          <div className="thank-you-photo" aria-hidden="true">
+            <Image
+              src="/images/staci-larry-split.webp"
+              alt=""
+              fill
+              sizes="(min-width: 901px) 42vw, 0px"
+              preload
+              style={{
+                objectFit: "cover",
+                objectPosition: "center top",
+              }}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(8,8,8,0) 56%, #080808 100%)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(8,8,8,0) 68%, #080808 100%)" }} />
+          </div>
           <div className="thank-you-copy">
             <div className="thank-you-copy-inner">
               <p style={{ ...sectionLabelStyle, marginBottom: "20px" }}>Welcome to the FBF community</p>
@@ -199,6 +216,8 @@ export default async function ThankYou() {
                 videoId="1194072208"
                 title="KIM Final Registration Welcome"
                 eventName={FUNNEL_EVENTS.thankYouVideoPlay}
+                posterSrc="https://i.vimeocdn.com/video/2159632141-aa8ea218a6b473a15a56edfe1c759da4f16ad53355c9eb5ed5390d9634503eef-d_1280x720?region=us"
+                posterAlt="Staci Wallace in the welcome video"
               />
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.76)", lineHeight: 1.85, marginBottom: "20px" }}>
                 Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for your
