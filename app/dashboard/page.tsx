@@ -608,30 +608,35 @@ export default function DashboardPage() {
           .dashboard-title {
             order: 1;
             font-size: 38px;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
           }
 
           .schedule-row {
-            order: 3;
+            order: 2;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: nowrap;
             width: 100%;
-            margin: 18px 0;
+            margin: 0 0 14px;
           }
 
           .schedule-pill {
+            flex: 1 1 auto;
             min-width: 0;
             border-radius: 8px;
-            padding: 12px 12px;
-            font-size: 11px;
+            padding: 11px 10px;
+            font-size: 10px;
             letter-spacing: 0.01em;
+            white-space: nowrap;
           }
 
           .top-action-group {
-            width: 100%;
+            flex: 0 0 auto;
+            width: auto;
             gap: 10px;
+            flex-wrap: nowrap;
           }
 
           .hero-grid {
@@ -639,11 +644,11 @@ export default function DashboardPage() {
           }
 
           .hero-image-card {
-            order: 2;
+            order: 3;
           }
 
           .main-feature {
-            order: 2;
+            order: 3;
             width: 100%;
             max-width: 100%;
           }
