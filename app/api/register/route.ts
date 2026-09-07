@@ -47,6 +47,7 @@ type RegistrationPayload = {
   phone?: string;
   agreed?: boolean;
   timeZone?: string;
+  attribution?: Record<string, string | undefined>;
 };
 
 function normalizeEmail(email = "") {

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { trackClarityEvent } from "./lib/clarity-events";
 import { FUNNEL_EVENTS } from "./lib/funnel-events";
 import { postJsonWithTimeout, RegistrationRequestError } from "./lib/post-json";
+import { captureAttributionFromCurrentUrl, getStoredAttribution } from "./lib/attribution";
 import TrackedVimeoVideo from "./components/TrackedVimeoVideo";
 
 const REGISTER_URL = "#register";
@@ -25,6 +26,10 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
   const [errorMessage, setErrorMessage] = useState("");
   const errorRef = useRef<HTMLParagraphElement>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    captureAttributionFromCurrentUrl();
+  }, []);
 
   useEffect(() => {
     if (errorMessage) {
@@ -48,7 +53,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
       const timeZone = getBrowserTimeZone();
       const result = await postJsonWithTimeout<{ ok: true; degraded?: boolean; registrationId?: string }>(
         "/api/register",
-        { ...form, timeZone },
+        { ...form, timeZone, attribution: getStoredAttribution() },
       );
       trackClarityEvent(FUNNEL_EVENTS.registrationConfirmed, {
         degraded: result.degraded ? "true" : "false",

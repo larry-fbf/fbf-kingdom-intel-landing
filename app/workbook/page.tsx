@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { trackClarityEvent } from "../lib/clarity-events";
+import { captureAttributionFromCurrentUrl, getStoredAttribution } from "../lib/attribution";
 import styles from "./page.module.css";
 
 const descriptors = ["CEO (Decision Maker)", "Entrepreneur/Expert", "Startup", "Coach/ Consultant", "Dreamer"];
@@ -58,6 +59,7 @@ export default function WorkbookPage() {
   const router = useRouter();
 
   useEffect(() => {
+    captureAttributionFromCurrentUrl();
     trackClarityEvent("kim_workbook_visit");
   }, []);
 
@@ -87,7 +89,7 @@ export default function WorkbookPage() {
       const response = await fetch("/api/workbook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, attribution: getStoredAttribution() }),
       });
 
       if (!response.ok) {
