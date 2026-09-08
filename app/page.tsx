@@ -338,6 +338,8 @@ function VSLSection({ onOpen }: { onOpen: () => void }) {
           videoId="1177090365"
           title="Kingdom Intelligence Masterclass"
           eventName={FUNNEL_EVENTS.homepageVideoPlay}
+          posterSrc="https://i.vimeocdn.com/video/2138769308-ea7c753f24b968d413cda3b9fb06425c5b6d71ee8ccb063eced01d90ea76fe92-d_1280x720?region=us"
+          posterAlt="Staci Wallace in the Kingdom Intelligence Masterclass welcome video"
           style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", overflow: "hidden", borderRadius: "12px", boxShadow: "0 20px 60px rgba(0,0,0,0.6)", border: "1px solid rgba(201,165,90,0.2)", background: "#111" }}
         />
         <div style={{ marginTop: "40px" }}>
