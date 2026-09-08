@@ -270,7 +270,6 @@ async function createAttioWorkbookNote(recordId: string, payload: WorkbookPayloa
 async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
   if (!SLACK_WORKBOOK_WEBHOOK_URL) return { skipped: true };
 
-  const attribution = payload.attribution || {};
   const text = [
     "New Kingdom Intelligence Masterclass qualification form submission",
     `Name: ${contact.firstName} ${contact.lastName}`,
@@ -281,7 +280,6 @@ async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
     `Best describes them: ${answer(payload.whichOfTheFollowingBestDescribesYou)}`,
     `Wants help with: ${payload.helpAreas?.length ? payload.helpAreas.join(", ") : "Not provided"}`,
     `Timeline: ${answer(payload.wantResults)}`,
-    `Attribution: ${attributionAnswer(attribution.utmCampaign)} / ${attributionAnswer(attribution.utmContent)} / ${attributionAnswer(attribution.ad)}`,
   ].join("\n");
 
   const res = await fetch(SLACK_WORKBOOK_WEBHOOK_URL, {
@@ -303,15 +301,6 @@ async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
             { type: "mrkdwn", text: `*Timeline:*\n${answer(payload.wantResults)}` },
             { type: "mrkdwn", text: `*Needs help with:*\n${payload.helpAreas?.length ? payload.helpAreas.join(", ") : "Not provided"}` },
             { type: "mrkdwn", text: `*Attended before:*\n${answer(payload.attendedWorkshop)}` },
-          ],
-        },
-        {
-          type: "section",
-          fields: [
-            { type: "mrkdwn", text: `*Campaign:*\n${attributionAnswer(attribution.utmCampaign)}` },
-            { type: "mrkdwn", text: `*Audience/content:*\n${attributionAnswer(attribution.utmContent)}` },
-            { type: "mrkdwn", text: `*Ad:*\n${attributionAnswer(attribution.ad)}` },
-            { type: "mrkdwn", text: `*Ad set ID:*\n${attributionAnswer(attribution.utmTerm || attribution.adsetId)}` },
           ],
         },
         { type: "section", text: { type: "mrkdwn", text: `*One thing they want help achieving:*\n${answer(payload.oneThing)}` } },
