@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import ClarityPageViewEvent from "../../components/ClarityPageViewEvent";
 import ShareMasterclassSection from "../../components/ShareMasterclassSection";
+import TrackedClarityLink from "../../components/TrackedClarityLink";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -32,6 +34,14 @@ const syncScript = `
   const params = new URLSearchParams(window.location.search);
   const sessionId = params.get("session_id");
   const status = document.querySelector("[data-sync-status]");
+  const track = (eventName) => {
+    if (typeof window.clarity === "function") {
+      window.clarity("set", "funnel", "kim_sept_2026");
+      window.clarity("event", eventName);
+    }
+  };
+
+  track(sessionId ? "kim_vip_purchase_success" : "kim_vip_thank_you_visit");
 
   if (sessionId) {
     fetch("/api/vip-purchase", {
@@ -41,9 +51,11 @@ const syncScript = `
     })
       .then(() => {
         if (status) status.textContent = "VIP access confirmed.";
+        track("kim_vip_purchase_sync_success");
       })
       .catch(() => {
         if (status) status.textContent = "VIP access is confirmed. Our team will also verify your details.";
+        track("kim_vip_purchase_sync_warning");
       });
   } else if (status) {
     status.textContent = "VIP access is confirmed. Check your email receipt for payment details.";
@@ -54,6 +66,7 @@ const syncScript = `
 export default function VIPThankYouPage() {
   return (
     <main className={styles.pageShell}>
+      <ClarityPageViewEvent eventName="kim_vip_thank_you_page_load" />
       <section className={styles.hero}>
         <div className={styles.heroOverlay} />
         <div className={styles.heroInner}>
@@ -69,12 +82,23 @@ export default function VIPThankYouPage() {
             Confirming your VIP details...
           </p>
           <div className={styles.actions}>
-            <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className={styles.goldButton}>
+            <TrackedClarityLink
+              href={COMMUNITY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.goldButton}
+              eventName="kim_vip_community_click"
+              eventTags={{ destination: "fbf_vault_community" }}
+            >
               Join the masterclass community
-            </a>
-            <a href="#share" className={styles.darkButton}>
+            </TrackedClarityLink>
+            <TrackedClarityLink
+              href="#share"
+              className={styles.darkButton}
+              eventName="kim_vip_share_click"
+            >
               Share with a friend
-            </a>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AttributionTracker from "./components/AttributionTracker";
 import MicrosoftClarity from "./components/MicrosoftClarity";
 
 export const metadata: Metadata = {
@@ -189,7 +190,8 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 768px) {
 
   /* ── TOP BANNER ── */
-  .top-banner-text { font-size: 11px !important; letter-spacing: 0.12em !important; }
+  .top-banner-text { display: none !important; }
+  .top-banner-mobile-text { display: inline !important; }
 
   /* ── HERO — stack vertically, photo on top ── */
   .hero-section { min-height: auto; }
@@ -279,6 +281,7 @@ a { color: inherit; text-decoration: none; }
         <noscript><img height="1" width="1" style={{display:"none"}} src="https://www.facebook.com/tr?id=386045455794262&ev=PageView&noscript=1" /></noscript>
       </head>
       <body>
+        <AttributionTracker />
         <MicrosoftClarity />
         {children}
       </body>

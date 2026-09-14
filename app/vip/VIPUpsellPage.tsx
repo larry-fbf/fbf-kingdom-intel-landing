@@ -1,4 +1,5 @@
 import CountdownTimer from "./CountdownTimer";
+import TrackedClarityLink from "../components/TrackedClarityLink";
 import styles from "./page.module.css";
 
 const PAYMENT_LINK = "https://buy.stripe.com/8x2dRabIR7JA3qQ88t5kk0i";
@@ -65,9 +66,14 @@ const testimonials = [
 
 function CTAButton({ label = "Yes, I want VIP for $97" }: { label?: string }) {
   return (
-    <a className={styles.ctaButton} href={PAYMENT_LINK}>
+    <TrackedClarityLink
+      className={styles.ctaButton}
+      eventName="kim_vip_cta_click"
+      eventTags={{ destination: "stripe" }}
+      href={PAYMENT_LINK}
+    >
       {label}
-    </a>
+    </TrackedClarityLink>
   );
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
+import { trackClarityEvent } from "../lib/clarity-events";
 
 const SHARE_TEXT =
   "Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass September 15-17 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/";
@@ -12,6 +13,7 @@ export default function ShareMasterclassButton() {
   const shareTextId = useId();
 
   async function copyShareText() {
+    trackClarityEvent("kim_dashboard_share_copy");
     try {
       await navigator.clipboard.writeText(SHARE_TEXT);
       setCopyStatus("Copied");
@@ -34,7 +36,10 @@ export default function ShareMasterclassButton() {
         type="button"
         aria-label="Share the masterclass"
         title="Share the masterclass"
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          trackClarityEvent("kim_dashboard_share_open");
+          setIsOpen(true);
+        }}
       >
         <span className="share-trigger-text">Share</span>
         <svg
@@ -106,7 +111,11 @@ export default function ShareMasterclassButton() {
               <button className="share-copy" type="button" onClick={copyShareText}>
                 {copyStatus}
               </button>
-              <a className="share-link" href="https://www.kingdomintel.com/">
+              <a
+                className="share-link"
+                href="https://www.kingdomintel.com/"
+                onClick={() => trackClarityEvent("kim_dashboard_share_page_click")}
+              >
                 Open Page
               </a>
             </div>
@@ -122,10 +131,10 @@ export default function ShareMasterclassButton() {
           gap: 8px;
           min-width: 104px;
           height: 46px;
-          border: 1px solid #d8d3c9;
+          border: 1px solid #cc0000;
           border-radius: 999px;
-          background: #fff;
-          color: #cc0000;
+          background: #cc0000;
+          color: #fff;
           padding: 0 16px;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.11);
           cursor: pointer;
@@ -133,7 +142,7 @@ export default function ShareMasterclassButton() {
         }
 
         .share-trigger-text {
-          color: #121212;
+          color: #fff;
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.08em;
@@ -148,7 +157,7 @@ export default function ShareMasterclassButton() {
         .share-trigger:hover,
         .share-trigger:focus-visible {
           border-color: #cc0000;
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+          box-shadow: 0 16px 36px rgba(204, 0, 0, 0.24);
           outline: none;
           transform: translateY(-1px);
         }
