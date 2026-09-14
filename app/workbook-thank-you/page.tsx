@@ -1,4 +1,6 @@
 import Image from "next/image";
+import ClarityPageViewEvent from "../components/ClarityPageViewEvent";
+import TrackedClarityLink from "../components/TrackedClarityLink";
 import styles from "../workbook/page.module.css";
 
 const WORKBOOK_URL = "https://drive.google.com/file/d/1Nqlt9m0fjuKTX5t6KrYdqcuWLld1Tqox/view";
@@ -7,6 +9,7 @@ const DASHBOARD_URL = "/dashboard";
 export default function WorkbookThankYouPage() {
   return (
     <main className={styles.pageShell}>
+      <ClarityPageViewEvent eventName="kim_workbook_thank_you_visit" />
       <section className={`${styles.heroSection} ${styles.workbookHero} ${styles.thankYouHero}`}>
         <div className={styles.heroOverlay} />
         <div className={`${styles.container} ${styles.thankYouShell}`}>
@@ -18,12 +21,23 @@ export default function WorkbookThankYouPage() {
           </p>
 
           <div className={styles.thankYouActions}>
-            <a className={`${styles.button} ${styles.buttonGold}`} href={WORKBOOK_URL} target="_blank" rel="noopener noreferrer">
+            <TrackedClarityLink
+              className={`${styles.button} ${styles.buttonGold}`}
+              eventName="kim_workbook_pdf_download_click"
+              eventTags={{ destination: "google_drive" }}
+              href={WORKBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Download the workbook PDF
-            </a>
-            <a className={`${styles.button} ${styles.buttonRed}`} href={DASHBOARD_URL}>
+            </TrackedClarityLink>
+            <TrackedClarityLink
+              className={`${styles.button} ${styles.buttonRed}`}
+              eventName="kim_workbook_dashboard_click"
+              href={DASHBOARD_URL}
+            >
               Open the event dashboard
-            </a>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>

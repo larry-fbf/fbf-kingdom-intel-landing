@@ -1,4 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { captureIntegration, classifyRegistrationResults } from "../../lib/registration-outcome";
+import { hasAffirmativeConsent } from "../../lib/registration-input";
+import {
+  getRegistrationConfirmationSecret,
+  REGISTRATION_CONFIRMATION_COOKIE,
+  signRegistrationConfirmation,
+} from "../../lib/registration-confirmation";
+import { registrationTimeZoneFromPayloadAndHeaders } from "../../lib/registration-timezone";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const ATTIO_MASTERCLASS_LIST_ID =
@@ -6,6 +14,10 @@ const ATTIO_MASTERCLASS_LIST_ID =
   process.env.ATTIO_KIM_JULY_2026_LIST_ID ||
   process.env.ATTIO_MASTERCLASS_LIST_ID ||
   "979ff89f-4f9e-4af6-828f-9cfd48be52de";
+const ATTIO_DEFAULT_DEAL_OWNER_ID =
+  process.env.ATTIO_KIM_SEPTEMBER_2026_DEAL_OWNER_ID ||
+  process.env.ATTIO_DEFAULT_DEAL_OWNER_ID ||
+  "166ff2ea-b9ce-4caa-b06a-4d64c555d5da";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
 const BREVO_MASTERCLASS_LIST_ID = Number(
   process.env.BREVO_KIM_SEPTEMBER_2026_LIST_ID ||
@@ -26,6 +38,7 @@ const SIMPLETEXTING_MASTERCLASS_LIST_NAME =
   process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME ||
   process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME ||
   "K.I.M. - September 2026";
+const INTEGRATION_TIMEOUT_MS = 10000;
 
 type RegistrationPayload = {
   email?: string;
@@ -33,6 +46,8 @@ type RegistrationPayload = {
   lastName?: string;
   phone?: string;
   agreed?: boolean;
+  timeZone?: string;
+  attribution?: Record<string, string | undefined>;
 };
 
 function normalizeEmail(email = "") {
@@ -96,7 +111,7 @@ function parseSimpleTextingResponse(bodyText: string) {
 }
 
 async function fetchJson(url: string, init: RequestInit, label: string) {
-  const res = await fetch(url, init);
+  const res = await fetch(url, { ...init, signal: init.signal || AbortSignal.timeout(INTEGRATION_TIMEOUT_MS) });
   if (!res.ok) {
     throw new Error(`${label} failed (${res.status}): ${await readError(res)}`);
   }
@@ -104,7 +119,128 @@ async function fetchJson(url: string, init: RequestInit, label: string) {
   return text ? JSON.parse(text) : null;
 }
 
-async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
+function firstRecordValue(record: { values?: Record<string, unknown[]> } | null | undefined, slug: string) {
+  return record?.values?.[slug]?.[0] as Record<string, unknown> | undefined;
+}
+
+function recordRefs(record: { values?: Record<string, unknown[]> } | null | undefined, slug: string) {
+  return (record?.values?.[slug] || [])
+    .map((item) => (item as { target_record_id?: string }).target_record_id)
+    .filter(Boolean) as string[];
+}
+
+function attioActorId(record: { values?: Record<string, unknown[]> } | null | undefined, slug: string) {
+  const value = firstRecordValue(record, slug);
+  return (
+    (value?.referenced_actor_type === "workspace-member" && typeof value.referenced_actor_id === "string"
+      ? value.referenced_actor_id
+      : "") || ""
+  );
+}
+
+function attioTextValue(item: Record<string, unknown> | undefined) {
+  const value =
+    item?.value ||
+    item?.title ||
+    (item?.status as { title?: string } | undefined)?.title ||
+    item?.full_name ||
+    "";
+  return String(value).replace(/\s+/g, " ").trim();
+}
+
+function attioFullName(record: { values?: Record<string, unknown[]> } | null | undefined, fallback: string) {
+  const name = firstRecordValue(record, "name");
+  return attioTextValue(name) || fallback;
+}
+
+function isStaffOrTestContact(contact: { email: string; firstName: string; lastName: string }) {
+  const [localPart = "", domain = ""] = contact.email.split("@");
+  const name = `${contact.firstName} ${contact.lastName}`.toLowerCase();
+  const staffDomains = new Set(["fbfmastery.com", "paytonwallace.com", "christianeelizabeth.com"]);
+
+  return (
+    staffDomains.has(domain) ||
+    ["example.com", "example.org", "test.com"].includes(domain) ||
+    /\b(test|dummy|sample)\b/i.test(localPart.replace(/[._+-]/g, " ")) ||
+    /\b(test|dummy|sample)\b/i.test(name)
+  );
+}
+
+function isClientOrDoNotContact(record: { values?: Record<string, unknown[]> } | null | undefined) {
+  const status = attioTextValue(firstRecordValue(record, "lead_status_1")).toLowerCase();
+  return ["client", "onboarding", "alumni/past client", "past client", "do not contact"].includes(status);
+}
+
+async function getAttioPerson(recordId: string) {
+  const person = await fetchJson(
+    `https://api.attio.com/v2/objects/people/records/${encodeURIComponent(recordId)}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${ATTIO_API_KEY}`,
+        Accept: "application/json",
+      },
+    },
+    "Attio person lookup",
+  );
+
+  return person?.data;
+}
+
+async function createAttioDealForRegistrant(
+  contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string; timeZone: string },
+  person: { values?: Record<string, unknown[]> } | null | undefined,
+  recordId: string,
+) {
+  if (!ATTIO_DEFAULT_DEAL_OWNER_ID) return { skipped: true, reason: "missing deal owner" };
+
+  if (isStaffOrTestContact(contact)) return { skipped: true, reason: "staff_or_test" };
+  if (isClientOrDoNotContact(person)) return { skipped: true, reason: "client_or_do_not_contact" };
+  if (recordRefs(person, "associated_deals").length > 0) return { skipped: true, reason: "existing_deal" };
+
+  const companyId = recordRefs(person, "company")[0] || "";
+  const fullName = attioFullName(person, `${contact.firstName} ${contact.lastName}`.trim());
+  const ownerId = attioActorId(person, "contact_owner") || ATTIO_DEFAULT_DEAL_OWNER_ID;
+  const values: Record<string, unknown> = {
+    name: `${fullName} - KIM Sept 2026`,
+    stage: "Outreach",
+    owner: {
+      referenced_actor_type: "workspace-member",
+      referenced_actor_id: ownerId,
+    },
+    associated_people: [
+      {
+        target_object: "people",
+        target_record_id: recordId,
+      },
+    ],
+  };
+
+  if (companyId) {
+    values.associated_company = {
+      target_object: "companies",
+      target_record_id: companyId,
+    };
+  }
+
+  const deal = await fetchJson(
+    "https://api.attio.com/v2/objects/deals/records",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${ATTIO_API_KEY}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ data: { values } }),
+    },
+    "Attio deal",
+  );
+
+  return { skipped: false, recordId: deal?.data?.id?.record_id };
+}
+
+async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string; timeZone: string }) {
   if (!ATTIO_API_KEY || !ATTIO_MASTERCLASS_LIST_ID) return { skipped: true };
 
   const values: Record<string, unknown> = {
@@ -114,6 +250,9 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
 
   if (contact.phone) {
     values.phone_numbers = [{ original_phone_number: contact.phone, country_code: "US" }];
+  }
+  if (contact.timeZone) {
+    values.time_zone = contact.timeZone;
   }
 
   const person = await fetchJson(
@@ -133,6 +272,9 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
   const recordId = person?.data?.id?.record_id;
   if (!recordId) throw new Error("Attio contact failed: missing record id");
 
+  const attioPerson = await getAttioPerson(recordId);
+  const deal = await createAttioDealForRegistrant(contact, attioPerson, recordId);
+
   await fetchJson(
     `https://api.attio.com/v2/lists/${encodeURIComponent(ATTIO_MASTERCLASS_LIST_ID)}/entries`,
     {
@@ -147,7 +289,7 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
     "Attio list entry"
   );
 
-  return { skipped: false, recordId };
+  return { skipped: false, recordId, deal };
 }
 
 async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
@@ -173,6 +315,7 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
         listIds: [BREVO_MASTERCLASS_LIST_ID],
         updateEnabled: true,
       }),
+      signal: AbortSignal.timeout(INTEGRATION_TIMEOUT_MS),
     });
 
     const text = await res.text();
@@ -227,6 +370,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body,
+    signal: AbortSignal.timeout(INTEGRATION_TIMEOUT_MS),
   });
 
   const bodyText = await res.text();
@@ -243,42 +387,75 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
   return { skipped: false };
 }
 
-async function captureIntegration<T>(label: string, task: () => Promise<T>) {
-  try {
-    return await task();
-  } catch (error) {
-    console.error(`${label} integration failed`, error);
-    return { skipped: false, error: `${label} integration failed` };
-  }
-}
-
 export async function POST(req: NextRequest) {
+  const registrationId = crypto.randomUUID();
   try {
     const payload = (await req.json()) as RegistrationPayload;
     const email = normalizeEmail(payload.email);
     const firstName = normalizeName(payload.firstName);
     const lastName = normalizeName(payload.lastName);
     const phone = normalizePhoneForSync(payload.phone);
+    const timeZone = registrationTimeZoneFromPayloadAndHeaders(payload.timeZone, req.headers);
 
-    if (!email || !firstName || !lastName) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    if (!email || !/^\S+@\S+\.\S+$/.test(email) || !firstName || !lastName) {
+      return NextResponse.json({ ok: false, error: "Missing required fields", registrationId }, { status: 400 });
     }
 
-    const contact = { email, firstName, lastName, phone };
-    const results: Record<string, unknown> = {};
-
-    results.attio = await captureIntegration("Attio", () => upsertAttioContact(contact));
-    results.brevo = await captureIntegration("Brevo", () => upsertBrevoContact(contact));
-
-    if (payload.agreed && phone) {
-      results.simpleTexting = await captureIntegration("SimpleTexting", () => upsertSimpleTextingContact(contact));
-    } else {
-      results.simpleTexting = { skipped: true, reason: "missing sms consent or phone" };
+    if (!hasAffirmativeConsent(payload.agreed)) {
+      return NextResponse.json({ ok: false, error: "Consent is required", registrationId }, { status: 400 });
     }
 
-    return NextResponse.json({ ok: true, results });
+    const contact = { email, firstName, lastName, phone, timeZone };
+    const [attio, brevo, simpleTexting] = await Promise.all([
+      captureIntegration("Attio", () => upsertAttioContact(contact)),
+      captureIntegration("Brevo", () => upsertBrevoContact(contact)),
+      phone
+        ? captureIntegration("SimpleTexting", () => upsertSimpleTextingContact(contact))
+        : Promise.resolve({ ok: true, value: { skipped: true, reason: "no phone supplied" } }),
+    ]);
+    const results = { attio, brevo, simpleTexting };
+    const outcome = classifyRegistrationResults(results);
+
+    if (!outcome.accepted) {
+      console.error("Registration was not durably saved", { registrationId, failedIntegrations: outcome.failedIntegrations });
+      return NextResponse.json(
+        { ok: false, error: "Registration could not be saved. Please try again.", retryable: true, registrationId },
+        { status: 503 },
+      );
+    }
+
+    if (outcome.degraded) {
+      console.warn("Registration accepted with integration warnings", {
+        registrationId,
+        failedIntegrations: outcome.failedIntegrations,
+      });
+    }
+
+    const confirmationSecret = getRegistrationConfirmationSecret();
+    if (!confirmationSecret) {
+      console.error("Registration confirmation secret is unavailable", { registrationId });
+      return NextResponse.json(
+        { ok: false, error: "Registration was saved, but confirmation is unavailable. Please try again.", retryable: true, registrationId },
+        { status: 503 },
+      );
+    }
+
+    const response = NextResponse.json({ ok: true, degraded: outcome.degraded, registrationId });
+    response.cookies.set({
+      name: REGISTRATION_CONFIRMATION_COOKIE,
+      value: signRegistrationConfirmation(registrationId, confirmationSecret),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/thank-you",
+      maxAge: 60 * 60,
+    });
+    return response;
   } catch (e) {
-    console.error(e);
-    return NextResponse.json({ ok: true, warning: "Registration accepted with processing errors" });
+    console.error("Registration request failed", { registrationId, error: e });
+    return NextResponse.json(
+      { ok: false, error: "Registration could not be processed. Please try again.", retryable: true, registrationId },
+      { status: 500 },
+    );
   }
 }

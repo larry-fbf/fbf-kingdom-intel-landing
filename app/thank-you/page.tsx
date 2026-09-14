@@ -1,7 +1,18 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
-import Script from "next/script";
+import Image from "next/image";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import ShareMasterclassSection from "../components/ShareMasterclassSection";
+import ConfirmedRegistrationAnalytics from "../components/ConfirmedRegistrationAnalytics";
+import TrackedClarityLink from "../components/TrackedClarityLink";
+import TrackedVimeoVideo from "../components/TrackedVimeoVideo";
+import { FUNNEL_EVENTS } from "../lib/funnel-events";
+import {
+  getRegistrationConfirmationSecret,
+  REGISTRATION_CONFIRMATION_COOKIE,
+  verifyRegistrationConfirmation,
+} from "../lib/registration-confirmation";
 
 export const metadata: Metadata = {
   title: "You Are Registered | Kingdom Intelligence Masterclass",
@@ -72,48 +83,39 @@ const features = [
   },
 ];
 
-function VimeoWelcomeVideo() {
-  return (
-    <div className="welcome-video" aria-label="A welcome message from Staci Wallace">
-      <iframe
-        src="https://player.vimeo.com/video/1194072208?badge=0&autopause=0&player_id=0&app_id=58479"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        title="KIM Final Registration Welcome"
-      />
-    </div>
-  );
-}
+export default async function ThankYou() {
+  const confirmationToken = (await cookies()).get(REGISTRATION_CONFIRMATION_COOKIE)?.value;
+  if (
+    !confirmationToken ||
+    !verifyRegistrationConfirmation(confirmationToken, getRegistrationConfirmationSecret())
+  ) {
+    redirect("/?registration=required");
+  }
 
-export default function ThankYou() {
   return (
     <main style={pageStyle}>
-      <Script id="fb-complete-registration" strategy="afterInteractive">
-        {`if (window.fbq) window.fbq("track", "CompleteRegistration");`}
-      </Script>
-      <Script src="https://player.vimeo.com/api/player.js" strategy="lazyOnload" />
+      <ConfirmedRegistrationAnalytics />
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Anton&family=Frank+Ruhl+Libre:wght@400;700;900&family=Work+Sans:wght@400;500;600;700;800&display=swap');
-        .thank-you-hero { display: flex; max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
-        .thank-you-photo { flex: 0 0 44%; position: relative; overflow: hidden; min-height: 560px; }
-        .thank-you-copy { flex: 1 1 56%; display: flex; align-items: center; min-width: 0; padding: 72px 64px 72px 40px; }
-        .thank-you-copy-inner { width: 100%; max-width: 540px; min-width: 0; }
+        .thank-you-hero { display: grid; grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr); gap: 36px; align-items: center; max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
+        .thank-you-photo { position: relative; align-self: stretch; min-height: 620px; overflow: hidden; border-right: 1px solid rgba(201,165,90,0.18); }
+        .thank-you-copy { display: flex; align-items: center; min-width: 0; padding: 76px 24px 88px 0; }
+        .thank-you-copy-inner { width: 100%; max-width: 620px; min-width: 0; }
         .thank-you-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .thank-you-card { background: #F8F8F8; border: 1px solid #E8E8E8; border-radius: 10px; padding: 28px 24px; }
         .welcome-video { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(201,165,90,0.35); border-radius: 8px; background: #000000; box-shadow: 0 18px 54px rgba(0,0,0,0.45); margin: 0 0 30px; }
         .welcome-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .workbook-section { background: #111111; padding: 88px 24px; }
-        .workbook-panel { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; max-width: 1060px; margin: 0 auto; }
-        .workbook-cover-wrap { display: flex; justify-content: center; }
-        .workbook-cover { width: min(100%, 360px); border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,0.5); border: 1px solid rgba(201,165,90,0.25); }
+        .workbook-panel { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: 56px; align-items: center; max-width: 1060px; margin: 0 auto; }
+        .workbook-cover-wrap { display: flex; justify-content: center; align-items: center; min-width: 0; }
+        .workbook-cover { display: block; width: min(100%, 330px); height: auto; max-height: min(64vh, 520px); object-fit: contain; border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,0.5); border: 1px solid rgba(201,165,90,0.25); }
         .thank-you-gold-btn { transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
         .thank-you-gold-btn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(185,148,90,0.5); }
-        @media (max-width: 768px) {
-          .thank-you-hero { flex-direction: column; width: 100%; max-width: 100%; padding-left: 0 !important; padding-right: 0 !important; overflow: hidden; }
-          .thank-you-photo { height: 320px; min-height: 320px; width: 100%; }
-          .thank-you-photo-gradient-side { display: none; }
-          .thank-you-copy { width: 100%; max-width: 100%; box-sizing: border-box; padding: 40px 32px 56px; }
+        @media (max-width: 900px) {
+          .thank-you-hero { display: block; width: 100%; max-width: 100%; padding-left: 0 !important; padding-right: 0 !important; overflow: hidden; }
+          .thank-you-photo { display: none; }
+          .thank-you-copy { width: 100%; max-width: 100%; box-sizing: border-box; padding: 42px 28px 56px; }
           .thank-you-copy-inner { width: 100%; max-width: 100%; }
           .welcome-video { max-width: 100%; }
           .registered-banner { padding: 12px 18px !important; }
@@ -121,7 +123,7 @@ export default function ThankYou() {
           .thank-you-features { grid-template-columns: 1fr; }
           .workbook-section { padding: 64px 20px; }
           .workbook-panel { grid-template-columns: 1fr; gap: 34px; }
-          .workbook-cover { width: min(100%, 300px); }
+          .workbook-cover { width: min(100%, 280px); max-height: 420px; }
           .thank-you-gold-btn { width: 100%; text-align: center; }
         }
       `}</style>
@@ -163,27 +165,21 @@ export default function ThankYou() {
         />
 
         <div className="thank-you-hero">
-          <div className="thank-you-photo">
-            <img
+          <div className="thank-you-photo" aria-hidden="true">
+            <Image
               src="/images/staci-larry-split.webp"
-              alt="Larry and Staci Wallace"
+              alt=""
+              fill
+              sizes="(min-width: 901px) 42vw, 0px"
+              preload
               style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
                 objectFit: "cover",
                 objectPosition: "center top",
-                display: "block",
               }}
             />
-            <div
-              className="thank-you-photo-gradient-side"
-              style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 55%, #080808 100%)" }}
-            />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 70%, #080808 100%)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(8,8,8,0) 56%, #080808 100%)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(8,8,8,0) 68%, #080808 100%)" }} />
           </div>
-
           <div className="thank-you-copy">
             <div className="thank-you-copy-inner">
               <p style={{ ...sectionLabelStyle, marginBottom: "20px" }}>Welcome to the FBF community</p>
@@ -215,7 +211,14 @@ export default function ThankYou() {
               </h2>
               <div style={{ width: "48px", height: "3px", background: "#C9A55A", marginBottom: "32px", borderRadius: "2px" }} />
               <p style={sectionLabelStyle}>A message from Staci</p>
-              <VimeoWelcomeVideo />
+              <TrackedVimeoVideo
+                className="welcome-video"
+                videoId="1194072208"
+                title="KIM Final Registration Welcome"
+                eventName={FUNNEL_EVENTS.thankYouVideoPlay}
+                posterSrc="https://i.vimeocdn.com/video/2159632141-aa8ea218a6b473a15a56edfe1c759da4f16ad53355c9eb5ed5390d9634503eef-d_1280x720?region=us"
+                posterAlt="Staci Wallace in the welcome video"
+              />
               <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.76)", lineHeight: 1.85, marginBottom: "20px" }}>
                 Make sure to <strong style={{ color: "#FFFFFF" }}>check your email</strong> for your
                 confirmation and next steps. If you do not see it, check spam or promotions.
@@ -225,9 +228,9 @@ export default function ThankYou() {
                 community</strong> so you can stay connected with other faith-driven leaders and keep
                 momentum going before the masterclass begins.
               </p>
-              <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle}>
+              <TrackedClarityLink href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle} eventName={FUNNEL_EVENTS.thankYouCommunityClick} eventTags={{ placement: "hero" }}>
                 Join the FBF Community
-              </a>
+              </TrackedClarityLink>
               <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.38)", marginTop: "12px", fontStyle: "italic" }}>
                 Your dashboard, workbook, VIP invite, and live Zoom link will come by email and text.
               </p>
@@ -271,9 +274,9 @@ export default function ThankYou() {
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: "48px" }}>
-            <a href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle}>
+            <TrackedClarityLink href={COMMUNITY_URL} target="_blank" rel="noopener noreferrer" className="thank-you-gold-btn" style={goldButtonStyle} eventName={FUNNEL_EVENTS.thankYouCommunityClick} eventTags={{ placement: "next_steps" }}>
               Join Now - It&apos;s Free
-            </a>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>
@@ -281,9 +284,13 @@ export default function ThankYou() {
       <section className="workbook-section">
         <div className="workbook-panel">
           <div className="workbook-cover-wrap">
-            <img
+            <Image
               src="/images/kingdom-intelligence-workbook-cover.png"
               alt="Kingdom Intelligence Masterclass workbook"
+              width={1125}
+              height={1609}
+              sizes="(max-width: 768px) 300px, 360px"
+              loading="lazy"
               className="workbook-cover"
             />
           </div>
@@ -310,9 +317,9 @@ export default function ThankYou() {
               Use it to reinforce your learning, set actionable goals, and track your progress
               throughout the masterclass. Fill out the form and we will send your workbook.
             </p>
-            <a href={WORKBOOK_URL} className="thank-you-gold-btn" style={goldButtonStyle}>
+            <TrackedClarityLink href={WORKBOOK_URL} className="thank-you-gold-btn" style={goldButtonStyle} eventName={FUNNEL_EVENTS.thankYouWorkbookClick}>
               Grab Your Workbook
-            </a>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>
@@ -320,7 +327,7 @@ export default function ThankYou() {
       <ShareMasterclassSection steps={shareSteps} />
 
       <footer style={{ background: "#080808", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 20px", textAlign: "center" }}>
-        <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" style={{ height: "40px", display: "inline-block", marginBottom: "20px" }} />
+        <Image src="/images/fbf-logo-white.png" alt="Fueled By Fire" width={46} height={40} sizes="46px" loading="lazy" style={{ height: "40px", width: "auto", display: "inline-block", marginBottom: "20px" }} />
         <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
           Fueled By Fire, LLC | Copyright 2026 | All Rights Reserved
         </p>

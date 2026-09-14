@@ -23,6 +23,7 @@ type WorkbookPayload = {
   leadershipExperience?: string;
   kingdomAlignment?: string;
   readyToInvest?: string;
+  attribution?: AttributionPayload;
 };
 
 type WorkbookContact = {
@@ -31,6 +32,25 @@ type WorkbookContact = {
   email: string;
   phone: string;
   company: string;
+};
+
+type AttributionPayload = {
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  utmTerm?: string;
+  utmId?: string;
+  ad?: string;
+  adId?: string;
+  adset?: string;
+  adsetId?: string;
+  campaignId?: string;
+  fbclid?: string;
+  gclid?: string;
+  landingPage?: string;
+  referrer?: string;
+  capturedAt?: string;
 };
 
 function clean(value = "") {
@@ -97,6 +117,10 @@ function answer(value?: string) {
   return clean(value || "") || "Not provided";
 }
 
+function attributionAnswer(value?: string) {
+  return clean(value || "") || "Not captured";
+}
+
 function normalizeSelect(value?: string, options: string[] = []) {
   const raw = clean(value || "");
   if (!raw) return raw;
@@ -119,6 +143,8 @@ function normalizedPayload(payload: WorkbookPayload): WorkbookPayload {
 }
 
 function formatWorkbookNote(payload: WorkbookPayload, contact: WorkbookContact) {
+  const attribution = payload.attribution || {};
+
   return [
     "# Kingdom Intelligence Masterclass qualification form",
     "",
@@ -135,6 +161,24 @@ function formatWorkbookNote(payload: WorkbookPayload, contact: WorkbookContact) 
     `**Preferred session connection:** ${answer(payload.sessionConnectionPreference)}`,
     `**Attended a free workshop/masterclass:** ${answer(payload.attendedWorkshop)}`,
     `**Monthly business/household income range:** ${answer(payload.monthlyIncomeRange)}`,
+    "",
+    "## Attribution",
+    `**UTM source:** ${attributionAnswer(attribution.utmSource)}`,
+    `**UTM medium:** ${attributionAnswer(attribution.utmMedium)}`,
+    `**UTM campaign:** ${attributionAnswer(attribution.utmCampaign)}`,
+    `**UTM content / audience:** ${attributionAnswer(attribution.utmContent)}`,
+    `**UTM term / ad set ID:** ${attributionAnswer(attribution.utmTerm)}`,
+    `**UTM ID / campaign ID:** ${attributionAnswer(attribution.utmId)}`,
+    `**Ad:** ${attributionAnswer(attribution.ad)}`,
+    `**Ad ID:** ${attributionAnswer(attribution.adId)}`,
+    `**Ad set:** ${attributionAnswer(attribution.adset)}`,
+    `**Ad set ID:** ${attributionAnswer(attribution.adsetId)}`,
+    `**Campaign ID:** ${attributionAnswer(attribution.campaignId)}`,
+    `**FB click ID:** ${attributionAnswer(attribution.fbclid)}`,
+    `**Google click ID:** ${attributionAnswer(attribution.gclid)}`,
+    `**Landing page:** ${attributionAnswer(attribution.landingPage)}`,
+    `**Referrer:** ${attributionAnswer(attribution.referrer)}`,
+    `**Captured at:** ${attributionAnswer(attribution.capturedAt)}`,
   ].join("\n");
 }
 
