@@ -13,7 +13,7 @@ const payload = { email: " Alex@customer.invalid ", firstName: " Alex ", lastNam
 
 // Execute the real handler and helpers, replacing only the network boundary and
 // environment. No real credentials, requests, CRM writes, or messages are used.
-function harness({ events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false } = {}) {
+function harness({ events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false, zoomStatus = "registered", zoomThrows = false } = {}) {
   const calls: { url: string; method: string; body: any }[] = [];
   const state = { events: [...events], registered: "Legacy event" };
   const warnings: unknown[][] = [];
@@ -38,6 +38,11 @@ function harness({ events = ["Earlier event"], failPatch = false, failBrevo = fa
   };
   const env = { ATTIO_API_KEY: "test-only", BREVO_API_KEY: "test-only", SIMPLETEXTING_API_KEY: "test-only", REGISTRATION_CONFIRMATION_SECRET: "test-only-confirmation-secret", NODE_ENV: "production" };
   function load(file: string): any {
+    if (file.endsWith("/zoom-runtime.ts")) return { registerWebsiteZoom: async (contact: any) => {
+      calls.push({ url: "zoom-service-fixture", method: "SERVICE", body: contact });
+      if (zoomThrows) throw new Error("private provider diagnostic");
+      return { status: zoomStatus };
+    } };
     const module = { exports: {} };
     const code = ts.transpileModule(readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
     vm.runInNewContext(code, { module, exports: module.exports, require: (id: string) => id.startsWith(".") ? load(resolve(dirname(file), id + ".ts")) : require(id), process: { env }, fetch, Response, Headers, URLSearchParams, AbortSignal, crypto, Buffer, setTimeout, clearTimeout, console: { error: (...args: unknown[]) => warnings.push(args), warn: (...args: unknown[]) => warnings.push(args) } }, { filename: file });
@@ -102,6 +107,26 @@ test("all durable integrations failing still returns retryable 503 without confi
   assert.equal(response.status, 503);
   assert.equal((await response.json()).retryable, true);
   assert.equal(response.headers.get("set-cookie"), null);
+});
+
+for (const zoomStatus of ["registered", "pending", "held", "unavailable"]) {
+  test(`Zoom ${zoomStatus} preserves exactly one CRM/Brevo/SMS fulfillment and truthful acceptance`, async () => {
+    const h = harness({ zoomStatus }); const response = await h.post(); const body = await response.json();
+    assert.equal(response.status, 200); assert.equal(body.ok, true);
+    assert.equal(body.zoom.status, zoomStatus); assert.equal(body.degraded, zoomStatus !== "registered");
+    assert.equal(body.retryable, undefined);
+    assert.equal(h.calls.filter(c => c.url.includes("brevo.com")).length, 1);
+    assert.equal(h.calls.filter(c => c.url.includes("simpletexting.com")).length, 1);
+    const zoom = h.calls.filter(c => c.url === "zoom-service-fixture");
+    assert.equal(zoom.length, 1); assert.equal(zoom[0].body.agreed, true);
+    assert.equal(zoom[0].body.email, "alex@customer.invalid");
+  });
+}
+test("unexpected Zoom exception cannot turn CRM success into retryable failure or leak diagnostics", async () => {
+  const h = harness({ zoomThrows: true }); const response = await h.post();
+  assert.equal(response.status, 200);
+  const body = await response.json(); assert.equal(body.zoom.status, "unavailable");
+  assert.equal(JSON.stringify([body, h.warnings]).includes("private provider diagnostic"), false);
 });
 
 test("missing affirmative consent rejects registration before any integration", async () => {

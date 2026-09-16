@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { registerWebsiteZoom } from "../../lib/zoom-runtime";
 import { captureIntegration, classifyRegistrationResults } from "../../lib/registration-outcome";
 import { hasAffirmativeConsent } from "../../lib/registration-input";
 import {
@@ -294,12 +295,14 @@ export async function POST(req: NextRequest) {
     }
 
     const contact = { email, firstName, lastName, phone, timeZone };
-    const [attio, brevo, simpleTexting] = await Promise.all([
+    const [attio, brevo, simpleTexting, zoom] = await Promise.all([
       captureIntegration("Attio", () => upsertAttioContact(contact)),
       captureIntegration("Brevo", () => upsertBrevoContact(contact)),
       phone
         ? captureIntegration("SimpleTexting", () => upsertSimpleTextingContact(contact))
         : Promise.resolve({ ok: true, value: { skipped: true, reason: "no phone supplied" } }),
+      registerWebsiteZoom({ email, firstName, lastName, agreed: payload.agreed })
+        .catch(() => ({ status: "unavailable" as const })),
     ]);
     const results = { attio, brevo, simpleTexting };
     const outcome = classifyRegistrationResults(results);
@@ -328,7 +331,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const response = NextResponse.json({ ok: true, degraded: outcome.degraded, registrationId });
+    const response = NextResponse.json({ ok: true, degraded: outcome.degraded || zoom.status !== "registered", registrationId, zoom });
     response.cookies.set({
       name: REGISTRATION_CONFIRMATION_COOKIE,
       value: signRegistrationConfirmation(registrationId, confirmationSecret),
