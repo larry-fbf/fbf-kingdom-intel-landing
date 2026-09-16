@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createHash } from "node:crypto";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const ATTIO_KIM_QUALIFICATION_LIST_ID = process.env.ATTIO_KIM_QUALIFICATION_LIST_ID || "cd32653d-1176-454d-9e35-dc258b85a3ae";
@@ -259,7 +260,7 @@ async function createAttioWorkbookNote(recordId: string, payload: WorkbookPayloa
           parent_record_id: recordId,
           title: "Kingdom Intelligence Masterclass qualification form",
           format: "plaintext",
-          content: formatWorkbookNote(payload, contact),
+          content: `${formatWorkbookNote(payload, contact)}\n\nWorkbook delivery reference: ${submissionKey(payload, contact)}:note`,
         },
       }),
     },
@@ -312,6 +313,63 @@ async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
   return { skipped: false };
 }
 
+const DELIVERY_LEDGER = "https://api.attio.com/v2/lists/kim_workbook_delivery_ledger/entries";
+
+// A provider-enforced unique text attribute is the durable claim, never process memory.
+// Pending claims are deliberately never expired/replayed: a timed-out POST may have succeeded.
+// Resolve pending rows by checking the provider before an operator marks them complete.
+async function deliverOnce(recordId: string, key: string, deliver: () => Promise<unknown>) {
+  const headers = { Authorization: `Bearer ${ATTIO_API_KEY}`, "Content-Type": "application/json" };
+  const find = async () => {
+    const found = await fetchJson(`${DELIVERY_LEDGER}/query`, {
+      method: "POST", headers, body: JSON.stringify({ filter: { delivery_key: key }, limit: 2, offset: 0 }),
+    }, "Workbook delivery lookup");
+    if (!Array.isArray(found?.data) || found.data.length > 1) throw new Error("Invalid delivery ledger");
+    return found.data[0];
+  };
+  const completed = (entry: { entry_values?: { delivery_state?: { value: string }[] } }) =>
+    entry?.entry_values?.delivery_state?.[0]?.value === "complete";
+  const existing = await find();
+  if (existing) {
+    if (completed(existing)) return;
+    throw new Error("Workbook delivery pending verification");
+  }
+  let claim;
+  try {
+    claim = await fetchJson(DELIVERY_LEDGER, {
+      method: "POST", headers,
+      body: JSON.stringify({ data: { parent_object: "people", parent_record_id: recordId,
+        entry_values: { delivery_key: key, delivery_state: "pending" } } }),
+    }, "Workbook delivery claim");
+  } catch {
+    // Also covers an ambiguous transport failure. Do not claim ownership by reading a pending row.
+    if (completed(await find())) return;
+    throw new Error("Workbook delivery claim unavailable");
+  }
+  const entryId = claim?.data?.id?.entry_id;
+  if (!entryId) throw new Error("Missing delivery claim id");
+  await deliver();
+  const entryUrl = `${DELIVERY_LEDGER}/${encodeURIComponent(entryId)}`;
+  await fetchJson(entryUrl, { method: "PATCH", headers,
+    body: JSON.stringify({ data: { entry_values: { delivery_state: "complete" } } }),
+  }, "Workbook delivery receipt");
+  const receipt = await fetchJson(entryUrl, { method: "GET", headers, cache: "no-store" }, "Workbook delivery verification");
+  if (!completed(receipt?.data)) throw new Error("Workbook delivery receipt not confirmed");
+}
+
+function submissionKey(payload: WorkbookPayload, contact: WorkbookContact) {
+  // Stable answer order, normalized identity, and no transient attribution timestamp.
+  // Changed answers are a new qualification; identical answers are retries even after a cold start.
+  const fields = ["whichOfTheFollowingBestDescribesYou", "oneThing", "outcomeImpact",
+    "otherDecisionMakers", "wantResults", "sessionConnectionPreference", "attendedWorkshop",
+    "monthlyIncomeRange", "stageOfGrowth", "leadershipExperience", "kingdomAlignment", "readyToInvest"] as const;
+  const answers = fields.map(field => clean(payload[field]));
+  const canonical = JSON.stringify(["kim-september-2026-v1", contact.firstName, contact.lastName,
+    contact.email, normalizeE164Phone(contact.phone) || contact.phone, contact.company,
+    answers, [...(payload.helpAreas || [])].map(value => clean(value)).sort()]);
+  return createHash("sha256").update(canonical).digest("hex");
+}
+
 export async function POST(req: NextRequest) {
   try {
     const payload = normalizedPayload((await req.json()) as WorkbookPayload);
@@ -344,26 +402,38 @@ export async function POST(req: NextRequest) {
     }
 
     const results: Record<string, unknown> = {};
+    const key = submissionKey(payload, contact);
+    let personId = "";
 
     if (!ATTIO_API_KEY) {
-      results.attio = { skipped: true, error: "Attio is not configured" };
+      return NextResponse.json({ ok: false, error: "Workbook saving is temporarily unavailable. Please try again." }, { status: 503 });
     } else {
       try {
         const attio = await upsertAttioPerson(payload, contact);
+        personId = attio.recordId;
         results.attio = { skipped: false, recordId: attio.recordId };
 
+        await fetchJson(`https://api.attio.com/v2/objects/people/records/${encodeURIComponent(attio.recordId)}`, {
+          method: "PATCH",
+          headers: { Authorization: `Bearer ${ATTIO_API_KEY}`, "Content-Type": "application/json" },
+          // Explicit September cohort. PATCH appends; PUT would replace event history.
+          body: JSON.stringify({ data: { values: { events_registered: ["ede3e1e7-e233-4e5b-9b61-fcf315c31e1d"] } } }),
+        }, "Attio September workbook event");
         results.attioList = await addAttioQualificationListEntry(attio.recordId);
 
-        await createAttioWorkbookNote(attio.recordId, payload, contact);
+        await deliverOnce(attio.recordId, `${key}:note`, () => createAttioWorkbookNote(attio.recordId, payload, contact));
         results.attioNote = { skipped: false };
       } catch (error) {
-        console.error(error);
-        results.attio = { skipped: false, error: "Attio qualification sync failed" };
+        console.error("Workbook Attio persistence failed");
+        return NextResponse.json({ ok: false, error: "We could not confirm your workbook was saved. Retry once; if this persists, contact support so we can check the saved submission." }, { status: 503 });
       }
     }
 
     try {
-      results.slack = await notifySlack(payload, contact);
+      if (SLACK_WORKBOOK_WEBHOOK_URL) {
+        await deliverOnce(personId, `${key}:slack`, () => notifySlack(payload, contact));
+        results.slack = { skipped: false };
+      } else results.slack = { skipped: true };
     } catch (error) {
       console.error(error);
       results.slack = { skipped: false, error: "Slack notification failed" };
