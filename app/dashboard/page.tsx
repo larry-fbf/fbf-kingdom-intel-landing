@@ -32,7 +32,8 @@ const replays = [
   },
   {
     day: "Day 3",
-    title: "Replay Coming Soon",
+    title: "Watch the Replay",
+    videoUrl: "https://player.vimeo.com/video/1227853840",
   },
 ];
 
