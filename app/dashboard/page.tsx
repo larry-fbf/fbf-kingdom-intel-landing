@@ -753,7 +753,7 @@ export default function DashboardPage() {
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
             <div className="schedule-pill">
-              <span>September 15-17 | 12 PM Central</span>
+              <span>November 3-5 | 12 PM Central</span>
             </div>
             <div className="top-action-group">
               <ShareMasterclassButton />
@@ -791,7 +791,7 @@ export default function DashboardPage() {
                   Bring your workbook, arrive a few minutes early, and come prepared to turn insight
                   into action.
                 </p>
-                <div className="date-pill">September 15 to 17 | 12 PM Central</div>
+                <div className="date-pill">November 3 to 5 | 12 PM Central</div>
               </div>
               <div>
                 <TrackedClarityLink
@@ -845,7 +845,7 @@ export default function DashboardPage() {
                   <p className="action-detail">
                     Unlock the VIP room, direct coaching, bonuses, and replay access.
                   </p>
-                  <div className="action-date">September 16-17 | 7 PM Central</div>
+                  <div className="action-date">November 4-5 | 7 PM Central</div>
                 </div>
               </div>
               <span className="action-cta">Upgrade to VIP</span>
@@ -915,10 +915,10 @@ export default function DashboardPage() {
           <div className="replay-head">
             <div>
               <p className="section-label">Replay Library</p>
-              <h2 className="section-title">Session Replays</h2>
+              <h2 className="section-title">September 2026 Session Replays</h2>
             </div>
             <p className="replay-note">
-              Replays will be posted here after each live session is processed.
+              These recordings are from September 15–17, 2026, not the upcoming November sessions.
             </p>
           </div>
 
