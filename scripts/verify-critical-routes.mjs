@@ -71,8 +71,8 @@ if (missingMetadata.length > 0) {
 }
 
 const requiredRegistrationPageMarkers = [
-  "September 15&ndash;17, 2026",
-  "September 15&ndash;17 @ 12 PM Central",
+  "November 3&ndash;5, 2026",
+  "November 3&ndash;5 @ 12 PM Central",
   "/api/register",
   "SAVE MY SEAT",
 ];
@@ -119,10 +119,10 @@ if (missingVipMarkers.length > 0) {
 
 const requiredDashboardMarkers = [
   "Event Dashboard",
-  "September 15-17 | 12 PM Central",
+  "November 3-5 | 12 PM Central",
   "VIP",
   "action-date",
-  "September 16-17 | 7 PM Central",
+  "November 4-5 | 7 PM Central",
   "ShareMasterclassButton",
   "Join the Community",
   "Priority dashboard workflow",
