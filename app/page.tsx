@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { trackClarityEvent } from "./lib/clarity-events";
 import { FUNNEL_EVENTS } from "./lib/funnel-events";
-import { postJsonWithTimeout, RegistrationRequestError } from "./lib/post-json";
+import { postJsonWithTimeout, RegistrationRequestError, REGISTRATION_UNCERTAIN_MESSAGE } from "./lib/post-json";
 import { captureAttributionFromCurrentUrl, getStoredAttribution } from "./lib/attribution";
 import TrackedVimeoVideo from "./components/TrackedVimeoVideo";
 
@@ -22,7 +22,8 @@ function getBrowserTimeZone() {
 /* -- REGISTRATION MODAL -- */
 function RegisterModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState({ email: "", firstName: "", lastName: "", phone: "", agreed: false });
-  const [status, setStatus] = useState<"idle"|"loading"|"error">("idle");
+  const [status, setStatus] = useState<"idle"|"loading"|"error"|"pending"|"blocked">("idle");
+  const submissionLocked = useRef(false);
   const [errorMessage, setErrorMessage] = useState("");
   const errorRef = useRef<HTMLParagraphElement>(null);
   const router = useRouter();
@@ -39,12 +40,14 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submissionLocked.current) return;
     if (!form.agreed) {
       setErrorMessage("Please agree to receive communications to continue.");
       setStatus("error");
       return;
     }
     setStatus("loading");
+    submissionLocked.current = true;
     setErrorMessage("");
     trackClarityEvent(FUNNEL_EVENTS.registrationSubmitAttempt, {
       has_phone: form.phone.trim() ? "true" : "false",
@@ -70,8 +73,10 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
         failure_kind: requestError?.kind || "unknown",
         http_status: requestError?.status ? String(requestError.status) : undefined,
       });
-      setErrorMessage(error instanceof Error ? error.message : "Something went wrong. Please try again.");
-      setStatus("error");
+      const retryable = requestError?.retryable === true;
+      submissionLocked.current = !retryable;
+      setErrorMessage(requestError?.message || REGISTRATION_UNCERTAIN_MESSAGE);
+      setStatus(retryable ? "error" : requestError && !requestError.uncertain ? "blocked" : "pending");
     }
   };
 
@@ -143,17 +148,17 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
                 </label>
               </div>
 
-              <button type="submit" disabled={status === "loading"} style={{
+              <button type="submit" disabled={status === "loading" || status === "pending" || status === "blocked"} style={{
                 background: "linear-gradient(135deg, #C9A55A 0%, #E8D080 45%, #BB945A 100%)",
                 color: "#120800", fontWeight: 800, padding: "16px", borderRadius: "6px",
                 border: "none", fontSize: "16px", cursor: "pointer", letterSpacing: "0.08em",
                 textTransform: "uppercase" as const, fontFamily: "'Work Sans', sans-serif",
                 opacity: status === "loading" ? 0.7 : 1,
               }}>
-                {status === "loading" ? "Registering..." : "RSVP NOW"}
+                {status === "loading" ? "Registering..." : status === "pending" ? "Pending verification" : status === "blocked" ? "Contact support" : "RSVP NOW"}
               </button>
 
-              {status === "error" && (
+              {(status === "error" || status === "pending" || status === "blocked") && (
                 <p ref={errorRef} role="alert" aria-live="assertive" style={{ fontSize: "13px", color: "#CC0000", textAlign: "center", fontFamily: "'Work Sans', sans-serif" }}>
                   {errorMessage}
                 </p>
@@ -656,7 +661,7 @@ export default function Home() {
 
   return (
     <>
-      {modalOpen && <RegisterModal onClose={close} />}
+      <div hidden={!modalOpen}><RegisterModal onClose={close} /></div>
       <TopBanner onOpen={open} />
       <main style={{ paddingTop: "43px" }}>
         <Hero onOpen={open} />

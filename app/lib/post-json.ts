@@ -1,12 +1,18 @@
+export const REGISTRATION_UNCERTAIN_MESSAGE = "We could not confirm the outcome of your registration. It may have been saved. Do not resubmit. Check your confirmation email (including spam), or contact support@fueledbyfire.com so we can verify your registration.";
+
 export class RegistrationRequestError extends Error {
   status: number | null;
   kind: "timeout" | "server" | "network";
+  retryable: boolean;
+  uncertain: boolean;
 
-  constructor(message: string, options: { status?: number | null; kind: "timeout" | "server" | "network" }) {
+  constructor(message: string, options: { status?: number | null; kind: "timeout" | "server" | "network"; retryable?: boolean; uncertain?: boolean }) {
     super(message);
     this.name = "RegistrationRequestError";
     this.status = options.status ?? null;
     this.kind = options.kind;
+    this.retryable = options.retryable ?? false;
+    this.uncertain = options.uncertain ?? false;
   }
 }
 
@@ -28,34 +34,28 @@ export async function postJsonWithTimeout<T>(
       body: JSON.stringify(body),
       signal: controller.signal,
     });
-    const payload = await response.json().catch(() => null) as ({ ok?: boolean; error?: string } & T) | null;
+    const payload = await response.json().catch(() => null) as ({ ok?: boolean; error?: string; retryable?: boolean } & T) | null;
 
-    if (!response.ok) {
+    if (!response.ok && payload?.ok === false && typeof payload.error === "string" && payload.error) {
       throw new RegistrationRequestError(
-        payload?.error || "We could not save your registration. Please try again.",
-        { status: response.status, kind: "server" },
+        payload.error,
+        { status: response.status, kind: "server", retryable: payload.retryable ?? response.status === 400 },
       );
     }
 
-    if (!payload || typeof payload !== "object" || payload.ok !== true) {
+    if (!response.ok || !payload || typeof payload !== "object" || payload.ok !== true) {
       throw new RegistrationRequestError(
-        "The registration service did not confirm your registration. Please try again.",
-        { status: response.status, kind: "server" },
+        REGISTRATION_UNCERTAIN_MESSAGE,
+        { status: response.status, kind: "server", uncertain: true },
       );
     }
 
     return payload as T;
   } catch (error) {
     if (error instanceof RegistrationRequestError) throw error;
-    if (error instanceof Error && error.name === "AbortError") {
-      throw new RegistrationRequestError(
-        "Registration is taking longer than expected. Please try again.",
-        { kind: "timeout" },
-      );
-    }
     throw new RegistrationRequestError(
-      "We could not reach the registration service. Check your connection and try again.",
-      { kind: "network" },
+      REGISTRATION_UNCERTAIN_MESSAGE,
+      { kind: error instanceof Error && error.name === "AbortError" ? "timeout" : "network", uncertain: true },
     );
   } finally {
     clearTimeout(timeout);
