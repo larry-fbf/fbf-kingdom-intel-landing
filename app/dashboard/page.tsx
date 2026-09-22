@@ -811,7 +811,7 @@ export default function DashboardPage() {
                 <div>
                   <p className="action-eyebrow">Workbook</p>
                   <h2 className="action-title">Grab Your Workbook</h2>
-                  <p className="action-detail">Complete the form and get your workbook sent to you.</p>
+                  <p className="action-detail">Complete the November form to open your workbook download.</p>
                 </div>
               </div>
               <span className="action-cta">Get Workbook</span>
@@ -830,12 +830,12 @@ export default function DashboardPage() {
                   <p className="action-eyebrow">VIP</p>
                   <h2 className="action-title">VIP Upgrade</h2>
                   <p className="action-detail">
-                    Unlock the VIP room, direct coaching, bonuses, and replay access.
+                    November VIP checkout is not open yet. View the session details and check back for access.
                   </p>
                   <div className="action-date">November 4-5 | 7 PM Central</div>
                 </div>
               </div>
-              <span className="action-cta">Upgrade to VIP</span>
+              <span className="action-cta">VIP Details</span>
             </TrackedClarityLink>
 
             <TrackedClarityLink

@@ -34,3 +34,9 @@ test('confirmation does not promise unverified Zoom delivery or encourage uncert
  assert.ok(thanks.includes('Zoom access is confirmed only by Zoom'));
  assert.equal(thanks.includes('Your dashboard, workbook, VIP invite, and live Zoom link will come by email and text.'),false);
 });
+
+test('dashboard discloses the paid hold and actual workbook download path', () => {
+ const page=source('app/dashboard/page.tsx');
+ assert.ok(page.includes('November VIP checkout is not open yet.'));
+ assert.ok(page.includes('Complete the November form to open your workbook download.'));
+});
