@@ -10,31 +10,13 @@ import {
 import { registrationTimeZoneFromPayloadAndHeaders } from "../../lib/registration-timezone";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
-const ATTIO_MASTERCLASS_LIST_ID =
-  process.env.ATTIO_KIM_SEPTEMBER_2026_LIST_ID ||
-  process.env.ATTIO_KIM_JULY_2026_LIST_ID ||
-  process.env.ATTIO_MASTERCLASS_LIST_ID ||
-  "979ff89f-4f9e-4af6-828f-9cfd48be52de";
+// Exact November destinations verified against provider list metadata.
+const ATTIO_MASTERCLASS_LIST_ID = "0be88ec0-42a9-4169-bdbc-fd47a86fbcdb";
+const ATTIO_EVENT_OPTION_ID = process.env.ATTIO_KIM_NOVEMBER_2026_EVENT_OPTION_ID || "";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const BREVO_MASTERCLASS_LIST_ID = Number(
-  process.env.BREVO_KIM_SEPTEMBER_2026_LIST_ID ||
-    process.env.BREVO_KIM_JULY_2026_LIST_ID ||
-    process.env.BREVO_MASTERCLASS_LIST_ID ||
-    "19",
-);
+const BREVO_MASTERCLASS_LIST_ID = 26;
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
-const SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID = process.env.SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID || "";
-const SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME = process.env.SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME || "";
-const SIMPLETEXTING_MASTERCLASS_LIST_ID =
-  SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID ||
-  process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_ID ||
-  process.env.SIMPLETEXTING_MASTERCLASS_LIST_ID ||
-  "6a3186065d1d20e476b5c75d";
-const SIMPLETEXTING_MASTERCLASS_LIST_NAME =
-  SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME ||
-  process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME ||
-  process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME ||
-  "K.I.M. - September 2026";
+const SIMPLETEXTING_MASTERCLASS_LIST_ID = "6ab168287c960c8a3dff232b";
 const INTEGRATION_TIMEOUT_MS = 10000;
 
 type RegistrationPayload = {
@@ -173,7 +155,7 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ data: { values: { events_registered: ["K.I.M Sept 2026"] } } }),
+      body: JSON.stringify({ data: { values: { events_registered: [ATTIO_EVENT_OPTION_ID] } } }),
     },
     "Attio event registration"
   );
@@ -235,11 +217,7 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
 }
 
 async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
-  const simpleTextingGroup =
-    SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID ||
-    SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME ||
-    SIMPLETEXTING_MASTERCLASS_LIST_ID ||
-    SIMPLETEXTING_MASTERCLASS_LIST_NAME;
+  const simpleTextingGroup = SIMPLETEXTING_MASTERCLASS_LIST_ID;
   if (!SIMPLETEXTING_API_KEY || !simpleTextingGroup || !contact.phone) return { skipped: true };
 
   const body = new URLSearchParams({
@@ -249,7 +227,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
     firstName: contact.firstName,
     lastName: contact.lastName,
     email: contact.email,
-    comment: "Kingdom Intelligence Masterclass - September 2026 registration",
+    comment: "Kingdom Intelligence Masterclass - November 2026 registration",
   });
 
   const res = await fetch("https://app2.simpletexting.com/v1/group/contact/add", {
@@ -294,6 +272,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: "Consent is required", registrationId }, { status: 400 });
     }
 
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(ATTIO_EVENT_OPTION_ID) || !getRegistrationConfirmationSecret()) {
+      return NextResponse.json({ ok: false, error: "November registration is not ready yet. Please contact support@fueledbyfire.com.", retryable: false, registrationId }, { status: 503 });
+    }
     const contact = { email, firstName, lastName, phone, timeZone };
     const [attio, brevo, simpleTexting, zoom] = await Promise.all([
       captureIntegration("Attio", () => upsertAttioContact(contact)),
@@ -310,7 +291,7 @@ export async function POST(req: NextRequest) {
     if (!outcome.accepted) {
       console.error("Registration was not durably saved", { registrationId, failedIntegrations: outcome.failedIntegrations });
       return NextResponse.json(
-        { ok: false, error: "Registration could not be saved. Please try again.", retryable: true, registrationId },
+        { ok: false, error: "Registration could not be fully confirmed. Do not resubmit; contact support@fueledbyfire.com so we can check your registration.", retryable: false, registrationId },
         { status: 503 },
       );
     }

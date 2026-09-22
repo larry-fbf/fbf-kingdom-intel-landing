@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 
+const ATTIO_EVENT_OPTION_ID = process.env.ATTIO_KIM_NOVEMBER_2026_EVENT_OPTION_ID || "";
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
 const ATTIO_KIM_QUALIFICATION_LIST_ID = process.env.ATTIO_KIM_QUALIFICATION_LIST_ID || "cd32653d-1176-454d-9e35-dc258b85a3ae";
 const SLACK_WORKBOOK_WEBHOOK_URL = process.env.SLACK_WORKBOOK_WEBHOOK_URL || "";
@@ -364,13 +365,16 @@ function submissionKey(payload: WorkbookPayload, contact: WorkbookContact) {
     "otherDecisionMakers", "wantResults", "sessionConnectionPreference", "attendedWorkshop",
     "monthlyIncomeRange", "stageOfGrowth", "leadershipExperience", "kingdomAlignment", "readyToInvest"] as const;
   const answers = fields.map(field => clean(payload[field]));
-  const canonical = JSON.stringify(["kim-september-2026-v1", contact.firstName, contact.lastName,
+  const canonical = JSON.stringify(["kim-november-2026-v1", contact.firstName, contact.lastName,
     contact.email, normalizeE164Phone(contact.phone) || contact.phone, contact.company,
     answers, [...(payload.helpAreas || [])].map(value => clean(value)).sort()]);
   return createHash("sha256").update(canonical).digest("hex");
 }
 
 export async function POST(req: NextRequest) {
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(ATTIO_EVENT_OPTION_ID)) {
+    return NextResponse.json({ ok: false, error: "November workbook requests are not ready yet. Please contact support@fueledbyfire.com." }, { status: 503 });
+  }
   try {
     const payload = normalizedPayload((await req.json()) as WorkbookPayload);
     const contact = {
@@ -416,9 +420,9 @@ export async function POST(req: NextRequest) {
         await fetchJson(`https://api.attio.com/v2/objects/people/records/${encodeURIComponent(attio.recordId)}`, {
           method: "PATCH",
           headers: { Authorization: `Bearer ${ATTIO_API_KEY}`, "Content-Type": "application/json" },
-          // Explicit September cohort. PATCH appends; PUT would replace event history.
-          body: JSON.stringify({ data: { values: { events_registered: ["ede3e1e7-e233-4e5b-9b61-fcf315c31e1d"] } } }),
-        }, "Attio September workbook event");
+          // Explicit November cohort. PATCH appends; PUT would replace event history.
+          body: JSON.stringify({ data: { values: { events_registered: [ATTIO_EVENT_OPTION_ID] } } }),
+        }, "Attio November workbook event");
         results.attioList = await addAttioQualificationListEntry(attio.recordId);
 
         await deliverOnce(attio.recordId, `${key}:note`, () => createAttioWorkbookNote(attio.recordId, payload, contact));

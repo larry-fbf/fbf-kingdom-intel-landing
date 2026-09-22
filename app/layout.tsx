@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.kingdomintel.com"),
   title: "Kingdom Intelligence Masterclass | Fueled By Fire",
   description:
-    "Free 3-day live online event for faith-driven business owners. September 15-17, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
+    "Free 3-day live online event for faith-driven business owners. November 3-5, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Kingdom Intelligence Masterclass | Fueled By Fire",
     description:
-      "Free 3-day live event September 15-17, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.",
+      "Free 3-day live event November 3-5, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.",
     url: "/",
     siteName: "Kingdom Intel",
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kingdom Intelligence Masterclass | Fueled By Fire",
     description:
-      "Free 3-day live event September 15-17, 2026. Learn how to scale your business God's way.",
+      "Free 3-day live event November 3-5, 2026. Learn how to scale your business God's way.",
     images: ["/images/og-share.jpg"],
   },
   icons: {

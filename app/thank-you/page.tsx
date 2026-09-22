@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
   title: "You Are Registered | Kingdom Intelligence Masterclass",
   description:
-    "Your seat is confirmed for the Kingdom Intelligence Masterclass. Join the FBF community and check your email for next steps.",
+    "Your November 3–5 registration has been saved. Check your Zoom confirmation and prepare with the event dashboard.",
 };
 
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
@@ -26,7 +26,7 @@ const WORKBOOK_URL = "/workbook";
 const shareSteps = [
   {
     title: "Watch your email and texts.",
-    body: "You will receive reminder details and your Zoom link before the masterclass.",
+    body: "Check for your Zoom confirmation email with your personal access link. If it is missing, contact support@fueledbyfire.com.",
   },
   {
     title: "Join the community.",
@@ -79,7 +79,7 @@ const features = [
   },
   {
     title: "Next-step reminders",
-    body: "Watch your email and texts for the dashboard link, workbook access, VIP invitation, live Zoom link, and replay updates.",
+    body: "Use the November dashboard for the schedule, workbook, and community links. Zoom sends personal access links separately.",
   },
 ];
 
@@ -146,7 +146,7 @@ export default async function ThankYou() {
             color: "#FFFFFF",
           }}
         >
-          You are registered | September 15-17, 2026 | 12:00 PM Central | Free live online event
+          You are registered | November 3-5, 2026 | 12:00 PM Central | Free live online event
         </p>
       </div>
 
@@ -232,7 +232,7 @@ export default async function ThankYou() {
                 Join the FBF Community
               </TrackedClarityLink>
               <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.38)", marginTop: "12px", fontStyle: "italic" }}>
-                Your dashboard, workbook, VIP invite, and live Zoom link will come by email and text.
+                Zoom access is confirmed only by Zoom. If your confirmation email is missing, contact support@fueledbyfire.com before registering again.
               </p>
             </div>
           </div>
@@ -315,7 +315,7 @@ export default async function ThankYou() {
             </p>
             <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.78)", lineHeight: 1.85, marginBottom: "34px" }}>
               Use it to reinforce your learning, set actionable goals, and track your progress
-              throughout the masterclass. Fill out the form and we will send your workbook.
+              throughout the masterclass. Complete the November qualification form to open the workbook download.
             </p>
             <TrackedClarityLink href={WORKBOOK_URL} className="thank-you-gold-btn" style={goldButtonStyle} eventName={FUNNEL_EVENTS.thankYouWorkbookClick}>
               Grab Your Workbook

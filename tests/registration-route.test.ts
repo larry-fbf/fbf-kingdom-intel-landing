@@ -8,12 +8,12 @@ import ts from "typescript";
 
 const require = createRequire(import.meta.url);
 const PERSON = "11111111-1111-4111-8111-111111111111";
-const EVENT = "K.I.M Sept 2026";
+const EVENT = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
 const payload = { email: " Alex@customer.invalid ", firstName: " Alex ", lastName: " Rivera ", phone: "3122346789", agreed: true, timeZone: "America/Chicago" };
 
 // Execute the real handler and helpers, replacing only the network boundary and
 // environment. No real credentials, requests, CRM writes, or messages are used.
-function harness({ events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false, zoomStatus = "registered", zoomThrows = false } = {}) {
+function harness({ events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false, zoomStatus = "registered", zoomThrows = false, eventOption = EVENT } = {}) {
   const calls: { url: string; method: string; body: any }[] = [];
   const state = { events: [...events], registered: "Legacy event" };
   const warnings: unknown[][] = [];
@@ -36,7 +36,7 @@ function harness({ events = ["Earlier event"], failPatch = false, failBrevo = fa
     if (url === "https://app2.simpletexting.com/v1/group/contact/add") return Response.json({ code: 1 });
     throw new Error(`Unexpected network request blocked: ${method} ${url}`);
   };
-  const env = { ATTIO_API_KEY: "test-only", BREVO_API_KEY: "test-only", SIMPLETEXTING_API_KEY: "test-only", REGISTRATION_CONFIRMATION_SECRET: "test-only-confirmation-secret", NODE_ENV: "production" };
+  const env = { ATTIO_KIM_NOVEMBER_2026_EVENT_OPTION_ID: eventOption, ATTIO_API_KEY: "test-only", BREVO_API_KEY: "test-only", SIMPLETEXTING_API_KEY: "test-only", REGISTRATION_CONFIRMATION_SECRET: "test-only-confirmation-secret", NODE_ENV: "production" };
   function load(file: string): any {
     if (file.endsWith("/zoom-runtime.ts")) return { registerWebsiteZoom: async (contact: any) => {
       calls.push({ url: "zoom-service-fixture", method: "SERVICE", body: contact });
@@ -62,8 +62,8 @@ test("registration creates a Person and fulfills registration without creating a
   assert.equal(person.body.data.values.name[0].full_name, "Alex Rivera");
   assert.equal(person.body.data.values.phone_numbers[0].original_phone_number, "+13122346789");
   assert.equal(person.body.data.values.time_zone, "America/Chicago");
-  assert.ok(h.calls.some(c => c.method === "PUT" && c.url.includes("/lists/") && c.body.data.parent_record_id === PERSON));
-  assert.ok(h.calls.some(c => c.url.includes("brevo.com") && c.body.listIds.includes(19)));
+  assert.ok(h.calls.some(c => c.method === "PUT" && c.url.includes("/lists/0be88ec0-42a9-4169-bdbc-fd47a86fbcdb/") && c.body.data.parent_record_id === PERSON));
+  assert.ok(h.calls.some(c => c.url.includes("brevo.com") && c.body.listIds.includes(26)));
   assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.phone === "+13122346789"));
   assert.match(response.headers.get("set-cookie"), /HttpOnly/i);
   assert.match(response.headers.get("set-cookie"), /Path=\/thank-you/i);
@@ -71,7 +71,7 @@ test("registration creates a Person and fulfills registration without creating a
 });
 
 for (const existing of [[], ["Earlier event", "Another event"], ["Earlier event", EVENT]]) {
-  test(`appends exact September event without replacing history: ${JSON.stringify(existing)}`, async () => {
+  test(`appends exact November event without replacing history: ${JSON.stringify(existing)}`, async () => {
     const h = harness({ events: existing });
     for (let attempt = 0; attempt < 2; attempt++) {
       assert.equal((await h.post()).status, 200);
@@ -101,11 +101,11 @@ test("event append failure preserves list enrollment and other fulfillment, repo
   assert.ok(h.warnings.length);
 });
 
-test("all durable integrations failing still returns retryable 503 without confirmation", async () => {
+test("all durable integrations failing returns unconfirmed 503 without inviting a retry", async () => {
   const h = harness({ failAttio: true, failBrevo: true });
   const response = await h.post();
   assert.equal(response.status, 503);
-  assert.equal((await response.json()).retryable, true);
+  assert.equal((await response.json()).retryable, false);
   assert.equal(response.headers.get("set-cookie"), null);
 });
 
@@ -134,4 +134,20 @@ test("missing affirmative consent rejects registration before any integration", 
   const response = await h.post({ ...payload, agreed: false });
   assert.equal(response.status, 400);
   assert.equal(h.calls.length, 0);
+});
+
+test("missing November option fails closed before every integration", async () => {
+  const h = harness({ eventOption: "" });
+  const response = await h.post();
+  assert.equal(response.status, 503);
+  assert.equal(h.calls.length, 0);
+});
+
+test('ambiguous Zoom write plus failed CRM must not invite a duplicate registration', async () => {
+ const h=harness({failAttio:true,failBrevo:true,zoomStatus:'pending'});
+ const response=await h.post();
+ const body=await response.json();
+ assert.equal(response.status,503);
+ assert.equal(body.retryable,false);
+ assert.ok(body.error.includes('Do not resubmit'));
 });

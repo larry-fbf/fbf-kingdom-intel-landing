@@ -6,7 +6,7 @@ import ShareMasterclassButton from "./ShareMasterclassButton";
 export const metadata: Metadata = {
   title: "Event Dashboard | Kingdom Intelligence Masterclass",
   description:
-    "Access the live Zoom room, workbook, VIP upgrade, and replay updates for the Kingdom Intelligence Masterclass.",
+    "Prepare for the November 3–5 Kingdom Intelligence Masterclass: Zoom registration, workbook, community, and VIP details.",
   alternates: {
     canonical: "https://www.kingdomintel.com/dashboard",
   },
@@ -15,27 +15,9 @@ export const metadata: Metadata = {
 const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
 const REGISTRATION_URL = "https://www.kingdomintel.com/";
-const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8waQcQ";
+const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g";
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const WHATSAPP_URL = "https://whatsapp.com/channel/0029VbDiXJN7T8bbQGSxqt2H";
-
-const replays = [
-  {
-    day: "Day 1",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1227087561",
-  },
-  {
-    day: "Day 2",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1227491620",
-  },
-  {
-    day: "Day 3",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1227853840",
-  },
-];
 
 export default function DashboardPage() {
   return (
@@ -521,6 +503,9 @@ export default function DashboardPage() {
           text-transform: uppercase;
         }
 
+        .mastery-button:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+        .mastery-section { overflow: visible; }
+
         .whatsapp-button {
           background: #1f7a4f;
         }
@@ -741,6 +726,8 @@ export default function DashboardPage() {
             padding: 20px;
           }
 
+          .mastery-section { padding: 22px !important; }
+
           .community-button {
             width: 100%;
             min-width: 0;
@@ -753,7 +740,7 @@ export default function DashboardPage() {
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
             <div className="schedule-pill">
-              <span>September 15-17 | 12 PM Central</span>
+              <span>November 3-5 | 12 PM Central</span>
             </div>
             <div className="top-action-group">
               <ShareMasterclassButton />
@@ -782,16 +769,16 @@ export default function DashboardPage() {
             <div className="join-strip">
               <div>
                 <p className="join-label">Live Room</p>
-                <h2 className="join-title">Join the Room</h2>
+                <h2 className="join-title">Prepare for November</h2>
                 <p className="join-detail">
-                  Your seat is ready. Join us live for three days of Kingdom-centered strategy,
+                  Join us November 3–5 for three days of Kingdom-centered strategy,
                   practical implementation, and real-time coaching.
                 </p>
                 <p className="join-detail">
                   Bring your workbook, arrive a few minutes early, and come prepared to turn insight
                   into action.
                 </p>
-                <div className="date-pill">September 15 to 17 | 12 PM Central</div>
+                <div className="date-pill">November 3 to 5 | 12 PM Central</div>
               </div>
               <div>
                 <TrackedClarityLink
@@ -802,7 +789,7 @@ export default function DashboardPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Enter the Live Room
+                  Register for November on Zoom
                 </TrackedClarityLink>
                 <p style={{ margin: "8px 0 0", color: "#a3a3a3", fontSize: "12px", lineHeight: 1.5, textAlign: "center" }}>
                   Register with Zoom to receive your personal link by email.
@@ -845,7 +832,7 @@ export default function DashboardPage() {
                   <p className="action-detail">
                     Unlock the VIP room, direct coaching, bonuses, and replay access.
                   </p>
-                  <div className="action-date">September 16-17 | 7 PM Central</div>
+                  <div className="action-date">November 4-5 | 7 PM Central</div>
                 </div>
               </div>
               <span className="action-cta">Upgrade to VIP</span>
@@ -910,35 +897,15 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      <section className="replays-section">
+      <section className="replays-section" aria-labelledby="upcoming-heading">
         <div className="dashboard-wrap">
-          <div className="replay-head">
-            <div>
-              <p className="section-label">Replay Library</p>
-              <h2 className="section-title">Session Replays</h2>
-            </div>
-            <p className="replay-note">
-              Replays will be posted here after each live session is processed.
-            </p>
-          </div>
-
-          <div className="replay-grid">
-            {replays.map((replay) => (
-              <article className="replay-card" key={replay.day}>
-                <p className="replay-day">{replay.day}</p>
-                <h3 className="replay-title">{replay.title}</h3>
-                {replay.videoUrl && (
-                  <iframe
-                    src={replay.videoUrl}
-                    title={`${replay.day} replay`}
-                    style={{ width: "100%", aspectRatio: "16 / 9", border: 0, display: "block", marginTop: "16px" }}
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                  />
-                )}
-              </article>
-            ))}
-          </div>
+          <p className="section-label">Upcoming masterclass</p>
+          <h2 id="upcoming-heading" className="section-title">November 3–5, 2026</h2>
+          <p className="join-detail">Join us live at noon Central each day. Prepare your workbook before the first session.</p>
+          <section className="community-strip mastery-section" aria-labelledby="mastery-heading">
+            <h2 id="mastery-heading" className="community-title">Ready for your next step?</h2>
+            <a className="community-button mastery-button" href="https://fbfmastery.com" target="_blank" rel="noopener noreferrer">Apply for Mastery</a>
+          </section>
         </div>
       </section>
 
