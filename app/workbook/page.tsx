@@ -112,7 +112,7 @@ export default function WorkbookPage() {
         <div className={`${styles.container} ${styles.workbookHeroLayout} ${styles.workbookHeroCoverLayout}`}>
           <div className={styles.workbookHeroCopy}>
             <Image src="/images/fbf-logo-white.png" alt="Fueled By Fire" width={154} height={72} className={styles.workbookLogo} priority />
-            <p className={styles.heroKicker}>Kingdom Intelligence Masterclass</p>
+            <p className={styles.heroKicker}>November 3–5, 2026 · Kingdom Intelligence Masterclass</p>
             <h1 className={styles.workbookTitle}>Get Your Masterclass Workbook</h1>
             <p className={styles.heroDescription}>
               Complete the short intake below to unlock the workbook and prepare for the live sessions.

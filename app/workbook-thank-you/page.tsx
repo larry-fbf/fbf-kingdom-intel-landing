@@ -15,9 +15,9 @@ export default function WorkbookThankYouPage() {
         <div className={`${styles.container} ${styles.thankYouShell}`}>
           <Image src="/images/fbf-logo-white.png" alt="Fueled By Fire" width={154} height={72} className={styles.workbookLogo} priority />
           <p className={styles.heroKicker}>Kingdom Intelligence Masterclass</p>
-          <h1 className={styles.workbookTitle}>You’re in.</h1>
+          <h1 className={styles.workbookTitle}>Your workbook is ready.</h1>
           <p className={styles.heroDescription}>
-            Your workbook is ready. Download it now, then open the event dashboard so you can add the event to your calendar, access replays, use the chat, and stay connected during the masterclass.
+            Your workbook is ready. Download it now, then open the event dashboard for the November 3–5 schedule, Zoom registration, and community links. A workbook request does not confirm Zoom or VIP registration.
           </p>
 
           <div className={styles.thankYouActions}>

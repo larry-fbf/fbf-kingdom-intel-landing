@@ -8,7 +8,7 @@ const ts = require('typescript');
 const source = readFileSync(new URL('../app/api/workbook/route.ts', import.meta.url), 'utf8');
 const code = ts.transpileModule(source, {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const payload = {firstName:' Test ',lastName:' Person ',email:' TEST@example.invalid ',phone:'3122346789',company:'Test',whichOfTheFollowingBestDescribesYou:'CEO',oneThing:'Test',outcomeImpact:'Test',otherDecisionMakers:'None',wantResults:'ASAP',helpAreas:['Operations'],attendedWorkshop:'Yes',monthlyIncomeRange:'Under $10K/month'};
-function harness(configured = true, failAt = '', ambiguous: boolean | 'claim' | 'receipt' | 'receipt-read' | 'slack' = false) {
+function harness(configured = true, failAt = '', ambiguous: boolean | 'claim' | 'receipt' | 'receipt-read' | 'slack' = false, eventOption = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa') {
  const events = new Set(['earlier-event']);
  const calls: string[] = [];
  const ledger = new Map<string, {id:{entry_id:string},entry_values:Record<string, {value:string}[]>}>();
@@ -33,7 +33,7 @@ function harness(configured = true, failAt = '', ambiguous: boolean | 'claim' | 
  };
  const loadRoute = () => {
  const module={exports:{} as {POST:(req:unknown)=>Promise<Response>}};
- vm.runInNewContext(code,{module,exports:module.exports,require:(id:string)=>id==='next/server'?{NextResponse:{json:Response.json}}:require(id),process:{env:{ATTIO_API_KEY:configured?'synthetic':'',SLACK_WORKBOOK_WEBHOOK_URL:'https://slack.invalid/test'}},fetch,console:{error:()=>{}},AbortSignal});
+ vm.runInNewContext(code,{module,exports:module.exports,require:(id:string)=>id==='next/server'?{NextResponse:{json:Response.json}}:require(id),process:{env:{ATTIO_KIM_NOVEMBER_2026_EVENT_OPTION_ID:eventOption,ATTIO_API_KEY:configured?'synthetic':'',SLACK_WORKBOOK_WEBHOOK_URL:'https://slack.invalid/test'}},fetch,console:{error:()=>{}},AbortSignal});
  return module.exports;
  };
  // Every request runs in a new module context, sharing only the mocked external provider.
@@ -55,7 +55,13 @@ test('transient attribution and reordered fields do not bypass retry identity',a
 test('Attio failures are not success',async()=>{
  for(const h of [harness(false),harness(true,'matching_attribute'),harness(true,'/records/person'),harness(true,'/notes')]) {const r=await h.post();assert.equal(r.status,503);assert.equal((await r.json()).ok,false);}
 });
-test('workbook additively appends the existing September option',async()=>{
+test('workbook additively appends the configured November option',async()=>{
  const h=harness();assert.equal((await h.post()).status,200);
- assert.deepEqual([...h.events],['earlier-event','ede3e1e7-e233-4e5b-9b61-fcf315c31e1d']);
+ assert.deepEqual([...h.events],['earlier-event','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa']);
+});
+
+test('missing workbook cohort cannot write CRM or delivery ledger', async () => {
+ const h=harness(true,'',false,'');
+ assert.equal((await h.post()).status,503);
+ assert.equal(h.calls.length,0);
 });

@@ -4,7 +4,7 @@ import { useId, useRef, useState } from "react";
 import { trackClarityEvent } from "../lib/clarity-events";
 
 const SHARE_TEXT =
-  "Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass September 15-17 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/";
+  "Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass November 3-5 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/";
 
 export default function ShareMasterclassButton() {
   const [isOpen, setIsOpen] = useState(false);

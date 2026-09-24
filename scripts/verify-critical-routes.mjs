@@ -71,8 +71,8 @@ if (missingMetadata.length > 0) {
 }
 
 const requiredRegistrationPageMarkers = [
-  "September 15&ndash;17, 2026",
-  "September 15&ndash;17 @ 12 PM Central",
+  "November 3&ndash;5, 2026",
+  "November 3&ndash;5 @ 12 PM Central",
   "/api/register",
   "SAVE MY SEAT",
 ];
@@ -107,7 +107,7 @@ if (missingThankYouMarkers.length > 0) {
 const requiredVipMarkers = [
   "1222112622",
   "VIP 2026 (Evergreen)",
-  "Yes, I want VIP for $97",
+  "November VIP checkout is not open yet",
 ];
 
 const missingVipMarkers = requiredVipMarkers.filter((marker) => !vipUpsellPage.includes(marker));
@@ -119,16 +119,16 @@ if (missingVipMarkers.length > 0) {
 
 const requiredDashboardMarkers = [
   "Event Dashboard",
-  "September 15-17 | 12 PM Central",
+  "November 3-5 | 12 PM Central",
   "VIP",
   "action-date",
-  "September 16-17 | 7 PM Central",
+  "November 4-5 | 7 PM Central",
   "ShareMasterclassButton",
   "Join the Community",
   "Priority dashboard workflow",
   "kim_dashboard_whatsapp_click",
-  "Your seat is ready. Join us live for three days of Kingdom-centered strategy",
-  "Enter the Live Room",
+  "Join us November 3–5 for three days of Kingdom-centered strategy",
+  "Register for November on Zoom",
   "Say hello, meet the other business owners in the room",
   "Get session reminders, links, and extra free resources sent straight to your phone",
 ];
