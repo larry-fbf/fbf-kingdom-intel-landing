@@ -19,24 +19,6 @@ const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8w
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const WHATSAPP_URL = "https://whatsapp.com/channel/0029VbDiXJN7T8bbQGSxqt2H";
 
-const replays = [
-  {
-    day: "Day 1",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1227087561",
-  },
-  {
-    day: "Day 2",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1227491620",
-  },
-  {
-    day: "Day 3",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1227853840",
-  },
-];
-
 export default function DashboardPage() {
   return (
     <main className="dashboard-shell">
@@ -906,38 +888,6 @@ export default function DashboardPage() {
               </div>
               <span className="action-cta">Join WhatsApp</span>
             </TrackedClarityLink>
-          </div>
-        </div>
-      </section>
-
-      <section className="replays-section">
-        <div className="dashboard-wrap">
-          <div className="replay-head">
-            <div>
-              <p className="section-label">Replay Library</p>
-              <h2 className="section-title">Session Replays</h2>
-            </div>
-            <p className="replay-note">
-              Replays will be posted here after each live session is processed.
-            </p>
-          </div>
-
-          <div className="replay-grid">
-            {replays.map((replay) => (
-              <article className="replay-card" key={replay.day}>
-                <p className="replay-day">{replay.day}</p>
-                <h3 className="replay-title">{replay.title}</h3>
-                {replay.videoUrl && (
-                  <iframe
-                    src={replay.videoUrl}
-                    title={`${replay.day} replay`}
-                    style={{ width: "100%", aspectRatio: "16 / 9", border: 0, display: "block", marginTop: "16px" }}
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                  />
-                )}
-              </article>
-            ))}
           </div>
         </div>
       </section>
