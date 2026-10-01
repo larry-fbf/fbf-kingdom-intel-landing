@@ -179,7 +179,7 @@ function HeroVsl() {
 
 function RegistrationCard() {
   const [form, setForm] = useState<RegistrationForm>(initialForm);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
 
   const update = (field: keyof RegistrationForm, value: string | boolean) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -194,31 +194,18 @@ function RegistrationCard() {
 
     setStatus("loading");
     try {
-      await postWithTimeout("/api/workshop/register", {
+      const result = await postWithTimeout("/api/workshop/register", {
         ...form,
         event: "Kingdom Intel Workshop - October 13, 2026",
         sourcePath: window.location.pathname,
         queryString: window.location.search,
       });
-      setStatus("success");
-      setForm(initialForm);
+      if (result?.ok !== true) throw new Error("Registration not confirmed");
+      window.location.assign("/workshop/thank-you");
     } catch {
       setStatus("error");
     }
   };
-
-  if (status === "success") {
-    return (
-      <div id="registration" className={`${styles.registrationCard} ${styles.successCard}`}>
-        <p className={styles.eyebrow}>You Are Registered</p>
-        <h2>You Are In for October 13, 2026.</h2>
-        <p>
-          Watch your email for Zoom access and reminders. Teaching starts at <WorkshopTime /> and runs
-          for 60 minutes, with time afterward for open Q&A.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <form id="registration" className={styles.registrationCard} onSubmit={submit}>

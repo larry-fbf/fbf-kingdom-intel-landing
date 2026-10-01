@@ -8,6 +8,7 @@ const generatedRoutes = new Set(Object.values(manifest));
 const criticalRoutes = [
   "/",
   "/workshop",
+  "/workshop/thank-you",
   "/api/workshop/register",
   "/api/register",
   "/thank-you",
