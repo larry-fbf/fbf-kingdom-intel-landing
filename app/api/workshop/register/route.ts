@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
-const ATTIO_WORKSHOP_LIST_ID = process.env.ATTIO_KI_WORKSHOP_AUGUST_2026_LIST_ID || "";
+const ATTIO_WORKSHOP_LIST_ID = process.env.ATTIO_KI_WORKSHOP_OCTOBER_2026_LIST_ID || "";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const BREVO_WORKSHOP_LIST_ID = Number(process.env.BREVO_KI_WORKSHOP_AUGUST_2026_LIST_ID || "0");
+const BREVO_WORKSHOP_LIST_ID = Number(process.env.BREVO_KI_WORKSHOP_OCTOBER_2026_LIST_ID || "0");
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
 const SIMPLETEXTING_WORKSHOP_LIST_ID =
   process.env.SIMPLETEXTING_KI_WORKSHOP_AUGUST_2026_LIST_ID || "";
@@ -271,11 +271,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
+    // No fallback to a previous workshop: missing event configuration must fail closed.
+    if (!ATTIO_API_KEY || !ATTIO_WORKSHOP_LIST_ID || !BREVO_API_KEY ||
+        !Number.isSafeInteger(BREVO_WORKSHOP_LIST_ID) || BREVO_WORKSHOP_LIST_ID <= 0) {
+      return NextResponse.json({ ok: false, error: "Workshop registration is temporarily unavailable. Please try again." }, { status: 503 });
+    }
+
     const contact = { email, firstName, lastName, phone };
     const results: Record<string, unknown> = {};
 
-    results.attio = await captureIntegration("Attio", () => upsertAttioContact(payload, contact));
-    results.brevo = await captureIntegration("Brevo", () => upsertBrevoContact(contact));
+    const attio = await captureIntegration("Attio", () => upsertAttioContact(payload, contact));
+    const brevo = await captureIntegration("Brevo", () => upsertBrevoContact(contact));
+    results.attio = attio;
+    results.brevo = brevo;
+
+    // A confirmation means BOTH event lists accepted the registrant. Partial writes
+    // are safe to retry (person/list/contact upserts); do not trigger SMS on failure.
+    if (attio.skipped || "error" in attio || brevo.skipped || "error" in brevo) {
+      return NextResponse.json({ ok: false, error: "We could not finish your registration. Please try again." }, { status: 503 });
+    }
 
     if (payload.agreed && phone) {
       results.simpleTexting = await captureIntegration("SimpleTexting", () => upsertSimpleTextingContact(contact));
