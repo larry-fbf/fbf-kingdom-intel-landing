@@ -4,12 +4,12 @@ import WorkshopLanding from "./WorkshopLanding";
 const workshopOgImage =
   "https://www.kingdomintel.com/images/kingdom-intel-workshop-og.jpg?v=20260811-called-stuck";
 const workshopTitle =
-  "Called but Stuck? | Kingdom Intel Workshop | Aug 18th 11am CT";
+  "Called but Stuck? | Kingdom Intel Workshop | Oct 13, 2026 11am CT";
 
 export const metadata: Metadata = {
   title: workshopTitle,
   description:
-    "A free live workshop for Kingdom CEOs who are working hard and not gaining traction. Tuesday, August 18 at 11am CT / 12pm ET.",
+    "A free live workshop for Kingdom CEOs who are working hard and not gaining traction. Tuesday, October 13, 2026 at 11am CT / 12pm ET.",
   alternates: {
     canonical: "https://www.kingdomintel.com/workshop",
   },

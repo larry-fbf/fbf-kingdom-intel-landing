@@ -98,7 +98,7 @@ function buildNote(payload: WorkshopRegistrationPayload, contact: { email: strin
     `Email: ${contact.email}`,
     `Phone: ${contact.phone || "Not provided"}`,
     `Leader type: ${clean(payload.leaderType) || "Not provided"}`,
-    "Event: Tuesday, August 18 at 11am CT / 12pm ET",
+    "Event: Tuesday, October 13, 2026 at 11am CT / 12pm ET",
     `SMS consent: ${payload.agreed ? "yes" : "no"}`,
     `Source path: ${clean(payload.sourcePath) || "Not provided"}`,
     `Query string: ${clean(payload.queryString) || "Not provided"}`,
@@ -187,7 +187,7 @@ async function upsertBrevoContact(contact: { email: string; firstName: string; l
   const attributes: Record<string, string> = {
     FIRSTNAME: contact.firstName,
     LASTNAME: contact.lastName,
-    WORKSHOP: "Called, But Stuck - August 18",
+    WORKSHOP: "Called, But Stuck - October 13, 2026",
   };
 
   if (contact.phone) attributes.SMS = contact.phone;
@@ -227,7 +227,7 @@ async function upsertSimpleTextingContact(contact: { email: string; firstName: s
     firstName: contact.firstName,
     lastName: contact.lastName,
     email: contact.email,
-    comment: "Called, But Stuck workshop - August 18 registration",
+    comment: "Called, But Stuck workshop - October 13, 2026 registration",
   });
 
   const res = await fetch("https://app2.simpletexting.com/v1/group/contact/add", {
