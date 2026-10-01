@@ -21,8 +21,8 @@ const initialForm: RegistrationForm = {
   agreed: false,
 };
 
-const EVENT_DATE_LABEL = "Tuesday, August 18";
-const WORKSHOP_START_UTC = "2026-08-18T16:00:00.000Z";
+const EVENT_DATE_LABEL = "Tuesday, October 13, 2026";
+const WORKSHOP_START_UTC = "2026-10-13T16:00:00.000Z";
 const WORKSHOP_TIME_LABEL = "11am CT / 12pm ET";
 
 const takeaways = [
@@ -196,7 +196,7 @@ function RegistrationCard() {
     try {
       await postWithTimeout("/api/workshop/register", {
         ...form,
-        event: "Kingdom Intel Workshop - August 18",
+        event: "Kingdom Intel Workshop - October 13, 2026",
         sourcePath: window.location.pathname,
         queryString: window.location.search,
       });
@@ -211,7 +211,7 @@ function RegistrationCard() {
     return (
       <div id="registration" className={`${styles.registrationCard} ${styles.successCard}`}>
         <p className={styles.eyebrow}>You Are Registered</p>
-        <h2>You Are In for August 18.</h2>
+        <h2>You Are In for October 13, 2026.</h2>
         <p>
           Watch your email for Zoom access and reminders. Teaching starts at <WorkshopTime /> and runs
           for 60 minutes, with time afterward for open Q&A.
@@ -452,7 +452,7 @@ export default function WorkshopLanding() {
               </div>
               <div className={styles.hostPanel}>
                 <span>Free Live Workshop</span>
-                <strong>August 18</strong>
+                <strong>October 13, 2026</strong>
                 <p>
                   <WorkshopTime />. Teaching runs for 60 minutes, with open Q&A afterward.
                 </p>

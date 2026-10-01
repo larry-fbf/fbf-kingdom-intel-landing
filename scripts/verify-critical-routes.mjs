@@ -38,7 +38,7 @@ const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "Mi
 
 const requiredWorkshopMarkers = [
   "Free Kingdom Intelligence Workshop",
-  "Tuesday, August 18",
+  "Tuesday, October 13, 2026",
   "/api/workshop/register",
   "Called But Stuck?",
 ];
@@ -46,7 +46,7 @@ const requiredWorkshopMarkers = [
 const requiredWorkshopMetadata = [
   "https://www.kingdomintel.com/workshop",
   "https://www.kingdomintel.com/images/kingdom-intel-workshop-og.jpg",
-  "Called but Stuck? | Kingdom Intel Workshop | Aug 18th 11am CT",
+  "Called but Stuck? | Kingdom Intel Workshop | Oct 13, 2026 11am CT",
   "width: 1200",
   "height: 630",
 ];
