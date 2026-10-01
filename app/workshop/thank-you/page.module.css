@@ -1,0 +1,65 @@
+.page {
+  background: radial-gradient(ellipse at 50% 0, rgba(189, 150, 89, 0.16), transparent 48%), var(--black);
+}
+
+.container {
+  width: min(calc(100% - 40px), 880px);
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--gold-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.brand img { width: 76px; height: auto; }
+.brand span { max-width: 230px; line-height: 1.5; }
+.confirmation { padding: 40px 0 32px; text-align: center; }
+.check {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 22px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-2);
+  font-size: 28px;
+}
+.page h1 { margin: 12px 0 16px; font-size: clamp(38px, 6vw, 64px); line-height: 1.08; }
+.lead { color: #ded8ce; font-size: 19px; line-height: 1.6; }
+.event { margin-top: 28px; padding: 24px 16px; border-block: 1px solid rgba(189, 150, 89, 0.35); line-height: 1.8; }
+.date { color: var(--gold-2); font-size: 23px; font-weight: 700; }
+.event p:last-child { margin-top: 8px; color: #ded8ce; }
+.nextSteps { padding: 32px; background: var(--paper); color: var(--ink); border-radius: 16px; }
+.nextSteps h2 { font-size: 28px; line-height: 1.25; }
+.steps { display: grid; gap: 24px; list-style: none; margin-top: 28px; }
+.steps li { display: flex; gap: 18px; align-items: flex-start; }
+.number { flex: 0 0 36px; color: #806031; font-size: 23px; font-weight: 700; line-height: 1.2; }
+.steps h3 { font-size: 19px; margin-bottom: 7px; }
+.steps p { color: var(--muted); font-size: 17px; line-height: 1.55; }
+.footer { padding-top: 28px; text-align: center; font-size: 14px; line-height: 1.6; }
+.footer a { display: inline-block; padding: 10px; color: var(--gold-2); text-decoration: underline; text-underline-offset: 4px; }
+.footer a:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 4px; }
+.footer p { margin-top: 14px; color: #b0aaa0; font-size: 12px; }
+
+@media (max-width: 540px) {
+  .container { padding-top: 24px; }
+  .brand { gap: 14px; font-size: 10px; }
+  .brand img { width: 60px; }
+  .confirmation { padding-top: 32px; }
+  .lead { font-size: 17px; }
+  .date { font-size: 20px; }
+  .nextSteps { padding: 26px 20px; }
+  .nextSteps h2 { font-size: 25px; }
+  .steps li { gap: 10px; }
+  .number { flex-basis: 28px; font-size: 20px; }
+}
