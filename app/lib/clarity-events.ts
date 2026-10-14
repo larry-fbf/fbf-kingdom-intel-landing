@@ -6,7 +6,7 @@ type ClarityFn = {
 };
 
 const DEFAULT_TAGS: ClarityTags = {
-  funnel: "kim_sept_2026",
+  funnel: "kim_nov_2026",
 };
 
 export function trackClarityEvent(eventName: string, tags: ClarityTags = {}) {

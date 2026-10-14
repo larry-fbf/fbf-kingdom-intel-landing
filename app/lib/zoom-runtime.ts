@@ -9,6 +9,15 @@ export async function registerWebsiteZoom(contact: ZoomContact, env: Record<stri
     if (required.some(name => !env[name])) return { status: "unavailable" };
     const target = JSON.parse(env.ZOOM_SIGNUP_TARGET!) as ZoomTarget;
     if (![target.webinarId, target.topic, target.timezone, target.occurrenceId, target.startTime].every(value => typeof value === "string" && value)) return { status: "unavailable" };
+    // Bind this website campaign to the provider metadata verified October 14.
+    if (target.webinarId !== "81823603475" || target.topic !== "Kingdom Intelligence Masterclass" ||
+        target.timezone !== "America/Chicago" || target.occurrenceId !== "1793901600000" ||
+        target.startTime !== "2026-11-05T18:00:00Z") return { status: "unavailable" };
+    target.occurrences = [
+      { occurrenceId: "1793728800000", startTime: "2026-11-03T18:00:00Z" },
+      { occurrenceId: "1793815200000", startTime: "2026-11-04T18:00:00Z" },
+      { occurrenceId: "1793901600000", startTime: "2026-11-05T18:00:00Z" },
+    ];
     const provider = createZoomProvider({ accountId: env.ZOOM_ACCOUNT_ID!, clientId: env.ZOOM_CLIENT_ID!, clientSecret: env.ZOOM_CLIENT_SECRET! });
     return await registerZoomSignup(contact, target, provider);
   } catch { return { status: "unavailable" }; }

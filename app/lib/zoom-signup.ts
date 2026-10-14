@@ -1,7 +1,7 @@
 // Best-effort direct registration. No durable deduplication or automatic retry.
 // Native Zoom confirmation owns join-link delivery; never expose personal URLs.
 export type ZoomContact = { email: string; firstName: string; lastName: string; agreed: unknown };
-export type ZoomTarget = { webinarId: string; topic: string; timezone: string; occurrenceId: string; startTime: string };
+export type ZoomTarget = { webinarId: string; topic: string; timezone: string; occurrenceId: string; startTime: string; occurrences?: { occurrenceId: string; startTime: string }[] };
 export type ZoomOutcome = { status: "registered" | "pending" | "held" | "unavailable" | "not_consented" };
 export type ZoomRow = { id: string; email: string; first_name?: string; last_name?: string; status: string };
 export interface ZoomProvider {
@@ -38,6 +38,8 @@ async function run(contact: ZoomContact, target: ZoomTarget, provider: ZoomProvi
     if (!accountMatches || String(w.id) !== target.webinarId || w.topic !== target.topic || w.type !== 9 || w.timezone !== target.timezone ||
         s?.registration_type !== 1 || s?.approval_type !== 0 || s?.registrants_confirmation_email !== true || s?.meeting_authentication !== false || s?.close_registration !== false ||
         !Array.isArray(w.occurrences) || !w.occurrences.some((o: any) => o.occurrence_id === target.occurrenceId && o.start_time === target.startTime && o.status === "available" && Date.parse(o.start_time) > Date.now()) ||
+        target.occurrences?.some(expected => Date.parse(expected.startTime) > Date.now() &&
+          !w.occurrences.some((o: any) => o.occurrence_id === expected.occurrenceId && o.start_time === expected.startTime && o.status === "available")) ||
         !Array.isArray(q.questions) || !Array.isArray(q.custom_questions) || q.custom_questions.length !== 0 ||
         q.questions.some((question: any) => question.required !== false && !["email", "first_name", "last_name"].includes(question.field_name))) return { status: "held" };
     const rows: ZoomRow[] = [];

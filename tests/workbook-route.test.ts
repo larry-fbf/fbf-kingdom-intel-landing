@@ -55,7 +55,7 @@ test('transient attribution and reordered fields do not bypass retry identity',a
 test('Attio failures are not success',async()=>{
  for(const h of [harness(false),harness(true,'matching_attribute'),harness(true,'/records/person'),harness(true,'/notes')]) {const r=await h.post();assert.equal(r.status,503);assert.equal((await r.json()).ok,false);}
 });
-test('workbook additively appends the existing September option',async()=>{
+test('workbook additively appends the existing November option',async()=>{
  const h=harness();assert.equal((await h.post()).status,200);
- assert.deepEqual([...h.events],['earlier-event','ede3e1e7-e233-4e5b-9b61-fcf315c31e1d']);
+ assert.deepEqual([...h.events],['earlier-event','e4039e80-b639-4481-b24d-c00aa5b6390d']);
 });

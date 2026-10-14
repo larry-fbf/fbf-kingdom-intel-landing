@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getLaunchConfig } from "../../lib/launch-config";
 import { registerWebsiteZoom } from "../../lib/zoom-runtime";
 import { captureIntegration, classifyRegistrationResults } from "../../lib/registration-outcome";
 import { hasAffirmativeConsent } from "../../lib/registration-input";
@@ -9,32 +10,13 @@ import {
 } from "../../lib/registration-confirmation";
 import { registrationTimeZoneFromPayloadAndHeaders } from "../../lib/registration-timezone";
 
+const launch = getLaunchConfig('regular');
 const ATTIO_API_KEY = process.env.ATTIO_API_KEY || "";
-const ATTIO_MASTERCLASS_LIST_ID =
-  process.env.ATTIO_KIM_SEPTEMBER_2026_LIST_ID ||
-  process.env.ATTIO_KIM_JULY_2026_LIST_ID ||
-  process.env.ATTIO_MASTERCLASS_LIST_ID ||
-  "979ff89f-4f9e-4af6-828f-9cfd48be52de";
+const ATTIO_MASTERCLASS_LIST_ID = launch?.attioList || "";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const BREVO_MASTERCLASS_LIST_ID = Number(
-  process.env.BREVO_KIM_SEPTEMBER_2026_LIST_ID ||
-    process.env.BREVO_KIM_JULY_2026_LIST_ID ||
-    process.env.BREVO_MASTERCLASS_LIST_ID ||
-    "19",
-);
+const BREVO_MASTERCLASS_LIST_ID = launch?.brevoList || 0;
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
-const SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID = process.env.SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID || "";
-const SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME = process.env.SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME || "";
-const SIMPLETEXTING_MASTERCLASS_LIST_ID =
-  SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID ||
-  process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_ID ||
-  process.env.SIMPLETEXTING_MASTERCLASS_LIST_ID ||
-  "6a3186065d1d20e476b5c75d";
-const SIMPLETEXTING_MASTERCLASS_LIST_NAME =
-  SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME ||
-  process.env.SIMPLETEXTING_KIM_JULY_2026_LIST_NAME ||
-  process.env.SIMPLETEXTING_MASTERCLASS_LIST_NAME ||
-  "K.I.M. - September 2026";
+const SIMPLETEXTING_MASTERCLASS_LIST_ID = launch?.smsList || "";
 const INTEGRATION_TIMEOUT_MS = 10000;
 
 type RegistrationPayload = {
@@ -173,7 +155,7 @@ async function upsertAttioContact(contact: Required<Pick<RegistrationPayload, "e
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ data: { values: { events_registered: ["K.I.M Sept 2026"] } } }),
+      body: JSON.stringify({ data: { values: { events_registered: [launch!.eventOption] } } }),
     },
     "Attio event registration"
   );
@@ -235,11 +217,7 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
 }
 
 async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
-  const simpleTextingGroup =
-    SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_ID ||
-    SIMPLETEXTING_KIM_SEPTEMBER_2026_LIST_NAME ||
-    SIMPLETEXTING_MASTERCLASS_LIST_ID ||
-    SIMPLETEXTING_MASTERCLASS_LIST_NAME;
+  const simpleTextingGroup = SIMPLETEXTING_MASTERCLASS_LIST_ID;
   if (!SIMPLETEXTING_API_KEY || !simpleTextingGroup || !contact.phone) return { skipped: true };
 
   const body = new URLSearchParams({
@@ -249,7 +227,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
     firstName: contact.firstName,
     lastName: contact.lastName,
     email: contact.email,
-    comment: "Kingdom Intelligence Masterclass - September 2026 registration",
+    comment: "Kingdom Intelligence Masterclass - November 2026 registration",
   });
 
   const res = await fetch("https://app2.simpletexting.com/v1/group/contact/add", {
@@ -294,6 +272,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: "Consent is required", registrationId }, { status: 400 });
     }
 
+    if (!launch || !ATTIO_API_KEY || !BREVO_API_KEY || !SIMPLETEXTING_API_KEY || !getRegistrationConfirmationSecret()) {
+      return NextResponse.json({ ok: false, error: "Launch configuration is incomplete. Please contact support.", retryable: false, registrationId }, { status: 503 });
+    }
     const contact = { email, firstName, lastName, phone, timeZone };
     const [attio, brevo, simpleTexting, zoom] = await Promise.all([
       captureIntegration("Attio", () => upsertAttioContact(contact)),
@@ -310,7 +291,7 @@ export async function POST(req: NextRequest) {
     if (!outcome.accepted) {
       console.error("Registration was not durably saved", { registrationId, failedIntegrations: outcome.failedIntegrations });
       return NextResponse.json(
-        { ok: false, error: "Registration could not be saved. Please try again.", retryable: true, registrationId },
+        { ok: false, error: "We could not confirm registration. Please check your email or contact support before submitting again.", retryable: false, registrationId },
         { status: 503 },
       );
     }
@@ -326,7 +307,7 @@ export async function POST(req: NextRequest) {
     if (!confirmationSecret) {
       console.error("Registration confirmation secret is unavailable", { registrationId });
       return NextResponse.json(
-        { ok: false, error: "Registration was saved, but confirmation is unavailable. Please try again.", retryable: true, registrationId },
+        { ok: false, error: "Registration was saved, but confirmation is unavailable. Please check your email or contact support; do not submit again.", retryable: false, registrationId },
         { status: 503 },
       );
     }
@@ -345,7 +326,7 @@ export async function POST(req: NextRequest) {
   } catch (e) {
     console.error("Registration request failed", { registrationId, error: e });
     return NextResponse.json(
-      { ok: false, error: "Registration could not be processed. Please try again.", retryable: true, registrationId },
+      { ok: false, error: "We could not confirm registration. Please check your email or contact support before submitting again.", retryable: false, registrationId },
       { status: 500 },
     );
   }
