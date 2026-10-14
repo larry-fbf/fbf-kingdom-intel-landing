@@ -13,3 +13,12 @@ test('runtime needs explicit server-only credentials and target, never a default
     assert.equal(calls, 0);
   } finally { globalThis.fetch = original; }
 });
+
+test('runtime rejects a different campaign before any network request', async () => {
+ const original=globalThis.fetch; let calls=0;
+ globalThis.fetch=async()=>{calls++;throw Error('blocked');};
+ try {
+  const env={ZOOM_ACCOUNT_ID:'fixture',ZOOM_CLIENT_ID:'fixture',ZOOM_CLIENT_SECRET:'fixture',ZOOM_SIGNUP_TARGET:JSON.stringify({webinarId:'87621606558',topic:'Kingdom Intelligence Masterclass',timezone:'America/Chicago',occurrenceId:'old',startTime:'2099-01-01T17:00:00Z'})};
+  assert.deepEqual(await registerWebsiteZoom(contact,env),{status:'unavailable'}); assert.equal(calls,0);
+ } finally {globalThis.fetch=original;}
+});

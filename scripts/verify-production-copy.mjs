@@ -4,9 +4,9 @@ const checks = [
   {
     file: "app/page.tsx",
     mustInclude: [
-      "September 15&ndash;17, 2026",
-      "September 15&ndash;17 @ 12 PM Central",
-      "September 15\\u201317, 2026",
+      "November 3&ndash;5, 2026",
+      "November 3&ndash;5 @ 12 PM Central",
+      "November 3\\u20135, 2026",
     ],
     mustNotMatch: [
       /June\s*9/i,
@@ -20,7 +20,7 @@ const checks = [
   {
     file: "app/vip/VIPUpsellPage.tsx",
     mustInclude: [
-      "September 16th and 17th",
+      "November 4th and 5th",
       "Lifetime access to the K.I. Masterclass replays",
       "The S.W.E.E.T. Spot Audit",
       "VIP rooms",

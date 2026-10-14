@@ -120,3 +120,12 @@ test('POST timeout is pending and late success never triggers a retry or readbac
   assert.deepEqual(await registerZoomSignup(contact, target, f.provider, controller.signal), { status: 'pending' });
   assert.equal(f.calls.filter(x => x === 'POST').length, 1); assert.equal(f.calls.includes('GET'), false);
 });
+
+test('all advertised remaining occurrences must match before registering the series', async () => {
+ const f=fixture();
+ const series={...target,occurrences:[{occurrenceId:'day1',startTime:'2099-09-15T17:00:00Z'},{occurrenceId:target.occurrenceId,startTime:target.startTime}]};
+ assert.equal((await registerZoomSignup(contact,series,f.provider)).status,'held');
+ assert.equal(f.calls.includes('POST'),false);
+ f.metadata.webinar.occurrences.push({occurrence_id:'day1',start_time:'2099-09-15T17:00:00Z',status:'available'});
+ assert.equal((await registerZoomSignup(contact,series,f.provider)).status,'registered');
+});

@@ -146,7 +146,7 @@ export default async function ThankYou() {
             color: "#FFFFFF",
           }}
         >
-          You are registered | September 15-17, 2026 | 12:00 PM Central | Free live online event
+          You are registered | November 3-5, 2026 | 12:00 PM Central | Free live online event
         </p>
       </div>
 

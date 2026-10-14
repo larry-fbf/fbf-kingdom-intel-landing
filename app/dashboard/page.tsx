@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
 const REGISTRATION_URL = "https://www.kingdomintel.com/";
-const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_36fBt-YSQ5qZgI0h8waQcQ";
+const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g";
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const WHATSAPP_URL = "https://whatsapp.com/channel/0029VbDiXJN7T8bbQGSxqt2H";
 
@@ -735,7 +735,7 @@ export default function DashboardPage() {
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
             <div className="schedule-pill">
-              <span>September 15-17 | 12 PM Central</span>
+              <span>November 3-5 | 12 PM Central</span>
             </div>
             <div className="top-action-group">
               <ShareMasterclassButton />
@@ -773,7 +773,7 @@ export default function DashboardPage() {
                   Bring your workbook, arrive a few minutes early, and come prepared to turn insight
                   into action.
                 </p>
-                <div className="date-pill">September 15 to 17 | 12 PM Central</div>
+                <div className="date-pill">November 3 to 5 | 12 PM Central</div>
               </div>
               <div>
                 <TrackedClarityLink
@@ -806,7 +806,7 @@ export default function DashboardPage() {
                 <div>
                   <p className="action-eyebrow">Workbook</p>
                   <h2 className="action-title">Grab Your Workbook</h2>
-                  <p className="action-detail">Complete the form and get your workbook sent to you.</p>
+                  <p className="action-detail">Complete the form and download your workbook.</p>
                 </div>
               </div>
               <span className="action-cta">Get Workbook</span>
@@ -827,7 +827,7 @@ export default function DashboardPage() {
                   <p className="action-detail">
                     Unlock the VIP room, direct coaching, bonuses, and replay access.
                   </p>
-                  <div className="action-date">September 16-17 | 7 PM Central</div>
+                  <div className="action-date">November 4-5 | 7 PM Central</div>
                 </div>
               </div>
               <span className="action-cta">Upgrade to VIP</span>
