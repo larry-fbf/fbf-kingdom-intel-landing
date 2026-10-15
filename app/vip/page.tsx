@@ -4,7 +4,7 @@ import VIPUpsellPage from "./VIPUpsellPage";
 export const metadata: Metadata = {
   title: "VIP Upgrade | Kingdom Intelligence Masterclass",
   description:
-    "Upgrade to VIP for the November 4th and 5th VIP rooms and FBF Vault recordings for the Kingdom Intelligence Masterclass.",
+    "Upgrade to VIP for the November 11th and 12th VIP rooms and FBF Vault recordings for the Kingdom Intelligence Masterclass.",
   alternates: {
     canonical: "https://www.kingdomintel.com/vip",
   },
