@@ -735,7 +735,7 @@ export default function DashboardPage() {
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
             <div className="schedule-pill">
-              <span>November 3-5 | 12 PM Central</span>
+              <span>November 10-12 | 12 PM Central</span>
             </div>
             <div className="top-action-group">
               <ShareMasterclassButton />
@@ -773,7 +773,7 @@ export default function DashboardPage() {
                   Bring your workbook, arrive a few minutes early, and come prepared to turn insight
                   into action.
                 </p>
-                <div className="date-pill">November 3 to 5 | 12 PM Central</div>
+                <div className="date-pill">November 10 to 12 | 12 PM Central</div>
               </div>
               <div>
                 <TrackedClarityLink
@@ -827,7 +827,7 @@ export default function DashboardPage() {
                   <p className="action-detail">
                     Unlock the VIP room, direct coaching, bonuses, and replay access.
                   </p>
-                  <div className="action-date">November 4-5 | 7 PM Central</div>
+                  <div className="action-date">November 11-12 | 7 PM Central</div>
                 </div>
               </div>
               <span className="action-cta">Upgrade to VIP</span>
