@@ -6,6 +6,6 @@ export const launchEnv = {
  KI_NOVEMBER_2026_BREVO_LIST_ID: '26',
  KI_NOVEMBER_2026_SIMPLETEXTING_LIST_ID: '6ab168287c960c8a3dff232b',
  KI_NOVEMBER_2026_ZOOM_WEBINAR_ID: '81823603475',
- ZOOM_SIGNUP_TARGET: JSON.stringify({webinarId:'81823603475',topic:'Kingdom Intelligence Masterclass',timezone:'America/Chicago',occurrenceId:'fixture-day3',startTime:'2026-11-12T18:00:00Z',occurrences:[{occurrenceId:'fixture-day1',startTime:'2026-11-10T18:00:00Z'},{occurrenceId:'fixture-day2',startTime:'2026-11-11T18:00:00Z'},{occurrenceId:'fixture-day3',startTime:'2026-11-12T18:00:00Z'}]}),
+ ZOOM_SIGNUP_TARGET: JSON.stringify({webinarId:'81823603475',topic:'Kingdom Intelligence Masterclass',timezone:'America/Chicago',occurrenceId:'1793901600000',startTime:'2026-11-05T18:00:00Z'}),
  ZOOM_ACCOUNT_ID:'fixture', ZOOM_CLIENT_ID:'fixture', ZOOM_CLIENT_SECRET:'fixture',
 };
