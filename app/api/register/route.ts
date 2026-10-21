@@ -16,7 +16,10 @@ const ATTIO_MASTERCLASS_LIST_ID = launch?.attioList || "";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
 const BREVO_MASTERCLASS_LIST_ID = launch?.brevoList || 0;
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
-const SIMPLETEXTING_MASTERCLASS_LIST_ID = launch?.smsList || "";
+// The legacy v1 group endpoint takes a name; retain the exact v2 cohort ID gate.
+const SIMPLETEXTING_MASTERCLASS_GROUP = launch?.smsList === "6ab168287c960c8a3dff232b"
+  ? "K.I.M. - Nov 2026"
+  : "";
 const INTEGRATION_TIMEOUT_MS = 10000;
 
 type RegistrationPayload = {
@@ -217,7 +220,7 @@ async function upsertBrevoContact(contact: Required<Pick<RegistrationPayload, "e
 }
 
 async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPayload, "email" | "firstName" | "lastName">> & { phone: string }) {
-  const simpleTextingGroup = SIMPLETEXTING_MASTERCLASS_LIST_ID;
+  const simpleTextingGroup = SIMPLETEXTING_MASTERCLASS_GROUP;
   if (!SIMPLETEXTING_API_KEY || !simpleTextingGroup || !contact.phone) return { skipped: true };
 
   const body = new URLSearchParams({
@@ -243,11 +246,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
   const bodyText = await res.text();
   const responseBody = parseSimpleTextingResponse(bodyText);
 
-  if (responseBody.code === -607) {
-    return { skipped: false, alreadyInList: true };
-  }
-
-  if (!res.ok || (typeof responseBody.code === "number" && responseBody.code < 0)) {
+  if (!res.ok || responseBody?.code !== 1) {
     throw new Error(`SimpleTexting contact failed (${res.status}): ${JSON.stringify(responseBody)}`);
   }
 

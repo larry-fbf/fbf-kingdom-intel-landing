@@ -14,7 +14,7 @@ const payload = { email: " Alex@customer.invalid ", firstName: " Alex ", lastNam
 
 // Execute the real handler and helpers, replacing only the network boundary and
 // environment. No real credentials, requests, CRM writes, or messages are used.
-function harness({ configured = true, events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false, zoomStatus = "registered", zoomThrows = false } = {}) {
+function harness({ configured = true, events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false, zoomStatus = "registered", zoomThrows = false, smsResponse = '{"code":1}', smsStatus = 200, smsList = launchEnv.KI_NOVEMBER_2026_SIMPLETEXTING_LIST_ID } = {}) {
   const calls: { url: string; method: string; body: any }[] = [];
   const state = { events: [...events], registered: "Legacy event" };
   const warnings: unknown[][] = [];
@@ -34,10 +34,18 @@ function harness({ configured = true, events = ["Earlier event"], failPatch = fa
     if (url.includes("/objects/deals/records")) return Response.json({ data: { id: { record_id: "forbidden-deal" } } });
     if (url.includes("/lists/") && url.endsWith("/entries")) return Response.json({ data: {} });
     if (url === "https://api.brevo.com/v3/contacts") return Response.json({}, { status: failBrevo ? 503 : 201 });
-    if (url === "https://app2.simpletexting.com/v1/group/contact/add") return Response.json({ code: 1 });
+    if (url === "https://app2.simpletexting.com/v1/group/contact/add") {
+      assert.equal(method, "POST");
+      assert.equal(new Headers(init.headers).get("Content-Type"), "application/x-www-form-urlencoded");
+      // Legacy v1 requires the exact list name, not its v2 ID.
+      if (body.group !== "K.I.M. - Nov 2026") return Response.json({ code: -600, message: "Invalid list name" });
+      assert.ok(String(init.body).includes("group=K.I.M.+-+Nov+2026"));
+      assert.deepEqual(Object.keys(body).sort(), ["comment", "email", "firstName", "group", "lastName", "phone", "token"].sort(), "no subscription reset or other mutation fields");
+      return new Response(smsResponse, { status: smsStatus });
+    }
     throw new Error(`Unexpected network request blocked: ${method} ${url}`);
   };
-  const env = { ...(configured ? launchEnv : {}), ATTIO_API_KEY: "test-only", BREVO_API_KEY: "test-only", SIMPLETEXTING_API_KEY: "test-only", REGISTRATION_CONFIRMATION_SECRET: "test-only-confirmation-secret", NODE_ENV: "production" };
+  const env = { ...(configured ? { ...launchEnv, KI_NOVEMBER_2026_SIMPLETEXTING_LIST_ID: smsList } : {}), ATTIO_API_KEY: "test-only", BREVO_API_KEY: "test-only", SIMPLETEXTING_API_KEY: "test-only", REGISTRATION_CONFIRMATION_SECRET: "test-only-confirmation-secret", NODE_ENV: "production" };
   function load(file: string): any {
     if (file.endsWith("/zoom-runtime.ts")) return { registerWebsiteZoom: async (contact: any) => {
       calls.push({ url: "zoom-service-fixture", method: "SERVICE", body: contact });
@@ -70,7 +78,7 @@ test("registration creates a Person and fulfills registration without creating a
   assert.equal(person.body.data.values.phone_numbers[0].original_phone_number, "+13122346789");
   assert.equal(person.body.data.values.time_zone, "America/Chicago");
   assert.ok(h.calls.some(c => c.method === "PUT" && c.url === "https://api.attio.com/v2/lists/0be88ec0-42a9-4169-bdbc-fd47a86fbcdb/entries" && c.body.data.parent_record_id === PERSON));
-  assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.group === "6ab168287c960c8a3dff232b"));
+  assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.group === "K.I.M. - Nov 2026"));
   assert.ok(h.calls.some(c => c.url.includes("brevo.com") && c.body.listIds.includes(26)));
   assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.phone === "+13122346789"));
   assert.match(response.headers.get("set-cookie"), /HttpOnly/i);
@@ -136,6 +144,50 @@ test("unexpected Zoom exception cannot turn CRM success into retryable failure o
   const body = await response.json(); assert.equal(body.zoom.status, "unavailable");
   assert.equal(JSON.stringify([body, h.warnings]).includes("private provider diagnostic"), false);
 });
+
+test("SimpleTexting opt-out rejection is degraded, never already-in-list success", async () => {
+  const h = harness({ smsResponse: '{"code":-607,"message":"Contact opted out"}' });
+  const response = await h.post();
+  const body = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(body.ok, true);
+  assert.equal(body.degraded, true);
+  assert.ok(JSON.stringify(h.warnings).includes('"failedIntegrations":["simpleTexting"]'));
+  assert.ok(h.calls.some(c => c.method === "PATCH" && c.url.includes("attio.com")));
+  assert.equal(h.calls.filter(c => c.url.includes("brevo.com")).length, 1);
+  assert.equal(h.calls.filter(c => c.url.includes("simpletexting.com")).length, 1, "never resubscribe or retry");
+});
+
+for (const smsResponse of ['', '{}', 'null', '[]', 'not-json', '{"code":"1"}', '{"code":0}', '{"code":2}', '{"code":-600,"message":"Invalid list name"}', '<response><code>-607</code><message>Contact opted out</message></response>']) {
+  test(`SimpleTexting requires explicit success: ${smsResponse}`, async () => {
+    const h = harness({ smsResponse });
+    const response = await h.post();
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).degraded, true);
+    assert.ok(JSON.stringify(h.warnings).includes('"failedIntegrations":["simpleTexting"]'));
+    assert.equal(h.calls.filter(c => c.url.includes("simpletexting.com")).length, 1);
+    assert.ok(h.calls.some(c => c.method === "PATCH" && c.url.includes("attio.com")));
+    assert.equal(h.calls.filter(c => c.url.includes("brevo.com")).length, 1);
+  });
+}
+
+test("HTTP failure cannot be overridden by a SimpleTexting success code", async () => {
+  const h = harness({ smsStatus: 503 });
+  assert.equal((await (await h.post()).json()).degraded, true);
+});
+
+test("SimpleTexting XML success remains supported", async () => {
+  const h = harness({ smsResponse: '<response><code>1</code><message>Success</message></response>' });
+  assert.equal((await (await h.post()).json()).degraded, false);
+});
+
+for (const smsList of ['6ab168890bb25491ec9be684', '6ab168287c960c8a3dff232c', 'K.I.M. - Nov 2026']) {
+  test(`SMS cohort validation rejects ${smsList} before any provider`, async () => {
+    const h = harness({ smsList });
+    assert.equal((await h.post()).status, 503);
+    assert.equal(h.calls.length, 0);
+  });
+}
 
 test("missing affirmative consent rejects registration before any integration", async () => {
   const h = harness();
