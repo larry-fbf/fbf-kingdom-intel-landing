@@ -8,14 +8,15 @@ import ts from "typescript";
 import { launchEnv } from "./launch-fixture.ts";
 const require = createRequire(import.meta.url);
 
-for (const scenario of ['new', 'existing', 'pending', 'uncertain', 'unavailable']) {
+for (const scenario of ['new', 'existing', 'pending', 'uncertain', 'unavailable', 'missing-day-1', 'missing-day-2', 'missing-day-3']) {
 test(`actual route + direct runtime + provider: ${scenario}, without private links`, async () => {
 
-    const target = { webinarId: "81823603475", topic: "Kingdom Intelligence Masterclass", timezone: "America/Chicago", occurrenceId: "1793901600000", startTime: "2026-11-05T18:00:00Z" };
+    const target = { webinarId: "81823603475", topic: "Kingdom Intelligence Masterclass", timezone: "America/Chicago", occurrenceId: "1794506400000", startTime: "2026-11-12T18:00:00Z" };
     const env = { ...launchEnv, ATTIO_API_KEY: "fixture", BREVO_API_KEY: "fixture", SIMPLETEXTING_API_KEY: "fixture", REGISTRATION_CONFIRMATION_SECRET: "fixture-confirmation-secret", NODE_ENV: "production", ZOOM_ACCOUNT_ID: "fixture", ZOOM_CLIENT_ID: "fixture", ZOOM_CLIENT_SECRET: "fixture", ZOOM_SIGNUP_TARGET: JSON.stringify(target) };
     const calls: { url: string; method: string; body: any }[] = [], logs: unknown[] = [];
     let registered = scenario === 'existing' || scenario === 'pending';
     const row = { id: "rid", email: "alex@example.invalid", first_name: "Alex", last_name: "Rivera", status: "approved", join_url: "https://example.invalid/PRIVATE_JOIN_SENTINEL" };
+    const missingDay = scenario.startsWith("missing-day-") ? Number(scenario.slice(-1)) : 0;
     const fetch = async (url: string, init: RequestInit = {}) => {
       const method = init.method || "GET";
       const body = init.body instanceof URLSearchParams ? Object.fromEntries(init.body) : init.body ? JSON.parse(String(init.body)) : null;
@@ -37,7 +38,7 @@ test(`actual route + direct runtime + provider: ${scenario}, without private lin
         const rows = registered && url.includes(`status=${status}`) ? [{ ...row, status }] : [];
         return Response.json({ total_records: rows.length, registrants: rows, next_page_token: "" });
       }
-      if (url === "https://api.zoom.us/v2/webinars/81823603475") return Response.json({ id: 81823603475, host_id: "host", topic: target.topic, timezone: target.timezone, type: 9, occurrences: [{ occurrence_id: "1793728800000", start_time: "2026-11-03T18:00:00Z", status: "available" }, { occurrence_id: "1793815200000", start_time: "2026-11-04T18:00:00Z", status: "available" }, { occurrence_id: target.occurrenceId, start_time: target.startTime, status: "available" }], settings: { registration_type: 1, approval_type: 0, registrants_confirmation_email: true, meeting_authentication: false, close_registration: false } });
+      if (url === "https://api.zoom.us/v2/webinars/81823603475") return Response.json({ id: 81823603475, host_id: "host", topic: target.topic, timezone: target.timezone, type: 9, occurrences: [{ occurrence_id: "1794333600000", start_time: "2026-11-10T18:00:00Z", status: "available" }, { occurrence_id: "1794420000000", start_time: "2026-11-11T18:00:00Z", status: "available" }, { occurrence_id: target.occurrenceId, start_time: target.startTime, status: "available" }].filter((_, index) => index + 1 !== missingDay), settings: { registration_type: 1, approval_type: 0, registrants_confirmation_email: true, meeting_authentication: false, close_registration: false } });
       throw Error("unexpected network blocked");
     };
     function load(file: string): any {
@@ -52,7 +53,7 @@ test(`actual route + direct runtime + provider: ${scenario}, without private lin
     const payload = { email: "alex@example.invalid", firstName: "Alex", lastName: "Rivera", agreed: true, phone: "3122346789" };
     const response = await route.POST(new Request("https://fixture.invalid/api/register", { method: "POST", body: JSON.stringify(payload) }));
     const result = await response.json();
-    const expected = ({ new: 'registered', existing: 'registered', pending: 'held', uncertain: 'pending', unavailable: 'unavailable' } as Record<string, string>)[scenario];
+    const expected = ({ new: 'registered', existing: 'registered', pending: 'held', uncertain: 'pending', unavailable: 'unavailable', 'missing-day-1': 'held', 'missing-day-2': 'held', 'missing-day-3': 'held' } as Record<string, string>)[scenario];
     assert.equal(response.status, 200); assert.equal(result.ok, true); assert.equal(result.zoom.status, expected); assert.equal(result.degraded, expected !== 'registered');
     assert.equal(result.retryable, undefined);
     assert.equal(calls.filter(c => c.url.includes("brevo.com")).length, 1);
