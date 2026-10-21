@@ -273,7 +273,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             fontSize: "clamp(14px, 1.4vw, 18px)", color: "rgba(255,255,255,0.65)",
             lineHeight: 1.7, marginBottom: "36px", fontFamily: "'Work Sans', sans-serif", maxWidth: "480px",
           }}>
-            AI accelerates speed, but Kingdom Intelligence governs it with discernment.{" "}<span style={{ color: "#BB945A", fontWeight: 700 }}>Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.</span>
+            For 7- and 8-figure business owners ready to grow without compromising how God has called them to lead.{" "}<span style={{ color: "#BB945A", fontWeight: 700 }}>Combine spirit-led strategy, operational excellence, and AI-powered execution to build your next stage of growth.</span>
           </p>
 
           <CTAButton onOpen={onOpen} />
