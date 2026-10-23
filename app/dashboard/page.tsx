@@ -19,6 +19,21 @@ const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const WHATSAPP_URL = "https://whatsapp.com/channel/0029VbDiXJN7T8bbQGSxqt2H";
 
+const replays = [
+  {
+    day: "Day 1",
+    title: "Replay Coming Soon",
+  },
+  {
+    day: "Day 2",
+    title: "Replay Coming Soon",
+  },
+  {
+    day: "Day 3",
+    title: "Replay Coming Soon",
+  },
+];
+
 export default function DashboardPage() {
   return (
     <main className="dashboard-shell">
@@ -888,6 +903,29 @@ export default function DashboardPage() {
               </div>
               <span className="action-cta">Join WhatsApp</span>
             </TrackedClarityLink>
+          </div>
+        </div>
+      </section>
+
+      <section className="replays-section">
+        <div className="dashboard-wrap">
+          <div className="replay-head">
+            <div>
+              <p className="section-label">Replay Library</p>
+              <h2 className="section-title">Coming Soon</h2>
+            </div>
+            <p className="replay-note">
+              Replays will be posted here after each live session is processed.
+            </p>
+          </div>
+
+          <div className="replay-grid">
+            {replays.map((replay) => (
+              <article className="replay-card" key={replay.day}>
+                <p className="replay-day">{replay.day}</p>
+                <h3 className="replay-title">{replay.title}</h3>
+              </article>
+            ))}
           </div>
         </div>
       </section>
