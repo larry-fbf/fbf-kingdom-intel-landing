@@ -14,6 +14,7 @@ const criticalRoutes = [
   "/thank-you",
   "/vip",
   "/dashboard",
+  "/dashboard/calendar.ics",
   "/workbook",
   "/workbook-thank-you",
 ];
@@ -127,11 +128,10 @@ const requiredDashboardMarkers = [
   "ShareMasterclassButton",
   "Join the Community",
   "Priority dashboard workflow",
-  "kim_dashboard_whatsapp_click",
+  "<AddToCalendar />",
   "Your seat is ready. Join us live for three days of Kingdom-centered strategy",
   "Enter the Live Room",
   "Say hello, meet the other business owners in the room",
-  "Get session reminders, links, and extra free resources sent straight to your phone",
 ];
 
 const requiredDashboardShareMarkers = [
