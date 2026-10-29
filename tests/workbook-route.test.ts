@@ -7,14 +7,16 @@ const require = createRequire(import.meta.url);
 const ts = require('typescript');
 const source = readFileSync(new URL('../app/api/workbook/route.ts', import.meta.url), 'utf8');
 const code = ts.transpileModule(source, {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
-const payload = {firstName:' Test ',lastName:' Person ',email:' TEST@example.invalid ',phone:'3122346789',company:'Test',whichOfTheFollowingBestDescribesYou:'CEO',oneThing:'Test',outcomeImpact:'Test',otherDecisionMakers:'None',wantResults:'ASAP',helpAreas:['Operations'],attendedWorkshop:'Yes',monthlyIncomeRange:'Under $10K/month'};
+const payload = {firstName:' Test ',lastName:' Person ',email:' TEST@example.invalid ',phone:'3122346789',company:'Test',whichOfTheFollowingBestDescribesYou:'CEO',oneThing:'Test',outcomeImpact:'Test',otherDecisionMakers:'None',wantResults:'ASAP',helpAreas:['Operations'],attendedWorkshop:'Yes',monthlyIncomeRange:'Under $5,000/month'};
 function harness(configured = true, failAt = '', ambiguous: boolean | 'claim' | 'receipt' | 'receipt-read' | 'slack' = false) {
  const events = new Set(['earlier-event']);
  const calls: string[] = [];
+ const requests: {url:string, method:string|undefined, body:any}[] = [];
  const ledger = new Map<string, {id:{entry_id:string},entry_values:Record<string, {value:string}[]>}>();
  let notes=0, slack=0;
  const fetch = async(url: string, init: RequestInit) => {
   calls.push(url);const body=init.body?JSON.parse(String(init.body)):null;
+  requests.push({url,method:init.method,body});
   if(failAt && url.includes(failAt))return Response.json({}, {status:503});
   if(url.includes('matching_attribute=email_addresses')) {assert.equal(body.data.values.events_registered,undefined);return Response.json({data:{id:{record_id:'person'}}});}
   if(url.endsWith('/objects/people/records/person')) {assert.equal(init.method,'PATCH');for(const id of body.data.values.events_registered)events.add(id);return Response.json({data:{}});}
@@ -37,7 +39,7 @@ function harness(configured = true, failAt = '', ambiguous: boolean | 'claim' | 
  return module.exports;
  };
  // Every request runs in a new module context, sharing only the mocked external provider.
- return {events,calls,ledger,counts:()=>({notes,slack}),post:(body=payload)=>loadRoute().POST({json:async()=>body})};
+ return {events,calls,requests,ledger,counts:()=>({notes,slack}),post:(body=payload)=>loadRoute().POST({json:async()=>body})};
 }
 test('identical sequential and concurrent retries do not duplicate side effects',async()=>{
  const h=harness();await Promise.all([h.post(),h.post()]);assert.equal((await h.post()).status,200);assert.deepEqual(h.counts(),{notes:1,slack:1});
@@ -59,3 +61,40 @@ test('workbook additively appends the existing November option',async()=>{
  const h=harness();assert.equal((await h.post()).status,200);
  assert.deepEqual([...h.events],['earlier-event','e4039e80-b639-4481-b24d-c00aa5b6390d']);
 });
+
+const householdRanges = ['Under $5,000/month', '$5K - $10K/month', '$10K - $15K/month', '$15K - $25K/month', '$25K - $50K/month', '$50K or more per month'];
+test('UI uses exact household question, helper and required label-as-value options',()=>{
+ const page=readFileSync(new URL('../app/workbook/page.tsx',import.meta.url),'utf8');
+ assert.deepEqual(JSON.parse(page.match(/const incomeRanges = (\[[^;]+\]);/)![1]),householdRanges);
+ assert.ok(page.includes('<legend>Which range best represents your current monthly household income before taxes? *</legend>'));
+ assert.ok(page.includes('(Include income from all household earners, not total business revenue.)'));
+ assert.match(page,/<fieldset className=\{styles.checkboxFieldset\} aria-describedby="household-income-help">/);
+ assert.match(page,/<input required type="radio" name="monthlyIncomeRange" value=\{option\} checked=\{form.monthlyIncomeRange === option\}/);
+ assert.ok(page.includes('income_range: form.monthlyIncomeRange'));
+ assert.ok(page.includes('body: JSON.stringify({ ...form, attribution: getStoredAttribution() })'));
+});
+test('missing, obsolete and unknown income answers fail before any provider call',async()=>{
+ for(const monthlyIncomeRange of ['', ' ', 'Under $10K/month', '$10K–$50K/month', '$50K–$100K/month', '$100K–$500K/month', '$500K-$1 Mill/month', '$1 Mill +/month', 'unknown']) {
+  const h=harness();const response=await h.post({...payload,monthlyIncomeRange});
+  assert.equal(response.status,400);assert.deepEqual((await response.json()).fields,['monthlyIncomeRange']);
+  assert.deepEqual(h.calls,[]);
+ }
+});
+for (const monthlyIncomeRange of householdRanges) {
+ test(`household income preserves exact downstream answer: ${monthlyIncomeRange}`, async()=>{
+  const h=harness();const response=await h.post({...payload,monthlyIncomeRange});
+  assert.equal(response.status,200);assert.equal((await response.json()).ok,true);
+  const note=h.requests.find(r=>r.url.endsWith('/notes'))!.body.data;
+  assert.equal(note.format,'plaintext');
+  assert.ok(note.content.includes(`**Monthly household income range before taxes:** ${monthlyIncomeRange}\n`));
+  const slack=h.requests.find(r=>r.url==='https://slack.invalid/test')!.body;
+  assert.ok(slack.text.includes(`Monthly household income before taxes: ${monthlyIncomeRange}\n`));
+  assert.ok(slack.blocks.flatMap((b:any)=>b.fields||[]).some((f:any)=>f.text===`*Monthly household income before taxes:*\n${monthlyIncomeRange}`));
+  assert.deepEqual(h.counts(),{notes:1,slack:1});
+  const person=h.requests.find(r=>r.url.includes('matching_attribute'))!.body.data.values;
+  assert.deepEqual(Object.keys(person).sort(),['email_addresses','name','phone_numbers']);
+  const entry=h.requests.find(r=>r.url.includes('/lists/')&&!r.url.includes('delivery_ledger'))!;
+  assert.deepEqual(entry.body.data.entry_values,{});
+  assert.deepEqual([...h.events],['earlier-event','e4039e80-b639-4481-b24d-c00aa5b6390d']);
+ });
+}

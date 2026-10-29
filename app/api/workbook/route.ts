@@ -129,17 +129,19 @@ function normalizeSelect(value?: string, options: string[] = []) {
   return options.find((option) => option.toLowerCase().replace(/[–—−?]/g, "-").replace(/\s+/g, " ") === comparable) || raw;
 }
 
+const householdIncomeRanges = [
+  "Under $5,000/month",
+  "$5K - $10K/month",
+  "$10K - $15K/month",
+  "$15K - $25K/month",
+  "$25K - $50K/month",
+  "$50K or more per month",
+];
+
 function normalizedPayload(payload: WorkbookPayload): WorkbookPayload {
   return {
     ...payload,
-    monthlyIncomeRange: normalizeSelect(payload.monthlyIncomeRange, [
-      "Under $10K/month",
-      "$10K–$50K/month",
-      "$50K–$100K/month",
-      "$100K–$500K/month",
-      "$500K-$1 Mill/month",
-      "$1 Mill +/month",
-    ]),
+    monthlyIncomeRange: normalizeSelect(payload.monthlyIncomeRange, householdIncomeRanges),
   };
 }
 
@@ -161,7 +163,7 @@ function formatWorkbookNote(payload: WorkbookPayload, contact: WorkbookContact) 
     `**Area needing most help:** ${payload.helpAreas?.length ? payload.helpAreas.join(", ") : "Not provided"}`,
     `**Preferred session connection:** ${answer(payload.sessionConnectionPreference)}`,
     `**Attended a free workshop/masterclass:** ${answer(payload.attendedWorkshop)}`,
-    `**Monthly business/household income range:** ${answer(payload.monthlyIncomeRange)}`,
+    `**Monthly household income range before taxes:** ${answer(payload.monthlyIncomeRange)}`,
     "",
     "## Attribution",
     `**UTM source:** ${attributionAnswer(attribution.utmSource)}`,
@@ -277,7 +279,7 @@ async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
     `Email: ${contact.email}`,
     `Phone: ${contact.phone}`,
     `Company: ${contact.company}`,
-    `Income: ${answer(payload.monthlyIncomeRange)}`,
+    `Monthly household income before taxes: ${answer(payload.monthlyIncomeRange)}`,
     `Best describes them: ${answer(payload.whichOfTheFollowingBestDescribesYou)}`,
     `Wants help with: ${payload.helpAreas?.length ? payload.helpAreas.join(", ") : "Not provided"}`,
     `Timeline: ${answer(payload.wantResults)}`,
@@ -297,7 +299,7 @@ async function notifySlack(payload: WorkbookPayload, contact: WorkbookContact) {
             { type: "mrkdwn", text: `*Email:*\n${contact.email}` },
             { type: "mrkdwn", text: `*Phone:*\n${contact.phone}` },
             { type: "mrkdwn", text: `*Company:*\n${contact.company}` },
-            { type: "mrkdwn", text: `*Income:*\n${answer(payload.monthlyIncomeRange)}` },
+            { type: "mrkdwn", text: `*Monthly household income before taxes:*\n${answer(payload.monthlyIncomeRange)}` },
             { type: "mrkdwn", text: `*Best describes them:*\n${answer(payload.whichOfTheFollowingBestDescribesYou)}` },
             { type: "mrkdwn", text: `*Timeline:*\n${answer(payload.wantResults)}` },
             { type: "mrkdwn", text: `*Needs help with:*\n${payload.helpAreas?.length ? payload.helpAreas.join(", ") : "Not provided"}` },
@@ -399,6 +401,12 @@ export async function POST(req: NextRequest) {
 
     if (missing.length > 0) {
       return NextResponse.json({ error: "Missing required fields", fields: missing.map(([name]) => name) }, { status: 400 });
+    }
+
+    // Old business/household categories cannot be relabelled as household-only answers.
+    // This validates the answer vocabulary, not financial qualification.
+    if (!householdIncomeRanges.includes(payload.monthlyIncomeRange || "")) {
+      return NextResponse.json({ error: "Please select a current household income range. Refresh the form if needed.", fields: ["monthlyIncomeRange"] }, { status: 400 });
     }
 
     const results: Record<string, unknown> = {};
