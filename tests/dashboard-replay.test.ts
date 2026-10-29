@@ -9,7 +9,17 @@ test('only exact historical placeholder blocks are added to the pinned dashboard
   // Reverse only the approved calendar substitution before the legacy whole-page guard.
   const oldCard = readFileSync(new URL('./fixtures/dashboard-whatsapp-card.txt', import.meta.url), 'utf8');
   assert.equal(createHash('sha256').update(oldCard).digest('hex'), '00f9f1df27d3f291ab343a8b373ee922783a00fc782b48710c8f18e06fa71bf6');
-  const original = source
+  const editsText = readFileSync(new URL('./fixtures/dashboard-workflow-edits.json', import.meta.url), 'utf8');
+  assert.equal(createHash('sha256').update(editsText).digest('hex'), 'f0ed85132667b943715ea47659a5edd1176a7c25ef6c5f317533bb538ce0fdb5');
+  const edits = JSON.parse(editsText);
+  assert.equal(edits.base, '8a23de71bbc164d592509aaf3872310689026226');
+  let baseline = source;
+  for (const { before, after } of edits.changes) {
+    assert.equal(baseline.split(after).length, 2, 'exact approved transformation occurs once');
+    baseline = baseline.replace(after, before);
+  }
+  assert.equal(createHash('sha256').update(baseline).digest('hex'), edits.pageSha256);
+  const original = baseline
     .replace('import AddToCalendar from "./AddToCalendar";\r\n', '')
     .replace('            <AddToCalendar />', oldCard)
     .replace('const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";\r\n', 'const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";\r\nconst WHATSAPP_URL = "https://whatsapp.com/channel/0029VbDiXJN7T8bbQGSxqt2H";\r\n');

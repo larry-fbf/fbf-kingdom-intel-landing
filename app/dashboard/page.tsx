@@ -1,4 +1,5 @@
 import AddToCalendar from "./AddToCalendar";
+import { googleCalendarUrl } from "./calendar";
 import type { Metadata } from "next";
 import ClarityPageViewEvent from "../components/ClarityPageViewEvent";
 import TrackedClarityLink from "../components/TrackedClarityLink";
@@ -99,6 +100,14 @@ export default function DashboardPage() {
           letter-spacing: 0.02em;
           line-height: 1.25;
           text-align: center;
+        }
+
+        .schedule-pill, .date-pill { text-decoration: none; }
+
+        .schedule-pill:focus-visible,
+        .date-pill:focus-visible {
+          outline: 3px solid #cc0000;
+          outline-offset: 4px;
         }
 
         .schedule-pill strong {
@@ -749,9 +758,9 @@ export default function DashboardPage() {
         <div className="dashboard-wrap">
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
-            <div className="schedule-pill">
+            <a className="schedule-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the November 10-12 masterclass to Google Calendar (opens in a new tab)">
               <span>November 10-12 | 12 PM Central</span>
-            </div>
+            </a>
             <div className="top-action-group">
               <ShareMasterclassButton />
             </div>
@@ -788,7 +797,7 @@ export default function DashboardPage() {
                   Bring your workbook, arrive a few minutes early, and come prepared to turn insight
                   into action.
                 </p>
-                <div className="date-pill">November 10 to 12 | 12 PM Central</div>
+                <a className="date-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the November 10-12 masterclass to Google Calendar (opens in a new tab)">November 10 to 12 | 12 PM Central</a>
               </div>
               <div>
                 <TrackedClarityLink
@@ -809,6 +818,8 @@ export default function DashboardPage() {
           </div>
 
           <div className="workflow-grid" aria-label="Priority dashboard workflow">
+            <AddToCalendar />
+
             <TrackedClarityLink
               className="action-card workbook-card"
               eventName="kim_dashboard_workbook_click"
@@ -816,7 +827,7 @@ export default function DashboardPage() {
             >
               <div>
                 <div className="action-meta">
-                  <span className="action-step">Step 1</span>
+                  <span className="action-step">Step 2</span>
                 </div>
                 <div>
                   <p className="action-eyebrow">Workbook</p>
@@ -825,27 +836,6 @@ export default function DashboardPage() {
                 </div>
               </div>
               <span className="action-cta">Get Workbook</span>
-            </TrackedClarityLink>
-
-            <TrackedClarityLink
-              className="action-card vip-card"
-              eventName="kim_dashboard_vip_click"
-              href={VIP_URL}
-            >
-              <div>
-                <div className="action-meta">
-                  <span className="action-step">Step 2</span>
-                </div>
-                <div>
-                  <p className="action-eyebrow">VIP</p>
-                  <h2 className="action-title">VIP Upgrade</h2>
-                  <p className="action-detail">
-                    Unlock the VIP room, direct coaching, bonuses, and replay access.
-                  </p>
-                  <div className="action-date">November 11-12 | 7 PM Central</div>
-                </div>
-              </div>
-              <span className="action-cta">Upgrade to VIP</span>
             </TrackedClarityLink>
 
             <TrackedClarityLink
@@ -876,7 +866,26 @@ export default function DashboardPage() {
               <span className="action-cta">Join Facebook</span>
             </TrackedClarityLink>
 
-            <AddToCalendar />
+            <TrackedClarityLink
+              className="action-card vip-card"
+              eventName="kim_dashboard_vip_click"
+              href={VIP_URL}
+            >
+              <div>
+                <div className="action-meta">
+                  <span className="action-step">Step 4</span>
+                </div>
+                <div>
+                  <p className="action-eyebrow">VIP</p>
+                  <h2 className="action-title">VIP Upgrade</h2>
+                  <p className="action-detail">
+                    Unlock the VIP room, direct coaching, bonuses, and replay access.
+                  </p>
+                  <div className="action-date">November 11-12 | 7 PM Central</div>
+                </div>
+              </div>
+              <span className="action-cta">Upgrade to VIP</span>
+            </TrackedClarityLink>
           </div>
         </div>
       </section>
