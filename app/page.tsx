@@ -273,7 +273,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             fontSize: "clamp(14px, 1.4vw, 18px)", color: "rgba(255,255,255,0.65)",
             lineHeight: 1.7, marginBottom: "36px", fontFamily: "'Work Sans', sans-serif", maxWidth: "480px",
           }}>
-            For 7- and 8-figure business owners ready to grow without compromising how God has called them to lead.{" "}<span style={{ color: "#BB945A", fontWeight: 700 }}>Combine spirit-led strategy, operational excellence, and AI-powered execution to build your next stage of growth.</span>
+            For 7- and 8-figure business owners and leaders ready to grow without compromising how God has called them to lead.{" "}<span style={{ color: "#BB945A", fontWeight: 700 }}>Combine spirit-led strategy, operational excellence, and AI-powered execution to build your next stage of growth.</span>
           </p>
 
           <CTAButton onOpen={onOpen} />
@@ -441,7 +441,7 @@ function Invitation({ onOpen }: { onOpen: () => void }) {
 /* -- ECHO BLUEPRINT -- */
 const echoItems = [
   { letter: "E", label: "Economic Stewardship", tagline: "ECONOMIC STEWARDSHIP", description: "Design profitable systems and financial architecture that fund and sustain your God-sized vision." },
-  { letter: "C", label: "Culture Architecture", tagline: "CULTURE ARCHITECTURE", description: "Create an environment that attracts, develops, and multiplies leaders who carry the vision without you becoming the bottleneck." },
+  { letter: "C", label: "Clarity Of Vision", tagline: "CLARITY OF VISION", description: "Clarify and communicate your God-given vision so your leaders can carry it forward without you becoming the bottleneck." },
   { letter: "H", label: "Human Infrastructure", tagline: "HUMAN INFRASTRUCTURE", description: "Transition from founder-dependent to team-managed. Your company should scale beyond you, not because of you." },
   { letter: "O", label: "Operational Excellence", tagline: "OPERATIONAL EXCELLENCE", description: "Deploy AI, automation, and operational architecture that removes friction, increases speed, and allows your company to grow without chaos." },
 ];
