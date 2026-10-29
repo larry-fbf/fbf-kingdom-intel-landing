@@ -161,7 +161,6 @@ function formatWorkbookNote(payload: WorkbookPayload, contact: WorkbookContact) 
     `**Other decision makers / emails:** ${answer(payload.otherDecisionMakers)}`,
     `**How soon they want help:** ${answer(payload.wantResults)}`,
     `**Area needing most help:** ${payload.helpAreas?.length ? payload.helpAreas.join(", ") : "Not provided"}`,
-    `**Preferred session connection:** ${answer(payload.sessionConnectionPreference)}`,
     `**Attended a free workshop/masterclass:** ${answer(payload.attendedWorkshop)}`,
     `**Monthly household income range before taxes:** ${answer(payload.monthlyIncomeRange)}`,
     "",

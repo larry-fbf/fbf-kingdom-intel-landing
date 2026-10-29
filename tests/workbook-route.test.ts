@@ -62,6 +62,36 @@ test('workbook additively appends the existing November option',async()=>{
  assert.deepEqual([...h.events],['earlier-event','e4039e80-b639-4481-b24d-c00aa5b6390d']);
 });
 
+test('removed connection question is absent from UI and submitted form state',()=>{
+ const page=readFileSync(new URL('../app/workbook/page.tsx',import.meta.url),'utf8');
+ assert.doesNotMatch(page,/sessionConnectionPreference|How would you like for us to connect with you for this session|Phone or Zoom/);
+});
+
+test('omitted connection succeeds without obsolete downstream summary rows',async()=>{
+ const h=harness();const response=await h.post();
+ assert.equal(response.status,200);assert.equal((await response.json()).ok,true);
+ const note=h.requests.find(r=>r.url.endsWith('/notes'))!.body.data.content;
+ assert.doesNotMatch(note,/Preferred session connection|sessionConnectionPreference/);
+ const slack=h.requests.find(r=>r.url==='https://slack.invalid/test')!.body;
+ assert.doesNotMatch(JSON.stringify(slack),/Preferred session connection|sessionConnectionPreference/);
+ assert.deepEqual(h.counts(),{notes:1,slack:1});
+});
+
+test('legacy empty connection and omission retain the pinned historical delivery key',async()=>{
+ const h=harness();await h.post({...payload,sessionConnectionPreference:''} as typeof payload);await h.post();
+ assert.deepEqual([...h.ledger.keys()].sort(),[
+  '7c496ac27419e156f6d28563808d77ded5ffa15cb8373e3ca5074f8b8a1d80c1:note',
+  '7c496ac27419e156f6d28563808d77ded5ffa15cb8373e3ca5074f8b8a1d80c1:slack',
+ ]);
+ assert.deepEqual(h.counts(),{notes:1,slack:1});
+});
+test('legacy nonempty connection remains accepted and retry-stable without a summary row',async()=>{
+ const h=harness();const legacy={...payload,sessionConnectionPreference:'Zoom'} as typeof payload;
+ assert.equal((await h.post(legacy)).status,200);assert.equal((await h.post(legacy)).status,200);
+ assert.deepEqual(h.counts(),{notes:1,slack:1});
+ assert.doesNotMatch(h.requests.find(r=>r.url.endsWith('/notes'))!.body.data.content,/Preferred session connection/);
+});
+
 const householdRanges = ['Under $5,000/month', '$5K - $10K/month', '$10K - $15K/month', '$15K - $25K/month', '$25K - $50K/month', '$50K or more per month'];
 test('UI uses exact household question, helper and required label-as-value options',()=>{
  const page=readFileSync(new URL('../app/workbook/page.tsx',import.meta.url),'utf8');
