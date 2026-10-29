@@ -6,7 +6,7 @@ const PAYMENT_LINK = "https://buy.stripe.com/8x2dRabIR7JA3qQ88t5kk0i";
 
 const bonuses = [
   {
-    title: "The K.I. Masterclass workbook",
+    title: "The Kingdom Intelligence Masterclass workbook",
     body:
       "Get the workbook so you can follow the sessions, capture what God is showing you, and turn the training into a clear implementation plan.",
     image: "/images/kingdom-intelligence-workbook-cover.png",
@@ -18,7 +18,7 @@ const bonuses = [
     image: "/images/vip-sweet-spot-audit.png",
   },
   {
-    title: "Lifetime access to the K.I. Masterclass replays",
+    title: "Lifetime access to the Kingdom Intelligence Masterclass replays",
     body:
       "Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.",
     image: "/images/vip-mastermind-og.jpg",
@@ -29,9 +29,9 @@ const vipIncludes = [
   "Two live VIP rooms on November 11th and 12th at 7pm CT on Zoom",
   "Direct coaching and feedback from Larry, Staci, and the CEO Mentor team",
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
-  "The K.I. Masterclass workbook",
+  "The Kingdom Intelligence Masterclass workbook",
   "The S.W.E.E.T. Spot Audit",
-  "Lifetime access to the K.I. Masterclass replays in the FBF Vault",
+  "Lifetime access to the Kingdom Intelligence Masterclass replays in the FBF Vault",
 ];
 
 const cindyTestimonial = {
@@ -162,7 +162,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
               <span>one-on-one coaching!</span>
             </p>
             <CTAButton />
-            <p className={styles.microcopy}>Includes lifetime access to the K.I. Masterclass replays.</p>
+            <p className={styles.microcopy}>Includes lifetime access to the Kingdom Intelligence Masterclass replays.</p>
           </div>
         </div>
       </section>
@@ -171,7 +171,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
         <div className={styles.urgencyCopy}>
           <strong>PLUS!</strong>
           <p>
-            When you upgrade on this page, you&apos;ll also get lifetime access to the K.I.
+            When you upgrade on this page, you&apos;ll also get lifetime access to the Kingdom Intelligence
             Masterclass replays.
           </p>
         </div>
@@ -360,7 +360,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
           <h2>Upgrade to VIP for $97.</h2>
           <p>
             Join the VIP rooms on November 11th and 12th at 7pm CT on Zoom, bring your real questions, and get
-            lifetime access to the K.I. Masterclass replays so you can keep moving after the live
+            lifetime access to the Kingdom Intelligence Masterclass replays so you can keep moving after the live
             event.
           </p>
           <CTAButton />

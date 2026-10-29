@@ -21,7 +21,7 @@ const checks = [
     file: "app/vip/VIPUpsellPage.tsx",
     mustInclude: [
       "November 11th and 12th",
-      "Lifetime access to the K.I. Masterclass replays",
+      "Lifetime access to the Kingdom Intelligence Masterclass replays",
       "The S.W.E.E.T. Spot Audit",
       "VIP rooms",
     ],
