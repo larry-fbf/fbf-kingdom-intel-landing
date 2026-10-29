@@ -1,6 +1,33 @@
 // Regular masterclass only. November dates are CST (UTC-06), after DST ends.
 export const dashboardUrl = 'https://www.kingdomintel.com/dashboard';
-export const description = `Use your personal Zoom join link from your confirmation email.\nDashboard: ${dashboardUrl}`;
+export const description = `Welcome to the 3-Day Kingdom Intelligence Masterclass
+
+I am so excited to see you registered for our 3 day Kingdom Intel Masterclass!!
+
+This 3-day event will happen LIVE by Zoom. Accepting this invite will add our free event to your Google calendar so you can make sure you don't miss anything!\u0020
+
+If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g
+
+Important details:
+
+- You will be sent the Zoom link daily by email, and by texts if you opted into text messaging.
+
+- If you miss any of the classes, you will have access to the replays during the week on your www.kingdomintel.com/dashboard.
+
+- It is important to watch live if possible because we will be giving away over $10,000 in prizes and scholarships.
+
+- For those who are serious about scaling to the next level, on day 2 & 3 of our challenge we will have a VIP room for Q & A.
+
+FAQ:
+
+Q: How do I connect with someone?
+A: You should have received a text message, DM, and/or email from your "Advocate". Type the word advocate as a comment on any of the live videos and your advocate will send you a message for more help. Feel free to email us at anytime at support@fbfmastery.com
+
+Q: I filled out the form for the workbook. Where can I find it?
+A: Check your junk or spam mail. Or try again at kingdomintel.com/workbook
+
+Q: How can I learn more about Fueled by Fire?
+A: Go to www.fbfmastery.com`;
 const series = {
   title: 'Kingdom Intelligence Masterclass',
   start: '20261110T180000Z',
