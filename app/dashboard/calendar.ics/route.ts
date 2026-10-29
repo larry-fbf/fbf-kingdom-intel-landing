@@ -6,7 +6,7 @@ export function GET() {
   return new Response(calendarIcs(), {
     headers: {
       'Content-Type': 'text/calendar; charset=utf-8',
-      'Content-Disposition': 'attachment; filename="kingdom-intelligence-november-2026.ics"',
+      'Content-Disposition': 'inline; filename="kingdom-intelligence-november-2026.ics"',
     },
   });
 }

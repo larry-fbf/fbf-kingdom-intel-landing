@@ -1,4 +1,4 @@
-import { googleCalendarUrl, sessions } from './calendar';
+import { googleCalendarUrl } from './calendar';
 
 export default function AddToCalendar() {
   return (
@@ -12,7 +12,6 @@ export default function AddToCalendar() {
           outline: 3px solid #121212; outline-offset: 3px;
         }
         .calendar-options { margin-top: 16px; }
-        .calendar-options p { margin: 12px 0 4px; }
         .calendar-options a {
           display: block; padding: 10px 0; color: #a80000;
           font-size: 14px; font-weight: 700; line-height: 1.5;
@@ -26,17 +25,11 @@ export default function AddToCalendar() {
         <p className="action-detail">November 10–12, 2026<br />12–1 PM Central each day.</p>
       </div>
       <details>
-        <summary className="action-cta">Choose Calendar</summary>
+        <summary className="action-cta">Add to Calendar</summary>
         <div className="calendar-options">
-          <p className="action-detail"><strong>Google Calendar</strong><br />Save each day separately:</p>
-          {sessions.map(session => (
-            <a key={session.uid} href={googleCalendarUrl(session)} target="_blank" rel="noopener noreferrer">
-              Day {session.day} · November {session.date}
-            </a>
-          ))}
-          <p className="action-detail"><strong>Apple / Outlook</strong></p>
-          <a href="/dashboard/calendar.ics" download="kingdom-intelligence-november-2026.ics">Download all 3 sessions (.ics)</a>
-          <p className="action-detail">Import the downloaded file into your calendar. Use your personal Zoom join link from your confirmation email.</p>
+          <a href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer">Google Calendar</a>
+          <a href="/dashboard/calendar.ics">Apple Calendar</a>
+          <a href="/dashboard/calendar.ics">Outlook</a>
         </div>
       </details>
     </div>
