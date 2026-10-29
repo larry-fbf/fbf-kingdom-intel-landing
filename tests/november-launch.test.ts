@@ -18,7 +18,7 @@ test('VIP browser return is informational only, never a second fulfillment write
  assert.equal(calls,0);
  const page=read('app/vip/thank-you/page.tsx');
  assert.doesNotMatch(page,/purchase_success|sync_success|invitation_token|VIP access confirmed|VIP upgrade complete|You are in\./);
- assert.match(page,/cannot verify your payment/);
+ assert.match(page,/This page does not verify payment/);
  assert.match(read('app/vip/VIPUpsellPage.tsx'),/https:\/\/buy.stripe.com\/8x2dRabIR7JA3qQ88t5kk0i/);
 });
 
