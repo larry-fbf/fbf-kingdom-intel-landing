@@ -1,14 +1,13 @@
 // Regular masterclass only. November dates are CST (UTC-06), after DST ends.
 export const dashboardUrl = 'https://www.kingdomintel.com/dashboard';
 export const description = `Use your personal Zoom join link from your confirmation email.\nDashboard: ${dashboardUrl}`;
-export const sessions = [10, 11, 12].map((date, index) => ({
-  day: index + 1,
-  date,
-  title: `Kingdom Intelligence Masterclass - Day ${index + 1}`,
-  start: `202611${date}T180000Z`,
-  end: `202611${date}T190000Z`,
-  uid: `kingdom-intelligence-202611${date}@kingdomintel.com`,
-}));
+const series = {
+  title: 'Kingdom Intelligence Masterclass',
+  start: '20261110T180000Z',
+  end: '20261110T190000Z',
+  uid: 'kingdom-intelligence-20261110-series@kingdomintel.com',
+  recurrence: 'RRULE:FREQ=DAILY;COUNT=3',
+};
 
 // RFC 5545 TEXT escaping and UTF-8-safe 75-octet content-line folding.
 export function escapeIcsText(value: string) {
@@ -30,22 +29,22 @@ export function foldIcsLine(value: string) {
 
 export function calendarIcs() {
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Fueled By Fire//Kingdom Intelligence//EN', 'CALSCALE:GREGORIAN'];
-  for (const session of sessions) {
-    lines.push('BEGIN:VEVENT', `UID:${session.uid}`, 'DTSTAMP:20261023T000000Z',
-      `DTSTART:${session.start}`, `DTEND:${session.end}`,
-      `SUMMARY:${escapeIcsText(session.title)}`, `DESCRIPTION:${escapeIcsText(description)}`,
-      'LOCATION:Online via Zoom', `URL:${dashboardUrl}`, 'END:VEVENT');
-  }
+  lines.push('BEGIN:VEVENT', `UID:${series.uid}`, 'DTSTAMP:20261029T000000Z',
+    `DTSTART:${series.start}`, `DTEND:${series.end}`, series.recurrence,
+    `SUMMARY:${escapeIcsText(series.title)}`, `DESCRIPTION:${escapeIcsText(description)}`,
+    'LOCATION:Online via Zoom', `URL:${dashboardUrl}`, 'END:VEVENT');
   return [...lines, 'END:VCALENDAR'].map(foldIcsLine).join('\r\n') + '\r\n';
 }
 
-// Google's documented one-off template; each event needs its own save.
-// https://developers.google.com/workspace/calendar/api/concepts/inviting-attendees-to-events
-export function googleCalendarUrl(session: typeof sessions[number]) {
+// Google web template recurrence matches add2cal/add-to-calendar-button's
+// src/generators/google.ts at 7d689427941be7f05318f1199436c81d505dafa1.
+// Keep HTTPS: native app handling (especially iOS recurrence) is platform-dependent.
+export function googleCalendarUrl() {
   const params = new URLSearchParams({
-    action: 'TEMPLATE', dates: `${session.start}/${session.end}`,
+    action: 'TEMPLATE', dates: `${series.start}/${series.end}`,
     stz: 'America/Chicago', etz: 'America/Chicago',
-    text: session.title, details: description, location: 'Online via Zoom',
+    ctz: 'America/Chicago', recur: series.recurrence,
+    text: series.title, details: description, location: 'Online via Zoom',
   });
   return `https://calendar.google.com/calendar/r/eventedit?${params}`;
 }
