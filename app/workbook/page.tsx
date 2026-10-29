@@ -25,7 +25,6 @@ const initialForm = {
   otherDecisionMakers: "",
   wantResults: "",
   helpAreas: [] as string[],
-  sessionConnectionPreference: "",
   attendedWorkshop: "",
   monthlyIncomeRange: "",
 };
@@ -186,7 +185,6 @@ export default function WorkbookPage() {
                   </div>
                 </fieldset>
 
-                <div><FieldLabel>How would you like for us to connect with you for this session? Phone or Zoom?</FieldLabel><TextInput value={form.sessionConnectionPreference} onChange={(e) => setField("sessionConnectionPreference", e.target.value)} /></div>
 
                 <fieldset className={styles.checkboxFieldset}>
                   <legend>Have you attended one of our FREE Online Workshops or Masterclasses? *</legend>
