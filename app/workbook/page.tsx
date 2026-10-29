@@ -11,7 +11,7 @@ const descriptors = ["CEO (Decision Maker)", "Entrepreneur/Expert", "Startup", "
 const startTimelines = ["ASAP", "1-14 Days", "15-30 Days", "30+ Days", "60+ Days"];
 const helpAreas = ["Sales/Marketing", "Operations", "Human Resources", "Relationships", "Personal clarity", "Health & Wellness", "Financial Freedom"];
 const attendedOptions = ["Yes", "No"];
-const incomeRanges = ["Under $10K/month", "$10K–$50K/month", "$50K–$100K/month", "$100K–$500K/month", "$500K-$1 Mill/month", "$1 Mill +/month"];
+const incomeRanges = ["Under $5,000/month", "$5K - $10K/month", "$10K - $15K/month", "$15K - $25K/month", "$25K - $50K/month", "$50K or more per month"];
 
 const initialForm = {
   firstName: "",
@@ -200,8 +200,9 @@ export default function WorkbookPage() {
                   </div>
                 </fieldset>
 
-                <fieldset className={styles.checkboxFieldset}>
-                  <legend>Which range best represents your current monthly business or household income? *</legend>
+                <fieldset className={styles.checkboxFieldset} aria-describedby="household-income-help">
+                  <legend>Which range best represents your current monthly household income before taxes? *</legend>
+                  <p id="household-income-help">(Include income from all household earners, not total business revenue.)</p>
                   <div className={styles.checkboxGrid}>
                     {incomeRanges.map((option) => (
                       <label key={option} className={styles.checkboxOption}>
