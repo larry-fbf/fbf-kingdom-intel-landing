@@ -2,6 +2,35 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import test from 'node:test';
 
+const expectedDescription = `Welcome to the 3-Day Kingdom Intelligence Masterclass
+
+I am so excited to see you registered for our 3 day Kingdom Intel Masterclass!!
+
+This 3-day event will happen LIVE by Zoom. Accepting this invite will add our free event to your Google calendar so you can make sure you don't miss anything!\u0020
+
+If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g
+
+Important details:
+
+- You will be sent the Zoom link daily by email, and by texts if you opted into text messaging.
+
+- If you miss any of the classes, you will have access to the replays during the week on your www.kingdomintel.com/dashboard.
+
+- It is important to watch live if possible because we will be giving away over $10,000 in prizes and scholarships.
+
+- For those who are serious about scaling to the next level, on day 2 & 3 of our challenge we will have a VIP room for Q & A.
+
+FAQ:
+
+Q: How do I connect with someone?
+A: You should have received a text message, DM, and/or email from your "Advocate". Type the word advocate as a comment on any of the live videos and your advocate will send you a message for more help. Feel free to email us at anytime at support@fbfmastery.com
+
+Q: I filled out the form for the workbook. Where can I find it?
+A: Check your junk or spam mail. Or try again at kingdomintel.com/workbook
+
+Q: How can I learn more about Fueled by Fire?
+A: Go to www.fbfmastery.com`;
+
 test('ICS has one valid, stable recurring event with CRLF, folded lines and escaped text', async () => {
   const calendar = await import(moduleUrl.href);
   assert.equal(typeof calendar.calendarIcs, 'function');
@@ -25,10 +54,12 @@ test('ICS has one valid, stable recurring event with CRLF, folded lines and esca
     assert.match(fields.DTSTAMP, /^\d{8}T\d{6}Z$/);
     assert.equal(fields.URL, calendar.dashboardUrl);
     assert.equal(fields.DESCRIPTION, calendar.escapeIcsText(calendar.description));
+    const decodedDescription = fields.DESCRIPTION.replace(/\\([nN,;\\])/g, (_: string, escaped: string) => /[nN]/.test(escaped) ? '\n' : escaped);
+    assert.equal(decodedDescription, expectedDescription);
     uids.add(fields.UID);
   });
   assert.equal(uids.size, 1);
-  assert.doesNotMatch(unfolded, /ATTENDEE|ORGANIZER|VIP|zoom\.us/i);
+  assert.doesNotMatch(unfolded, /^(ATTENDEE|ORGANIZER)[;:]/im);
   assert.equal(calendar.escapeIcsText('a,b;c\\d\ne'), 'a\\,b\\;c\\\\d\\ne');
   const folded = calendar.foldIcsLine('DESCRIPTION:' + 'é😀'.repeat(50));
   assert.equal(folded.replace(/\r\n /g,''), 'DESCRIPTION:' + 'é😀'.repeat(50));
@@ -71,11 +102,10 @@ test('Google URL carries the recurring series with Chicago timezone', async () =
     assert.equal(url.searchParams.get('stz'), 'America/Chicago');
     assert.equal(url.searchParams.get('etz'), 'America/Chicago');
     assert.equal(url.searchParams.get('text'), session.title);
-    assert.match(url.searchParams.get('details')!, /personal Zoom join link.*confirmation email/);
-    assert.match(url.searchParams.get('details')!, /https:\/\/www.kingdomintel.com\/dashboard/);
+    assert.equal(url.searchParams.get('details'), expectedDescription);
     assert.equal(url.searchParams.get('recur'), 'RRULE:FREQ=DAILY;COUNT=3');
     assert.equal(url.searchParams.get('ctz'), 'America/Chicago');
-    assert.doesNotMatch(url.href, /zoom.us|VIP/);
+
     assert.match(url.href, /%2F/);
   }
 });
