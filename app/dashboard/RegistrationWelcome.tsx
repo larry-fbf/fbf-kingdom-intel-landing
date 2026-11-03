@@ -92,17 +92,19 @@ export default function RegistrationWelcome({ confirmedRegistration }: { confirm
       <style>{`
         .registration-welcome { order: 2; text-align: center; margin: -8px 0 20px; }
         .welcome-reopen { border: 0; background: none; color: #635a4d; font: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 8px; }
-        .registration-welcome-dialog { position: fixed; inset: 0; margin: auto; width: min(640px, calc(100% - 24px)); max-height: calc(100dvh - 24px); padding: 0; overflow-y: auto; overscroll-behavior: contain; border: 1px solid #c9a55a; border-radius: 12px; background: #080808; color: #fff; text-align: center; box-shadow: 0 24px 80px #0008; }
+        .registration-welcome-dialog { position: fixed; inset: 0; margin: auto; width: min(640px, calc(100% - 24px)); max-height: calc(100dvh - 24px); padding: 0; overflow-y: auto; overscroll-behavior: contain; border: 1px solid #CC0000; border-radius: 12px; background: #080808; color: #fff; text-align: center; box-shadow: 0 24px 80px #0008; }
         .welcome-focus-boundary { position: fixed; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
         .registration-welcome-dialog::backdrop { background: rgba(0,0,0,.78); }
         .welcome-close-row { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-end; padding: 8px 12px; background: #080808; }
         .welcome-close { min-height: 44px; padding: 8px 12px; border: 1px solid #777; border-radius: 6px; background: #171717; color: #fff; cursor: pointer; font: inherit; font-size: 14px; }
         .welcome-content { padding: 0 24px 28px; }
-        .welcome-eyebrow, .welcome-caption { color: #c9a55a; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
+        .welcome-eyebrow, .welcome-caption { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
         #registration-welcome-title { color: #fff; font-family: 'Anton', Arial, sans-serif; font-size: clamp(28px, 5vw, 42px); font-weight: 400; line-height: 1.12; text-transform: uppercase; margin: 0 0 12px; }
-        .welcome-community-heading { color: #e8d080; font-family: 'Frank Ruhl Libre', Georgia, serif; font-size: 22px; font-weight: 700; margin: 0 0 20px; }
-        .dashboard-welcome-video { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #c9a55a66; border-radius: 8px; margin: 0 0 20px; }
-        .welcome-community-cta { display: inline-block; max-width: 100%; padding: 16px 24px; border-radius: 6px; background: linear-gradient(135deg,#c9a55a,#e8d080,#bb945a); color: #120800; font-weight: 800; font-size: 14px; text-transform: uppercase; }
+        .welcome-community-heading { color: #CC0000; font-family: 'Frank Ruhl Libre', Georgia, serif; font-size: 22px; font-weight: 700; margin: 0 0 20px; }
+        .dashboard-welcome-video { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #CC0000; border-radius: 8px; margin: 0 0 20px; }
+        .dashboard-welcome-video > span[aria-hidden="true"] { border-color: #CC0000 !important; }
+        .dashboard-welcome-video > span[aria-hidden="true"] > span { border-left-color: #CC0000 !important; }
+        .welcome-community-cta { display: inline-block; max-width: 100%; padding: 16px 24px; border-radius: 6px; background: #CC0000; color: #fff; font-weight: 800; font-size: 14px; text-transform: uppercase; }
         .registration-welcome :focus-visible { outline: 3px solid #cc0000; outline-offset: 3px; }
         @media (max-width: 480px) { .welcome-content { padding: 0 16px 24px; } }
       `}</style>
