@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
+import { beforeWelcome } from './welcome-preservation.ts';
 
 const source = readFileSync(new URL('../app/dashboard/page.tsx', import.meta.url), 'utf8');
 
@@ -13,7 +14,7 @@ test('only exact historical placeholder blocks are added to the pinned dashboard
   assert.equal(createHash('sha256').update(editsText).digest('hex'), 'f0ed85132667b943715ea47659a5edd1176a7c25ef6c5f317533bb538ce0fdb5');
   const edits = JSON.parse(editsText);
   assert.equal(edits.base, '8a23de71bbc164d592509aaf3872310689026226');
-  let baseline = source;
+  let baseline = beforeWelcome('app/dashboard/page.tsx', source);
   for (const { before, after } of edits.changes) {
     assert.equal(baseline.split(after).length, 2, 'exact approved transformation occurs once');
     baseline = baseline.replace(after, before);
@@ -28,7 +29,7 @@ test('only exact historical placeholder blocks are added to the pinned dashboard
   // Immediate production/main baseline: 6670a7f3ab67ae91351649eec48837ee571ccd2f.
   // Preserve mixed CRLF/LF bytes, including all existing styles, CTA placement and dates.
   const hash = (value: string) => createHash('sha256').update(value).digest('hex');
-  const data = source.slice(source.indexOf('const replays = ['), source.indexOf('export default function'));
+  const data = baseline.slice(baseline.indexOf('const replays = ['), baseline.indexOf('export default function'));
   const section = source.slice(source.indexOf('      <section className="replays-section">'), source.indexOf('      <footer'));
   assert.equal(hash(data), '47e58cd2240e32fcb0a396357d75ca2c412e9762edfa091efe15f07ff9b01569');
   assert.equal(hash(section), '5b450ce21443ada2193f757468c0d2c219dd4fea4dde4c2ac420141ea24564cd');

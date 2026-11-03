@@ -4,6 +4,13 @@ import type { Metadata } from "next";
 import ClarityPageViewEvent from "../components/ClarityPageViewEvent";
 import TrackedClarityLink from "../components/TrackedClarityLink";
 import ShareMasterclassButton from "./ShareMasterclassButton";
+import { cookies } from "next/headers";
+import RegistrationWelcome from "./RegistrationWelcome";
+import ConfirmedRegistrationAnalytics from "../components/ConfirmedRegistrationAnalytics";
+import { getRegistrationConfirmationSecret, REGISTRATION_CONFIRMATION_COOKIE, verifyRegistrationConfirmation } from "../lib/registration-confirmation";
+
+// This public page reads a per-request cookie; never cache a visitor's gate.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Event Dashboard | Kingdom Intelligence Masterclass",
@@ -35,9 +42,17 @@ const replays = [
   },
 ];
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  let confirmedRegistration = false;
+  try {
+    const token = (await cookies()).get(REGISTRATION_CONFIRMATION_COOKIE)?.value;
+    confirmedRegistration = !!token && verifyRegistrationConfirmation(token, getRegistrationConfirmationSecret());
+  } catch {
+    // Confirmation is optional: storage/cookie failures must not block the dashboard.
+  }
   return (
     <main className="dashboard-shell">
+      {confirmedRegistration && <ConfirmedRegistrationAnalytics trackThankYouView={false} />}
       <ClarityPageViewEvent eventName="kim_dashboard_visit" />
       <style>{`
         .dashboard-shell {
@@ -766,6 +781,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          <RegistrationWelcome confirmedRegistration={confirmedRegistration} />
           <div className="hero-grid">
             <div className="main-feature">
               <TrackedClarityLink

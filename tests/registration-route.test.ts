@@ -82,7 +82,7 @@ test("registration creates a Person and fulfills registration without creating a
   assert.ok(h.calls.some(c => c.url.includes("brevo.com") && c.body.listIds.includes(26)));
   assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.phone === "+13122346789"));
   assert.match(response.headers.get("set-cookie"), /HttpOnly/i);
-  assert.match(response.headers.get("set-cookie"), /Path=\/thank-you/i);
+  assert.match(response.headers.get("set-cookie"), /Path=\/;/i);
   assert.equal((await response.json()).degraded, false);
 });
 
