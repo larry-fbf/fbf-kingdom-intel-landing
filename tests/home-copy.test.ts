@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import test from "node:test";
+import { beforeWelcome } from './welcome-preservation.ts';
 
 const page = readFileSync("app/page.tsx", "utf8");
 const first = "For 7- and 8-figure business owners and leaders ready to grow without compromising how God has called them to lead.";
@@ -21,5 +22,5 @@ test("ECHO C describes clarity of vision with no conflicting culture label", () 
 
 test("homepage preserves every baseline byte outside the requested hero and C copy", () => {
   const baseline = execFileSync("git", ["show", "619fedcd4d2aa86756ec80188933165f53c45365:app/page.tsx"], { encoding: "utf8" });
-  assert.equal(page.replace(first, first.replace(" and leaders", "")).replace(newC, oldC), baseline);
+  assert.equal(beforeWelcome('app/page.tsx', page).replace(first, first.replace(" and leaders", "")).replace(newC, oldC), baseline);
 });

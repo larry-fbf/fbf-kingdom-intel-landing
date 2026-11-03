@@ -60,10 +60,11 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
       });
       try {
         window.sessionStorage.setItem("kim_registration_confirmed", "true");
+        window.sessionStorage.setItem("kim_registration_welcome", "true");
       } catch {
         // Storage can be unavailable in privacy-restricted in-app browsers.
       }
-      router.push("/thank-you");
+      router.push("/dashboard");
     } catch (error) {
       const requestError = error instanceof RegistrationRequestError ? error : null;
       trackClarityEvent(FUNNEL_EVENTS.registrationFailed, {

@@ -6,17 +6,19 @@ import { trackClarityEvent } from "../lib/clarity-events";
 
 type FacebookPixel = (command: "track", eventName: string) => void;
 
-export default function ConfirmedRegistrationAnalytics() {
+// Mount only behind the server-verified registration confirmation gate.
+export default function ConfirmedRegistrationAnalytics({ trackThankYouView = true }: { trackThankYouView?: boolean } = {}) {
   useEffect(() => {
     let confirmed = false;
     try {
       confirmed = window.sessionStorage.getItem("kim_registration_confirmed") === "true";
       if (confirmed) window.sessionStorage.removeItem("kim_registration_confirmed");
     } catch {
-      // Analytics must never interrupt the thank-you experience.
+      // Fail closed if the per-tab deduplication marker cannot be consumed.
+      confirmed = false;
     }
 
-    trackClarityEvent(FUNNEL_EVENTS.thankYouView, {
+    if (trackThankYouView) trackClarityEvent(FUNNEL_EVENTS.thankYouView, {
       confirmed_registration: confirmed ? "true" : "false",
     });
 

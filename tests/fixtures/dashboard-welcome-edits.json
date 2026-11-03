@@ -1,0 +1,30 @@
+{
+  "app/dashboard/page.tsx": [
+    {
+      "before": "",
+      "after": "import { cookies } from \"next/headers\";\r\nimport RegistrationWelcome from \"./RegistrationWelcome\";\r\nimport ConfirmedRegistrationAnalytics from \"../components/ConfirmedRegistrationAnalytics\";\r\nimport { getRegistrationConfirmationSecret, REGISTRATION_CONFIRMATION_COOKIE, verifyRegistrationConfirmation } from \"../lib/registration-confirmation\";\r\n\r\n// This public page reads a per-request cookie; never cache a visitor's gate.\r\nexport const dynamic = \"force-dynamic\";\r\n"
+    },
+    {
+      "before": "export default function DashboardPage() {\r\n",
+      "after": "export default async function DashboardPage() {\r\n  let confirmedRegistration = false;\r\n  try {\r\n    const token = (await cookies()).get(REGISTRATION_CONFIRMATION_COOKIE)?.value;\r\n    confirmedRegistration = !!token && verifyRegistrationConfirmation(token, getRegistrationConfirmationSecret());\r\n  } catch {\r\n    // Confirmation is optional: storage/cookie failures must not block the dashboard.\r\n  }\r\n"
+    },
+    {
+      "before": "",
+      "after": "      {confirmedRegistration && <ConfirmedRegistrationAnalytics trackThankYouView={false} />}\r\n"
+    },
+    {
+      "before": "",
+      "after": "          <RegistrationWelcome confirmedRegistration={confirmedRegistration} />\r\n"
+    }
+  ],
+  "app/page.tsx": [
+    {
+      "before": "",
+      "after": "        window.sessionStorage.setItem(\"kim_registration_welcome\", \"true\");\r\n"
+    },
+    {
+      "before": "      router.push(\"/thank-you\");\r\n",
+      "after": "      router.push(\"/dashboard\");\r\n"
+    }
+  ]
+}
