@@ -1,3 +1,4 @@
+import BonusContent from "./BonusContent";
 import AddToCalendar from "./AddToCalendar";
 import { googleCalendarUrl } from "./calendar";
 import type { Metadata } from "next";
@@ -928,6 +929,8 @@ export default async function DashboardPage() {
           </div>
         </div>
       </section>
+
+      <BonusContent />
 
       <footer className="footer">
         <img src="/images/fbf-logo-white.png" alt="Fueled By Fire" />

@@ -89,6 +89,7 @@ for (const [name, token, expected] of [
   test(`real public dashboard server gate: ${name} confirmation`, async () => {
     const Welcome = () => null; const Analytics = () => null;
     const page = load('app/dashboard/page.tsx', {
+      './BonusContent': {default:()=>null},
       './AddToCalendar': {default:()=>null}, './calendar':{googleCalendarUrl:()=>''},
       '../components/ClarityPageViewEvent':{default:()=>null}, '../components/TrackedClarityLink':{default:()=>null},
       './ShareMasterclassButton':{default:()=>null}, './RegistrationWelcome':{default:Welcome},

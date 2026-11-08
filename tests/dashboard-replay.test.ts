@@ -4,7 +4,8 @@ import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { beforeWelcome } from './welcome-preservation.ts';
 
-const source = readFileSync(new URL('../app/dashboard/page.tsx', import.meta.url), 'utf8');
+import { beforeBonus } from './bonus-preservation.ts';
+const source = beforeBonus(readFileSync(new URL('../app/dashboard/page.tsx', import.meta.url), 'utf8'));
 
 test('only exact historical placeholder blocks are added to the pinned dashboard bytes', () => {
   // Reverse only the approved calendar substitution before the legacy whole-page guard.
