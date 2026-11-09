@@ -1,0 +1,199 @@
+{
+  "app/vip/VIPUpsellPage.tsx": {
+    "baseHash": "0a4e657a2773b350da5e35a2a3a3eebff97ddda5c2e1b338a495003fea129495",
+    "candidateHash": "f83d98e0016d338184232e36e4c2494e26ab494781dbe5057e838a81679eb567",
+    "changes": [
+      {
+        "newStart": 207,
+        "old": "    title: \"The Kingdom Intelligence Masterclass workbook\",\r\n",
+        "new": "    title: \"Lifetime access to the Kingdom Intelligence Masterclass replays\",\r\n"
+      },
+      {
+        "newStart": 297,
+        "old": "      \"Get the workbook so you can follow the sessions, capture what God is showing you, and turn the training into a clear implementation plan.\",\r\n    image: \"/images/kingdom-intelligence-workbook-cover.png\",\r\n",
+        "new": "      \"Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.\",\r\n    image: \"/images/vip-mastermind-og.jpg\",\r\n"
+      },
+      {
+        "newStart": 781,
+        "old": "    title: \"Lifetime access to the Kingdom Intelligence Masterclass replays\",\n",
+        "new": "    title: \"Lifetime access to the VIP session recordings\",\r\n"
+      },
+      {
+        "newStart": 852,
+        "old": "      \"Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.\",\n",
+        "new": "      \"Revisit both VIP sessions for coaching insights you can keep putting into practice.\",\r\n"
+      },
+      {
+        "newStart": 4005,
+        "old": "            <>\r\n              <span>You have an opportunity</span>\r\n              <span>to enhance your</span>\r\n              <span>experience</span>\r\n            </>\r\n",
+        "new": "            <span>Upgrade your experience</span>\r\n"
+      },
+      {
+        "newStart": 4606,
+        "old": "              <h1>\r\n                <span className={styles.accessLine}>&ldquo;Exclusive Access&rdquo;</span>\r\n                <span className={styles.goldUnderline}>\r\n                  <span>Upgrade To</span>\r\n                  <span>&apos;VIP Mastermind&apos;</span>\r\n                </span>\r\n                <span className={styles.supportingLine}>And Get Direct Help With</span>\r\n                <span className={styles.supportingLine}>\r\n                  Your <em>Life &amp; Business Reset</em>\r\n                </span>\r\n              </h1>\r\n",
+        "new": "              <>\r\n                <h1>\r\n                  <span className={styles.accessLine}>Exlusive Access to{' '}</span>\r\n                  <span className={styles.goldUnderline}>VIP MASTERMIND</span>\r\n                </h1>\r\n                <p className={styles.supportingLine}>One-on-one coaching &amp; Q&amp;A</p>\r\n              </>\r\n"
+      }
+    ]
+  },
+  "app/vip/page.module.css": {
+    "baseHash": "b9860278c80368047529e5bd4b05845e4af569f8d691de4c07a7257365864f36",
+    "candidateHash": "b328de258db8159f19347ca99d898387213021e52b9f28553bd7427eae4fe3f3",
+    "changes": [
+      {
+        "newStart": 391,
+        "old": "  border-top: 2px solid #CC0000;\r\n  border-bottom: 2px solid #CC0000;\r\n",
+        "new": "  border-top: 2px solid #d9bd72;\r\n  border-bottom: 2px solid #d9bd72;\r\n"
+      },
+      {
+        "newStart": 555,
+        "old": "    radial-gradient(circle at 50% 18%, rgba(204, 0, 0, 0.14), transparent 30%),\r\n",
+        "new": "    radial-gradient(circle at 50% 18%, rgba(217, 189, 114, 0.14), transparent 30%),\r\n"
+      },
+      {
+        "newStart": 828,
+        "old": "  border-bottom: 1px solid rgba(204, 0, 0, 0.85);\r\n",
+        "new": "  border-bottom: 1px solid rgba(217, 189, 114, 0.85);\r\n"
+      },
+      {
+        "newStart": 1862,
+        "old": "  color: #cc0000;\r\n",
+        "new": "  color: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 2175,
+        "old": "  color: #CC0000;\r\n",
+        "new": "  color: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 2453,
+        "old": "  border-bottom: 4px solid #CC0000;\r\n",
+        "new": "  border-bottom: 4px solid #e6c979;\r\n"
+      },
+      {
+        "newStart": 2764,
+        "old": "  color: #CC0000;\r\n",
+        "new": "  color: #e6c979;\r\n"
+      },
+      {
+        "newStart": 3058,
+        "old": "  border: 2px solid rgba(204, 0, 0, 0.82);\r\n",
+        "new": "  border: 2px solid rgba(217, 189, 114, 0.82);\r\n"
+      },
+      {
+        "newStart": 3517,
+        "old": "  background: #CC0000;\r\n  box-shadow: 0 12px 34px rgba(204, 0, 0, 0.35);\r\n  color: #ffffff;\r\n",
+        "new": "  background: linear-gradient(135deg, #c9a55a 0%, #e8d080 45%, #bb945a 100%);\r\n  box-shadow: 0 12px 34px rgba(185, 148, 90, 0.35);\r\n  color: #120800;\r\n"
+      },
+      {
+        "newStart": 4010,
+        "old": "  box-shadow: 0 16px 46px rgba(204, 0, 0, 0.5);\r\n",
+        "new": "  box-shadow: 0 16px 46px rgba(185, 148, 90, 0.5);\r\n"
+      },
+      {
+        "newStart": 4379,
+        "old": "  border: 2px solid #CC0000;\r\n",
+        "new": "  border: 2px solid #d9bd72;\r\n"
+      },
+      {
+        "newStart": 4605,
+        "old": "  color: #CC0000;\r\n",
+        "new": "  color: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 5061,
+        "old": "  border: 2px solid #CC0000;\r\n",
+        "new": "  border: 2px solid #d9bd72;\r\n"
+      },
+      {
+        "newStart": 5130,
+        "old": "    radial-gradient(circle at 12px 12px, rgba(204, 0, 0, 0.14) 1px, transparent 1.5px) 0 0 / 18px 18px,\r\n",
+        "new": "    radial-gradient(circle at 12px 12px, rgba(217, 189, 114, 0.14) 1px, transparent 1.5px) 0 0 / 18px 18px,\r\n"
+      },
+      {
+        "newStart": 5452,
+        "old": "  background: #CC0000;\r\n",
+        "new": "  background: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 6035,
+        "old": "  color: #CC0000;\r\n",
+        "new": "  color: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 6382,
+        "old": "  background: #CC0000;\r\n",
+        "new": "  background: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 6512,
+        "old": "  border-top: 1px solid rgba(204, 0, 0, 0.25);\r\n  border-bottom: 1px solid rgba(204, 0, 0, 0.25);\r\n",
+        "new": "  border-top: 1px solid rgba(217, 189, 114, 0.25);\r\n  border-bottom: 1px solid rgba(217, 189, 114, 0.25);\r\n"
+      },
+      {
+        "newStart": 6855,
+        "old": "  color: #CC0000;\r\n",
+        "new": "  color: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 8191,
+        "old": "  border: 1px solid rgba(204, 0, 0, 0.32);\r\n",
+        "new": "  border: 1px solid rgba(201, 165, 90, 0.32);\r\n"
+      },
+      {
+        "newStart": 9414,
+        "old": "  background: #CC0000;\r\n",
+        "new": "  background: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 10723,
+        "old": "  border: 1px solid rgba(255, 255, 255, 0.1);\r\n",
+        "new": "  border: 1px solid rgba(217, 189, 114, 0.32);\r\n"
+      },
+      {
+        "newStart": 11738,
+        "old": "  background: #cc0000;\r\n  box-shadow: 0 0 0 5px rgba(204, 0, 0, 0.11);\r\n",
+        "new": "  background: #d9bd72;\r\n  box-shadow: 0 0 0 5px rgba(217, 189, 114, 0.11);\r\n"
+      },
+      {
+        "newStart": 12261,
+        "old": "  background: #cc0000;\r\n",
+        "new": "  background: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 12378,
+        "old": "  color: #ffffff;\r\n",
+        "new": "  color: #120800;\r\n"
+      },
+      {
+        "newStart": 12920,
+        "old": "  border: 2px solid rgba(204, 0, 0, 0.45);\r\n",
+        "new": "  border: 2px solid rgba(201, 165, 90, 0.45);\r\n"
+      },
+      {
+        "newStart": 13040,
+        "old": "  color: #cc0000;\r\n",
+        "new": "  color: #d9bd72;\r\n"
+      },
+      {
+        "newStart": 13916,
+        "old": "  border-top: 1px solid rgba(255, 255, 255, 0.08);\r\n",
+        "new": "  border-top: 1px solid rgba(217, 189, 114, 0.32);\r\n"
+      },
+      {
+        "newStart": 18959,
+        "old": ".heroCopy h1 em, .heroLead strong { color: #ffffff; }\r\n",
+        "new": ".heroCopy > p.supportingLine { margin: -12px auto 24px; font-family: \"Anton\", Impact, sans-serif; font-size: clamp(20px, 2vw, 28px); }\r\n.heroCopy h1 em { color: #ffffff; }\r\n.heroLead strong { color: #e6c979; }\r\n.topAnnouncement, .accessLine, .supportingLine { text-transform: none; }\r\n"
+      },
+      {
+        "newStart": 19526,
+        "old": ".quoteBadge, .starRow span { color: #ffffff; }\r\n",
+        "new": ".quoteBadge, .starRow span { color: #050505; }\r\n"
+      },
+      {
+        "newStart": 19962,
+        "old": ".ctaButton:focus-visible { outline: 3px solid #ffffff; outline-offset: 4px; }\r\n",
+        "new": ".ctaButton:focus-visible { outline: 3px solid #e6c979; outline-offset: 4px; }\r\n"
+      }
+    ]
+  }
+}

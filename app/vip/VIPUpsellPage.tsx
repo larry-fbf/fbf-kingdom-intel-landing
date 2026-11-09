@@ -5,10 +5,10 @@ const PAYMENT_LINK = "https://buy.stripe.com/8x2dRabIR7JA3qQ88t5kk0i";
 
 const bonuses = [
   {
-    title: "The Kingdom Intelligence Masterclass workbook",
+    title: "Lifetime access to the Kingdom Intelligence Masterclass replays",
     body:
-      "Get the workbook so you can follow the sessions, capture what God is showing you, and turn the training into a clear implementation plan.",
-    image: "/images/kingdom-intelligence-workbook-cover.png",
+      "Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.",
+    image: "/images/vip-mastermind-og.jpg",
   },
   {
     title: "The S.W.E.E.T. Spot Audit",
@@ -17,9 +17,9 @@ const bonuses = [
     image: "/images/vip-sweet-spot-audit.png",
   },
   {
-    title: "Lifetime access to the Kingdom Intelligence Masterclass replays",
+    title: "Lifetime access to the VIP session recordings",
     body:
-      "Get lifetime access to the Kingdom Intelligence Masterclass replays inside the FBF Vault so you can revisit the training and keep implementing after the live event.",
+      "Revisit both VIP sessions for coaching insights you can keep putting into practice.",
     image: "/images/vip-mastermind-og.jpg",
   },
 ];
@@ -104,11 +104,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
           {isThankYou ? (
             <span>CONGRATULATIONS! You are registered, just one more step before you go!</span>
           ) : (
-            <>
-              <span>You have an opportunity</span>
-              <span>to enhance your</span>
-              <span>experience</span>
-            </>
+            <span>Upgrade your experience</span>
           )}
         </div>
 
@@ -124,17 +120,13 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
                 <span className={styles.supportingLine}>Before You Go</span>
               </h1>
             ) : (
-              <h1>
-                <span className={styles.accessLine}>&ldquo;Exclusive Access&rdquo;</span>
-                <span className={styles.goldUnderline}>
-                  <span>Upgrade To</span>
-                  <span>&apos;VIP Mastermind&apos;</span>
-                </span>
-                <span className={styles.supportingLine}>And Get Direct Help With</span>
-                <span className={styles.supportingLine}>
-                  Your <em>Life &amp; Business Reset</em>
-                </span>
-              </h1>
+              <>
+                <h1>
+                  <span className={styles.accessLine}>Exlusive Access to{' '}</span>
+                  <span className={styles.goldUnderline}>VIP MASTERMIND</span>
+                </h1>
+                <p className={styles.supportingLine}>One-on-one coaching &amp; Q&amp;A</p>
+              </>
             )}
             <div className={styles.inviteVideo}>
               <iframe

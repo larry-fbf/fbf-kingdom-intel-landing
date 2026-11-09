@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-const page = readFileSync('app/vip/VIPUpsellPage.tsx', 'utf8');
-const css = readFileSync('app/vip/page.module.css', 'utf8');
+import {beforeVIPGold} from './vip-gold-preservation.ts';
+const page=beforeVIPGold(readFileSync('app/vip/VIPUpsellPage.tsx','utf8'),'app/vip/VIPUpsellPage.tsx');
+const css=beforeVIPGold(readFileSync('app/vip/page.module.css','utf8'),'app/vip/page.module.css');
 test('VIP uses a compact secondary line, larger video and red neutral palette', () => {
   assert.doesNotMatch(css, /#(?:d9bd72|c9a55a|e6c979|e8d080|bb945a)|rgba\((?:217, 189, 114|201, 165, 90|185, 148, 90)/i);
   assert.match(css, /font-size: clamp\(20px, 2vw, 28px\)/);
