@@ -363,6 +363,18 @@
   color: #ffffff;
 }
 
+.coachingLight {
+  background: #f4f2ee;
+}
+
+.coachingLight .copyStack h2 {
+  color: #121212;
+}
+
+.coachingLight .copyStack p {
+  color: #3a352f;
+}
+
 .sectionDark,
 .bonusSection {
   background: #0f0f0f;
