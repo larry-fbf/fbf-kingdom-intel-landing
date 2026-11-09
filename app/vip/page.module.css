@@ -1077,3 +1077,20 @@
   .sectionWhite, .sectionDark, .bonusSection, .featuredTestimonialSection, .finalCta { padding: 48px 0; }
   .offerCard h2 { font-size: clamp(30px, 8vw, 44px); }
 }
+
+/* A single short separator replaces the unused full-width underline. */
+.heroCopy:has(> p.supportingLine) h1 { margin-bottom: 8px; }
+.heroCopy:has(> p.supportingLine) .goldUnderline { margin-bottom: 0; padding-bottom: 0; }
+.heroCopy:has(> p.supportingLine) .goldUnderline::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 2px;
+  margin: 10px auto 0;
+  background: #e6c979;
+}
+.heroCopy > p.supportingLine { margin-top: 0; }
+@media (max-width: 768px) {
+  /* Override only this section's global 56px !important mobile top padding. */
+  .coachingLight { padding-top: 32px !important; }
+}

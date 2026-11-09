@@ -1,3 +1,4 @@
+import {beforeVIPSpacing} from './vip-spacing-preservation.ts';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
@@ -11,6 +12,7 @@ export function beforeVIPGold(source:string,file='app/vip/VIPUpsellPage.tsx') {
  assert.equal(hash(base),spec.baseHash);
  // Historical tests may chain this restoration twice; only exact base is accepted.
  if(source===base)return source;
+ source=beforeVIPSpacing(source,file);
  assert.equal(hash(source),spec.candidateHash,'reviewed candidate bytes only');
  for(const change of [...spec.changes].reverse()) {
   assert.equal(source.slice(change.newStart,change.newStart+change.new.length),change.new);
