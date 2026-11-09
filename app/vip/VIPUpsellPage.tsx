@@ -1,4 +1,3 @@
-import CountdownTimer from "./CountdownTimer";
 import TrackedClarityLink from "../components/TrackedClarityLink";
 import styles from "./page.module.css";
 
@@ -167,6 +166,49 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
         </div>
       </section>
 
+      <section className={styles.sectionWhite}>
+        <div className={styles.container}>
+          <div className={styles.splitWithImage}>
+            <div>
+              <p className={styles.eyebrowRed}>What you get</p>
+              <h2>Upgrade your VIP status today.</h2>
+              <p>
+                We designed the VIP upgrade to be a fast-track training and coaching experience.
+                You get direct feedback so you can get the most out of the masterclass and move
+                faster on the business decisions that matter.
+              </p>
+              <ul className={styles.checkList}>
+                {vipIncludes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className={styles.imagePanel}>
+              <img src="/images/vip-coaching-room.png" alt="Live coaching room" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.bonusSection}>
+        <div className={styles.container}>
+          <div className={styles.centerHeaderDark}>
+            <p className={styles.eyebrowGold}>Fast-action bonuses</p>
+            <h2>As a BONUS you will also get these resources.</h2>
+          </div>
+          <div className={styles.bonusGrid}>
+            {bonuses.map((bonus, index) => (
+              <article key={bonus.title} className={styles.bonusCard}>
+                <img src={bonus.image} alt="" />
+                <span>Bonus {index + 1}</span>
+                <h3>{bonus.title}</h3>
+                <p>{bonus.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className={styles.urgencyBand}>
         <div className={styles.urgencyCopy}>
           <strong>PLUS!</strong>
@@ -175,7 +217,6 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
             Masterclass replays.
           </p>
         </div>
-        <CountdownTimer />
       </section>
 
       <section className={styles.featuredTestimonialSection}>
@@ -280,49 +321,6 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
                 asking, and receive direction while momentum from the masterclass is high.
               </p>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.sectionWhite}>
-        <div className={styles.container}>
-          <div className={styles.splitWithImage}>
-            <div>
-              <p className={styles.eyebrowRed}>What you get</p>
-              <h2>Upgrade your VIP status today.</h2>
-              <p>
-                We designed the VIP upgrade to be a fast-track training and coaching experience.
-                You get direct feedback so you can get the most out of the masterclass and move
-                faster on the business decisions that matter.
-              </p>
-              <ul className={styles.checkList}>
-                {vipIncludes.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className={styles.imagePanel}>
-              <img src="/images/vip-coaching-room.png" alt="Live coaching room" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.bonusSection}>
-        <div className={styles.container}>
-          <div className={styles.centerHeaderDark}>
-            <p className={styles.eyebrowGold}>Fast-action bonuses</p>
-            <h2>As a BONUS you will also get these resources.</h2>
-          </div>
-          <div className={styles.bonusGrid}>
-            {bonuses.map((bonus, index) => (
-              <article key={bonus.title} className={styles.bonusCard}>
-                <img src={bonus.image} alt="" />
-                <span>Bonus {index + 1}</span>
-                <h3>{bonus.title}</h3>
-                <p>{bonus.body}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>

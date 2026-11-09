@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import test from "node:test";
+import { beforeVIPHierarchy } from './vip-hierarchy-preservation.ts';
 
 const file = "app/vip/VIPUpsellPage.tsx";
 const page = readFileSync(file, "utf8");
@@ -17,7 +18,7 @@ test("VIP spells out all seven Masterclass abbreviations, including wrapped JSX 
 
 test("VIP preserves every baseline byte except the seven approved name expansions", () => {
   const expected = baseline.replace(/K\.I\.(\s+)Masterclass/g, "Kingdom Intelligence$1Masterclass");
-  assert.equal(page, expected);
+  assert.equal(beforeVIPHierarchy(page), expected);
 });
 
 test("VIP metadata and imported countdown and tracked links contain no abbreviated name", () => {

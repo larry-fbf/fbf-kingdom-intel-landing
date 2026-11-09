@@ -15,8 +15,8 @@
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.52) 48%, rgba(0, 0, 0, 0.88) 100%),
     url("/images/vip-city-bg.png") center / cover;
-  border-top: 2px solid #d9bd72;
-  border-bottom: 2px solid #d9bd72;
+  border-top: 2px solid #CC0000;
+  border-bottom: 2px solid #CC0000;
   overflow: hidden;
 }
 
@@ -24,7 +24,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 18%, rgba(201, 165, 90, 0.14), transparent 30%),
+    radial-gradient(circle at 50% 18%, rgba(204, 0, 0, 0.14), transparent 30%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.72));
   pointer-events: none;
 }
@@ -33,7 +33,7 @@
   position: relative;
   z-index: 3;
   padding: 16px 24px 14px;
-  border-bottom: 1px solid rgba(217, 189, 114, 0.85);
+  border-bottom: 1px solid rgba(204, 0, 0, 0.85);
   background: #050505;
   color: rgba(255, 255, 255, 0.92);
   font-size: 15px;
@@ -88,7 +88,7 @@
 .eyebrow,
 .eyebrowGold,
 .offerKicker {
-  color: #c9a55a;
+  color: #e0e0e0;
 }
 
 .eyebrowRed {
@@ -110,7 +110,7 @@
 }
 
 .heroCopy h1 em {
-  color: #e6c979;
+  color: #CC0000;
   font-style: normal;
 }
 
@@ -127,8 +127,8 @@
   width: fit-content;
   max-width: 100%;
   margin: 2px auto 18px;
-  color: #e6c979;
-  border-bottom: 4px solid #e6c979;
+  color: #CC0000;
+  border-bottom: 4px solid #CC0000;
   line-height: 1.02;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .heroLead strong {
-  color: #e6c979;
+  color: #CC0000;
   font-style: italic;
   font-weight: 700;
   text-transform: uppercase;
@@ -161,10 +161,10 @@
 }
 
 .inviteVideo {
-  width: min(760px, 100%);
+  width: min(900px, 100%);
   margin: 0 auto 28px;
   overflow: hidden;
-  border: 2px solid rgba(217, 189, 114, 0.82);
+  border: 2px solid rgba(204, 0, 0, 0.82);
   border-radius: 10px;
   background: #050505;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.48);
@@ -188,9 +188,9 @@
   min-height: 58px;
   padding: 18px 42px;
   border-radius: 5px;
-  background: linear-gradient(135deg, #c9a55a 0%, #e8d080 45%, #bb945a 100%);
-  box-shadow: 0 12px 34px rgba(185, 148, 90, 0.35);
-  color: #120800;
+  background: #CC0000;
+  box-shadow: 0 12px 34px rgba(204, 0, 0, 0.35);
+  color: #ffffff;
   font-family: "Work Sans", system-ui, sans-serif;
   font-size: 16px;
   font-weight: 900;
@@ -204,7 +204,7 @@
 .ctaButton:hover {
   filter: brightness(1.08);
   transform: translateY(-2px);
-  box-shadow: 0 16px 46px rgba(185, 148, 90, 0.5);
+  box-shadow: 0 16px 46px rgba(204, 0, 0, 0.5);
 }
 
 .microcopy {
@@ -222,7 +222,7 @@
   width: min(1120px, calc(100% - 40px));
   margin: 46px auto 48px;
   padding: 28px 34px;
-  border: 2px solid #d9bd72;
+  border: 2px solid #CC0000;
   border-radius: 8px;
   background: #050505;
   color: #ffffff;
@@ -236,7 +236,7 @@
 }
 
 .urgencyCopy strong {
-  color: #e6c979;
+  color: #CC0000;
   font-size: 18px;
   font-weight: 900;
   letter-spacing: 0.05em;
@@ -257,18 +257,18 @@
 }
 
 .featuredTestimonialSection {
-  background: #eef1f5;
-  color: #111111;
+  background: #080808;
+  color: #ffffff;
 }
 
 .featuredTestimonial {
   position: relative;
   overflow: visible;
-  border: 2px solid #d9bd72;
+  border: 2px solid #CC0000;
   border-radius: 12px;
   background:
-    radial-gradient(circle at 12px 12px, rgba(217, 189, 114, 0.14) 1px, transparent 1.5px) 0 0 / 18px 18px,
-    #fffefa;
+    radial-gradient(circle at 12px 12px, rgba(204, 0, 0, 0.14) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    #111111;
   padding: 58px 62px 54px;
 }
 
@@ -281,7 +281,7 @@
   width: 84px;
   height: 84px;
   border-radius: 50%;
-  background: #d9bd72;
+  background: #CC0000;
   color: #050505;
   font-family: Georgia, serif;
   font-size: 84px;
@@ -291,7 +291,7 @@
 
 .featuredTestimonial blockquote {
   margin: 0 0 34px;
-  color: #333333;
+  color: #e0e0e0;
   max-width: 920px;
   font-size: clamp(18px, 1.7vw, 25px);
   font-weight: 400;
@@ -312,14 +312,14 @@
   height: 86px;
   border-radius: 50%;
   background: #111111;
-  color: #d9bd72;
+  color: #CC0000;
   font-size: 24px;
   font-weight: 900;
 }
 
 .featuredTestimonialFooter strong {
   display: block;
-  color: #0b1d28;
+  color: #ffffff;
   font-size: 34px;
   line-height: 1.1;
 }
@@ -335,7 +335,7 @@
   place-items: center;
   width: 26px;
   height: 26px;
-  background: #d9bd72;
+  background: #CC0000;
   color: #050505;
   font-size: 16px;
   line-height: 1;
@@ -343,8 +343,8 @@
 
 .coachingIntro {
   padding: 74px 0 78px;
-  border-top: 1px solid rgba(217, 189, 114, 0.25);
-  border-bottom: 1px solid rgba(217, 189, 114, 0.25);
+  border-top: 1px solid rgba(204, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(204, 0, 0, 0.25);
   background:
     linear-gradient(180deg, rgba(8, 8, 8, 0.94), rgba(8, 8, 8, 0.98)),
     url("/images/vip-city-bg.png") center / cover;
@@ -355,12 +355,12 @@
 }
 
 .coachingIntro .eyebrowRed {
-  color: #e6c979;
+  color: #CC0000;
 }
 
 .sectionWhite {
-  background: #ffffff;
-  color: #111111;
+  background: #080808;
+  color: #ffffff;
 }
 
 .sectionDark,
@@ -392,7 +392,7 @@
 .copyStack p,
 .splitWithImage p,
 .finalCta p {
-  color: #555555;
+  color: #cccccc;
   font-size: 17px;
   line-height: 1.78;
 }
@@ -427,7 +427,7 @@
 .offerCard {
   position: sticky;
   top: 24px;
-  border: 1px solid rgba(201, 165, 90, 0.32);
+  border: 1px solid rgba(204, 0, 0, 0.32);
   border-radius: 12px;
   background: #0d0d0d;
   padding: 32px;
@@ -468,7 +468,7 @@
 }
 
 .priceBox strong {
-  color: rgba(255, 255, 255, 0.42);
+  color: #b3b3b3;
   font-size: 34px;
   text-decoration: line-through;
 }
@@ -495,7 +495,7 @@
   min-width: 0;
   padding: 14px 18px;
   border-radius: 4px;
-  background: #e6c979;
+  background: #CC0000;
   color: #050505;
 }
 
@@ -584,7 +584,7 @@
 .bonusCard span {
   display: block;
   margin-bottom: 14px;
-  color: #c9a55a;
+  color: #e0e0e0;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -617,7 +617,7 @@
 .checkList li {
   position: relative;
   padding-left: 30px;
-  color: #333333;
+  color: #e0e0e0;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.55;
@@ -691,7 +691,7 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-  border: 2px solid rgba(201, 165, 90, 0.45);
+  border: 2px solid rgba(204, 0, 0, 0.45);
 }
 
 .testimonialCard span {
@@ -722,7 +722,7 @@
 .testimonialCard small {
   display: block;
   margin-top: 4px;
-  color: rgba(255, 255, 255, 0.4);
+  color: #b3b3b3;
   font-size: 15px;
   line-height: 1.35;
 }
@@ -753,7 +753,7 @@
   padding: 46px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: #050505;
-  color: rgba(255, 255, 255, 0.34);
+  color: #b3b3b3;
   text-align: center;
 }
 
@@ -765,7 +765,7 @@
 }
 
 .footer a {
-  color: rgba(255, 255, 255, 0.42);
+  color: #b3b3b3;
   font-size: 12px;
 }
 
@@ -1023,4 +1023,42 @@
   .bonusCard img {
     height: 190px;
   }
+}
+
+/* Page-local hierarchy: preserve wording while putting the video and offer first. */
+.heroCopy { padding: 28px 0 48px; }
+.heroCopy h1 { font-size: clamp(38px, 4vw, 58px); margin-bottom: 24px; }
+.accessLine { font-size: .65em; }
+.goldUnderline { margin-bottom: 12px; border-bottom: 0; }
+.heroCopy h1 .goldUnderline span { display: inline; }
+.heroCopy h1 .goldUnderline span + span::before { content: " "; }
+.supportingLine { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; }
+.heroCopy h1 em, .heroLead strong { color: #ffffff; }
+.heroLead { max-width: 760px; font-size: 18px; line-height: 1.5; }
+.heroCopy .ctaButton { margin-top: 22px; }
+.eyebrow, .eyebrowRed, .eyebrowGold, .offerKicker,
+.coachingIntro .eyebrowRed, .reasonGrid span, .bonusCard span { color: #e0e0e0; }
+.offerCard h2 { color: #CC0000; }
+.quoteBadge, .starRow span { color: #ffffff; }
+.avatarFallback { color: #ffffff; }
+.microcopy, .todayBox span, .priceBox span { color: #b3b3b3; }
+.urgencyCopy strong { color: #ffffff; }
+.urgencyBand { margin-block: 32px; }
+.featuredTestimonial { background: #111111; }
+.sectionWhite, .sectionDark, .bonusSection, .featuredTestimonialSection, .finalCta { padding: 64px 0; }
+.ctaButton { max-width: 100%; text-decoration: none; }
+.ctaButton:focus-visible { outline: 3px solid #ffffff; outline-offset: 4px; }
+@media (max-width: 900px) {
+  .heroCopy { padding: 28px 0 40px; }
+  .heroCopy h1 { font-size: clamp(30px, 8.3vw, 42px); gap: 6px; }
+  .heroCopy h1 .goldUnderline span { display: block; }
+  .heroCopy h1 .goldUnderline span + span::before { content: ""; }
+  .supportingLine { font-size: .58em; }
+  .heroLead { max-width: 34ch; font-size: 16px; }
+  .heroLead span { display: inline; }
+  .heroLead span:not(:last-child)::after { content: " "; }
+  .topAnnouncement span { display: inline; }
+  .topAnnouncement span:not(:last-child)::after { content: " "; }
+  .sectionWhite, .sectionDark, .bonusSection, .featuredTestimonialSection, .finalCta { padding: 48px 0; }
+  .offerCard h2 { font-size: clamp(30px, 8vw, 44px); }
 }
