@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
+import {beforeVIPGold} from './vip-gold-preservation.ts';
 import {execFileSync} from 'node:child_process';
 import {base,beforeVIPCoachingLight,lightCSS} from './vip-coaching-light-preservation.ts';
 test('immediate base bytes differ only by the approved copy and scoped palette',()=>{
@@ -8,8 +9,8 @@ test('immediate base bytes differ only by the approved copy and scoped palette',
   assert.equal(css.split(lightCSS).length,2);
   assert.equal(css.replace(lightCSS,''),execFileSync('git',['show',`${base}:app/vip/page.module.css`],{encoding:'utf8'}));
 });
-const page=readFileSync('app/vip/VIPUpsellPage.tsx','utf8');
-const css=readFileSync('app/vip/page.module.css','utf8');
+const page=beforeVIPGold(readFileSync('app/vip/VIPUpsellPage.tsx','utf8'),'app/vip/VIPUpsellPage.tsx');
+const css=beforeVIPGold(readFileSync('app/vip/page.module.css','utf8'),'app/vip/page.module.css');
 test('remove only the specified paragraph and three redundant inclusions, not bonuses',()=>{
   assert.doesNotMatch(page,/Right now, while you are here/);
   const includes=page.match(/const vipIncludes = \[([\s\S]*?)\];/)![1];

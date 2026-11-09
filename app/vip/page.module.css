@@ -15,8 +15,8 @@
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.52) 48%, rgba(0, 0, 0, 0.88) 100%),
     url("/images/vip-city-bg.png") center / cover;
-  border-top: 2px solid #CC0000;
-  border-bottom: 2px solid #CC0000;
+  border-top: 2px solid #d9bd72;
+  border-bottom: 2px solid #d9bd72;
   overflow: hidden;
 }
 
@@ -24,7 +24,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 18%, rgba(204, 0, 0, 0.14), transparent 30%),
+    radial-gradient(circle at 50% 18%, rgba(217, 189, 114, 0.14), transparent 30%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.72));
   pointer-events: none;
 }
@@ -33,7 +33,7 @@
   position: relative;
   z-index: 3;
   padding: 16px 24px 14px;
-  border-bottom: 1px solid rgba(204, 0, 0, 0.85);
+  border-bottom: 1px solid rgba(217, 189, 114, 0.85);
   background: #050505;
   color: rgba(255, 255, 255, 0.92);
   font-size: 15px;
@@ -92,7 +92,7 @@
 }
 
 .eyebrowRed {
-  color: #cc0000;
+  color: #d9bd72;
 }
 
 .heroCopy h1 {
@@ -110,7 +110,7 @@
 }
 
 .heroCopy h1 em {
-  color: #CC0000;
+  color: #d9bd72;
   font-style: normal;
 }
 
@@ -128,7 +128,7 @@
   max-width: 100%;
   margin: 2px auto 18px;
   color: #CC0000;
-  border-bottom: 4px solid #CC0000;
+  border-bottom: 4px solid #e6c979;
   line-height: 1.02;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .heroLead strong {
-  color: #CC0000;
+  color: #e6c979;
   font-style: italic;
   font-weight: 700;
   text-transform: uppercase;
@@ -164,7 +164,7 @@
   width: min(900px, 100%);
   margin: 0 auto 28px;
   overflow: hidden;
-  border: 2px solid rgba(204, 0, 0, 0.82);
+  border: 2px solid rgba(217, 189, 114, 0.82);
   border-radius: 10px;
   background: #050505;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.48);
@@ -188,9 +188,9 @@
   min-height: 58px;
   padding: 18px 42px;
   border-radius: 5px;
-  background: #CC0000;
-  box-shadow: 0 12px 34px rgba(204, 0, 0, 0.35);
-  color: #ffffff;
+  background: linear-gradient(135deg, #c9a55a 0%, #e8d080 45%, #bb945a 100%);
+  box-shadow: 0 12px 34px rgba(185, 148, 90, 0.35);
+  color: #120800;
   font-family: "Work Sans", system-ui, sans-serif;
   font-size: 16px;
   font-weight: 900;
@@ -204,7 +204,7 @@
 .ctaButton:hover {
   filter: brightness(1.08);
   transform: translateY(-2px);
-  box-shadow: 0 16px 46px rgba(204, 0, 0, 0.5);
+  box-shadow: 0 16px 46px rgba(185, 148, 90, 0.5);
 }
 
 .microcopy {
@@ -222,7 +222,7 @@
   width: min(1120px, calc(100% - 40px));
   margin: 46px auto 48px;
   padding: 28px 34px;
-  border: 2px solid #CC0000;
+  border: 2px solid #d9bd72;
   border-radius: 8px;
   background: #050505;
   color: #ffffff;
@@ -236,7 +236,7 @@
 }
 
 .urgencyCopy strong {
-  color: #CC0000;
+  color: #d9bd72;
   font-size: 18px;
   font-weight: 900;
   letter-spacing: 0.05em;
@@ -264,10 +264,10 @@
 .featuredTestimonial {
   position: relative;
   overflow: visible;
-  border: 2px solid #CC0000;
+  border: 2px solid #d9bd72;
   border-radius: 12px;
   background:
-    radial-gradient(circle at 12px 12px, rgba(204, 0, 0, 0.14) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    radial-gradient(circle at 12px 12px, rgba(217, 189, 114, 0.14) 1px, transparent 1.5px) 0 0 / 18px 18px,
     #111111;
   padding: 58px 62px 54px;
 }
@@ -281,7 +281,7 @@
   width: 84px;
   height: 84px;
   border-radius: 50%;
-  background: #CC0000;
+  background: #d9bd72;
   color: #050505;
   font-family: Georgia, serif;
   font-size: 84px;
@@ -312,7 +312,7 @@
   height: 86px;
   border-radius: 50%;
   background: #111111;
-  color: #CC0000;
+  color: #d9bd72;
   font-size: 24px;
   font-weight: 900;
 }
@@ -335,7 +335,7 @@
   place-items: center;
   width: 26px;
   height: 26px;
-  background: #CC0000;
+  background: #d9bd72;
   color: #050505;
   font-size: 16px;
   line-height: 1;
@@ -343,8 +343,8 @@
 
 .coachingIntro {
   padding: 74px 0 78px;
-  border-top: 1px solid rgba(204, 0, 0, 0.25);
-  border-bottom: 1px solid rgba(204, 0, 0, 0.25);
+  border-top: 1px solid rgba(217, 189, 114, 0.25);
+  border-bottom: 1px solid rgba(217, 189, 114, 0.25);
   background:
     linear-gradient(180deg, rgba(8, 8, 8, 0.94), rgba(8, 8, 8, 0.98)),
     url("/images/vip-city-bg.png") center / cover;
@@ -355,7 +355,7 @@
 }
 
 .coachingIntro .eyebrowRed {
-  color: #CC0000;
+  color: #d9bd72;
 }
 
 .sectionWhite {
@@ -439,7 +439,7 @@
 .offerCard {
   position: sticky;
   top: 24px;
-  border: 1px solid rgba(204, 0, 0, 0.32);
+  border: 1px solid rgba(201, 165, 90, 0.32);
   border-radius: 12px;
   background: #0d0d0d;
   padding: 32px;
@@ -507,7 +507,7 @@
   min-width: 0;
   padding: 14px 18px;
   border-radius: 4px;
-  background: #CC0000;
+  background: #d9bd72;
   color: #050505;
 }
 
@@ -586,7 +586,7 @@
 .reasonGrid article,
 .bonusCard,
 .testimonialCard {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(217, 189, 114, 0.32);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.035);
   padding: 30px;
@@ -643,8 +643,8 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #cc0000;
-  box-shadow: 0 0 0 5px rgba(204, 0, 0, 0.11);
+  background: #d9bd72;
+  box-shadow: 0 0 0 5px rgba(217, 189, 114, 0.11);
 }
 
 .imagePanel {
@@ -670,14 +670,14 @@
 
 .quoteBand {
   padding: 64px 20px;
-  background: #cc0000;
+  background: #d9bd72;
   text-align: center;
 }
 
 .quoteBand blockquote {
   max-width: 920px;
   margin: 0 auto;
-  color: #ffffff;
+  color: #120800;
   font-family: "Frank Ruhl Libre", Georgia, serif;
   font-size: clamp(28px, 4vw, 46px);
   font-style: italic;
@@ -703,13 +703,13 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-  border: 2px solid rgba(204, 0, 0, 0.45);
+  border: 2px solid rgba(201, 165, 90, 0.45);
 }
 
 .testimonialCard span {
   display: block;
   margin-bottom: -8px;
-  color: #cc0000;
+  color: #d9bd72;
   font-family: "Frank Ruhl Libre", Georgia, serif;
   font-size: 52px;
   line-height: 1;
@@ -763,7 +763,7 @@
   align-items: center;
   gap: 18px;
   padding: 46px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(217, 189, 114, 0.32);
   background: #050505;
   color: #b3b3b3;
   text-align: center;
@@ -1045,13 +1045,16 @@
 .heroCopy h1 .goldUnderline span { display: inline; }
 .heroCopy h1 .goldUnderline span + span::before { content: " "; }
 .supportingLine { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; }
-.heroCopy h1 em, .heroLead strong { color: #ffffff; }
+.heroCopy > p.supportingLine { margin: -12px auto 24px; font-family: "Anton", Impact, sans-serif; font-size: clamp(20px, 2vw, 28px); }
+.heroCopy h1 em { color: #ffffff; }
+.heroLead strong { color: #e6c979; }
+.topAnnouncement, .accessLine, .supportingLine { text-transform: none; }
 .heroLead { max-width: 760px; font-size: 18px; line-height: 1.5; }
 .heroCopy .ctaButton { margin-top: 22px; }
 .eyebrow, .eyebrowRed, .eyebrowGold, .offerKicker,
 .coachingIntro .eyebrowRed, .reasonGrid span, .bonusCard span { color: #e0e0e0; }
 .offerCard h2 { color: #CC0000; }
-.quoteBadge, .starRow span { color: #ffffff; }
+.quoteBadge, .starRow span { color: #050505; }
 .avatarFallback { color: #ffffff; }
 .microcopy, .todayBox span, .priceBox span { color: #b3b3b3; }
 .urgencyCopy strong { color: #ffffff; }
@@ -1059,7 +1062,7 @@
 .featuredTestimonial { background: #111111; }
 .sectionWhite, .sectionDark, .bonusSection, .featuredTestimonialSection, .finalCta { padding: 64px 0; }
 .ctaButton { max-width: 100%; text-decoration: none; }
-.ctaButton:focus-visible { outline: 3px solid #ffffff; outline-offset: 4px; }
+.ctaButton:focus-visible { outline: 3px solid #e6c979; outline-offset: 4px; }
 @media (max-width: 900px) {
   .heroCopy { padding: 28px 0 40px; }
   .heroCopy h1 { font-size: clamp(30px, 8.3vw, 42px); gap: 6px; }
