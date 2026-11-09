@@ -1041,7 +1041,7 @@
 .heroCopy { padding: 28px 0 48px; }
 .heroCopy h1 { font-size: clamp(38px, 4vw, 58px); margin-bottom: 24px; }
 .accessLine { font-size: .65em; }
-.goldUnderline { margin-bottom: 12px; border-bottom: 0; }
+.goldUnderline { font-size: clamp(36px, 1.2em, 70px); margin-bottom: 12px; border-bottom: 0; }
 .heroCopy h1 .goldUnderline span { display: inline; }
 .heroCopy h1 .goldUnderline span + span::before { content: " "; }
 .supportingLine { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; }
