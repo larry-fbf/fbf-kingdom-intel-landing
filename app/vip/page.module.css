@@ -1045,7 +1045,7 @@
 .heroCopy h1 .goldUnderline span { display: inline; }
 .heroCopy h1 .goldUnderline span + span::before { content: " "; }
 .supportingLine { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; }
-.heroCopy > p.supportingLine { margin: -12px auto 24px; font-family: "Anton", Impact, sans-serif; font-size: clamp(20px, 2vw, 28px); }
+.heroCopy > p.supportingLine { margin: -12px auto 24px; font-family: inherit; font-size: clamp(20px, 2vw, 28px); }
 .heroCopy h1 em { color: #ffffff; }
 .heroLead strong { color: #e6c979; }
 .topAnnouncement, .accessLine, .supportingLine { text-transform: none; }

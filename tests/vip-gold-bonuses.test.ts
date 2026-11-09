@@ -24,9 +24,9 @@ test('bonuses contain masterclass replays, unchanged audit, then VIP recordings'
 });
 test('VIP hero preserves the exact supplied spelling and accessible spaces',()=>{
  assert.match(page, /<span>Upgrade Your Experience<\/span>/);
- assert.match(page, /<span className=\{styles.accessLine\}>Exlusive Access to\{' '\}<\/span>/);
+ assert.match(page, /<span className=\{styles.accessLine\}>Exclusive Access to\{' '\}<\/span>/);
  assert.match(page, /<span className=\{styles.goldUnderline\}>VIP MASTERMIND<\/span>/);
  assert.match(page, /<\/h1>\s*<p className=\{styles.supportingLine\}>One-On-One Coaching and Q&amp;A<\/p>/);
  const hero=page.split('            ) : (')[1].split('            )}')[0];
- assert.doesNotMatch(hero,/Exclusive|Upgrade To|Business Reset/);
+ assert.doesNotMatch(hero,/Exlusive|Upgrade To|Business Reset/);
 });
