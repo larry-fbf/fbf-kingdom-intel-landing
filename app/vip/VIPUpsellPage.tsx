@@ -122,7 +122,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
             ) : (
               <>
                 <h1>
-                  <span className={styles.accessLine}>Exlusive Access to{' '}</span>
+                  <span className={styles.accessLine}>Exclusive Access to{' '}</span>
                   <span className={styles.goldUnderline}>VIP MASTERMIND</span>
                 </h1>
                 <p className={styles.supportingLine}>One-On-One Coaching and Q&amp;A</p>

@@ -1,3 +1,4 @@
+import {beforeVIPExclusiveFont} from './vip-exclusive-font-preservation.ts';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
@@ -10,6 +11,7 @@ export function beforeVIPSpacing(source:string,file='app/vip/VIPUpsellPage.tsx')
  const base=execFileSync('git',['show',`${spacingBase}:${file}`],{encoding:'utf8'});
  assert.equal(hash(base),spec.baseHash);
  if(source===base)return source;
+ source=beforeVIPExclusiveFont(source,file);
  assert.equal(hash(source),spec.candidateHash,'reviewed spacing candidate bytes only');
  for(const change of [...spec.changes].reverse()) {
   assert.equal(source.slice(change.newStart,change.newStart+change.new.length),change.new);
