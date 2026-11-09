@@ -28,9 +28,6 @@ const vipIncludes = [
   "Two live VIP rooms on November 11th and 12th at 7pm CT on Zoom",
   "Direct coaching and feedback from Larry, Staci, and the CEO Mentor team",
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
-  "The Kingdom Intelligence Masterclass workbook",
-  "The S.W.E.E.T. Spot Audit",
-  "Lifetime access to the Kingdom Intelligence Masterclass replays in the FBF Vault",
 ];
 
 const cindyTestimonial = {
@@ -166,15 +163,11 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
         </div>
       </section>
 
-      <section className={styles.sectionWhite}>
+      <section className={`${styles.sectionWhite} ${styles.coachingLight}`}>
         <div className={styles.container}>
           <div className={styles.twoColumn}>
             <div className={styles.copyStack}>
               <h2>Get personal coaching inside the November 11th and 12th VIP rooms.</h2>
-              <p>
-                Right now, while you are here, you have the opportunity to upgrade to VIP status in
-                the Kingdom Intelligence Masterclass.
-              </p>
               <p>
                 When you upgrade now, you get access to the VIP rooms on November 11th and 12th at 7pm CT on Zoom
                 where your specific questions can be answered in real time. No matter the product,
