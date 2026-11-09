@@ -168,6 +168,32 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
 
       <section className={styles.sectionWhite}>
         <div className={styles.container}>
+          <div className={styles.twoColumn}>
+            <div className={styles.copyStack}>
+              <h2>Get personal coaching inside the November 11th and 12th VIP rooms.</h2>
+              <p>
+                Right now, while you are here, you have the opportunity to upgrade to VIP status in
+                the Kingdom Intelligence Masterclass.
+              </p>
+              <p>
+                When you upgrade now, you get access to the VIP rooms on November 11th and 12th at 7pm CT on Zoom
+                where your specific questions can be answered in real time. No matter the product,
+                service, or offer, the goal is to help you lead with certainty, operate with Kingdom
+                authority, and multiply your impact like never before.
+              </p>
+              <p>
+                Larry, Staci, and the CEO Mentor team will be taking questions live, evaluating
+                real business challenges, and sharing what you can do to create more cash flow,
+                margin, and generosity.
+              </p>
+            </div>
+            <OfferCard />
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.sectionWhite}>
+        <div className={styles.container}>
           <div className={styles.splitWithImage}>
             <div>
               <p className={styles.eyebrowRed}>What you get</p>
@@ -209,16 +235,6 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
         </div>
       </section>
 
-      <section className={styles.urgencyBand}>
-        <div className={styles.urgencyCopy}>
-          <strong>PLUS!</strong>
-          <p>
-            When you upgrade on this page, you&apos;ll also get lifetime access to the Kingdom Intelligence
-            Masterclass replays.
-          </p>
-        </div>
-      </section>
-
       <section className={styles.featuredTestimonialSection}>
         <div className={styles.container}>
           <article className={styles.featuredTestimonial}>
@@ -238,90 +254,6 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
               </div>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section className={styles.coachingIntro}>
-        <div className={styles.container}>
-          <div className={styles.centerHeaderDark}>
-            {isThankYou ? (
-              <>
-                <p className={styles.eyebrowRed}>Exclusive access upgrade</p>
-                <h2>Step into the VIP incubator room.</h2>
-                <p>
-                  VIP is an exclusive room with Staci, Larry and our team of CEO Advisors where you
-                  can gain personal coaching in a LIVE incubator setting. Ask questions, listen to
-                  other leaders scaling 7-8 figure business ventures, and go 1x1 with Staci and
-                  Larry to activate what you&apos;ve learned in the 3-day Kingdom Intelligence
-                  Masterclass.
-                </p>
-              </>
-            ) : (
-              <>
-                <p className={styles.eyebrowRed}>Exclusive access upgrade</p>
-                <h2>Get personal coaching inside the November 11th and 12th VIP rooms.</h2>
-                <p>
-                  Go to the next level with direct coaching from Larry and Staci. Learn how to turn
-                  years of experience into a clearer offer, stronger sales message, and Kingdom
-                  business strategy that creates more profits, more margin, and more generosity.
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.sectionWhite}>
-        <div className={styles.container}>
-          <div className={styles.twoColumn}>
-            <div className={styles.copyStack}>
-              <h3>Friend, let me cut to the chase.</h3>
-              <p>
-                Right now, while you are here, you have the opportunity to upgrade to VIP status in
-                the Kingdom Intelligence Masterclass.
-              </p>
-              <p>
-                When you upgrade now, you get access to the VIP rooms on November 11th and 12th at 7pm CT on Zoom
-                where your specific questions can be answered in real time. No matter the product,
-                service, or offer, the goal is to help you lead with certainty, operate with Kingdom
-                authority, and multiply your impact like never before.
-              </p>
-              <p>
-                Larry, Staci, and the CEO Mentor team will be taking questions live, evaluating
-                real business challenges, and sharing what you can do to create more cash flow,
-                margin, and generosity.
-              </p>
-            </div>
-            <OfferCard />
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.sectionDark}>
-        <div className={styles.container}>
-          <div className={styles.centerHeaderDark}>
-            <p className={styles.eyebrowGold}>Why this matters</p>
-            <h2>Two reasons you do not want to miss this.</h2>
-          </div>
-          <div className={styles.reasonGrid}>
-            <article>
-              <span>Reason 1</span>
-              <h3>This level of access is rare.</h3>
-              <p>
-                Between coaching high-ticket clients, running multiple businesses and ministries,
-                and leading live rooms, Larry and Staci rarely open this kind of direct coaching
-                room during a public masterclass.
-              </p>
-            </article>
-            <article>
-              <span>Reason 2</span>
-              <h3>Proximity can compress years.</h3>
-              <p>
-                VIP gives you a focused chance to bring your real questions, hear what others are
-                asking, and receive direction while momentum from the masterclass is high.
-              </p>
-            </article>
-          </div>
         </div>
       </section>
 

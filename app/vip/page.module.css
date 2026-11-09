@@ -377,7 +377,7 @@
 
 .centerHeader h2,
 .centerHeaderDark h2,
-.copyStack h3,
+.copyStack h2,
 .splitWithImage h2,
 .finalCta h2 {
   margin-top: 12px;
@@ -415,7 +415,7 @@
   padding-top: 18px;
 }
 
-.copyStack h3 {
+.copyStack h2 {
   margin-bottom: 20px;
   font-size: clamp(28px, 3.2vw, 42px);
 }
@@ -934,7 +934,7 @@
 
   .centerHeader h2,
   .centerHeaderDark h2,
-  .copyStack h3,
+  .copyStack h2,
   .splitWithImage h2,
   .finalCta h2 {
     font-size: 28px;
