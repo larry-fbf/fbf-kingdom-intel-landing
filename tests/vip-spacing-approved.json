@@ -1,0 +1,29 @@
+{
+  "app/vip/VIPUpsellPage.tsx": {
+    "baseHash": "f83d98e0016d338184232e36e4c2494e26ab494781dbe5057e838a81679eb567",
+    "candidateHash": "1c61e65ca186c2f2c8c1c1d43976e9ce64b4dd9406c0656c4a9a8015731e9c89",
+    "changes": [
+      {
+        "newStart": 4005,
+        "old": "            <span>Upgrade your experience</span>\r\n",
+        "new": "            <span>Upgrade Your Experience</span>\r\n"
+      },
+      {
+        "newStart": 4835,
+        "old": "                <p className={styles.supportingLine}>One-on-one coaching &amp; Q&amp;A</p>\r\n",
+        "new": "                <p className={styles.supportingLine}>One-On-One Coaching and Q&amp;A</p>\r\n"
+      }
+    ]
+  },
+  "app/vip/page.module.css": {
+    "baseHash": "b328de258db8159f19347ca99d898387213021e52b9f28553bd7427eae4fe3f3",
+    "candidateHash": "2601d5b10ff3e258048fa0084477d1eb232e72b582743b9ff97cf167f99e10b0",
+    "changes": [
+      {
+        "newStart": 20770,
+        "old": "",
+        "new": "\r\n/* A single short separator replaces the unused full-width underline. */\r\n.heroCopy:has(> p.supportingLine) h1 { margin-bottom: 8px; }\r\n.heroCopy:has(> p.supportingLine) .goldUnderline { margin-bottom: 0; padding-bottom: 0; }\r\n.heroCopy:has(> p.supportingLine) .goldUnderline::after {\r\n  content: \"\";\r\n  display: block;\r\n  width: 64px;\r\n  height: 2px;\r\n  margin: 10px auto 0;\r\n  background: #e6c979;\r\n}\r\n.heroCopy > p.supportingLine { margin-top: 0; }\r\n@media (max-width: 768px) {\r\n  /* Override only this section's global 56px !important mobile top padding. */\r\n  .coachingLight { padding-top: 32px !important; }\r\n}\r\n"
+      }
+    ]
+  }
+}

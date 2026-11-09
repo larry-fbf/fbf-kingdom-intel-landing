@@ -104,7 +104,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
           {isThankYou ? (
             <span>CONGRATULATIONS! You are registered, just one more step before you go!</span>
           ) : (
-            <span>Upgrade your experience</span>
+            <span>Upgrade Your Experience</span>
           )}
         </div>
 
@@ -125,7 +125,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
                   <span className={styles.accessLine}>Exlusive Access to{' '}</span>
                   <span className={styles.goldUnderline}>VIP MASTERMIND</span>
                 </h1>
-                <p className={styles.supportingLine}>One-on-one coaching &amp; Q&amp;A</p>
+                <p className={styles.supportingLine}>One-On-One Coaching and Q&amp;A</p>
               </>
             )}
             <div className={styles.inviteVideo}>
