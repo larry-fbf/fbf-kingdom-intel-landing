@@ -31,7 +31,8 @@ const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 const replays = [
   {
     day: "Day 1",
-    title: "Replay Coming Soon",
+    title: "Watch the Replay",
+    videoUrl: "https://player.vimeo.com/video/1245584339",
   },
   {
     day: "Day 2",
@@ -912,7 +913,7 @@ export default async function DashboardPage() {
           <div className="replay-head">
             <div>
               <p className="section-label">Replay Library</p>
-              <h2 className="section-title">Coming Soon</h2>
+              <h2 className="section-title">Session Replays</h2>
             </div>
             <p className="replay-note">
               Replays will be posted here after each live session is processed.
@@ -924,6 +925,16 @@ export default async function DashboardPage() {
               <article className="replay-card" key={replay.day}>
                 <p className="replay-day">{replay.day}</p>
                 <h3 className="replay-title">{replay.title}</h3>
+                {replay.videoUrl && (
+                  <iframe
+                    src={replay.videoUrl}
+                    title={`${replay.day} — Kingdom Intelligence Masterclass Replay`}
+                    loading="lazy"
+                    allow="fullscreen; picture-in-picture; encrypted-media"
+                    allowFullScreen
+                    style={{ display: "block", width: "100%", aspectRatio: "16 / 9", border: 0, marginTop: "16px" }}
+                  />
+                )}
               </article>
             ))}
           </div>

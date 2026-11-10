@@ -1,0 +1,18 @@
+{
+  "base": "696cacac9ea309069ba1d228d9654a5cd80c30e1",
+  "sha256": "d3b3f111a1f46802453de8e6d70cd501c166ece2b939e6b1050b222d270689ad",
+  "changes": [
+    {
+      "before": "    title: \"Replay Coming Soon\",\r\n",
+      "after": "    title: \"Watch the Replay\",\r\n    videoUrl: \"https://player.vimeo.com/video/1245584339\",\r\n"
+    },
+    {
+      "before": "              <h2 className=\"section-title\">Coming Soon</h2>\r\n",
+      "after": "              <h2 className=\"section-title\">Session Replays</h2>\r\n"
+    },
+    {
+      "before": "",
+      "after": "                {replay.videoUrl && (\r\n                  <iframe\r\n                    src={replay.videoUrl}\r\n                    title={`${replay.day} \u2014 Kingdom Intelligence Masterclass Replay`}\r\n                    loading=\"lazy\"\r\n                    allow=\"fullscreen; picture-in-picture; encrypted-media\"\r\n                    allowFullScreen\r\n                    style={{ display: \"block\", width: \"100%\", aspectRatio: \"16 / 9\", border: 0, marginTop: \"16px\" }}\r\n                  />\r\n                )}\r\n"
+    }
+  ]
+}
