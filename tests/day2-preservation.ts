@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { beforeDay3 } from './day3-preservation.ts';
 export function beforeDay2(source: string) {
+  source = beforeDay3(source);
   const before = '    day: "Day 2",\r\n    title: "Replay Coming Soon",';
   const after = '    day: "Day 2",\r\n    title: "Watch the Replay",\r\n    videoUrl: "https://player.vimeo.com/video/1245979460",';
   assert.equal(source.split(after).length, 2);
