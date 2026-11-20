@@ -546,6 +546,11 @@ export default async function DashboardPage() {
           text-transform: uppercase;
         }
 
+        .mastery-button:focus-visible {
+          outline: 3px solid #fff;
+          outline-offset: 4px;
+        }
+
         .whatsapp-button {
           background: #1f7a4f;
         }
@@ -940,6 +945,12 @@ export default async function DashboardPage() {
               </article>
             ))}
           </div>
+          <section className="community-strip mastery-section" aria-labelledby="mastery-title">
+            <h2 className="community-title" id="mastery-title">Ready for your next step?</h2>
+            <a className="community-button mastery-button" href="https://fbfmastery.com">
+              Apply for Mastery
+            </a>
+          </section>
         </div>
       </section>
 
