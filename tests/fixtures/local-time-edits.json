@@ -1,0 +1,159 @@
+{
+  "base": "3a95c8299203fc526846fdd1a5c3654fcc172df2",
+  "files": {
+    "app/page.tsx": {
+      "baseline": "896ff49725291c100fd81c1b66b6fe199c4e805c1f97cc2cdc6565868d2352c3",
+      "candidate": "c36b489cc727d3d066eac4181131369455a65284d9ef4dbcb9caf8f50f1a5087",
+      "changes": [
+        {
+          "before": "import Image from \"next/image\";\r\n",
+          "after": "import Image from \"next/image\";\r\nimport EventTime from \"./components/EventTime\";\r\n"
+        },
+        {
+          "before": "                Join the FREE Kingdom Intelligence<br />Masterclass \u00b7 January 5&ndash;7, 2027\r\n",
+          "after": "                Join the FREE Kingdom Intelligence<br />Masterclass \u00b7 <EventTime variant=\"dates\" />\r\n"
+        },
+        {
+          "before": "              <div style={{ fontSize: \"clamp(13px, 1.2vw, 16px)\", color: \"#FFFFFF\", fontFamily: \"'Work Sans', sans-serif\", fontWeight: 600 }}>January 5&ndash;7 @ 12 PM Central</div>\r\n",
+          "after": "              <div style={{ fontSize: \"clamp(13px, 1.2vw, 16px)\", color: \"#FFFFFF\", fontFamily: \"'Work Sans', sans-serif\", fontWeight: 600 }}><EventTime /></div>\r\n"
+        },
+        {
+          "before": "            { label: \"Date\", value: \"January 5\\u20137, 2027\" },\r\n            { label: \"Time\", value: \"12:00 PM CST Daily\" },\r\n",
+          "after": "            { label: \"Date\", value: <EventTime variant=\"dates\" /> },\r\n            { label: \"Time\", value: <><EventTime variant=\"time\" /> Daily</> },\r\n"
+        },
+        {
+          "before": "  { number: \"01\", title: \"Block Your Calendar\", body: \"All sessions are LIVE January 5\\u20137, 12:00 PM CST. Set your notifications and treat these three days like a board meeting, not a webinar.\" },\r\n",
+          "after": "  { number: \"01\", title: \"Block Your Calendar\", body: <>All sessions are LIVE <EventTime />. Set your notifications and treat these three days like a board meeting, not a webinar.</> },\r\n"
+        },
+        {
+          "before": "        <p style={{ fontSize: \"12px\", fontWeight: 700, letterSpacing: \"0.22em\", textTransform: \"uppercase\" as const, color: \"#CC0000\", marginBottom: \"20px\", fontFamily: \"'Work Sans', sans-serif\" }}>January 5&ndash;7, 2027 &middot; Free Live Event</p>\r\n",
+          "after": "        <p style={{ fontSize: \"12px\", fontWeight: 700, letterSpacing: \"0.22em\", textTransform: \"uppercase\" as const, color: \"#CC0000\", marginBottom: \"20px\", fontFamily: \"'Work Sans', sans-serif\" }}><EventTime variant=\"dates\" /> &middot; Free Live Event</p>\r\n"
+        },
+        {
+          "before": "        Free 3-Day Live Event &nbsp;&middot;&nbsp; January 5&ndash;7, 2027 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;\r\n",
+          "after": "        Free 3-Day Live Event &nbsp;&middot;&nbsp; <EventTime /> &nbsp;&middot;&nbsp;\r\n"
+        },
+        {
+          "before": "        Free Event &middot; Jan 5-7 &middot; <span style={{ color: \"#FFE599\", textDecoration: \"underline\", textUnderlineOffset: \"3px\" }}>Register Now &rarr;</span>\r\n",
+          "after": "        Free Event &middot; <EventTime variant=\"shortDates\" /> &middot; <span style={{ color: \"#FFE599\", textDecoration: \"underline\", textUnderlineOffset: \"3px\" }}>Register Now &rarr;</span>\r\n"
+        }
+      ]
+    },
+    "app/dashboard/page.tsx": {
+      "baseline": "03c5193b05841e55ef4bf783c9c972ca3a96bd967941009d7e661ad9a52079d5",
+      "candidate": "0e7af6ab861843363daa0f83ab06917878664685d1bd30a145c206d5cb2a9b97",
+      "changes": [
+        {
+          "before": "import BonusContent from \"./BonusContent\";\r\n",
+          "after": "import BonusContent from \"./BonusContent\";\r\nimport EventTime from \"../components/EventTime\";\r\n"
+        },
+        {
+          "before": "            <a className=\"schedule-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the January 5-7 masterclass to Google Calendar (opens in a new tab)\">\r\n              <span>January 5-7 | 12 PM Central</span>\r\n",
+          "after": "            <a className=\"schedule-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the masterclass to Google Calendar (opens in a new tab)\">\r\n              <span><EventTime /></span>\r\n"
+        },
+        {
+          "before": "                <a className=\"date-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the January 5-7 masterclass to Google Calendar (opens in a new tab)\">January 5 to 7 | 12 PM Central</a>\r\n",
+          "after": "                <a className=\"date-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the masterclass to Google Calendar (opens in a new tab)\"><EventTime /></a>\r\n"
+        },
+        {
+          "before": "                  <div className=\"action-date\">January 6-7 | 7 PM Central</div>\r\n",
+          "after": "                  <div className=\"action-date\"><EventTime event=\"vip\" /></div>\r\n"
+        }
+      ]
+    },
+    "app/dashboard/AddToCalendar.tsx": {
+      "baseline": "9f49a1ab5caad4e7932db68bac2c5e4610c3c73d658167696d8158f0ef22b6e5",
+      "candidate": "821b250299b6b4354ae958196e536f70b21bb4b4b1ecf207e14d3fac90ee34b9",
+      "changes": [
+        {
+          "before": "import { googleCalendarUrl } from './calendar';\n",
+          "after": "import { googleCalendarUrl } from './calendar';\nimport EventTime from '../components/EventTime';\n"
+        },
+        {
+          "before": "        <p className=\"action-detail\">January 5\u20137, 2027<br />12\u20131 PM Central each day.</p>\n",
+          "after": "        <p className=\"action-detail\"><EventTime variant=\"dates\" /><br /><EventTime variant=\"range\" /> each day.</p>\n"
+        }
+      ]
+    },
+    "app/thank-you/page.tsx": {
+      "baseline": "2e70f0010f52bd94b06db7bbeccf2b286ea87b93880daca133821cebfe14dccb",
+      "candidate": "ef7d392024700685280d33f374479242d5a63671acbf6ae3e7144b0507193928",
+      "changes": [
+        {
+          "before": "import Image from \"next/image\";\r\n",
+          "after": "import Image from \"next/image\";\r\nimport EventTime from \"../components/EventTime\";\r\n"
+        },
+        {
+          "before": "          You are registered | January 5-7, 2027 | 12:00 PM Central | Free live online event\r\n",
+          "after": "          You are registered | <EventTime /> | Free live online event\r\n"
+        }
+      ]
+    },
+    "app/vip/VIPUpsellPage.tsx": {
+      "baseline": "87ba88abcd3722dd3d9e565c78ee3d04ad36520739859180b706e442734251fc",
+      "candidate": "bca0f894fffc422b6facc7dc910f52748fe461c550e58ae73ecfa270ef87ad4d",
+      "changes": [
+        {
+          "before": "import styles from \"./page.module.css\";\n",
+          "after": "import styles from \"./page.module.css\";\nimport EventTime from \"../components/EventTime\";\r\n"
+        },
+        {
+          "before": "  \"Two live VIP rooms on January 6th and 7th at 7pm CT on Zoom\",\r\n",
+          "after": "  <>Two live VIP rooms on <EventTime event=\"vip\" /> on Zoom</>,\r\n"
+        },
+        {
+          "before": "      <p className={styles.offerSubtitle}>Live 1 x 1 training with direct coaching on January 6th and 7th at 7pm CT on Zoom.</p>\r\n",
+          "after": "      <p className={styles.offerSubtitle}>Live 1 x 1 training with direct coaching on <EventTime event=\"vip\" /> on Zoom.</p>\r\n"
+        },
+        {
+          "before": "              <h2>Get personal coaching inside the January 6th and 7th VIP rooms.</h2>\r\n",
+          "after": "              <h2>Get personal coaching inside the <EventTime event=\"vip\" variant=\"dates\" /> VIP rooms.</h2>\r\n"
+        },
+        {
+          "before": "                When you upgrade now, you get access to the VIP rooms on January 6th and 7th at 7pm CT on Zoom\r\n",
+          "after": "                When you upgrade now, you get access to the VIP rooms on <EventTime event=\"vip\" /> on Zoom\r\n"
+        },
+        {
+          "before": "                {vipIncludes.map((item) => (\r\n                  <li key={item}>{item}</li>\r\n",
+          "after": "                {vipIncludes.map((item, index) => (\r\n                  <li key={index}>{item}</li>\r\n"
+        },
+        {
+          "before": "            Join the VIP rooms on January 6th and 7th at 7pm CT on Zoom, bring your real questions, and get\r\n",
+          "after": "            Join the VIP rooms on <EventTime event=\"vip\" /> on Zoom, bring your real questions, and get\r\n"
+        }
+      ]
+    },
+    "app/vip/thank-you/page.tsx": {
+      "baseline": "f9afe29eb473d2f16ec5bd54df8dfea7daba82bb8b782b8a0283acc43807f13f",
+      "candidate": "a6548132efa935da0c8d5d4c7216b68be3917bba445c8bf4df3568783b157e23",
+      "changes": [
+        {
+          "before": "import styles from \"./page.module.css\";\n",
+          "after": "import styles from \"./page.module.css\";\nimport EventTime from \"../../components/EventTime\";\r\n"
+        },
+        {
+          "before": "          <p className={styles.schedule}>Wednesday, January 6 &amp; Thursday, January 7, 2027<br /><strong>7 PM Central \u00b7 8 PM Eastern \u00b7 5 PM Pacific</strong></p>\n",
+          "after": "          <p className={styles.schedule}><EventTime event=\"vip\" variant=\"fullDates\" /><br /><strong><EventTime event=\"vip\" variant=\"time\" /></strong></p>\r\n"
+        }
+      ]
+    },
+    "app/dashboard/ShareMasterclassButton.tsx": {
+      "baseline": "cb10efed35f7ae8092e0032546dbfda3b4b73966bde7693929a15d865f1c68c9",
+      "candidate": "956f2cdf35acb264cbfdf2dff4071f4566705b3a922c3353347666b559a30bf1",
+      "changes": [
+        {
+          "before": "import { trackClarityEvent } from \"../lib/clarity-events\";\n",
+          "after": "import { trackClarityEvent } from \"../lib/clarity-events\";\nimport { useEventTime } from \"../components/EventTime\";\n"
+        },
+        {
+          "before": "const SHARE_TEXT =\n  \"Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass January 5-7 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/\";\n",
+          "after": "function shareText(schedule: string, zone: string) {\n  return `Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass ${schedule} (${zone}). It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/`;\n}\n"
+        },
+        {
+          "before": "export default function ShareMasterclassButton() {\n",
+          "after": "export default function ShareMasterclassButton() {\n  const display = useEventTime();\n  const SHARE_TEXT = shareText(display.schedule, display.timeZone);\n"
+        }
+      ]
+    }
+  }
+}

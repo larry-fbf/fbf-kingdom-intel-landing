@@ -2,11 +2,15 @@
 
 import { useId, useRef, useState } from "react";
 import { trackClarityEvent } from "../lib/clarity-events";
+import { useEventTime } from "../components/EventTime";
 
-const SHARE_TEXT =
-  "Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass January 5-7 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/";
+function shareText(schedule: string, zone: string) {
+  return `Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass ${schedule} (${zone}). It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/`;
+}
 
 export default function ShareMasterclassButton() {
+  const display = useEventTime();
+  const SHARE_TEXT = shareText(display.schedule, display.timeZone);
   const [isOpen, setIsOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState("Copy Blurb");
   const textareaRef = useRef<HTMLTextAreaElement>(null);

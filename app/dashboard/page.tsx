@@ -1,4 +1,5 @@
 import BonusContent from "./BonusContent";
+import EventTime from "../components/EventTime";
 import AddToCalendar from "./AddToCalendar";
 import { googleCalendarUrl } from "./calendar";
 import type { Metadata } from "next";
@@ -774,8 +775,8 @@ export default async function DashboardPage() {
         <div className="dashboard-wrap">
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
-            <a className="schedule-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the January 5-7 masterclass to Google Calendar (opens in a new tab)">
-              <span>January 5-7 | 12 PM Central</span>
+            <a className="schedule-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the masterclass to Google Calendar (opens in a new tab)">
+              <span><EventTime /></span>
             </a>
             <div className="top-action-group">
               <ShareMasterclassButton />
@@ -814,7 +815,7 @@ export default async function DashboardPage() {
                   Bring your workbook, arrive a few minutes early, and come prepared to turn insight
                   into action.
                 </p>
-                <a className="date-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the January 5-7 masterclass to Google Calendar (opens in a new tab)">January 5 to 7 | 12 PM Central</a>
+                <a className="date-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the masterclass to Google Calendar (opens in a new tab)"><EventTime /></a>
               </div>
               <div>
                 <TrackedClarityLink
@@ -898,7 +899,7 @@ export default async function DashboardPage() {
                   <p className="action-detail">
                     Unlock the VIP room, direct coaching, bonuses, and replay access.
                   </p>
-                  <div className="action-date">January 6-7 | 7 PM Central</div>
+                  <div className="action-date"><EventTime event="vip" /></div>
                 </div>
               </div>
               <span className="action-cta">Upgrade to VIP</span>

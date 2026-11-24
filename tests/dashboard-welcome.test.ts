@@ -32,6 +32,7 @@ async function submit(fail = false, brokenStorage = false) {
     './lib/post-json': {RegistrationRequestError:RequestError, postJsonWithTimeout:async () => {if(fail) throw new RequestError('synthetic failure');return {ok:true};}},
     './lib/attribution': {captureAttributionFromCurrentUrl:()=>{},getStoredAttribution:()=>({})},
     './components/TrackedVimeoVideo': {default:()=>null},
+    './components/EventTime': {default:()=>null},
   }, {window:{sessionStorage:brokenStorage ? {setItem:()=>{throw Error('disabled');}} : store}}, '\nexport { RegisterModal };');
   const form = nodes(page.RegisterModal({onClose:()=>{}})).find(n=>n.type==='form');
   await form.props.onSubmit({preventDefault:()=>{}});
@@ -90,6 +91,7 @@ for (const [name, token, expected] of [
     const Welcome = () => null; const Analytics = () => null;
     const page = load('app/dashboard/page.tsx', {
       './BonusContent': {default:()=>null},
+      '../components/EventTime': {default:()=>null},
       './AddToCalendar': {default:()=>null}, './calendar':{googleCalendarUrl:()=>''},
       '../components/ClarityPageViewEvent':{default:()=>null}, '../components/TrackedClarityLink':{default:()=>null},
       './ShareMasterclassButton':{default:()=>null}, './RegistrationWelcome':{default:Welcome},

@@ -72,9 +72,18 @@ if (missingMetadata.length > 0) {
   process.exit(1);
 }
 
+const displaySource = readFileSync(join(process.cwd(), "app", "lib", "event-time.ts"), "utf8");
+for (const instant of ['2027-01-05T18:00:00Z', '2027-01-06T18:00:00Z', '2027-01-07T18:00:00Z', '2027-01-07T01:00:00Z', '2027-01-08T01:00:00Z']) {
+  if (!displaySource.includes(instant)) throw new Error(`Missing canonical event instant: ${instant}`);
+}
+const homeHtml = readFileSync(join(process.cwd(), '.next/server/app/index.html'), 'utf8');
+for (const marker of ['January 5–7, 2027', '12:00 PM CST', 'data-time-zone="America/Chicago"']) {
+  if (!homeHtml.includes(marker)) throw new Error(`Missing deterministic server fallback: ${marker}`);
+}
+
 const requiredRegistrationPageMarkers = [
-  "January 5&ndash;7, 2027",
-  "January 5&ndash;7 @ 12 PM Central",
+  '<EventTime variant="dates" />',
+  '<EventTime />',
   "/api/register",
   "SAVE MY SEAT",
 ];
@@ -121,10 +130,10 @@ if (missingVipMarkers.length > 0) {
 
 const requiredDashboardMarkers = [
   "Event Dashboard",
-  "January 5-7 | 12 PM Central",
+  '<EventTime />',
   "VIP",
   "action-date",
-  "January 6-7 | 7 PM Central",
+  '<EventTime event="vip" />',
   "ShareMasterclassButton",
   "Join the Community",
   "Priority dashboard workflow",

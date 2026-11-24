@@ -10,6 +10,8 @@ function load(path: string): any {
   vm.runInNewContext(ts.transpileModule(readFileSync(path, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX } }).outputText, {
     module, exports: module.exports, require: (id: string) => {
       if (id.endsWith('.css')) return new Proxy({}, { get: (_target, key) => String(key) });
+      if (id.includes('EventTime')) return load('app/components/EventTime.tsx');
+      if (id.includes('lib/event-time')) return load('app/lib/event-time.ts');
       if (id.includes('ClarityPageViewEvent')) return { default: () => null };
       if (id.includes('ShareMasterclassSection')) return load('app/components/ShareMasterclassSection.tsx');
       return require(id);
@@ -36,7 +38,8 @@ test('VIP next steps render before the optional regular-masterclass invitation',
   assert.match(html, /Questions sent in advance get priority/);
   assert.match(html, /Wednesday, January 6/);
   assert.match(html, /Thursday, January 7, 2027/);
-  assert.match(html, /7 PM Central/);
+  assert.match(html, /7:00 PM CST/);
+  assert.doesNotMatch(html, /8 PM Eastern|5 PM Pacific/);
   assert.match(html, /href="\/dashboard"/);
   assert.match(html, /value="https:\/\/www.kingdomintel.com\/"/);
   assert.equal((html.match(/This page does not verify payment/g) || []).length, 1);
