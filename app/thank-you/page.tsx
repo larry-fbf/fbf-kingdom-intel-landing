@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
+import EventTime from "../components/EventTime";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import ShareMasterclassSection from "../components/ShareMasterclassSection";
@@ -146,7 +147,7 @@ export default async function ThankYou() {
             color: "#FFFFFF",
           }}
         >
-          You are registered | January 5-7, 2027 | 12:00 PM Central | Free live online event
+          You are registered | <EventTime /> | Free live online event
         </p>
       </div>
 

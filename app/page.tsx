@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import EventTime from "./components/EventTime";
 import { trackClarityEvent } from "./lib/clarity-events";
 import { FUNNEL_EVENTS } from "./lib/funnel-events";
 import { postJsonWithTimeout, RegistrationRequestError } from "./lib/post-json";
@@ -102,7 +103,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
             <div style={{ textAlign: "center", marginBottom: "28px" }}>
               <Image src="/images/fbf-logo-black.png" alt="FBF" width={41} height={36} sizes="41px" style={{ height: "36px", width: "auto", marginBottom: "20px", display: "inline-block" }} />
               <h2 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 900, color: "#111", lineHeight: 1.2, marginBottom: "8px" }}>
-                Join the FREE Kingdom Intelligence<br />Masterclass · January 5&ndash;7, 2027
+                Join the FREE Kingdom Intelligence<br />Masterclass · <EventTime variant="dates" />
               </h2>
               <p style={{ fontSize: "14px", color: "#CC0000", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>
                 Your decision to join has the potential to be the biggest choice you make in 2027.
@@ -283,7 +284,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           <div className="hero-event-bar">
             <div>
               <div style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" as const, color: "#BB945A", fontFamily: "'Work Sans', sans-serif", fontWeight: 700, marginBottom: "4px" }}>Date</div>
-              <div style={{ fontSize: "clamp(13px, 1.2vw, 16px)", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}>January 5&ndash;7 @ 12 PM Central</div>
+              <div style={{ fontSize: "clamp(13px, 1.2vw, 16px)", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", fontWeight: 600 }}><EventTime /></div>
             </div>
           </div>
         </div>
@@ -309,8 +310,8 @@ function EventDetails() {
         </p>
         <div className="event-details-row" style={{ display: "flex", justifyContent: "center", gap: "40px", flexWrap: "wrap", marginBottom: "32px" }}>
           {[
-            { label: "Date", value: "January 5\u20137, 2027" },
-            { label: "Time", value: "12:00 PM CST Daily" },
+            { label: "Date", value: <EventTime variant="dates" /> },
+            { label: "Time", value: <><EventTime variant="time" /> Daily</> },
             { label: "Format", value: "Free Live Online Event" },
           ].map((item, i) => (
             <div key={i} style={{ textAlign: "center" }}>
@@ -482,7 +483,7 @@ function ECHOBlueprint({ onOpen }: { onOpen: () => void }) {
 
 /* -- PREPARE -- */
 const prepSteps = [
-  { number: "01", title: "Block Your Calendar", body: "All sessions are LIVE January 5\u20137, 12:00 PM CST. Set your notifications and treat these three days like a board meeting, not a webinar." },
+  { number: "01", title: "Block Your Calendar", body: <>All sessions are LIVE <EventTime />. Set your notifications and treat these three days like a board meeting, not a webinar.</> },
   { number: "02", title: "Bring Your Biggest Challenge", body: "Come with the one thing that's been holding your business back. We built this Masterclass to solve real problems in real time." },
   { number: "03", title: "Invite Collaborators", body: "Bring your team or key leaders so implementation happens immediately after the event." },
 ];
@@ -583,7 +584,7 @@ function FinalCTA({ onOpen }: { onOpen: () => void }) {
   return (
     <section style={{ background: "#FFFFFF", padding: "100px 20px", position: "relative", overflow: "hidden" }}>
       <div ref={ref} className="section-reveal" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}>January 5&ndash;7, 2027 &middot; Free Live Event</p>
+        <p style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" as const, color: "#CC0000", marginBottom: "20px", fontFamily: "'Work Sans', sans-serif" }}><EventTime variant="dates" /> &middot; Free Live Event</p>
         <h2 style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 900, color: "#111111", marginBottom: "20px", lineHeight: 1.1 }}>
           Playing Small Has Never<br />Changed The World.
         </h2>
@@ -636,11 +637,11 @@ function TopBanner({ onOpen }: { onOpen: () => void }) {
       onMouseLeave={e => (e.currentTarget.style.filter = "brightness(1)")}
     >
       <span className="top-banner-text" style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", whiteSpace: "nowrap" }}>
-        Free 3-Day Live Event &nbsp;&middot;&nbsp; January 5&ndash;7, 2027 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;
+        Free 3-Day Live Event &nbsp;&middot;&nbsp; <EventTime /> &nbsp;&middot;&nbsp;
         <span style={{ color: "#FFE599", textDecoration: "underline" }}>Register Now &rarr;</span>
       </span>
       <span className="top-banner-mobile-text" style={{ display: "none", fontSize: "10px", fontWeight: 800, letterSpacing: "0.1em", lineHeight: 1, textTransform: "uppercase", color: "#FFFFFF", fontFamily: "'Work Sans', sans-serif", whiteSpace: "nowrap" }}>
-        Free Event &middot; Jan 5-7 &middot; <span style={{ color: "#FFE599", textDecoration: "underline", textUnderlineOffset: "3px" }}>Register Now &rarr;</span>
+        Free Event &middot; <EventTime variant="shortDates" /> &middot; <span style={{ color: "#FFE599", textDecoration: "underline", textUnderlineOffset: "3px" }}>Register Now &rarr;</span>
       </span>
     </button>
   );

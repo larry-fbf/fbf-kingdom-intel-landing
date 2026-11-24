@@ -4,9 +4,9 @@ const checks = [
   {
     file: "app/page.tsx",
     mustInclude: [
-      "January 5&ndash;7, 2027",
-      "January 5&ndash;7 @ 12 PM Central",
-      "January 5\\u20137, 2027",
+      '<EventTime variant="dates" />',
+      '<EventTime />',
+      '<EventTime variant="time" />',
     ],
     mustNotMatch: [
       /June\s*9/i,
@@ -20,7 +20,7 @@ const checks = [
   {
     file: "app/vip/VIPUpsellPage.tsx",
     mustInclude: [
-      "January 6th and 7th",
+      '<EventTime event="vip" />',
       "Lifetime access to the Kingdom Intelligence Masterclass replays",
       "The S.W.E.E.T. Spot Audit",
       "VIP rooms",

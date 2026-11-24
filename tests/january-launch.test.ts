@@ -24,7 +24,7 @@ test('January dashboard resets only masterclass replay players, retaining bonus 
  assert.equal((page.match(/title: "Replay Coming Soon"/g)||[]).length,3);
  assert.doesNotMatch(page,/<iframe|videoUrl|1245584339|1245979460|1246403206/);
  assert.match(page,/<BonusContent \/>/);
- assert.match(page,/January 5-7/); assert.match(page,/January 6-7/);
+ assert.match(page,/<EventTime \/>/); assert.match(page,/<EventTime event="vip" \/>/);
 });
 
 // Every edited application file must equal only the reviewed forward edits on main.
@@ -42,7 +42,7 @@ test('full application, assets and configuration scope remains exact',()=>{
 
 test('mobile banner and registration modal have no stale event year or month',()=>{
  const page=readFileSync('app/page.tsx','utf8');
- assert.ok(page.includes('Free Event &middot; Jan 5-7'));
+ assert.ok(page.includes('Free Event &middot; <EventTime variant="shortDates" />'));
  assert.ok(page.includes('biggest choice you make in 2027.'));
  assert.doesNotMatch(page,/Nov(?:ember)? 10/);
 });

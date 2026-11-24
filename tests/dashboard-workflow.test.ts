@@ -10,10 +10,10 @@ test('both top regular dates link directly to the shared Google series with safe
     assert.match(anchor, /target="_blank"/);
     assert.match(anchor, /rel="noopener noreferrer"/);
     assert.match(anchor, /aria-label="[^"]*Google Calendar[^"]*new tab[^"]*"/);
-    assert.match(anchor, /January 5(?:-| to )7 \| 12 PM Central/);
+    assert.match(anchor, /<EventTime \/>/);
   }
   assert.match(page, /\.schedule-pill:focus-visible,\s*\.date-pill:focus-visible\s*\{\s*outline: 3px solid #cc0000;\s*outline-offset: 4px;/);
-  assert.match(page, /<div className="action-date">January 6-7 \| 7 PM Central<\/div>/);
+  assert.match(page, /<div className="action-date"><EventTime event="vip" \/><\/div>/);
 });
 
 const page = readFileSync(new URL('../app/dashboard/page.tsx', import.meta.url), 'utf8');

@@ -74,7 +74,7 @@ test('dashboard mounts a native calendar disclosure with one action and exactly 
   assert.doesNotMatch(card, /<section/, 'nested card must avoid global mobile section padding');
   assert.doesNotMatch(card, /Save each|Save all|Download all|Import the|download=|sessions.map/i);
   assert.equal((card.match(/<a /g) || []).length, 3);
-  for (const marker of ['<details', '<summary className="action-cta">Add to Calendar</summary>', '12–1 PM Central', '>Google Calendar</a>', '>Apple Calendar</a>', '>Outlook</a>', 'noopener noreferrer']) assert.ok(card.includes(marker), marker);
+  for (const marker of ['<details', '<summary className="action-cta">Add to Calendar</summary>', '<EventTime variant="range" />', '>Google Calendar</a>', '>Apple Calendar</a>', '>Outlook</a>', 'noopener noreferrer']) assert.ok(card.includes(marker), marker);
 });
 
 test('calendar endpoint delivers an inline handoff containing the generated calendar', async () => {
