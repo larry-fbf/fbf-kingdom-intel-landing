@@ -39,19 +39,23 @@ const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8"
 const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "MicrosoftClarity.tsx"), "utf8");
 
 const requiredWorkshopMarkers = [
-  "Free Kingdom Intelligence Workshop",
-  "Tuesday, October 13, 2026",
-  "/api/workshop/register",
-  "Called But Stuck?",
+  "Build Without Borrowing",
+  "Build your business through wise counsel, trusted relationships, and the resources you already have.",
+  "Registration is not open.",
+  "payton-wallace-host.webp",
 ];
 
 const requiredWorkshopMetadata = [
   "https://www.kingdomintel.com/workshop",
-  "https://www.kingdomintel.com/images/kingdom-intel-workshop-og.jpg",
-  "Called but Stuck? | Kingdom Intel Workshop | Oct 13, 2026 11am CT",
-  "width: 1200",
-  "height: 630",
+  "Build Without Borrowing | Kingdom Intelligence Workshop",
+  "index: false",
+  "images: []",
 ];
+
+if (/October|Andy|Called But Stuck|\/api\/workshop\/register|<form|fetch\(/i.test(workshopSource)) {
+  console.error("Workshop preview must not expose the obsolete event or a registration write path.");
+  process.exit(1);
+}
 
 const missingMarkers = requiredWorkshopMarkers.filter((marker) => !workshopSource.includes(marker) && !workshopPage.includes(marker));
 
