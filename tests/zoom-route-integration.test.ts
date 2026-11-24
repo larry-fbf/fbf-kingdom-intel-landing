@@ -7,11 +7,15 @@ import vm from "node:vm";
 import ts from "typescript";
 import { launchEnv } from "./launch-fixture.ts";
 const require = createRequire(import.meta.url);
+class JanuaryFixtureDate extends Date {
+ constructor(value: string | number = '2027-01-01T00:00:00Z') { super(value); }
+ static now() { return Date.parse('2027-01-01T00:00:00Z'); }
+}
 
 for (const scenario of ['new', 'existing', 'pending', 'uncertain', 'unavailable', 'missing-day-1', 'missing-day-2', 'missing-day-3']) {
 test(`actual route + direct runtime + provider: ${scenario}, without private links`, async () => {
 
-    const target = { webinarId: "81823603475", topic: "Kingdom Intelligence Masterclass", timezone: "America/Chicago", occurrenceId: "1794506400000", startTime: "2026-11-12T18:00:00Z" };
+    const target = { webinarId: "87364502476", topic: "Kingdom Intelligence Masterclass", timezone: "America/Chicago", occurrenceId: "1799344800000", startTime: "2027-01-07T18:00:00Z" };
     const env = { ...launchEnv, ATTIO_API_KEY: "fixture", BREVO_API_KEY: "fixture", SIMPLETEXTING_API_KEY: "fixture", REGISTRATION_CONFIRMATION_SECRET: "fixture-confirmation-secret", NODE_ENV: "production", ZOOM_ACCOUNT_ID: "fixture", ZOOM_CLIENT_ID: "fixture", ZOOM_CLIENT_SECRET: "fixture", ZOOM_SIGNUP_TARGET: JSON.stringify(target) };
     const calls: { url: string; method: string; body: any }[] = [], logs: unknown[] = [];
     let registered = scenario === 'existing' || scenario === 'pending';
@@ -38,7 +42,7 @@ test(`actual route + direct runtime + provider: ${scenario}, without private lin
         const rows = registered && url.includes(`status=${status}`) ? [{ ...row, status }] : [];
         return Response.json({ total_records: rows.length, registrants: rows, next_page_token: "" });
       }
-      if (url === "https://api.zoom.us/v2/webinars/81823603475") return Response.json({ id: 81823603475, host_id: "host", topic: target.topic, timezone: target.timezone, type: 9, occurrences: [{ occurrence_id: "1794333600000", start_time: "2026-11-10T18:00:00Z", status: "available" }, { occurrence_id: "1794420000000", start_time: "2026-11-11T18:00:00Z", status: "available" }, { occurrence_id: target.occurrenceId, start_time: target.startTime, status: "available" }].filter((_, index) => index + 1 !== missingDay), settings: { registration_type: 1, approval_type: 0, registrants_confirmation_email: true, meeting_authentication: false, close_registration: false } });
+      if (url === "https://api.zoom.us/v2/webinars/87364502476") return Response.json({ id: 87364502476, host_id: "host", topic: target.topic, timezone: target.timezone, type: 9, occurrences: [{ occurrence_id: "1799172000000", start_time: "2027-01-05T18:00:00Z", status: "available" }, { occurrence_id: "1799258400000", start_time: "2027-01-06T18:00:00Z", status: "available" }, { occurrence_id: target.occurrenceId, start_time: target.startTime, status: "available" }].filter((_, index) => index + 1 !== missingDay), settings: { registration_type: 1, approval_type: 0, registrants_confirmation_email: true, meeting_authentication: false, close_registration: false } });
       throw Error("unexpected network blocked");
     };
     function load(file: string): any {
@@ -46,7 +50,7 @@ test(`actual route + direct runtime + provider: ${scenario}, without private lin
       const code = ts.transpileModule(readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
       vm.runInNewContext(code, { module, exports: module.exports, require: (id: string) => {
         return id.startsWith(".") ? load(resolve(dirname(file), id.endsWith(".ts") ? id : id + ".ts")) : require(id);
-      }, process: { env }, fetch, URL, Response, Headers, URLSearchParams, AbortSignal, AbortController, crypto, Buffer, setTimeout, clearTimeout, console: { error: (...args: unknown[]) => logs.push(args), warn: (...args: unknown[]) => logs.push(args) } }, { filename: file });
+      }, process: { env }, Date: JanuaryFixtureDate, fetch, URL, Response, Headers, URLSearchParams, AbortSignal, AbortController, crypto, Buffer, setTimeout, clearTimeout, console: { error: (...args: unknown[]) => logs.push(args), warn: (...args: unknown[]) => logs.push(args) } }, { filename: file });
       return module.exports;
     }
     const route = load(resolve("app/api/register/route.ts"));

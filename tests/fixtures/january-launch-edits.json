@@ -1,0 +1,297 @@
+{
+  "base": "7a29d973374468045abf8bc33a0c4bf67589e107",
+  "files": {
+    "app/api/register/route.ts": {
+      "changes": [
+        {
+          "before": "const SIMPLETEXTING_MASTERCLASS_GROUP = launch?.smsList === \"6ab168287c960c8a3dff232b\"\n  ? \"K.I.M. - Nov 2026\"\n",
+          "after": "const SIMPLETEXTING_MASTERCLASS_GROUP = launch?.smsList === \"6b05bd3e9a5e81ffa61b9352\"\n  ? \"K.I.M. - Jan 2027\"\n"
+        },
+        {
+          "before": "    comment: \"Kingdom Intelligence Masterclass - November 2026 registration\",\r\n",
+          "after": "    comment: \"Kingdom Intelligence Masterclass - January 2027 registration\",\r\n"
+        }
+      ],
+      "baseline": "e3e3031dfcf5f287b22ae57c6bbee3d9ce545dfe4148185e0b9b70232ef2326e",
+      "candidate": "baa228b117e63a5b272926631cfdf8ba4bcc5ffad547789fa9ebc94dda5d4947"
+    },
+    "app/api/workbook/route.ts": {
+      "changes": [
+        {
+          "before": "  const canonical = JSON.stringify([\"kim-november-2026-v1\", contact.firstName, contact.lastName,\n",
+          "after": "  const canonical = JSON.stringify([\"kim-january-2027-v1\", contact.firstName, contact.lastName,\n"
+        },
+        {
+          "before": "          // Explicit November cohort. PATCH appends; PUT would replace event history.\n          body: JSON.stringify({ data: { values: { events_registered: [\"e4039e80-b639-4481-b24d-c00aa5b6390d\"] } } }),\n        }, \"Attio November workbook event\");\n",
+          "after": "          // Explicit January cohort. PATCH appends; PUT would replace event history.\n          body: JSON.stringify({ data: { values: { events_registered: [\"031718af-253b-44c8-9c5f-20875993a3f7\"] } } }),\n        }, \"Attio January workbook event\");\n"
+        }
+      ],
+      "baseline": "24f26efdce3029fec41ab9bef06c534a2efa7598df872d0444ca485f161e35aa",
+      "candidate": "f6f88f406423d05711d59976f3fa5462da23c38defaefa0673bf86dca5098005"
+    },
+    "app/dashboard/AddToCalendar.tsx": {
+      "changes": [
+        {
+          "before": "        <p className=\"action-detail\">November 10\u201312, 2026<br />12\u20131 PM Central each day.</p>\n",
+          "after": "        <p className=\"action-detail\">January 5\u20137, 2027<br />12\u20131 PM Central each day.</p>\n"
+        }
+      ],
+      "baseline": "1540e90546ef98513b65f50d2bb0038249bb4bd4605e490da3923aa26a5c7a28",
+      "candidate": "9f49a1ab5caad4e7932db68bac2c5e4610c3c73d658167696d8158f0ef22b6e5"
+    },
+    "app/dashboard/ShareMasterclassButton.tsx": {
+      "changes": [
+        {
+          "before": "  \"Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass November 10-12 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/\";\n",
+          "after": "  \"Hey, I thought of you for this. Larry and Staci Wallace are hosting the free Kingdom Intelligence Masterclass January 5-7 at 12 PM Central. It is for faith-driven business owners who want to scale with clarity, peace, and Kingdom impact. You can register here: https://www.kingdomintel.com/\";\n"
+        }
+      ],
+      "baseline": "d96f48edc5179e0c5cf23609c06a91b01ac820bdf40892a98abd09a071b88dde",
+      "candidate": "cb10efed35f7ae8092e0032546dbfda3b4b73966bde7693929a15d865f1c68c9"
+    },
+    "app/dashboard/calendar.ics/route.ts": {
+      "changes": [
+        {
+          "before": "      'Content-Disposition': 'inline; filename=\"kingdom-intelligence-november-2026.ics\"',\n",
+          "after": "      'Content-Disposition': 'inline; filename=\"kingdom-intelligence-january-2027.ics\"',\n"
+        }
+      ],
+      "baseline": "0c3ebfdb59121cc1c270769657a11d2914fb1cf707f62de68b3dd915b4d12fb3",
+      "candidate": "3531629408e6c33f18d5d9bfa155f0437754f01344226b0af3d253822018cad8"
+    },
+    "app/dashboard/calendar.ts": {
+      "changes": [
+        {
+          "before": "// Regular masterclass only. November dates are CST (UTC-06), after DST ends.\n",
+          "after": "// Regular masterclass only. January dates are CST (UTC-06), after DST ends.\n"
+        },
+        {
+          "before": "If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g\n",
+          "after": "If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_ZwyUtBhmTzeerZ1Wy9LLPw\n"
+        },
+        {
+          "before": "  start: '20261110T180000Z',\n  end: '20261110T190000Z',\n  uid: 'kingdom-intelligence-20261110-series@kingdomintel.com',\n",
+          "after": "  start: '20270105T180000Z',\n  end: '20270105T190000Z',\n  uid: 'kingdom-intelligence-20270105-series@kingdomintel.com',\n"
+        }
+      ],
+      "baseline": "add0af38a6b98409d2072f2833453ee8a85a7651473af6647298cd14f0542ca1",
+      "candidate": "39ad9132ba7034055a5a60445e91a94f580b2c254b8e6de4b49688a9ad146d9d"
+    },
+    "app/dashboard/page.tsx": {
+      "changes": [
+        {
+          "before": "const ZOOM_URL = \"https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g\";\r\n",
+          "after": "const ZOOM_URL = \"https://us02web.zoom.us/webinar/register/WN_ZwyUtBhmTzeerZ1Wy9LLPw\";\r\n"
+        },
+        {
+          "before": "    title: \"Watch the Replay\",\r\n    videoUrl: \"https://player.vimeo.com/video/1245584339\",\r\n",
+          "after": "    title: \"Replay Coming Soon\",\r\n"
+        },
+        {
+          "before": "    title: \"Watch the Replay\",\r\n    videoUrl: \"https://player.vimeo.com/video/1245979460\",\r\n",
+          "after": "    title: \"Replay Coming Soon\",\r\n"
+        },
+        {
+          "before": "    title: \"Watch the Replay\",\r\n    videoUrl: \"https://player.vimeo.com/video/1246403206\",\r\n",
+          "after": "    title: \"Replay Coming Soon\",\r\n"
+        },
+        {
+          "before": "            <a className=\"schedule-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the November 10-12 masterclass to Google Calendar (opens in a new tab)\">\r\n              <span>November 10-12 | 12 PM Central</span>\r\n",
+          "after": "            <a className=\"schedule-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the January 5-7 masterclass to Google Calendar (opens in a new tab)\">\r\n              <span>January 5-7 | 12 PM Central</span>\r\n"
+        },
+        {
+          "before": "                <a className=\"date-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the November 10-12 masterclass to Google Calendar (opens in a new tab)\">November 10 to 12 | 12 PM Central</a>\r\n",
+          "after": "                <a className=\"date-pill\" href={googleCalendarUrl()} target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Add the January 5-7 masterclass to Google Calendar (opens in a new tab)\">January 5 to 7 | 12 PM Central</a>\r\n"
+        },
+        {
+          "before": "                  <div className=\"action-date\">November 11-12 | 7 PM Central</div>\r\n",
+          "after": "                  <div className=\"action-date\">January 6-7 | 7 PM Central</div>\r\n"
+        },
+        {
+          "before": "              <h2 className=\"section-title\">Session Replays</h2>\r\n",
+          "after": "              <h2 className=\"section-title\">Coming Soon</h2>\r\n"
+        },
+        {
+          "before": "                {replay.videoUrl && (\r\n                  <iframe\r\n                    src={replay.videoUrl}\r\n                    title={`${replay.day} \u2014 Kingdom Intelligence Masterclass Replay`}\r\n                    loading=\"lazy\"\r\n                    allow=\"fullscreen; picture-in-picture; encrypted-media\"\r\n                    allowFullScreen\r\n                    style={{ display: \"block\", width: \"100%\", aspectRatio: \"16 / 9\", border: 0, marginTop: \"16px\" }}\r\n                  />\r\n                )}\r\n",
+          "after": ""
+        }
+      ],
+      "baseline": "dc6b79336109f4ca4fed5c16cd38cd5790f4233afa8f2475ab62e5f3df1a567b",
+      "candidate": "03c5193b05841e55ef4bf783c9c972ca3a96bd967941009d7e661ad9a52079d5"
+    },
+    "app/layout.tsx": {
+      "changes": [
+        {
+          "before": "    \"Free 3-day live online event for faith-driven business owners. November 10-12, 2026. Learn the Kingdom Intelligence Framework to scale your company God's way.\",\r\n",
+          "after": "    \"Free 3-day live online event for faith-driven business owners. January 5-7, 2027. Learn the Kingdom Intelligence Framework to scale your company God's way.\",\r\n"
+        },
+        {
+          "before": "      \"Free 3-day live event November 10-12, 2026. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.\",\r\n",
+          "after": "      \"Free 3-day live event January 5-7, 2027. Learn how to scale your business with Spirit-led strategy, operational efficiency, and predictable cash flow in the AI era.\",\r\n"
+        },
+        {
+          "before": "      \"Free 3-day live event November 10-12, 2026. Learn how to scale your business God's way.\",\r\n",
+          "after": "      \"Free 3-day live event January 5-7, 2027. Learn how to scale your business God's way.\",\r\n"
+        }
+      ],
+      "baseline": "6c40bbc7babb95fafdaf06b4d3ed1e222ab755b98168a5c937aebba91b66d19e",
+      "candidate": "fdc399e7aa9b6338ba782f8a674f65361434d89937992b0db34e348009fc7224"
+    },
+    "app/lib/clarity-events.ts": {
+      "changes": [
+        {
+          "before": "  funnel: \"kim_nov_2026\",\n",
+          "after": "  funnel: \"kim_jan_2027\",\n"
+        }
+      ],
+      "baseline": "3dbd97859284282d7a0a7a75d8c622118690a03ad845a152e09678a93c547fd4",
+      "candidate": "039486ff4020b8f5c4d686e94d03900f3b5d5925cad48a80e7571dfb61cb2cca"
+    },
+    "app/lib/launch-config.ts": {
+      "changes": [
+        {
+          "before": "// Server-only, November-specific configuration. No legacy cohort fallbacks.\n",
+          "after": "// Server-only, January-specific configuration. No legacy cohort fallbacks.\n"
+        },
+        {
+          "before": "  const prefix = kind === 'vip' ? 'KI_NOVEMBER_2026_VIP_' : 'KI_NOVEMBER_2026_';\n",
+          "after": "  const prefix = kind === 'vip' ? 'KI_JANUARY_2027_VIP_' : 'KI_JANUARY_2027_';\n"
+        },
+        {
+          "before": "  const eventOption = env.KI_NOVEMBER_2026_ATTIO_EVENT_OPTION_ID || '';\n",
+          "after": "  const eventOption = env.KI_JANUARY_2027_ATTIO_EVENT_OPTION_ID || '';\n"
+        },
+        {
+          "before": "  if (read('VERIFIED') !== 'november-2026' || !uuid.test(attioList) || !uuid.test(eventOption)\n",
+          "after": "  if (read('VERIFIED') !== 'january-2027' || !uuid.test(attioList) || !uuid.test(eventOption)\n"
+        },
+        {
+          "before": "  // Exact nonsecret destinations independently read from providers October 14.\n",
+          "after": "  // Exact nonsecret destinations independently read from providers November 24.\n"
+        },
+        {
+          "before": "    ? ['0be88ec0-42a9-4169-bdbc-fd47a86fbcdb', 26, '6ab168287c960c8a3dff232b']\n    : ['e004417b-1e62-463f-bee2-87a61c864eeb', 27, '6ab168890bb25491ec9be684'];\n",
+          "after": "    ? ['dd7e0de7-26c7-43a8-b319-ea4b5f454e3c', 32, '6b05bd3e9a5e81ffa61b9352']\n    : ['c8c50f57-ef28-41db-b3af-849fc87aea59', 33, '6b05bd2600965d56b50966ae'];\n"
+        },
+        {
+          "before": "      eventOption !== 'e4039e80-b639-4481-b24d-c00aa5b6390d') return null;\n",
+          "after": "      eventOption !== '031718af-253b-44c8-9c5f-20875993a3f7') return null;\n"
+        }
+      ],
+      "baseline": "93c6f5323d57b8c157c8a163b8387988abf00de30d32d4dec57a7e96c803f7c7",
+      "candidate": "1d290f61e4d610c52cf4903556810552578f3f1ab0ca6432950f9189d3209f30"
+    },
+    "app/lib/zoom-runtime.ts": {
+      "changes": [
+        {
+          "before": "    // Bind this website campaign to the provider metadata verified October 21.\n    if (target.webinarId !== \"81823603475\" || target.topic !== \"Kingdom Intelligence Masterclass\" ||\n        target.timezone !== \"America/Chicago\" || target.occurrenceId !== \"1794506400000\" ||\n        target.startTime !== \"2026-11-12T18:00:00Z\") return { status: \"unavailable\" };\n",
+          "after": "    // Bind this website campaign to the provider metadata verified November 24.\n    if (target.webinarId !== \"87364502476\" || target.topic !== \"Kingdom Intelligence Masterclass\" ||\n        target.timezone !== \"America/Chicago\" || target.occurrenceId !== \"1799344800000\" ||\n        target.startTime !== \"2027-01-07T18:00:00Z\") return { status: \"unavailable\" };\n"
+        },
+        {
+          "before": "      { occurrenceId: \"1794333600000\", startTime: \"2026-11-10T18:00:00Z\" },\n      { occurrenceId: \"1794420000000\", startTime: \"2026-11-11T18:00:00Z\" },\n      { occurrenceId: \"1794506400000\", startTime: \"2026-11-12T18:00:00Z\" },\n",
+          "after": "      { occurrenceId: \"1799172000000\", startTime: \"2027-01-05T18:00:00Z\" },\n      { occurrenceId: \"1799258400000\", startTime: \"2027-01-06T18:00:00Z\" },\n      { occurrenceId: \"1799344800000\", startTime: \"2027-01-07T18:00:00Z\" },\n"
+        }
+      ],
+      "baseline": "63afd5ed3dc0913837d411776c952d5dd7ddf49feb49fa512b8276f74c2116d9",
+      "candidate": "09537d9fa15199d9b52866ba0664697e1d1cf8c2f579be7b3c8cb4e0b1b407e9"
+    },
+    "app/page.tsx": {
+      "changes": [
+        {
+          "before": "                Join the FREE Kingdom Intelligence<br />Masterclass \u00b7 November 10&ndash;12, 2026\r\n",
+          "after": "                Join the FREE Kingdom Intelligence<br />Masterclass \u00b7 January 5&ndash;7, 2027\r\n"
+        },
+        {
+          "before": "              <div style={{ fontSize: \"clamp(13px, 1.2vw, 16px)\", color: \"#FFFFFF\", fontFamily: \"'Work Sans', sans-serif\", fontWeight: 600 }}>November 10&ndash;12 @ 12 PM Central</div>\r\n",
+          "after": "              <div style={{ fontSize: \"clamp(13px, 1.2vw, 16px)\", color: \"#FFFFFF\", fontFamily: \"'Work Sans', sans-serif\", fontWeight: 600 }}>January 5&ndash;7 @ 12 PM Central</div>\r\n"
+        },
+        {
+          "before": "            { label: \"Date\", value: \"November 10\\u201312, 2026\" },\r\n",
+          "after": "            { label: \"Date\", value: \"January 5\\u20137, 2027\" },\r\n"
+        },
+        {
+          "before": "  { number: \"01\", title: \"Block Your Calendar\", body: \"All sessions are LIVE November 10\\u201312, 12:00 PM CST. Set your notifications and treat these three days like a board meeting, not a webinar.\" },\r\n",
+          "after": "  { number: \"01\", title: \"Block Your Calendar\", body: \"All sessions are LIVE January 5\\u20137, 12:00 PM CST. Set your notifications and treat these three days like a board meeting, not a webinar.\" },\r\n"
+        },
+        {
+          "before": "        <p style={{ fontSize: \"12px\", fontWeight: 700, letterSpacing: \"0.22em\", textTransform: \"uppercase\" as const, color: \"#CC0000\", marginBottom: \"20px\", fontFamily: \"'Work Sans', sans-serif\" }}>November 10&ndash;12, 2026 &middot; Free Live Event</p>\r\n",
+          "after": "        <p style={{ fontSize: \"12px\", fontWeight: 700, letterSpacing: \"0.22em\", textTransform: \"uppercase\" as const, color: \"#CC0000\", marginBottom: \"20px\", fontFamily: \"'Work Sans', sans-serif\" }}>January 5&ndash;7, 2027 &middot; Free Live Event</p>\r\n"
+        },
+        {
+          "before": "        Free 3-Day Live Event &nbsp;&middot;&nbsp; November 10&ndash;12, 2026 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;\r\n",
+          "after": "        Free 3-Day Live Event &nbsp;&middot;&nbsp; January 5&ndash;7, 2027 &nbsp;&middot;&nbsp; 12:00 PM CST &nbsp;&middot;&nbsp;\r\n"
+        },
+        {
+          "before": "Nov 10-12",
+          "after": "Jan 5-7"
+        },
+        {
+          "before": "biggest choice you make in 2026.",
+          "after": "biggest choice you make in 2027."
+        }
+      ],
+      "baseline": "338241ae6a60d065b1ae349a74559da436f4db7352cf4ceed540ba7ff34da00a",
+      "candidate": "896ff49725291c100fd81c1b66b6fe199c4e805c1f97cc2cdc6565868d2352c3"
+    },
+    "app/thank-you/page.tsx": {
+      "changes": [
+        {
+          "before": "          You are registered | November 10-12, 2026 | 12:00 PM Central | Free live online event\r\n",
+          "after": "          You are registered | January 5-7, 2027 | 12:00 PM Central | Free live online event\r\n"
+        }
+      ],
+      "baseline": "de09911c250302dfd6ca190af05409a723ed67948a2fddbe5dc3649655019252",
+      "candidate": "2e70f0010f52bd94b06db7bbeccf2b286ea87b93880daca133821cebfe14dccb"
+    },
+    "app/vip/VIPUpsellPage.tsx": {
+      "changes": [
+        {
+          "before": "  \"Two live VIP rooms on November 11th and 12th at 7pm CT on Zoom\",\r\n",
+          "after": "  \"Two live VIP rooms on January 6th and 7th at 7pm CT on Zoom\",\r\n"
+        },
+        {
+          "before": "      <p className={styles.offerSubtitle}>Live 1 x 1 training with direct coaching on November 11th and 12th at 7pm CT on Zoom.</p>\r\n",
+          "after": "      <p className={styles.offerSubtitle}>Live 1 x 1 training with direct coaching on January 6th and 7th at 7pm CT on Zoom.</p>\r\n"
+        },
+        {
+          "before": "              <h2>Get personal coaching inside the November 11th and 12th VIP rooms.</h2>\r\n",
+          "after": "              <h2>Get personal coaching inside the January 6th and 7th VIP rooms.</h2>\r\n"
+        },
+        {
+          "before": "                When you upgrade now, you get access to the VIP rooms on November 11th and 12th at 7pm CT on Zoom\r\n",
+          "after": "                When you upgrade now, you get access to the VIP rooms on January 6th and 7th at 7pm CT on Zoom\r\n"
+        },
+        {
+          "before": "            Join the VIP rooms on November 11th and 12th at 7pm CT on Zoom, bring your real questions, and get\r\n",
+          "after": "            Join the VIP rooms on January 6th and 7th at 7pm CT on Zoom, bring your real questions, and get\r\n"
+        }
+      ],
+      "baseline": "b0141f7853ebc39c8d2c562704aa3c82f2da2bb8b15966b875244628e0fd29c4",
+      "candidate": "87ba88abcd3722dd3d9e565c78ee3d04ad36520739859180b706e442734251fc"
+    },
+    "app/vip/page.tsx": {
+      "changes": [
+        {
+          "before": "    \"Upgrade to VIP for the November 11th and 12th VIP rooms and FBF Vault recordings for the Kingdom Intelligence Masterclass.\",\r\n",
+          "after": "    \"Upgrade to VIP for the January 6th and 7th VIP rooms and FBF Vault recordings for the Kingdom Intelligence Masterclass.\",\r\n"
+        }
+      ],
+      "baseline": "95954d6891f72200f85c2fc4fe6eb681382bccd4c6f31695993017f35d97bc42",
+      "candidate": "b37372c086de0fc1b61f76b8208422db41201dbf1173064dae324c913fd664a2"
+    },
+    "app/vip/thank-you/page.tsx": {
+      "changes": [
+        {
+          "before": "  description: \"Get ready for your VIP Business Mastermind: November 11\u201312, 2026 at 7 PM Central. Watch your inbox, prepare your question, and join us live.\",\n",
+          "after": "  description: \"Get ready for your VIP Business Mastermind: January 6\u20137, 2027 at 7 PM Central. Watch your inbox, prepare your question, and join us live.\",\n"
+        },
+        {
+          "before": "          <p className={styles.schedule}>Wednesday, November 11 &amp; Thursday, November 12, 2026<br /><strong>7 PM Central \u00b7 8 PM Eastern \u00b7 5 PM Pacific</strong></p>\n",
+          "after": "          <p className={styles.schedule}>Wednesday, January 6 &amp; Thursday, January 7, 2027<br /><strong>7 PM Central \u00b7 8 PM Eastern \u00b7 5 PM Pacific</strong></p>\n"
+        }
+      ],
+      "baseline": "374c61d2925cc70c46b4bab27aadbd747930083dd9865059fdcc25bdc2a32d0b",
+      "candidate": "f9afe29eb473d2f16ec5bd54df8dfea7daba82bb8b782b8a0283acc43807f13f"
+    }
+  }
+}

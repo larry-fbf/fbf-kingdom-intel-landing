@@ -9,14 +9,14 @@ export async function registerWebsiteZoom(contact: ZoomContact, env: Record<stri
     if (required.some(name => !env[name])) return { status: "unavailable" };
     const target = JSON.parse(env.ZOOM_SIGNUP_TARGET!) as ZoomTarget;
     if (![target.webinarId, target.topic, target.timezone, target.occurrenceId, target.startTime].every(value => typeof value === "string" && value)) return { status: "unavailable" };
-    // Bind this website campaign to the provider metadata verified October 21.
-    if (target.webinarId !== "81823603475" || target.topic !== "Kingdom Intelligence Masterclass" ||
-        target.timezone !== "America/Chicago" || target.occurrenceId !== "1794506400000" ||
-        target.startTime !== "2026-11-12T18:00:00Z") return { status: "unavailable" };
+    // Bind this website campaign to the provider metadata verified November 24.
+    if (target.webinarId !== "87364502476" || target.topic !== "Kingdom Intelligence Masterclass" ||
+        target.timezone !== "America/Chicago" || target.occurrenceId !== "1799344800000" ||
+        target.startTime !== "2027-01-07T18:00:00Z") return { status: "unavailable" };
     target.occurrences = [
-      { occurrenceId: "1794333600000", startTime: "2026-11-10T18:00:00Z" },
-      { occurrenceId: "1794420000000", startTime: "2026-11-11T18:00:00Z" },
-      { occurrenceId: "1794506400000", startTime: "2026-11-12T18:00:00Z" },
+      { occurrenceId: "1799172000000", startTime: "2027-01-05T18:00:00Z" },
+      { occurrenceId: "1799258400000", startTime: "2027-01-06T18:00:00Z" },
+      { occurrenceId: "1799344800000", startTime: "2027-01-07T18:00:00Z" },
     ];
     const provider = createZoomProvider({ accountId: env.ZOOM_ACCOUNT_ID!, clientId: env.ZOOM_CLIENT_ID!, clientSecret: env.ZOOM_CLIENT_SECRET! });
     return await registerZoomSignup(contact, target, provider);

@@ -1,4 +1,4 @@
-// Regular masterclass only. November dates are CST (UTC-06), after DST ends.
+// Regular masterclass only. January dates are CST (UTC-06), after DST ends.
 export const dashboardUrl = 'https://www.kingdomintel.com/dashboard';
 export const description = `Welcome to the 3-Day Kingdom Intelligence Masterclass
 
@@ -6,7 +6,7 @@ I am so excited to see you registered for our 3 day Kingdom Intel Masterclass!!
 
 This 3-day event will happen LIVE by Zoom. Accepting this invite will add our free event to your Google calendar so you can make sure you don't miss anything!\u0020
 
-If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g
+If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_ZwyUtBhmTzeerZ1Wy9LLPw
 
 Important details:
 
@@ -30,9 +30,9 @@ Q: How can I learn more about Fueled by Fire?
 A: Go to www.fbfmastery.com`;
 const series = {
   title: 'Kingdom Intelligence Masterclass',
-  start: '20261110T180000Z',
-  end: '20261110T190000Z',
-  uid: 'kingdom-intelligence-20261110-series@kingdomintel.com',
+  start: '20270105T180000Z',
+  end: '20270105T190000Z',
+  uid: 'kingdom-intelligence-20270105-series@kingdomintel.com',
   recurrence: 'RRULE:FREQ=DAILY;COUNT=3',
 };
 

@@ -25,24 +25,21 @@ export const metadata: Metadata = {
 const WORKBOOK_URL = "/workbook";
 const VIP_URL = "/vip";
 const REGISTRATION_URL = "https://www.kingdomintel.com/";
-const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g";
+const ZOOM_URL = "https://us02web.zoom.us/webinar/register/WN_ZwyUtBhmTzeerZ1Wy9LLPw";
 const COMMUNITY_URL = "https://www.facebook.com/groups/fueledbyfirecommunity/";
 
 const replays = [
   {
     day: "Day 1",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1245584339",
+    title: "Replay Coming Soon",
   },
   {
     day: "Day 2",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1245979460",
+    title: "Replay Coming Soon",
   },
   {
     day: "Day 3",
-    title: "Watch the Replay",
-    videoUrl: "https://player.vimeo.com/video/1246403206",
+    title: "Replay Coming Soon",
   },
 ];
 
@@ -777,8 +774,8 @@ export default async function DashboardPage() {
         <div className="dashboard-wrap">
           <h1 className="dashboard-title">Event Dashboard</h1>
           <div className="schedule-row" aria-label="Event schedule">
-            <a className="schedule-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the November 10-12 masterclass to Google Calendar (opens in a new tab)">
-              <span>November 10-12 | 12 PM Central</span>
+            <a className="schedule-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the January 5-7 masterclass to Google Calendar (opens in a new tab)">
+              <span>January 5-7 | 12 PM Central</span>
             </a>
             <div className="top-action-group">
               <ShareMasterclassButton />
@@ -817,7 +814,7 @@ export default async function DashboardPage() {
                   Bring your workbook, arrive a few minutes early, and come prepared to turn insight
                   into action.
                 </p>
-                <a className="date-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the November 10-12 masterclass to Google Calendar (opens in a new tab)">November 10 to 12 | 12 PM Central</a>
+                <a className="date-pill" href={googleCalendarUrl()} target="_blank" rel="noopener noreferrer" aria-label="Add the January 5-7 masterclass to Google Calendar (opens in a new tab)">January 5 to 7 | 12 PM Central</a>
               </div>
               <div>
                 <TrackedClarityLink
@@ -901,7 +898,7 @@ export default async function DashboardPage() {
                   <p className="action-detail">
                     Unlock the VIP room, direct coaching, bonuses, and replay access.
                   </p>
-                  <div className="action-date">November 11-12 | 7 PM Central</div>
+                  <div className="action-date">January 6-7 | 7 PM Central</div>
                 </div>
               </div>
               <span className="action-cta">Upgrade to VIP</span>
@@ -915,7 +912,7 @@ export default async function DashboardPage() {
           <div className="replay-head">
             <div>
               <p className="section-label">Replay Library</p>
-              <h2 className="section-title">Session Replays</h2>
+              <h2 className="section-title">Coming Soon</h2>
             </div>
             <p className="replay-note">
               Replays will be posted here after each live session is processed.
@@ -927,16 +924,6 @@ export default async function DashboardPage() {
               <article className="replay-card" key={replay.day}>
                 <p className="replay-day">{replay.day}</p>
                 <h3 className="replay-title">{replay.title}</h3>
-                {replay.videoUrl && (
-                  <iframe
-                    src={replay.videoUrl}
-                    title={`${replay.day} — Kingdom Intelligence Masterclass Replay`}
-                    loading="lazy"
-                    allow="fullscreen; picture-in-picture; encrypted-media"
-                    allowFullScreen
-                    style={{ display: "block", width: "100%", aspectRatio: "16 / 9", border: 0, marginTop: "16px" }}
-                  />
-                )}
               </article>
             ))}
           </div>

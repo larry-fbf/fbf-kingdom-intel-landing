@@ -17,8 +17,8 @@ const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
 const BREVO_MASTERCLASS_LIST_ID = launch?.brevoList || 0;
 const SIMPLETEXTING_API_KEY = process.env.SIMPLETEXTING_API_KEY || "";
 // The legacy v1 group endpoint takes a name; retain the exact v2 cohort ID gate.
-const SIMPLETEXTING_MASTERCLASS_GROUP = launch?.smsList === "6ab168287c960c8a3dff232b"
-  ? "K.I.M. - Nov 2026"
+const SIMPLETEXTING_MASTERCLASS_GROUP = launch?.smsList === "6b05bd3e9a5e81ffa61b9352"
+  ? "K.I.M. - Jan 2027"
   : "";
 const INTEGRATION_TIMEOUT_MS = 10000;
 
@@ -230,7 +230,7 @@ async function upsertSimpleTextingContact(contact: Required<Pick<RegistrationPay
     firstName: contact.firstName,
     lastName: contact.lastName,
     email: contact.email,
-    comment: "Kingdom Intelligence Masterclass - November 2026 registration",
+    comment: "Kingdom Intelligence Masterclass - January 2027 registration",
   });
 
   const res = await fetch("https://app2.simpletexting.com/v1/group/contact/add", {

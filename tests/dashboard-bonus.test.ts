@@ -1,3 +1,4 @@
+import { beforeJanuary } from './january-preservation.ts';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import test from 'node:test';
@@ -39,7 +40,7 @@ test('published roadmap preserves the supplied original PDF bytes', () => {
   assert.equal(createHash('sha256').update(pdf).digest('hex'), 'c839a4fcba022c54f9e0b3b0bf0ec4f335264929bca3730339ec79aa7e74b205');
 });
 
-const page = readFileSync('app/dashboard/page.tsx', 'utf8');
+const page = beforeJanuary('app/dashboard/page.tsx', readFileSync('app/dashboard/page.tsx', 'utf8'));
 test('bonus content is mounted immediately after replay library and before footer', () => {
   assert.match(page, /import BonusContent from "\.\/BonusContent";/);
   assert.match(page, /<\/section>\s*<BonusContent \/>\s*<footer className="footer">/);

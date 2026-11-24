@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "VIP Next Steps | Kingdom Intelligence Masterclass",
-  description: "Get ready for your VIP Business Mastermind: November 11–12, 2026 at 7 PM Central. Watch your inbox, prepare your question, and join us live.",
+  description: "Get ready for your VIP Business Mastermind: January 6–7, 2027 at 7 PM Central. Watch your inbox, prepare your question, and join us live.",
 };
 
 export default function VIPThankYouPage() {
@@ -19,7 +19,7 @@ export default function VIPThankYouPage() {
           <p className={styles.eyebrow}>VIP next steps</p>
           <h1>Get ready for your VIP Business Mastermind.</h1>
           <p className={styles.lead}>Bring your real business and leadership questions. Larry, Staci, and Payton will work through them with you in two private, question-driven Zoom sessions.</p>
-          <p className={styles.schedule}>Wednesday, November 11 &amp; Thursday, November 12, 2026<br /><strong>7 PM Central · 8 PM Eastern · 5 PM Pacific</strong></p>
+          <p className={styles.schedule}>Wednesday, January 6 &amp; Thursday, January 7, 2027<br /><strong>7 PM Central · 8 PM Eastern · 5 PM Pacific</strong></p>
           <div className={styles.actions}><a className={styles.darkButton} href="/dashboard">Masterclass dashboard</a></div>
         </div>
       </section>

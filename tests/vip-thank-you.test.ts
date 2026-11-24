@@ -34,8 +34,8 @@ test('VIP next steps render before the optional regular-masterclass invitation',
   assert.match(html, /What would overcoming it look like/);
   assert.match(html, /What specific question would you like us to answer/);
   assert.match(html, /Questions sent in advance get priority/);
-  assert.match(html, /Wednesday, November 11/);
-  assert.match(html, /Thursday, November 12, 2026/);
+  assert.match(html, /Wednesday, January 6/);
+  assert.match(html, /Thursday, January 7, 2027/);
   assert.match(html, /7 PM Central/);
   assert.match(html, /href="\/dashboard"/);
   assert.match(html, /value="https:\/\/www.kingdomintel.com\/"/);
