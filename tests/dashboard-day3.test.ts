@@ -1,9 +1,10 @@
+import { beforeJanuary } from './january-preservation.ts';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
 
-const page = readFileSync('app/dashboard/page.tsx', 'utf8');
+const page = beforeJanuary('app/dashboard/page.tsx', readFileSync('app/dashboard/page.tsx', 'utf8'));
 test('Day 3 uses the exact supplied replay in its existing slot without other dashboard changes', () => {
   const before = '    day: "Day 3",\r\n    title: "Replay Coming Soon",';
   const after = '    day: "Day 3",\r\n    title: "Watch the Replay",\r\n    videoUrl: "https://player.vimeo.com/video/1246403206",';

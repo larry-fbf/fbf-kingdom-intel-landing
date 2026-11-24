@@ -9,12 +9,12 @@ import ts from "typescript";
 import { launchEnv } from "./launch-fixture.ts";
 const require = createRequire(import.meta.url);
 const PERSON = "11111111-1111-4111-8111-111111111111";
-const EVENT = launchEnv.KI_NOVEMBER_2026_ATTIO_EVENT_OPTION_ID;
+const EVENT = launchEnv.KI_JANUARY_2027_ATTIO_EVENT_OPTION_ID;
 const payload = { email: " Alex@customer.invalid ", firstName: " Alex ", lastName: " Rivera ", phone: "3122346789", agreed: true, timeZone: "America/Chicago" };
 
 // Execute the real handler and helpers, replacing only the network boundary and
 // environment. No real credentials, requests, CRM writes, or messages are used.
-function harness({ configured = true, events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false, zoomStatus = "registered", zoomThrows = false, smsResponse = '{"code":1}', smsStatus = 200, smsList = launchEnv.KI_NOVEMBER_2026_SIMPLETEXTING_LIST_ID } = {}) {
+function harness({ configured = true, events = ["Earlier event"], failPatch = false, failBrevo = false, failAttio = false, zoomStatus = "registered", zoomThrows = false, smsResponse = '{"code":1}', smsStatus = 200, smsList = launchEnv.KI_JANUARY_2027_SIMPLETEXTING_LIST_ID } = {}) {
   const calls: { url: string; method: string; body: any }[] = [];
   const state = { events: [...events], registered: "Legacy event" };
   const warnings: unknown[][] = [];
@@ -38,14 +38,14 @@ function harness({ configured = true, events = ["Earlier event"], failPatch = fa
       assert.equal(method, "POST");
       assert.equal(new Headers(init.headers).get("Content-Type"), "application/x-www-form-urlencoded");
       // Legacy v1 requires the exact list name, not its v2 ID.
-      if (body.group !== "K.I.M. - Nov 2026") return Response.json({ code: -600, message: "Invalid list name" });
-      assert.ok(String(init.body).includes("group=K.I.M.+-+Nov+2026"));
+      if (body.group !== "K.I.M. - Jan 2027") return Response.json({ code: -600, message: "Invalid list name" });
+      assert.ok(String(init.body).includes("group=K.I.M.+-+Jan+2027"));
       assert.deepEqual(Object.keys(body).sort(), ["comment", "email", "firstName", "group", "lastName", "phone", "token"].sort(), "no subscription reset or other mutation fields");
       return new Response(smsResponse, { status: smsStatus });
     }
     throw new Error(`Unexpected network request blocked: ${method} ${url}`);
   };
-  const env = { ...(configured ? { ...launchEnv, KI_NOVEMBER_2026_SIMPLETEXTING_LIST_ID: smsList } : {}), ATTIO_API_KEY: "test-only", BREVO_API_KEY: "test-only", SIMPLETEXTING_API_KEY: "test-only", REGISTRATION_CONFIRMATION_SECRET: "test-only-confirmation-secret", NODE_ENV: "production" };
+  const env = { ...(configured ? { ...launchEnv, KI_JANUARY_2027_SIMPLETEXTING_LIST_ID: smsList } : {}), ATTIO_API_KEY: "test-only", BREVO_API_KEY: "test-only", SIMPLETEXTING_API_KEY: "test-only", REGISTRATION_CONFIRMATION_SECRET: "test-only-confirmation-secret", NODE_ENV: "production" };
   function load(file: string): any {
     if (file.endsWith("/zoom-runtime.ts")) return { registerWebsiteZoom: async (contact: any) => {
       calls.push({ url: "zoom-service-fixture", method: "SERVICE", body: contact });
@@ -77,9 +77,9 @@ test("registration creates a Person and fulfills registration without creating a
   assert.equal(person.body.data.values.name[0].full_name, "Alex Rivera");
   assert.equal(person.body.data.values.phone_numbers[0].original_phone_number, "+13122346789");
   assert.equal(person.body.data.values.time_zone, "America/Chicago");
-  assert.ok(h.calls.some(c => c.method === "PUT" && c.url === "https://api.attio.com/v2/lists/0be88ec0-42a9-4169-bdbc-fd47a86fbcdb/entries" && c.body.data.parent_record_id === PERSON));
-  assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.group === "K.I.M. - Nov 2026"));
-  assert.ok(h.calls.some(c => c.url.includes("brevo.com") && c.body.listIds.includes(26)));
+  assert.ok(h.calls.some(c => c.method === "PUT" && c.url === "https://api.attio.com/v2/lists/dd7e0de7-26c7-43a8-b319-ea4b5f454e3c/entries" && c.body.data.parent_record_id === PERSON));
+  assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.group === "K.I.M. - Jan 2027"));
+  assert.ok(h.calls.some(c => c.url.includes("brevo.com") && c.body.listIds.includes(32)));
   assert.ok(h.calls.some(c => c.url.includes("simpletexting.com") && c.body.phone === "+13122346789"));
   assert.match(response.headers.get("set-cookie"), /HttpOnly/i);
   assert.match(response.headers.get("set-cookie"), /Path=\/;/i);
@@ -181,7 +181,7 @@ test("SimpleTexting XML success remains supported", async () => {
   assert.equal((await (await h.post()).json()).degraded, false);
 });
 
-for (const smsList of ['6ab168890bb25491ec9be684', '6ab168287c960c8a3dff232c', 'K.I.M. - Nov 2026']) {
+for (const smsList of ['6b05bd2600965d56b50966ae', '6ab168287c960c8a3dff232c', 'K.I.M. - Jan 2027']) {
   test(`SMS cohort validation rejects ${smsList} before any provider`, async () => {
     const h = harness({ smsList });
     assert.equal((await h.post()).status, 503);

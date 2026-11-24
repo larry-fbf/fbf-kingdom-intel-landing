@@ -16,14 +16,14 @@ test('runtime needs explicit server-only credentials and target, never a default
 
 for (const target of [
  { occurrenceId: '1793901600000', startTime: '2026-11-05T18:00:00Z' },
- { occurrenceId: '1794506400000', startTime: '2026-11-05T18:00:00Z' },
- { occurrenceId: '1793901600000', startTime: '2026-11-12T18:00:00Z' },
+ { occurrenceId: '1799344800000', startTime: '2026-11-05T18:00:00Z' },
+ { occurrenceId: '1793901600000', startTime: '2027-01-07T18:00:00Z' },
 ]) {
  test(`runtime rejects stale or mismatched final occurrence ${JSON.stringify(target)}`, async () => {
   const original = globalThis.fetch; let calls = 0;
   globalThis.fetch = async () => { calls++; throw Error('blocked'); };
   try {
-   const env = { ZOOM_ACCOUNT_ID: 'fixture', ZOOM_CLIENT_ID: 'fixture', ZOOM_CLIENT_SECRET: 'fixture', ZOOM_SIGNUP_TARGET: JSON.stringify({ webinarId: '81823603475', topic: 'Kingdom Intelligence Masterclass', timezone: 'America/Chicago', ...target }) };
+   const env = { ZOOM_ACCOUNT_ID: 'fixture', ZOOM_CLIENT_ID: 'fixture', ZOOM_CLIENT_SECRET: 'fixture', ZOOM_SIGNUP_TARGET: JSON.stringify({ webinarId: '87364502476', topic: 'Kingdom Intelligence Masterclass', timezone: 'America/Chicago', ...target }) };
    assert.deepEqual(await registerWebsiteZoom(contact, env), { status: 'unavailable' });
    assert.equal(calls, 0);
   } finally { globalThis.fetch = original; }

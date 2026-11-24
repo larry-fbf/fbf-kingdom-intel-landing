@@ -1,3 +1,4 @@
+import { beforeJanuary } from './january-preservation.ts';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
@@ -11,7 +12,7 @@ test('gold actions and accents restore original gradient and keep only VIP title
  assert.doesNotMatch(css,/#cc0000|rgba\(204, 0, 0/);
  assert.match(css,/\.topAnnouncement, \.accessLine, \.supportingLine \{ text-transform: none; \}/);
 });
-const page=readFileSync('app/vip/VIPUpsellPage.tsx','utf8');
+const page=beforeJanuary('app/vip/VIPUpsellPage.tsx', readFileSync('app/vip/VIPUpsellPage.tsx','utf8'));
 test('bonuses contain masterclass replays, unchanged audit, then VIP recordings',()=>{
  const bonuses=page.match(/const bonuses = \[([\s\S]*?)\];/)![1];
  assert.deepEqual([...bonuses.matchAll(/title: "([^"]+)"/g)].map(m=>m[1]),[

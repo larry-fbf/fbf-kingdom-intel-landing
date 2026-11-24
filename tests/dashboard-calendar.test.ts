@@ -8,7 +8,7 @@ I am so excited to see you registered for our 3 day Kingdom Intel Masterclass!!
 
 This 3-day event will happen LIVE by Zoom. Accepting this invite will add our free event to your Google calendar so you can make sure you don't miss anything!\u0020
 
-If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_PljsUSceQdWHip96F1O18g
+If you haven't already recieved an email from zoom for the masterclass, here is the link: https://us02web.zoom.us/webinar/register/WN_ZwyUtBhmTzeerZ1Wy9LLPw
 
 Important details:
 
@@ -47,9 +47,9 @@ test('ICS has one valid, stable recurring event with CRLF, folded lines and esca
   const uids = new Set();
   events.forEach(([_, event], i) => {
     const fields = Object.fromEntries(event.trim().split('\r\n').map((line: string) => { const at=line.indexOf(':'); return [line.slice(0,at),line.slice(at+1)]; }));
-    assert.equal(fields.DTSTART, `202611${10+i}T180000Z`);
-    assert.equal(fields.DTEND, `202611${10+i}T190000Z`);
-    assert.equal(fields.UID, 'kingdom-intelligence-20261110-series@kingdomintel.com');
+    assert.equal(fields.DTSTART, '20270105T180000Z');
+    assert.equal(fields.DTEND, '20270105T190000Z');
+    assert.equal(fields.UID, 'kingdom-intelligence-20270105-series@kingdomintel.com');
     assert.equal(fields.RRULE, 'FREQ=DAILY;COUNT=3');
     assert.match(fields.DTSTAMP, /^\d{8}T\d{6}Z$/);
     assert.equal(fields.URL, calendar.dashboardUrl);
@@ -85,7 +85,7 @@ test('calendar endpoint delivers an inline handoff containing the generated cale
   const response = GET();
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('content-type'), 'text/calendar; charset=utf-8');
-  assert.equal(response.headers.get('content-disposition'), 'inline; filename="kingdom-intelligence-november-2026.ics"');
+  assert.equal(response.headers.get('content-disposition'), 'inline; filename="kingdom-intelligence-january-2027.ics"');
   assert.equal(await response.text(), calendarIcs());
 });
 
@@ -94,7 +94,7 @@ test('Google URL carries the recurring series with Chicago timezone', async () =
   assert.ok(existsSync(moduleUrl), 'calendar module must exist');
   const { googleCalendarUrl } = await import(moduleUrl.href);
   {
-    const session = { start: '20261110T180000Z', end: '20261110T190000Z', title: 'Kingdom Intelligence Masterclass' };
+    const session = { start: '20270105T180000Z', end: '20270105T190000Z', title: 'Kingdom Intelligence Masterclass' };
     const url = new URL(googleCalendarUrl());
     assert.equal(url.origin + url.pathname, 'https://calendar.google.com/calendar/r/eventedit');
     assert.equal(url.searchParams.get('action'), 'TEMPLATE');

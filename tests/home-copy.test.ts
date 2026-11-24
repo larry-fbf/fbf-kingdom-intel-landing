@@ -1,10 +1,11 @@
+import { beforeJanuary } from './january-preservation.ts';
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import test from "node:test";
 import { beforeWelcome } from './welcome-preservation.ts';
 
-const page = readFileSync("app/page.tsx", "utf8");
+const page = beforeJanuary('app/page.tsx', readFileSync("app/page.tsx", "utf8"));
 const first = "For 7- and 8-figure business owners and leaders ready to grow without compromising how God has called them to lead.";
 const second = "Combine spirit-led strategy, operational excellence, and AI-powered execution to build your next stage of growth.";
 

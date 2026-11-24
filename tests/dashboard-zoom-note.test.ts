@@ -1,8 +1,9 @@
+import { beforeJanuary } from './january-preservation.ts';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-const source = readFileSync(new URL('../app/dashboard/page.tsx', import.meta.url), 'utf8');
+const source = beforeJanuary('app/dashboard/page.tsx', readFileSync(new URL('../app/dashboard/page.tsx', import.meta.url), 'utf8'));
 
 test('live-room CTA retains registration and tracking, with the exact small grey email note directly beneath it', () => {
   assert.match(source, /const ZOOM_URL = "https:\/\/us02web\.zoom\.us\/webinar\/register\/WN_PljsUSceQdWHip96F1O18g";/);

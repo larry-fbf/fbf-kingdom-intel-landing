@@ -22,7 +22,7 @@ export default function AddToCalendar() {
         <div className="action-meta"><span className="action-step">Step 1</span></div>
         <p className="action-eyebrow">Calendar</p>
         <h2 className="action-title" id="calendar-title">Add to Calendar</h2>
-        <p className="action-detail">November 10–12, 2026<br />12–1 PM Central each day.</p>
+        <p className="action-detail">January 5–7, 2027<br />12–1 PM Central each day.</p>
       </div>
       <details>
         <summary className="action-cta">Add to Calendar</summary>

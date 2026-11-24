@@ -2,11 +2,12 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import test from "node:test";
+import { beforeJanuary } from "./january-preservation.ts";
 import { beforeVIPHierarchy } from './vip-hierarchy-preservation.ts';
 import { beforeVIPCopyOrder } from './vip-copy-order-preservation.ts';
 
 const file = "app/vip/VIPUpsellPage.tsx";
-const page = readFileSync(file, "utf8");
+const page = beforeJanuary(file, readFileSync(file, "utf8"));
 const base = "d91cad832fb015864c9a052b78de6e0769fe0dcb";
 const baseline = execFileSync("git", ["show", `${base}:${file}`], { encoding: "utf8" });
 

@@ -25,7 +25,7 @@ const bonuses = [
 ];
 
 const vipIncludes = [
-  "Two live VIP rooms on November 11th and 12th at 7pm CT on Zoom",
+  "Two live VIP rooms on January 6th and 7th at 7pm CT on Zoom",
   "Direct coaching and feedback from Larry, Staci, and the CEO Mentor team",
   "A chance to bring your specific life, business, offer, messaging, sales, and operations questions",
 ];
@@ -78,7 +78,7 @@ function OfferCard() {
     <aside className={styles.offerCard} aria-label="VIP offer">
       <p className={styles.offerKicker}>Limited time offer</p>
       <h2>VIP Mastermind</h2>
-      <p className={styles.offerSubtitle}>Live 1 x 1 training with direct coaching on November 11th and 12th at 7pm CT on Zoom.</p>
+      <p className={styles.offerSubtitle}>Live 1 x 1 training with direct coaching on January 6th and 7th at 7pm CT on Zoom.</p>
       <div className={styles.todayBox}>
         <span>Normally $2,997</span>
         <strong>Only $97</strong>
@@ -159,9 +159,9 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
         <div className={styles.container}>
           <div className={styles.twoColumn}>
             <div className={styles.copyStack}>
-              <h2>Get personal coaching inside the November 11th and 12th VIP rooms.</h2>
+              <h2>Get personal coaching inside the January 6th and 7th VIP rooms.</h2>
               <p>
-                When you upgrade now, you get access to the VIP rooms on November 11th and 12th at 7pm CT on Zoom
+                When you upgrade now, you get access to the VIP rooms on January 6th and 7th at 7pm CT on Zoom
                 where your specific questions can be answered in real time. No matter the product,
                 service, or offer, the goal is to help you lead with certainty, operate with Kingdom
                 authority, and multiply your impact like never before.
@@ -274,7 +274,7 @@ export default function VIPUpsellPage({ context = "vip" }: VIPUpsellPageProps) {
           <p className={styles.eyebrowGold}>Do not miss out</p>
           <h2>Upgrade to VIP for $97.</h2>
           <p>
-            Join the VIP rooms on November 11th and 12th at 7pm CT on Zoom, bring your real questions, and get
+            Join the VIP rooms on January 6th and 7th at 7pm CT on Zoom, bring your real questions, and get
             lifetime access to the Kingdom Intelligence Masterclass replays so you can keep moving after the live
             event.
           </p>

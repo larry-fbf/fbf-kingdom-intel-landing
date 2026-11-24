@@ -57,9 +57,9 @@ test('transient attribution and reordered fields do not bypass retry identity',a
 test('Attio failures are not success',async()=>{
  for(const h of [harness(false),harness(true,'matching_attribute'),harness(true,'/records/person'),harness(true,'/notes')]) {const r=await h.post();assert.equal(r.status,503);assert.equal((await r.json()).ok,false);}
 });
-test('workbook additively appends the existing November option',async()=>{
+test('workbook additively appends January without removing event history',async()=>{
  const h=harness();assert.equal((await h.post()).status,200);
- assert.deepEqual([...h.events],['earlier-event','e4039e80-b639-4481-b24d-c00aa5b6390d']);
+ assert.deepEqual([...h.events],['earlier-event','031718af-253b-44c8-9c5f-20875993a3f7']);
 });
 
 test('removed connection question is absent from UI and submitted form state',()=>{
@@ -77,11 +77,20 @@ test('omitted connection succeeds without obsolete downstream summary rows',asyn
  assert.deepEqual(h.counts(),{notes:1,slack:1});
 });
 
-test('legacy empty connection and omission retain the pinned historical delivery key',async()=>{
+test('January delivery leaves historical November ledger receipts untouched',async()=>{
+ const h=harness();
+ const old='7c496ac27419e156f6d28563808d77ded5ffa15cb8373e3ca5074f8b8a1d80c1:note';
+ const receipt={id:{entry_id:old},entry_values:{delivery_key:[{value:old}],delivery_state:[{value:'delivered'}]}};
+ h.ledger.set(old,receipt); const snapshot=JSON.stringify(receipt);
+ await h.post();await h.post();
+ assert.equal(JSON.stringify(h.ledger.get(old)),snapshot);
+ assert.equal(h.ledger.size,3);assert.deepEqual(h.counts(),{notes:1,slack:1});
+});
+test('empty connection and omission share the new January delivery key',async()=>{
  const h=harness();await h.post({...payload,sessionConnectionPreference:''} as typeof payload);await h.post();
  assert.deepEqual([...h.ledger.keys()].sort(),[
-  '7c496ac27419e156f6d28563808d77ded5ffa15cb8373e3ca5074f8b8a1d80c1:note',
-  '7c496ac27419e156f6d28563808d77ded5ffa15cb8373e3ca5074f8b8a1d80c1:slack',
+  '6897c8e53ba299488d2b69b4d06fafeec0dbc7fb8cd594b4ca76844b68b63064:note',
+  '6897c8e53ba299488d2b69b4d06fafeec0dbc7fb8cd594b4ca76844b68b63064:slack',
  ]);
  assert.deepEqual(h.counts(),{notes:1,slack:1});
 });
@@ -125,6 +134,6 @@ for (const monthlyIncomeRange of householdRanges) {
   assert.deepEqual(Object.keys(person).sort(),['email_addresses','name','phone_numbers']);
   const entry=h.requests.find(r=>r.url.includes('/lists/')&&!r.url.includes('delivery_ledger'))!;
   assert.deepEqual(entry.body.data.entry_values,{});
-  assert.deepEqual([...h.events],['earlier-event','e4039e80-b639-4481-b24d-c00aa5b6390d']);
+  assert.deepEqual([...h.events],['earlier-event','031718af-253b-44c8-9c5f-20875993a3f7']);
  });
 }

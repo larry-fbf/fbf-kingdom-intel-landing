@@ -13,7 +13,7 @@ function config() {
 }
 test('launch config rejects missing, legacy-only, and unverified cohort mappings', () => {
   const {getLaunchConfig} = config();
-  for (const env of [{}, {ATTIO_MASTERCLASS_LIST_ID:'old',BREVO_MASTERCLASS_LIST_ID:'19'}, {KI_NOVEMBER_2026_VERIFIED:'true'}]) {
+  for (const env of [{}, {ATTIO_MASTERCLASS_LIST_ID:'old',BREVO_MASTERCLASS_LIST_ID:'19'}, {KI_JANUARY_2027_VERIFIED:'true'}]) {
     assert.equal(getLaunchConfig('regular',env),null);
     assert.equal(getLaunchConfig('vip',env),null);
   }
@@ -21,6 +21,6 @@ test('launch config rejects missing, legacy-only, and unverified cohort mappings
 
 test('well-formed but wrong cohort IDs fail closed', () => {
  const {getLaunchConfig}=config();
- const env={KI_NOVEMBER_2026_VERIFIED:'november-2026',KI_NOVEMBER_2026_ATTIO_LIST_ID:'11111111-2222-4333-8444-555555555555',KI_NOVEMBER_2026_ATTIO_EVENT_OPTION_ID:'e4039e80-b639-4481-b24d-c00aa5b6390d',KI_NOVEMBER_2026_BREVO_LIST_ID:'26',KI_NOVEMBER_2026_SIMPLETEXTING_LIST_ID:'6ab168287c960c8a3dff232b'};
+ const env={KI_JANUARY_2027_VERIFIED:'january-2027',KI_JANUARY_2027_ATTIO_LIST_ID:'11111111-2222-4333-8444-555555555555',KI_JANUARY_2027_ATTIO_EVENT_OPTION_ID:'031718af-253b-44c8-9c5f-20875993a3f7',KI_JANUARY_2027_BREVO_LIST_ID:'32',KI_JANUARY_2027_SIMPLETEXTING_LIST_ID:'6b05bd3e9a5e81ffa61b9352'};
  assert.equal(getLaunchConfig('regular',env),null);
 });
