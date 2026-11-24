@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import WorkshopLanding from "./WorkshopLanding";
 const title = "Build Without Borrowing | Kingdom Intelligence Workshop";
-const description = "Build your business through wise counsel, trusted relationships, and the resources you already have.";
+const description = "Build Without Borrowing with Payton Wallace. A workshop for Kingdom entrepreneurs on wise counsel, trusted relationships, and resources already in your hands.";
 export const metadata: Metadata = {
   title, description,
   alternates: { canonical: "https://www.kingdomintel.com/workshop" },

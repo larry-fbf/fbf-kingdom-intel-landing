@@ -41,7 +41,7 @@ const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "Mi
 const requiredWorkshopMarkers = [
   "Build Without Borrowing",
   "Build your business through wise counsel, trusted relationships, and the resources you already have.",
-  "Registration is not open.",
+  "Registration is not open yet.",
   "payton-wallace-host.webp",
 ];
 

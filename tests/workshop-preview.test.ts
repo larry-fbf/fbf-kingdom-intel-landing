@@ -31,6 +31,9 @@ test('invitation teases benefits without publishing teaching or membership pitch
  assert.doesNotMatch(html,/OPM|OPW|seven.day|Network|Accelerator|B\.O\.O\.M|worksheet|black book|Leading the invitation|Rifle Focus|S\.W\.E\.E\.T/i);
  const words=html.replace(/<[^>]*>/g,' ').trim().split(/\s+/).length;
  assert.ok(words<600, `Invitation must be concise; found ${words} words`);
- assert.match(html,/A clearer way forward/);
- assert.ok((html.match(/href="#registration"/g)||[]).length>=3);
+ assert.match(html,/Spirit-led wisdom/);
+ assert.match(html,/Stewardship starts/);
+ assert.match(html,/Registration is not open yet/);
+ assert.doesNotMatch(html,/<button|<input|<form|heroStrip|Registration coming soon|To be confirmed|Implementation notes|Source phrase mapping/);
+ assert.equal((html.match(/href="#registration"/g)||[]).length,2);
 });
