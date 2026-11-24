@@ -25,3 +25,12 @@ test('workshop presents approved title, subtitle and sole teacher with a non-sub
  assert.doesNotMatch(html,/Andy|October|Oct 13|2026-10-13|Called But Stuck|\$997|\$197|<form|<iframe|type="submit"|Limited seats|Free live/i);
  assert.doesNotMatch(readFileSync('app/workshop/WorkshopLanding.tsx','utf8'),/fetch\(|\/api\/|window.location|trackClarity|fbq/);
 });
+
+test('invitation teases benefits without publishing teaching or membership pitch',()=>{
+ const html=render('app/workshop/WorkshopLanding.tsx');
+ assert.doesNotMatch(html,/OPM|OPW|seven.day|Network|Accelerator|B\.O\.O\.M|worksheet|black book|Leading the invitation|Rifle Focus|S\.W\.E\.E\.T/i);
+ const words=html.replace(/<[^>]*>/g,' ').trim().split(/\s+/).length;
+ assert.ok(words<600, `Invitation must be concise; found ${words} words`);
+ assert.match(html,/A clearer way forward/);
+ assert.ok((html.match(/href="#registration"/g)||[]).length>=3);
+});

@@ -43,6 +43,10 @@
 .small { font-size:13px; line-height:1.7; }
 .sectionHeading { max-width:730px; margin-bottom:44px; }
 .sectionHeading>p:last-child { color:#bdbdbd; margin-top:20px; }
+.benefits { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px; }
+.benefits article { border-top:2px solid var(--red); padding-top:24px; }
+.benefits p { color:#bdbdbd; margin-top:16px; }
+@media(max-width:768px) { .benefits { grid-template-columns:1fr; gap:28px; } }
 .lessons { display:grid; grid-template-columns:1fr 1fr; gap:38px 64px; }
 .lessons article { border-top:1px solid #454545; padding-top:26px; display:grid; grid-template-columns:44px 1fr; gap:18px; }
 .number { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--gold); line-height:1; }
