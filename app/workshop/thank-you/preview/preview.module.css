@@ -1,0 +1,17 @@
+.page{min-height:100svh;background:#faf8f5;color:#231e1c;padding:20px 24px;display:flex;flex-direction:column;font-family:Arial,sans-serif;text-align:center;box-sizing:border-box}
+.notice{margin:0;font-size:12px;line-height:1.5;color:#625b56}
+.content{width:100%;max-width:640px;margin:auto; padding:28px 0 12px}
+.logo{object-fit:contain;filter:brightness(0);margin:0 auto 20px;display:block}
+.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:11px;line-height:1.5;font-weight:700;color:#8c1717;margin:0 0 16px}
+.content h1{font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-.035em;margin:0 0 20px;font-weight:800;color:#231e1c}
+.content h1 span{color:#b80000}
+.intro{font-size:18px;line-height:1.5;margin:0;color:#514943}
+.schedule{margin:22px 0;font-size:16px;font-weight:700;line-height:1.6;color:#231e1c}
+.button{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:14px 28px;background:#c00;border:0;border-radius:5px;color:#fff;font:700 16px Arial,sans-serif;cursor:pointer}
+.button:hover{background:#a80000}
+.email{font-size:15px;line-height:1.6;color:#625b56;margin:24px 0 8px}.email strong{color:#332c27;font-weight:600}
+.back{display:inline-flex;align-items:center;min-height:44px;color:#625b56;font-size:13px;text-underline-offset:4px}
+.calendar{position:fixed;inset:0;margin:auto;width:min(300px,calc(100vw - 32px));max-height:calc(100svh - 32px);overflow:auto;padding:20px;background:#fff;color:#231e1c;border:1px solid #ded7cf;border-radius:10px;box-shadow:0 16px 60px #34251c33;text-align:center;box-sizing:border-box}
+.calendar::backdrop{background:#231e1c33}.calendar p{font-weight:700;margin:0 0 10px}.calendar a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px;color:#a80000;text-decoration:underline;text-underline-offset:3px;font-size:15px}.calendar a:hover{background:#faf8f5}.calendar small{display:block;margin:12px 0;color:#625b56;line-height:1.5}.calendar button{min-height:44px;background:#faf8f5;border:1px solid #ded7cf;border-radius:4px;padding:8px 22px;color:#231e1c;font:inherit;cursor:pointer}
+.page a:focus-visible,.page button:focus-visible{outline:3px solid #8c1717;outline-offset:4px}
+@media(max-height:650px){.page{padding:12px 18px}.content{padding:16px 0 0}.logo{width:48px;height:42px;margin-bottom:14px}.eyebrow{margin-bottom:12px;font-size:10px}.content h1{font-size:32px;margin-bottom:14px}.intro{font-size:16px}.schedule{margin:16px 0;font-size:15px}.email{margin-top:18px;font-size:14px}}

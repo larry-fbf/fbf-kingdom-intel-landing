@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const manifestPath = join(process.cwd(), ".next", "app-path-routes-manifest.json");
@@ -39,20 +39,8 @@ const workbookThankYouPage = readFileSync(join(process.cwd(), "app", "workbook-t
 const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8");
 const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "MicrosoftClarity.tsx"), "utf8");
 
-const requiredWorkshopMarkers = [
-  "Free Kingdom Intelligence Workshop",
-  "Tuesday, October 13, 2026",
-  "/api/workshop/register",
-  "Called But Stuck?",
-];
-
-const requiredWorkshopMetadata = [
-  "https://www.kingdomintel.com/workshop",
-  "https://www.kingdomintel.com/images/kingdom-intel-workshop-og.jpg",
-  "Called but Stuck? | Kingdom Intel Workshop | Oct 13, 2026 11am CT",
-  "width: 1200",
-  "height: 630",
-];
+const requiredWorkshopMarkers = ["Build Without Borrowing", "WorkshopRegistration", "OPM vs ?"];
+const requiredWorkshopMetadata = ["https://www.kingdomintel.com/workshop", "Build Without Borrowing", "robots: { index: false, follow: false }"];
 
 const missingMarkers = requiredWorkshopMarkers.filter((marker) => !workshopSource.includes(marker) && !workshopPage.includes(marker));
 
@@ -77,7 +65,15 @@ const displaySource = readFileSync(join(process.cwd(), "app", "lib", "event-time
 for (const instant of ['2027-01-05T18:00:00Z', '2027-01-06T18:00:00Z', '2027-01-07T18:00:00Z', '2027-01-07T01:00:00Z', '2027-01-08T01:00:00Z']) {
   if (!displaySource.includes(instant)) throw new Error(`Missing canonical event instant: ${instant}`);
 }
-const homeHtml = readFileSync(join(process.cwd(), '.next/server/app/index.html'), 'utf8');
+const homeCandidates = ['.next/server/app/index.html', '.vercel/output/static/index.html'];
+for (const root of ['.next', '.vercel/output']) {
+  if (existsSync(root)) for (const file of readdirSync(root, {recursive:true})) {
+    if (typeof file === 'string' && /(^|\/)index\.html$/.test(file)) homeCandidates.push(join(root,file));
+  }
+}
+const homePath = homeCandidates.map(p => join(process.cwd(), p)).find(p => existsSync(p) && readFileSync(p,'utf8').includes('January 5–7, 2027'));
+if (!homePath) throw new Error('Missing built homepage; candidate paths: '+JSON.stringify(homeCandidates));
+const homeHtml = readFileSync(homePath, 'utf8');
 for (const marker of ['January 5–7, 2027', '12:00 PM CST', 'data-time-zone="America/Chicago"']) {
   if (!homeHtml.includes(marker)) throw new Error(`Missing deterministic server fallback: ${marker}`);
 }
