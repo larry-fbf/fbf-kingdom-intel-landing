@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 const manifestPath = join(process.cwd(), ".next", "app-path-routes-manifest.json");
@@ -65,7 +65,10 @@ const displaySource = readFileSync(join(process.cwd(), "app", "lib", "event-time
 for (const instant of ['2027-01-05T18:00:00Z', '2027-01-06T18:00:00Z', '2027-01-07T18:00:00Z', '2027-01-07T01:00:00Z', '2027-01-08T01:00:00Z']) {
   if (!displaySource.includes(instant)) throw new Error(`Missing canonical event instant: ${instant}`);
 }
-const homeHtml = readFileSync(join(process.cwd(), '.next/server/app/index.html'), 'utf8');
+const homeCandidates = ['.next/server/app/index.html', '.vercel/output/static/index.html'];
+const homePath = homeCandidates.map(p => join(process.cwd(), p)).find(p => existsSync(p));
+if (!homePath) throw new Error('Missing built homepage in Next or Vercel output');
+const homeHtml = readFileSync(homePath, 'utf8');
 for (const marker of ['January 5–7, 2027', '12:00 PM CST', 'data-time-zone="America/Chicago"']) {
   if (!homeHtml.includes(marker)) throw new Error(`Missing deterministic server fallback: ${marker}`);
 }
