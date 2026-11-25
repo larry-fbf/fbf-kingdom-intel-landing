@@ -4,14 +4,14 @@ import WorkshopRegistration from "./WorkshopRegistration";
 
 const outcomes = [
  {title:"Recognize what you already have.",body:"Discover practical possibilities for the business you’re building before assuming another loan is the answer."},
- {title:"Build with Kingdom perspective.",body:"Consider your growth decisions through faith, wise counsel, and stewardship."},
- {title:"Turn a connection into a next step.",body:"Begin a focused action plan for building relationships with intention, not simply collecting more contacts."},
+ {title:"Build with Kingdom perspective.",body:"Consider your growth decisions through faith and stewardship."},
+ {title:"See a different way forward.",body:"Explore possibilities for your business before making debt the plan."},
 ];
 const faqs = [
- {q:"I’ve attended the masterclass. Why join this workshop?",a:"The masterclass gives you a broader Kingdom perspective on life and business. This workshop puts the focus on one practical business challenge: how to move forward through wise counsel, trusted relationships, and resources already within reach."},
+ {q:"I’ve attended the masterclass. Why join this workshop?",a:"The masterclass gives you a broader Kingdom perspective on life and business. This workshop focuses on one practical challenge: building your God-sized vision without making debt the plan."},
  {q:"Is this for me if I’m just getting started?",a:"Yes. Whether you’re building an established company or carrying a God-sized vision you haven’t launched, come explore building business God’s way. You do not need to have attended a masterclass."},
  {q:"What should I bring?",a:"Bring a business challenge you’re facing, something to take notes with, and a willingness to consider a different way forward."},
- {q:"Is this a loan or debt-relief program?",a:"No. This is a business workshop about wise counsel, relationships, and stewardship, not a financing offer or personal financial advice."},
+ {q:"Is this a loan or debt-relief program?",a:"No. This is a business workshop about building business God’s way, not a financing offer or personal financial advice."},
 ];
 // Verbatim first-party homepage testimonials; broader FBF, not this workshop.
 const testimonials = [
@@ -33,14 +33,14 @@ export default function WorkshopLanding(){
     <div className={styles.heroCopy}><p className={styles.eyebrow}>Kingdom Intelligence Workshop</p>
      <h1 id="workshop-title" aria-label="Build Without Borrowing"><span>Build</span>{" "}<span>Without</span>{" "}<span>Borrowing</span></h1>
      <div className={styles.divider} />
-     <p className={styles.subtitle}>A God-sized vision shouldn’t feel out of reach because of debt.</p>
+     <p className={styles.subtitle}>Debt shouldn’t stop your God-sized vision.</p>
      <InvitationButton />
      <p className={styles.schedule}><WorkshopTime /></p>
     </div>
    </div>
   </section>
   <section data-section="event-details" id="workshop-content" className={styles.light}><div className={styles.intro}>
-   <h2>A God-sized vision. A business to build. Does debt feel like the only way?</h2>
+   <h2>Do you have a business to build but feel like debt is the only way?</h2>
    <p>You see what God has called you to build, but a lack of money or the debt you already carry makes it feel out of reach.</p>
    <div className={styles.eventDetails}><div><small>When</small><strong><WorkshopTime /></strong></div></div>
   </div></section>
@@ -50,13 +50,13 @@ export default function WorkshopLanding(){
    <p className={styles.support}>Borrowing may feel like the obvious next step. This workshop invites you to consider another way.</p><InvitationButton />
   </div></section>
   <section data-section="community-proof" className={styles.proof} aria-labelledby="proof-heading"><div className={styles.container}>
-   <div className={styles.sectionHeading}><p className={styles.eyebrow}>From the Fueled By Fire community</p><h2 id="proof-heading">Business wisdom. Kingdom perspective.</h2><p>These stories describe their broader Fueled By Fire experience, not this workshop or a promised result.</p></div>
+   <div className={styles.sectionHeading}><p className={styles.eyebrow}>From the Fueled By Fire community</p><h2 id="proof-heading">What other people say.</h2><p>These stories describe their broader Fueled By Fire experience, not this workshop or a promised result.</p></div>
    <div className={styles.proofGrid}>{testimonials.slice(0,2).map(person=><Testimonial key={person.name} person={person} />)}</div>
   </div></section>
   <section data-section="your-host" id="your-host" className={styles.host} aria-labelledby="host-heading">
    <div className={styles.hostPhoto}><img src="/images/payton-wallace-host.webp" alt="Payton Wallace, workshop host" width="1400" height="934" loading="lazy" /></div>
    <div className={styles.hostCopy}><p className={styles.eyebrow}>Your host</p><h2 id="host-heading">Payton Wallace</h2><p className={styles.hostAffiliation}>Fueled By Fire</p><div className={styles.divider} />
-    <h3>Build with counsel.<br />Not in isolation.</h3><p>Join Payton to explore how wise counsel and trusted relationships can help you build the business God has put in your hands.</p><p>Your business is a mission field. How you build it matters.</p><InvitationButton />
+    <p>Your business is a mission field. How you build it matters.</p><InvitationButton />
    </div>
   </section>
   <section data-section="conviction" className={styles.conviction}><h2>“Commit your work to the LORD, and your plans will be established.”</h2><div className={styles.divider} /><p>Proverbs 16:3</p></section>
