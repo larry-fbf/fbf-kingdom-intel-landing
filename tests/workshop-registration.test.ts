@@ -1,62 +1,11 @@
-import assert from "node:assert/strict";
-import test from "node:test";
-import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
-import vm from "node:vm";
-import ts from "typescript";
-
-const require = createRequire(import.meta.url);
-const payload = { email: " Registrant@example.invalid ", firstName: "Real", lastName: "Registrant", agreed: false };
-function harness(overrides: Record<string, string> = {}, fail = "") {
-  const calls: { url: string; body: any; method: string }[] = [];
-  const env = {
-    ATTIO_API_KEY: "mock", BREVO_API_KEY: "mock", SIMPLETEXTING_API_KEY: "mock",
-    ATTIO_KI_WORKSHOP_OCTOBER_2026_LIST_ID: "october-attio",
-    BREVO_KI_WORKSHOP_OCTOBER_2026_LIST_ID: "28",
-    ATTIO_KI_WORKSHOP_AUGUST_2026_LIST_ID: "forbidden-august", BREVO_KI_WORKSHOP_AUGUST_2026_LIST_ID: "25",
-    ...overrides,
-  };
-  const fetch = async (url: string, init: RequestInit = {}) => {
-    const body = init.body instanceof URLSearchParams ? Object.fromEntries(init.body) : JSON.parse(String(init.body));
-    calls.push({url,body,method:init.method || "GET"});
-    if (fail && url.includes(fail)) return Response.json({}, { status: 503 });
-    if (url.includes("/objects/people/records")) return Response.json({ data: { id: { record_id: "person-id" } } });
-    if (url.includes("simpletexting.com")) return Response.json({code: 1});
-    return Response.json({data:{}});
-  };
-  const module = { exports: {} as any };
-  const code = ts.transpileModule(readFileSync("app/api/workshop/register/route.ts", "utf8"), {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
-  vm.runInNewContext(code, {module,exports:module.exports,require,process:{env},fetch,Response,URLSearchParams,console:{error:()=>{}}});
-  return {calls,post:(body: any=payload)=>module.exports.POST(new Request("https://local.invalid/api/workshop/register",{method:"POST",body:JSON.stringify(body)}))};
-}
-
-test("October workshop signup enrolls only in the separate October lists without changing opt-outs", async () => {
-  const h=harness(); const res=await h.post();
-  assert.equal(res.status,200);
-  assert.ok(h.calls.some(c=>c.url.endsWith("/lists/october-attio/entries")));
-  const brevo=h.calls.find(c=>c.url.includes("brevo.com"))!;
-  assert.deepEqual(brevo.body.listIds,[28]);
-  assert.equal(brevo.body.attributes.WORKSHOP,"Called, But Stuck - October 13, 2026");
-  assert.equal(Object.hasOwn(brevo.body,"emailBlacklisted"),false);
-  assert.equal(Object.hasOwn(brevo.body,"smsBlacklisted"),false);
-  assert.ok(h.calls.every(c=>!c.url.includes("forbidden-august") && !c.url.includes("simpletexting.com")));
-  assert.equal((await res.json()).ok,true);
-});
-
-for (const missing of ["ATTIO_API_KEY", "BREVO_API_KEY", "ATTIO_KI_WORKSHOP_OCTOBER_2026_LIST_ID", "BREVO_KI_WORKSHOP_OCTOBER_2026_LIST_ID"]) {
-  test(`missing ${missing} rejects before any write rather than silently accepting`, async () => {
-    const h=harness({[missing]:""}); const res=await h.post();
-    assert.equal(res.status,503);
-    assert.notEqual((await res.json()).ok,true);
-    assert.equal(h.calls.length,0);
-  });
-}
-for (const fail of ["api.attio.com", "api.brevo.com"]) {
-  test(`${fail} failure is retryable, not a false registration confirmation`, async () => {
-    const h=harness({},fail); const res=await h.post();
-    assert.equal(res.status,503);
-    assert.notEqual((await res.json()).ok,true);
-    assert.ok(h.calls.some(c=>c.url.includes("attio.com")));
-    assert.ok(h.calls.some(c=>c.url.includes("brevo.com")));
-  });
-}
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {register,proof,verified,LIST,EVENT} from '../app/lib/workshop-registration.ts';
+const payload={email:' Test@example.invalid ',firstName:'Test',lastName:'Only'};
+process.env.ATTIO_API_KEY='synthetic';process.env.BREVO_API_KEY='synthetic';process.env.REGISTRATION_CONFIRMATION_SECRET='synthetic-local-only';
+function mock(fail=-1){const calls:any[]=[];const fetcher=async(url:any,init:any)=>{calls.push({url,init,body:init.body?JSON.parse(init.body):null});if(calls.length===fail)throw Error('provider');const bodies=[{data:{id:{record_id:'person'}}},{data:{id:{entry_id:'entry'}}},{data:{parent_record_id:'person'}},{},{listIds:[34]}];return Response.json(bodies[(calls.length-1)%5]);};return {calls,fetcher:fetcher as typeof fetch};}
+test('December registration verifies both memberships without sending, SMS, or history overwrite',async()=>{const h=mock();assert.deepEqual(await register(payload,h.fetcher),{ok:true,event:EVENT});assert.equal(h.calls.length,5);assert.ok(h.calls[1].url.includes(LIST));assert.deepEqual(h.calls[3].body,{email:'test@example.invalid',listIds:[34],updateEnabled:true});assert.equal(h.calls[0].init.method,'PUT');assert.equal(h.calls[1].init.method,'PUT');assert.equal(h.calls[2].init.method,'GET');assert.equal(h.calls[4].init.method,'GET');assert.ok(h.calls.every(c=>!JSON.stringify(c.body).includes('events_registered')));});
+for(let fail=1;fail<=5;fail++)test(`provider step ${fail} failure never succeeds; upsert retry succeeds`,async()=>{const h=mock(fail);await assert.rejects(register(payload,h.fetcher));assert.equal(h.calls.length,fail);const retry=mock();assert.equal((await register(payload,retry.fetcher)).ok,true);});
+for(const value of [null,{}, {email:4}, {...payload,email:'bad'}, {...payload,firstName:' '}, {...payload,lastName:'a'.repeat(101)}])test(`invalid input ${JSON.stringify(value)} has no provider calls`,async()=>{const h=mock();await assert.rejects(register(value,h.fetcher),/validation/);assert.equal(h.calls.length,0);});
+for(const key of ['ATTIO_API_KEY','BREVO_API_KEY','REGISTRATION_CONFIRMATION_SECRET'])test(`missing ${key} has zero calls`,async()=>{const old=process.env[key];delete process.env[key];try{const h=mock();await assert.rejects(register(payload,h.fetcher),/configuration/);assert.equal(h.calls.length,0);}finally{process.env[key]=old;}});
+test('proof is signed, expiring and event bound',()=>{const now=Date.now(),p=proof(now);assert.equal(verified(p,now),true);for(const bad of [undefined,'true',p.replace(EVENT,'october'),p+'x',p.replace(/.$/,'z')])assert.equal(verified(bad,now),false);assert.equal(verified(p,now+86400001),false);});

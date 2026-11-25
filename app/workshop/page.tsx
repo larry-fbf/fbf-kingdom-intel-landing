@@ -1,43 +1,12 @@
 import type { Metadata } from "next";
 import WorkshopLanding from "./WorkshopLanding";
-
-const workshopOgImage =
-  "https://www.kingdomintel.com/images/kingdom-intel-workshop-og.jpg?v=20260811-called-stuck";
-const workshopTitle =
-  "Called but Stuck? | Kingdom Intel Workshop | Oct 13, 2026 11am CT";
-
+const title = "Build Without Borrowing | Kingdom Intelligence Workshop";
+const description = "A God-sized vision shouldn’t feel out of reach because of debt. Join Payton Wallace for Build Without Borrowing, a workshop for Kingdom entrepreneurs.";
 export const metadata: Metadata = {
-  title: workshopTitle,
-  description:
-    "A free live workshop for Kingdom CEOs who are working hard and not gaining traction. Tuesday, October 13, 2026 at 11am CT / 12pm ET.",
-  alternates: {
-    canonical: "https://www.kingdomintel.com/workshop",
-  },
-  openGraph: {
-    title: workshopTitle,
-    description:
-      "Clarify what needs attention now, choose one clear next move, and leave with a 7-Day Action Plan.",
-    url: "https://www.kingdomintel.com/workshop",
-    siteName: "Kingdom Intel",
-    images: [
-      {
-        url: workshopOgImage,
-        width: 1200,
-        height: 630,
-        alt: workshopTitle,
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: workshopTitle,
-    description:
-      "A free live workshop for Kingdom CEOs who are working hard and not gaining traction.",
-    images: [workshopOgImage],
-  },
+  title, description,
+  alternates: { canonical: "https://www.kingdomintel.com/workshop" },
+  robots: { index: false, follow: false },
+  openGraph: { title, description, url: "https://www.kingdomintel.com/workshop", siteName: "Kingdom Intel", type: "website", images: [] },
+  twitter: { card: "summary", title, description, images: [] },
 };
-
-export default function WorkshopPage() {
-  return <WorkshopLanding />;
-}
+export default function WorkshopPage() { return <WorkshopLanding />; }

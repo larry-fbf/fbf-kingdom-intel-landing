@@ -39,20 +39,8 @@ const workbookThankYouPage = readFileSync(join(process.cwd(), "app", "workbook-t
 const rootLayout = readFileSync(join(process.cwd(), "app", "layout.tsx"), "utf8");
 const clarityTracker = readFileSync(join(process.cwd(), "app", "components", "MicrosoftClarity.tsx"), "utf8");
 
-const requiredWorkshopMarkers = [
-  "Free Kingdom Intelligence Workshop",
-  "Tuesday, October 13, 2026",
-  "/api/workshop/register",
-  "Called But Stuck?",
-];
-
-const requiredWorkshopMetadata = [
-  "https://www.kingdomintel.com/workshop",
-  "https://www.kingdomintel.com/images/kingdom-intel-workshop-og.jpg",
-  "Called but Stuck? | Kingdom Intel Workshop | Oct 13, 2026 11am CT",
-  "width: 1200",
-  "height: 630",
-];
+const requiredWorkshopMarkers = ["Build Without Borrowing", "WorkshopRegistration", "OPM vs ?"];
+const requiredWorkshopMetadata = ["https://www.kingdomintel.com/workshop", "Build Without Borrowing", "robots: { index: false, follow: false }"];
 
 const missingMarkers = requiredWorkshopMarkers.filter((marker) => !workshopSource.includes(marker) && !workshopPage.includes(marker));
 
