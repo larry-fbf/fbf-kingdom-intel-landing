@@ -70,7 +70,7 @@
 .hostAffiliation { margin-top:8px!important; color:#c9a55a; font-size:14px; }
 .hostCopy .divider { margin:26px 0; background:#c00; }
 .hostCopy>p:not(.eyebrow):not(.hostAffiliation) { color:#ccc; margin-top:22px; font-size:17px; }
-.conviction { padding:64px 20px; background:#c00; text-align:center; }
+.conviction { padding:64px 20px; background:linear-gradient(115deg,#350606 0%,#6b0808 100%); text-align:center; }
 .conviction h2 { text-transform:uppercase; font-style:italic; }
 .conviction .divider { background:#ffffff66; }
 .conviction p { font-size:17px; }
@@ -80,7 +80,7 @@
 .benefits h3 { font-size:24px; }
 .benefits p { color:#ccc; margin-top:16px; font-size:15px; }
 .centerAction { text-align:center; }
-.dark .button,.light .button { background:linear-gradient(135deg,#a00,#c00,#a00); color:#fff; box-shadow:0 6px 24px #cc000033; }
+.light .button { background:linear-gradient(135deg,#a00,#c00,#a00); color:#fff; box-shadow:0 6px 24px #cc000033; }
 .prepGrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; max-width:960px; margin:auto; }
 .prepGrid article { border-top:3px solid #c00; padding-top:24px; }
 .prepGrid article>span { font-family:Georgia,serif; font-size:32px; font-weight:900; color:#999; }
