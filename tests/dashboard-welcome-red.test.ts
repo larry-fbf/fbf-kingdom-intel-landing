@@ -20,6 +20,8 @@ test('welcome uses brand red accents with readable neutral text and scoped video
   assert.match(rule('.dashboard-welcome-video > span[aria-hidden="true"] > span'), /border-left-color: #CC0000 !important;/);
   assert.doesNotMatch(source, /c9a55a|e8d080|bb945a|120800/i);
 });
-test('welcome behavior, content, tracking, video and links remain byte-identical to released main', () => {
-  assert.equal(createHash('sha256').update(source.split('<style>')[0]).digest('hex'), '289507dfbadb476f08b3b698e2e71e3bc8b600b466198cd5e77639172838f9d2');
+test('welcome preserves released behavior outside the exact bonus-fragment cleanup', () => {
+  const addition = '      if (window.location.hash === "#bonus-heading") {\n        document.getElementById("bonus-heading")?.scrollIntoView({ behavior: "instant", block: "start" });\n      }\n';
+  assert.equal(source.split(addition).length, 2);
+  assert.equal(createHash('sha256').update(source.replace(addition, '').split('<style>')[0]).digest('hex'), '289507dfbadb476f08b3b698e2e71e3bc8b600b466198cd5e77639172838f9d2');
 });

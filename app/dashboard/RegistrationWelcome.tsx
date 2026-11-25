@@ -53,6 +53,9 @@ export default function RegistrationWelcome({ confirmedRegistration }: { confirm
       window.scrollTo({ top: y, behavior: "instant" });
       const target = previousFocus && previousFocus !== body && previousFocus.isConnected ? previousFocus : openerRef.current;
       target?.focus({ preventScroll: true });
+      if (window.location.hash === "#bonus-heading") {
+        document.getElementById("bonus-heading")?.scrollIntoView({ behavior: "instant", block: "start" });
+      }
     };
   }, [open]);
 

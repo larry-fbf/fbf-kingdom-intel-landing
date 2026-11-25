@@ -11,6 +11,7 @@ const criticalRoutes = [
   "/workshop/thank-you",
   "/api/workshop/register",
   "/api/register",
+  "/api/fbf-registration",
   "/thank-you",
   "/vip",
   "/dashboard",
