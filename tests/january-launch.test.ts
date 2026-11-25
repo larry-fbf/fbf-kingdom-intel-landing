@@ -29,12 +29,13 @@ test('January dashboard resets only masterclass replay players, retaining bonus 
 
 // Every edited application file must equal only the reviewed forward edits on main.
 import { beforeJanuary } from './january-preservation.ts';
+import { beforeFbfHandoff } from './fbf-preservation.ts';
 import { execFileSync } from 'node:child_process';
 test('full application, assets and configuration scope remains exact',()=>{
  const manifest=JSON.parse(readFileSync('tests/fixtures/january-launch-edits.json','utf8'));
  const files=execFileSync('git',['ls-tree','-r','--name-only',manifest.base],{encoding:'utf8'}).trim().split('\n');
  for(const path of files.filter((p:string)=>!p.startsWith('tests/')&&!p.startsWith('scripts/'))) {
-  const actual=readFileSync(path);
+  const actual=beforeFbfHandoff(path,readFileSync(path));
   if(manifest.files[path]) beforeJanuary(path,actual.toString());
   else assert.deepEqual(actual,execFileSync('git',['show',`${manifest.base}:${path}`],{maxBuffer:64*1024*1024}),path);
  }
