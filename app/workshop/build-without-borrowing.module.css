@@ -171,4 +171,22 @@
  .registrationForm { padding:24px; }
 }
 @media(max-width:360px) { .nameFields { grid-template-columns:1fr; gap:0; } .registrationForm { padding:20px; } .heroVisual { height:270px; } .focusVisual { gap:8px; padding:24px 8px; } .focusVisual>div>span { font-size:44px; } }
+/* The mobile hero uses the usable browser viewport, not device screen pixels.
+   Content remains in normal flow so enlarged text can scroll without clipping. */
+@media(max-width:768px) {
+ .reviewBar { display:none; }
+ .page .hero>.heroInner { padding-top:0; padding-bottom:max(20px,env(safe-area-inset-bottom)); gap:12px; }
+ .heroVisual { height:clamp(150px,26svh,210px); }
+ .heroVisual img { object-position:center 42%; }
+ .heroVisual:after { background:linear-gradient(to top,#1b0909,transparent 24%); }
+ .heroCopy .eyebrow { font-size:11px; line-height:1.4; letter-spacing:.12em; margin-bottom:8px!important; }
+ .hero h1 { font-size:clamp(42px,12vw,58px); line-height:1.08; overflow-wrap:anywhere; }
+ .hero h1 span { display:inline; }
+ .hero h1 span:nth-child(2) { font-size:.85em; letter-spacing:.025em; line-height:inherit; }
+ .hero h1 span:last-child { display:block; font-size:1em; }
+ .heroCopy .divider { display:none; }
+ .heroCopy .subtitle { font-size:18px; line-height:1.4; max-width:370px; margin-top:12px!important; }
+ .heroCopy .button { min-height:50px; margin-top:14px; padding:12px; font-size:13px; letter-spacing:.025em; }
+ .heroCopy .schedule { font-size:13px; line-height:1.5; margin-top:10px!important; }
+}
 @media(prefers-reduced-motion:reduce) { .page * { transition:none!important; scroll-behavior:auto!important; } }
