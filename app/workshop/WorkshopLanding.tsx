@@ -27,13 +27,12 @@ export default function WorkshopLanding(){
   <a className={styles.skip} href="#workshop-content">Skip to workshop details</a>
   <div className={styles.reviewBar}><span>Live workshop · <WorkshopTime /></span></div>
   <section data-section="hero" className={styles.hero} aria-labelledby="workshop-title">
-   <div className={styles.logoBar}><img src="/images/fbf-logo-white.png" alt="Fueled By Fire" width="72" height="62" /></div>
    <div className={styles.heroInner}>
     <div className={styles.heroVisual}><img src="/images/kingdom-intel-network-hero.jpg" alt="Payton Wallace speaking at a Fueled By Fire gathering" width="1200" height="1400" fetchPriority="high" /></div>
     <div className={styles.heroCopy}><p className={styles.eyebrow}>Kingdom Intelligence Workshop</p>
      <h1 id="workshop-title" aria-label="Build Without Borrowing"><span>Build</span>{" "}<span>Without</span>{" "}<span>Borrowing</span></h1>
      <div className={styles.divider} />
-     <p className={styles.subtitle}>Debt shouldn’t stop your God-sized vision.</p>
+     <p className={styles.subtitle}>A God-sized vision shouldn’t feel out of reach because of debt.</p>
      <InvitationButton />
      <p className={styles.schedule}><WorkshopTime /></p>
     </div>
@@ -68,7 +67,7 @@ export default function WorkshopLanding(){
    <div className={styles.faq}><h2 id="faq-heading">Before you join us</h2>{faqs.map(item=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>
   </div></section>
   <section data-section="community-stories" className={styles.proof}><div className={styles.container}>
-   <div className={styles.sectionHeading}><p className={styles.eyebrow}>Faith. Family. Business.</p><h2>Why Kingdom perspective matters.</h2><p>More voices from the broader FBF community. These are not results from this workshop.</p></div><div className={styles.proofGrid}>{testimonials.slice(2).map(person=><Testimonial key={person.name} person={person} />)}</div>
+   <div className={styles.sectionHeading}><p className={styles.eyebrow}>Faith. Family. Business.</p><h2>Why Kingdom perspective matters.</h2></div><div className={styles.proofGrid}>{testimonials.slice(2).map(person=><Testimonial key={person.name} person={person} />)}</div>
   </div></section>
   <div id="registration"><WorkshopRegistration /></div>
   <footer className={styles.footer}><img src="/images/fbf-logo-white.png" alt="Fueled By Fire" width="82" height="72" /><p>Fueled By Fire, LLC.</p><p>Kingdom Intelligence · Build Without Borrowing</p></footer>

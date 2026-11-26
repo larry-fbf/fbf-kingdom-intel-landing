@@ -4,8 +4,8 @@ import {readFileSync} from 'node:fs';
 test('approved Noah invitation conceals the answer and preserves the event',()=>{
  const landing=readFileSync('app/workshop/WorkshopLanding.tsx','utf8');
  const metadata=readFileSync('app/workshop/page.tsx','utf8');
- for(const text of ['Debt shouldn’t stop your God-sized vision.','Do you have a business to build but feel like debt is the only way?','What other people say.','Consider your growth decisions through faith and stewardship.','See a different way forward.','Explore possibilities for your business before making debt the plan.']) assert.ok(landing.includes(text),text);
- assert.ok(metadata.includes('Debt shouldn’t stop your God-sized vision.'));
+ for(const text of ['A God-sized vision shouldn’t feel out of reach because of debt.','Do you have a business to build but feel like debt is the only way?','What other people say.','Consider your growth decisions through faith and stewardship.','See a different way forward.','Explore possibilities for your business before making debt the plan.']) assert.ok(landing.includes(text),text);
+ assert.ok(metadata.includes('A God-sized vision shouldn’t feel out of reach because of debt.'));
  assert.doesNotMatch(landing+metadata,/wise counsel|trusted relationships|building relationships|Build with counsel|Not in isolation|OPW|Other People’s Wisdom|—/i);
  assert.match(landing,/Your business is a mission field. How you build it matters./);
  assert.match(landing,/Commit your work to the LORD, and your plans will be established./);
