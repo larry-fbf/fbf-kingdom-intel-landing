@@ -32,7 +32,7 @@ export default function WorkshopLanding(){
     <div className={styles.heroCopy}><p className={styles.eyebrow}>Kingdom Intelligence Workshop</p>
      <h1 id="workshop-title" aria-label="Build Without Borrowing"><span>Build</span>{" "}<span>Without</span>{" "}<span>Borrowing</span></h1>
      <div className={styles.divider} />
-     <p className={styles.subtitle}>A God-sized vision shouldn’t feel out of reach because of debt.</p>
+     <p className={styles.subtitle}>A God-sized vision shouldn’t feel out of reach because of debt. Learn how to scale without having to leverage other people's money.</p>
      <InvitationButton />
      <p className={styles.schedule}><WorkshopTime /></p>
     </div>
@@ -46,7 +46,7 @@ export default function WorkshopLanding(){
   <section data-section="workshop-focus" className={styles.focus}><div className={styles.centered}>
    <p className={styles.eyebrow}>A different way to build</p><h2>You’ve heard of OPM.<br />What if there’s another way?</h2>
    <div className={styles.focusVisual} aria-label="OPM vs ?"><div><span>OPM</span><p>Other People’s Money</p></div><span className={styles.versus}>vs.</span><div><span>?</span><p>Discover it at the workshop.</p></div></div>
-   <p className={styles.support}>Borrowing may feel like the obvious next step. This workshop invites you to consider another way.</p><InvitationButton />
+   <p className={styles.support}>We’ve helped business owners scale their companies. But what matters most is building a business and a life with both peace and profits.</p><InvitationButton />
   </div></section>
   <section data-section="community-proof" className={styles.proof} aria-labelledby="proof-heading"><div className={styles.container}>
    <div className={styles.sectionHeading}><p className={styles.eyebrow}>From the Fueled By Fire community</p><h2 id="proof-heading">What other people say.</h2><p>These stories describe their broader Fueled By Fire experience, not this workshop or a promised result.</p></div>
