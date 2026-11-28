@@ -1,41 +1,62 @@
-# October 13, 2026 workshop registration
+# December 9, 2026 workshop registration
 
-The `/workshop` form POSTs to `/api/workshop/register`. A successful confirmation
-requires both Attio and Brevo enrollment. This is website **dual-write**, not a
-background Attio-to-Brevo synchronization service.
+The existing `/workshop` name/email form POSTs to `/api/workshop/register`.
+Successful confirmation now requires verified Attio membership, Brevo membership,
+and approved Zoom webinar registration. No second form or public Join button is added.
 
-## Production configuration
+## Verified target and configuration
 
-- `ATTIO_KI_WORKSHOP_OCTOBER_2026_LIST_ID`: October workshop Attio People list.
-- `BREVO_KI_WORKSHOP_OCTOBER_2026_LIST_ID`: October workshop Brevo list (positive integer).
-- Existing `ATTIO_API_KEY` and `BREVO_API_KEY` remain in use.
-- Brevo's normal text attribute `WORKSHOP` must exist for the event annotation.
-- No August list fallback is allowed. Missing required configuration returns HTTP
-  503 before any writes. Either CRM/email-provider failure also returns 503, so the
-  form does not display a false success. The other system may already have accepted
-  a partial registration; retrying uses person/list/contact upserts. Attio notes
-  are append-only and can repeat on retries.
+- Attio People list: `2658fa07-a5d6-47f3-9818-da2c82883e41`; Brevo list: `34`.
+- Webinar: `81398970006`, **Kingdom Intelligence Workshop**, type 5 (single scheduled webinar).
+- Public registration: https://us02web.zoom.us/webinar/register/WN_komAAW4PRZKv8rUSSej2Ug
+- Start: `2026-12-09T18:00:00Z`, noon America/Chicago, 1 PM Eastern.
+- Host account: Larry Wallace; host ID `BvkkU0IDT7mg8KrjcCbIyQ`; Payton is configured as alternative host.
+- Read-only metadata confirms automatic approval, native confirmation email enabled,
+  no meeting authentication, registration open, required last name and no custom questions.
+- Provider duration is 60 minutes, but public calendar remains start-only; no owner-approved end time has been added.
+- This webinar registration URL supersedes the earlier supplied meeting-style URL, which is not used.
+- Existing production credentials: `ATTIO_API_KEY`, `BREVO_API_KEY`,
+  `REGISTRATION_CONFIRMATION_SECRET`, `ZOOM_ACCOUNT_ID`, `ZOOM_CLIENT_ID`, `ZOOM_CLIENT_SECRET`.
+- Workshop target is server-owned in `app/lib/workshop-zoom.ts`. It never reads or changes
+  January `ZOOM_SIGNUP_TARGET`. Missing credentials fail before any provider call.
 
-## Scope and safety
+## Fulfillment and uncertainty
 
-- No email sequence, campaign, webhook, or scheduled sync is installed or activated.
-- Brevo opt-out/blacklist fields are omitted, not reset. List membership does not
-  override unsubscribe status or guarantee delivery.
-- Manual/imported Attio list additions and edits are **not** automatically copied
-  to Brevo. A separate ongoing sync would be required for that workflow.
-- Existing consent-gated SimpleTexting contact enrollment remains on the previous
-  August configuration; SMS migration was not requested. CRM/Brevo failures now
-  stop before the SMS call, avoiding SMS enrollment on a failed confirmation.
-- Do not exercise the production happy path with fabricated contacts. Unit tests
-  execute the real handler with an isolated environment and mocked network only.
+List upserts and Zoom run concurrently. List requests have six-second deadlines;
+Zoom has a twelve-second total deadline, below the forty-five-second browser timeout.
+Zoom revalidates identity/schedule/settings and checks complete approved/pending/denied
+inventories before at most one POST. Existing uniquely approved email is reused without
+another confirmation POST. New registrations require individual identity/status readback.
+Personal join URLs are discarded at the provider boundary; Zoom's native confirmation
+owns unique-link delivery. There is no separate email/SMS send or event-history overwrite.
 
-## Event rollover checklist
+An uncertain Zoom POST/readback, held registration or rejected Zoom operation cannot
+issue the success cookie and is non-retryable in the current form. Transport ambiguity
+also locks submission across modal close/reopen; no success redirect or automatic retry.
+Safe pre-POST outages and list failures remain explicitly retryable with idempotent list
+upserts and another complete Zoom lookup. Partial list/Zoom writes are possible.
+This reuses the approved best-effort direct architecture: it is NOT durable cross-instance
+idempotency. Concurrent tabs/instances and a reload after an ambiguous write are not
+strictly deduplicated; do not claim exactly-once delivery or automatically replay a failed write.
 
-1. Discover lists, avoid duplicates, and compare Attio list attributes and access.
-2. Create event-specific empty lists; preserve the historical cohort.
-3. Set the new production environment variables before merging to `main`.
-4. Run all tests and build; verify the production deployment commit and aliases.
-5. Reconcile only registrants supported by event-specific registration evidence
-   since the live date-change deployment. Existing-list entry dates alone miss
-   repeat registrants; also inspect registration notes and Brevo contact changes.
-6. Do not send messages or change subscription status while reconciling.
+The signed confirmation uses a new `kiw-dec-2026-zoom` proof namespace and
+`workshop_dec_2026_zoom` cookie. Old list-only proofs cannot certify Zoom enrollment.
+Prior list-only registrants are not backfilled by this release; any backfill requires
+separate approval and read-only reconciliation first.
+
+## Calendar and presentation
+
+The approved bright compact thank-you and one calendar chooser are unchanged.
+Google, Apple ICS and Outlook ICS include the public webinar registration URL and
+instruct attendees to use the unique join link in their Zoom confirmation email.
+A public registration URL is not labeled as a join link. No attendee/host link is public.
+Saved calendars do not automatically update. The neutral noindex preview stays neutral.
+
+## Verification and publication boundary
+
+Unit/integration tests use only synthetic providers and browser-intercepted submissions.
+Read-only Zoom metadata and production credential-key presence are verified separately.
+No real lead, registration, email, SMS, calendar save, or Zoom setting change was made.
+Native confirmation enabled does not establish actual inbox delivery; reminder emails
+are disabled in the observed webinar metadata. External Brevo automation/templates
+were not edited. Parent owns independent review, merge and production verification.

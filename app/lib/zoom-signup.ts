@@ -1,7 +1,7 @@
 // Best-effort direct registration. No durable deduplication or automatic retry.
 // Native Zoom confirmation owns join-link delivery; never expose personal URLs.
 export type ZoomContact = { email: string; firstName: string; lastName: string; agreed: unknown };
-export type ZoomTarget = { webinarId: string; topic: string; timezone: string; occurrenceId: string; startTime: string; occurrences?: { occurrenceId: string; startTime: string }[] };
+export type ZoomTarget = { webinarId: string; topic: string; timezone: string; occurrenceId: string; startTime: string; webinarType?: 5; hostId?: string; registrationUrl?: string; occurrences?: { occurrenceId: string; startTime: string }[] };
 export type ZoomOutcome = { status: "registered" | "pending" | "held" | "unavailable" | "not_consented" };
 export type ZoomRow = { id: string; email: string; first_name?: string; last_name?: string; status: string };
 export interface ZoomProvider {
@@ -35,11 +35,18 @@ async function run(contact: ZoomContact, target: ZoomTarget, provider: ZoomProvi
     signal.throwIfAborted();
     const { webinar: w, questions: q, accountMatches } = await provider.metadata(target, signal);
     const s = w.settings;
-    if (!accountMatches || String(w.id) !== target.webinarId || w.topic !== target.topic || w.type !== 9 || w.timezone !== target.timezone ||
-        s?.registration_type !== 1 || s?.approval_type !== 0 || s?.registrants_confirmation_email !== true || s?.meeting_authentication !== false || s?.close_registration !== false ||
-        !Array.isArray(w.occurrences) || !w.occurrences.some((o: any) => o.occurrence_id === target.occurrenceId && o.start_time === target.startTime && o.status === "available" && Date.parse(o.start_time) > Date.now()) ||
-        target.occurrences?.some(expected => Date.parse(expected.startTime) > Date.now() &&
-          !w.occurrences.some((o: any) => o.occurrence_id === expected.occurrenceId && o.start_time === expected.startTime && o.status === "available")) ||
+    // Single scheduled webinars have no occurrence or series registration_type.
+    // The recurring January path retains its original all-occurrence checks.
+    const scheduleMatches = target.webinarType === 5
+      ? w.type === 5 && !!target.hostId && w.host_id === target.hostId &&
+        !!target.registrationUrl && w.registration_url === target.registrationUrl &&
+        w.start_time === target.startTime && Date.parse(target.startTime) > Date.now()
+      : w.type === 9 && s?.registration_type === 1 && Array.isArray(w.occurrences) &&
+        w.occurrences.some((o: any) => o.occurrence_id === target.occurrenceId && o.start_time === target.startTime && o.status === "available" && Date.parse(o.start_time) > Date.now()) &&
+        !target.occurrences?.some(expected => Date.parse(expected.startTime) > Date.now() &&
+          !w.occurrences.some((o: any) => o.occurrence_id === expected.occurrenceId && o.start_time === expected.startTime && o.status === "available"));
+    if (!accountMatches || String(w.id) !== target.webinarId || w.topic !== target.topic || w.timezone !== target.timezone || !scheduleMatches ||
+        s?.approval_type !== 0 || s?.registrants_confirmation_email !== true || s?.meeting_authentication !== false || s?.close_registration !== false ||
         !Array.isArray(q.questions) || !Array.isArray(q.custom_questions) || q.custom_questions.length !== 0 ||
         q.questions.some((question: any) => question.required !== false && !["email", "first_name", "last_name"].includes(question.field_name))) return { status: "held" };
     const rows: ZoomRow[] = [];
