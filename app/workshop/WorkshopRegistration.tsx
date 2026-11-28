@@ -3,19 +3,20 @@ import {useEffect,useRef,useState} from 'react';
 import WorkshopTime from './WorkshopTime';
 import styles from './build-without-borrowing.module.css';
 
-// December list registration; no Zoom or SMS enrollment.
+// December list and webinar registration; no SMS enrollment.
 export default function WorkshopRegistration(){
  const dialog=useRef<HTMLDialogElement>(null);
  const pending=useRef(false);
  const controller=useRef<AbortController|null>(null);
  const [busy,setBusy]=useState(false);
  const [error,setError]=useState('');
+ const [blocked,setBlocked]=useState(false);
  useEffect(()=>{
   const el=dialog.current!;
   let opener:HTMLElement|null=null;
   let previousOverflow='';
   const close=()=>{controller.current?.abort();el.close();};
-  const restore=()=>{document.body.style.overflow=previousOverflow;opener?.focus({preventScroll:true});setError('');};
+  const restore=()=>{document.body.style.overflow=previousOverflow;opener?.focus({preventScroll:true});if(!pending.current)setError('');};
   const open=(event:MouseEvent)=>{
    const link=(event.target as Element).closest<HTMLAnchorElement>('a[href="#registration"]');
    if(!link)return;
@@ -44,14 +45,17 @@ export default function WorkshopRegistration(){
   const abort=new AbortController();controller.current=abort;
   const timer=setTimeout(()=>abort.abort(),45000);
   const data=new FormData(form);
+  let retryable=false;
   try{
    const response=await fetch('/api/workshop/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:data.get('firstName'),lastName:data.get('lastName'),email:data.get('email')}),signal:abort.signal,cache:'no-store'});
    const result=await response.json();
    if(response.ok&&result.ok===true&&result.event==='kiw-dec-2026'){window.location.assign('/workshop/thank-you');return;}
-   setError(result.error||'We could not verify registration. Please retry with the same email.');
+   retryable=result.retryable===true;
+   if(result.retryable===false)setBlocked(true);
+   setError(result.error||'We could not verify registration. Check your email before trying again.');
   }catch{
-   if(dialog.current?.open)setError('We could not verify registration. Your details may already be saved. Please retry with the same email.');
-  }finally{clearTimeout(timer);pending.current=false;setBusy(false);}
+   setError('We could not verify registration. Your details may already be saved. Check your email for confirmation before trying again.');
+  }finally{clearTimeout(timer);pending.current=!retryable;setBlocked(!retryable);setBusy(false);}
  }
  return <>
   <noscript><p className={styles.noScript}>Please enable JavaScript to open the registration form. No registration has been submitted.</p></noscript>
@@ -62,7 +66,7 @@ export default function WorkshopRegistration(){
     <label htmlFor="workshop-email">Email *<input id="workshop-email" name="email" type="email" inputMode="email" autoComplete="email" required /></label>
     <div className={styles.modalNames}><label htmlFor="workshop-first-name">First Name *<input id="workshop-first-name" name="firstName" autoComplete="given-name" required /></label><label htmlFor="workshop-last-name">Last Name *<input id="workshop-last-name" name="lastName" autoComplete="family-name" required /></label></div>
     <div className={styles.modalPrivacy}><p>Fueled By Fire, LLC values your privacy. We’ll use your info to manage your account and deliver the services you’ve asked for.</p><p><a href="https://www.fbfchallenge.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a> · <a href="https://www.fbfchallenge.com/terms" target="_blank" rel="noreferrer">Terms</a></p></div>
-    <button className={styles.modalSubmit} type="submit" disabled={busy}>{busy?'Registering...':'RSVP NOW'}</button>
+    <button className={styles.modalSubmit} type="submit" disabled={busy||blocked}>{busy?'Registering...':'RSVP NOW'}</button>
     {error&&<p className={styles.modalError} role="alert">{error}</p>}
    </form>
   </dialog>

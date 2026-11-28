@@ -44,6 +44,7 @@ export function createZoomProvider(credentials: ZoomCredentials, fetcher: typeof
       const s = raw.settings;
       return { accountMatches: host.account_id === credentials.accountId, questions: { questions: q.questions, custom_questions: q.custom_questions }, webinar: {
         id: raw.id, topic: raw.topic, type: raw.type, timezone: raw.timezone,
+        host_id: raw.host_id, start_time: raw.start_time, registration_url: raw.registration_url,
         occurrences: Array.isArray(raw.occurrences) ? raw.occurrences.map((o: any) => ({ occurrence_id: o.occurrence_id, start_time: o.start_time, status: o.status })) : null,
         settings: { registration_type: s?.registration_type, approval_type: s?.approval_type, registrants_confirmation_email: s?.registrants_confirmation_email, meeting_authentication: s?.meeting_authentication, close_registration: s?.close_registration },
       } };
